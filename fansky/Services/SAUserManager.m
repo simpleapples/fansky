@@ -25,7 +25,7 @@
 }
 
 - (void)authWithUsername:(NSString *)username password:(NSString *)password success:(void(^)())success failure:(void(^)(NSError *error))failure
-{    
+{
     NSURL *baseURL = [NSURL URLWithString:BASE_URL];
     AFXAuthClient *authClient = [[AFXAuthClient alloc] initWithBaseURL:baseURL key:COMSUMER_KEY secret:COMSUMER_SECRET];
     [authClient authorizeUsingXAuthWithAccessTokenPath:ACCESS_TOKEN_PATH accessMethod:@"POST" username:username password:password success:^(AFXAuthToken *accessToken) {

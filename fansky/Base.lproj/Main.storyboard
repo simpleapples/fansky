@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="bcT-Eb-ogE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XWw-WE-RBu">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
@@ -21,7 +21,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uTf-mV-ctu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="639" y="690"/>
+            <point key="canvasLocation" x="563" y="724"/>
         </scene>
         <!--Item 1-->
         <scene sceneID="PvX-ee-A9w">
@@ -40,7 +40,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="chD-kp-4Mz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="639" y="28"/>
+            <point key="canvasLocation" x="563" y="12"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="j3Z-zr-AFs">
@@ -56,12 +56,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6VA-oT-zqS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="639" y="-724"/>
+            <point key="canvasLocation" x="-153" y="-684"/>
         </scene>
-        <!--View Controller-->
+        <!--登录-->
         <scene sceneID="vi1-fF-ozJ">
             <objects>
-                <viewController id="Qjk-dJ-4r0" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SALoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Qjk-dJ-4r0" customClass="SALoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="p2g-jb-X9e"/>
                         <viewControllerLayoutGuide type="bottom" id="LKd-72-XQv"/>
@@ -69,13 +69,118 @@
                     <view key="view" contentMode="scaleToFill" id="5xx-Wb-b7M">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="邮箱" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GQL-Al-l5c">
+                                <rect key="frame" x="20" y="84" width="560" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="DET-is-TP0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" keyboardAppearance="alert" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Qjk-dJ-4r0" id="SJ6-tc-uGb"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9H9-d5-WCF">
+                                <rect key="frame" x="20" y="144" width="560" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="go" secureTextEntry="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AgH-W7-tM7">
+                                <rect key="frame" x="20" y="204" width="560" height="40"/>
+                                <state key="normal" title="登录">
+                                    <color key="titleShadowColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <integer key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="loginButtonClick:" destination="Qjk-dJ-4r0" eventType="touchUpInside" id="qUW-vj-ZLp"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9H9-d5-WCF" firstAttribute="top" secondItem="GQL-Al-l5c" secondAttribute="bottom" constant="20" id="821-8q-Rim"/>
+                            <constraint firstItem="9H9-d5-WCF" firstAttribute="leading" secondItem="AgH-W7-tM7" secondAttribute="leading" id="9Fq-yp-dgx"/>
+                            <constraint firstItem="9H9-d5-WCF" firstAttribute="trailing" secondItem="AgH-W7-tM7" secondAttribute="trailing" id="HXp-kU-4wM"/>
+                            <constraint firstItem="GQL-Al-l5c" firstAttribute="top" secondItem="p2g-jb-X9e" secondAttribute="bottom" constant="20" id="PLM-nc-SYe"/>
+                            <constraint firstAttribute="trailing" secondItem="GQL-Al-l5c" secondAttribute="trailing" constant="20" id="T7C-Gi-Ogf"/>
+                            <constraint firstItem="GQL-Al-l5c" firstAttribute="leading" secondItem="5xx-Wb-b7M" secondAttribute="leading" constant="20" id="UBO-xc-TEI"/>
+                            <constraint firstItem="9H9-d5-WCF" firstAttribute="height" secondItem="GQL-Al-l5c" secondAttribute="height" id="Uoh-ni-zpO"/>
+                            <constraint firstItem="9H9-d5-WCF" firstAttribute="width" secondItem="AgH-W7-tM7" secondAttribute="width" id="cfZ-vO-2Th"/>
+                            <constraint firstItem="9H9-d5-WCF" firstAttribute="height" secondItem="AgH-W7-tM7" secondAttribute="height" id="lT6-QX-OW6"/>
+                            <constraint firstItem="9H9-d5-WCF" firstAttribute="trailing" secondItem="GQL-Al-l5c" secondAttribute="trailing" id="lh0-eg-ARj"/>
+                            <constraint firstItem="9H9-d5-WCF" firstAttribute="leading" secondItem="GQL-Al-l5c" secondAttribute="leading" id="nmt-Oa-qCr"/>
+                            <constraint firstItem="GQL-Al-l5c" firstAttribute="leading" secondItem="5xx-Wb-b7M" secondAttribute="leading" constant="20" id="o4w-4D-9Nu"/>
+                            <constraint firstItem="AgH-W7-tM7" firstAttribute="top" secondItem="9H9-d5-WCF" secondAttribute="bottom" constant="20" id="oeX-8N-Umv"/>
+                            <constraint firstAttribute="trailing" secondItem="GQL-Al-l5c" secondAttribute="trailing" constant="20" id="rPv-ds-3Fa"/>
+                            <constraint firstItem="GQL-Al-l5c" firstAttribute="top" secondItem="p2g-jb-X9e" secondAttribute="bottom" constant="20" id="s38-3n-2A8"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="T7C-Gi-Ogf"/>
+                                <exclude reference="UBO-xc-TEI"/>
+                                <exclude reference="s38-3n-2A8"/>
+                                <exclude reference="cfZ-vO-2Th"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="Neo-U8-I7l"/>
+                    <navigationItem key="navigationItem" title="登录" id="Neo-U8-I7l"/>
+                    <connections>
+                        <outlet property="loginButton" destination="AgH-W7-tM7" id="TA5-cs-rGh"/>
+                        <outlet property="passwordTextField" destination="9H9-d5-WCF" id="du6-xb-EsF"/>
+                        <outlet property="usernameTextField" destination="GQL-Al-l5c" id="HzF-pt-WPr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pGa-cE-Hvr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1359" y="-724"/>
+            <point key="canvasLocation" x="563" y="-684"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="04i-Ae-QEq">
+            <objects>
+                <navigationController id="XWw-WE-RBu" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0yX-bA-ci0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="WFz-SE-kUe" kind="relationship" relationship="rootViewController" id="3bY-ZF-Pym"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yqi-Xs-yJG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1557" y="359"/>
+        </scene>
+        <!--Splash View Controller-->
+        <scene sceneID="voy-vh-KyH">
+            <objects>
+                <viewController storyboardIdentifier="SASplashViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WFz-SE-kUe" customClass="SASplashViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lmi-ib-MED"/>
+                        <viewControllerLayoutGuide type="bottom" id="B5E-Ah-0K1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tJj-Zi-Hyf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="PPs-lm-BtL"/>
+                    <connections>
+                        <segue destination="bcT-Eb-ogE" kind="show" identifier="SplashToTabbarSegue" id="aUu-wz-4WF"/>
+                        <segue destination="o2W-kd-yPy" kind="presentation" identifier="SplashToLoginNavigationSegue" id="Nd1-76-fHs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VKR-WH-ocu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-869" y="359"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="voi-Lp-eiM">
@@ -90,12 +195,11 @@
                     <connections>
                         <segue destination="6Db-qp-J6l" kind="relationship" relationship="viewControllers" id="aHW-ep-hwK"/>
                         <segue destination="Mep-ad-xaF" kind="relationship" relationship="viewControllers" id="fIi-Kw-l0n"/>
-                        <segue destination="o2W-kd-yPy" kind="presentation" id="HbS-UL-kEV"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tQ7-Lk-vfz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-181" y="359"/>
+            <point key="canvasLocation" x="-153" y="359"/>
         </scene>
     </scenes>
 </document>

@@ -12,4 +12,6 @@
 
 + (SAUserManager *)manager;
 
+- (void)authWithUsername:(NSString *)username password:(NSString *)password success:(void(^)())success failure:(void(^)(NSError *error))failure;
+
 @end
