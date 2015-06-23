@@ -30,6 +30,7 @@
 {
     [[SAUserManager manager] authWithUsername:self.usernameTextField.text password:self.passwordTextField.text success:^{
         NSLog(@"======");
+        [self performSegueWithIdentifier:@"LoginExitToSplashSegue" sender:nil];
     } failure:^(NSError *error) {
         NSLog(@"%@", error);
     }];

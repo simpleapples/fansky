@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A2365BD1B395FD200E1E73C /* SATimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2365BC1B395FD200E1E73C /* SATimeLineCell.m */; };
+		5A2365C11B39619D00E1E73C /* SAUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2365C01B39619D00E1E73C /* SAUser.m */; };
+		5A2365C41B39723900E1E73C /* SAAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2365C31B39723900E1E73C /* SAAPIService.m */; };
 		5AD70EF01B316A79009C5B84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EEF1B316A79009C5B84 /* main.m */; };
 		5AD70EF31B316A79009C5B84 /* SAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EF21B316A79009C5B84 /* SAAppDelegate.m */; };
 		5AD70EF61B316A79009C5B84 /* fansky.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EF41B316A79009C5B84 /* fansky.xcdatamodeld */; };
@@ -34,6 +37,12 @@
 
 /* Begin PBXFileReference section */
 		4CA0B1D52B50FFEAB4E792B5 /* Pods-fansky.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fansky.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fansky/Pods-fansky.debug.xcconfig"; sourceTree = "<group>"; };
+		5A2365BB1B395FD200E1E73C /* SATimeLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SATimeLineCell.h; sourceTree = "<group>"; };
+		5A2365BC1B395FD200E1E73C /* SATimeLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SATimeLineCell.m; sourceTree = "<group>"; };
+		5A2365BF1B39619D00E1E73C /* SAUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAUser.h; sourceTree = "<group>"; };
+		5A2365C01B39619D00E1E73C /* SAUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUser.m; sourceTree = "<group>"; };
+		5A2365C21B39723900E1E73C /* SAAPIService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAPIService.h; sourceTree = "<group>"; };
+		5A2365C31B39723900E1E73C /* SAAPIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAPIService.m; sourceTree = "<group>"; };
 		5AD70EEA1B316A79009C5B84 /* fansky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fansky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD70EEE1B316A79009C5B84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AD70EEF1B316A79009C5B84 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -79,6 +88,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A2365BA1B395FC100E1E73C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5A2365BB1B395FD200E1E73C /* SATimeLineCell.h */,
+				5A2365BC1B395FD200E1E73C /* SATimeLineCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		5A2365BE1B39619100E1E73C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5A2365BF1B39619D00E1E73C /* SAUser.h */,
+				5A2365C01B39619D00E1E73C /* SAUser.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		5AD70EE11B316A79009C5B84 = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +129,8 @@
 		5AD70EEC1B316A79009C5B84 /* fansky */ = {
 			isa = PBXGroup;
 			children = (
+				5A2365BE1B39619100E1E73C /* Models */,
+				5A2365BA1B395FC100E1E73C /* Views */,
 				5AD70F1A1B316F4D009C5B84 /* Services */,
 				5AD70F161B316AFD009C5B84 /* Controllers */,
 				5AD70EF11B316A79009C5B84 /* SAAppDelegate.h */,
@@ -161,6 +190,8 @@
 			children = (
 				5AD70F1B1B316F6E009C5B84 /* SAUserManager.h */,
 				5AD70F1C1B316F6E009C5B84 /* SAUserManager.m */,
+				5A2365C21B39723900E1E73C /* SAAPIService.h */,
+				5A2365C31B39723900E1E73C /* SAAPIService.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -321,6 +352,9 @@
 				5AD70F271B31805B009C5B84 /* SASplashViewController.m in Sources */,
 				5AD70EF31B316A79009C5B84 /* SAAppDelegate.m in Sources */,
 				5AD70F201B31716A009C5B84 /* SAConstants.m in Sources */,
+				5A2365C11B39619D00E1E73C /* SAUser.m in Sources */,
+				5A2365C41B39723900E1E73C /* SAAPIService.m in Sources */,
+				5A2365BD1B395FD200E1E73C /* SATimeLineCell.m in Sources */,
 				5AD70F191B316B05009C5B84 /* SATimeLineViewController.m in Sources */,
 				5AD70EF01B316A79009C5B84 /* main.m in Sources */,
 				5AD70F1D1B316F6E009C5B84 /* SAUserManager.m in Sources */,

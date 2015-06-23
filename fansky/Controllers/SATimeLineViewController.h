@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SATimeLineViewController : UIViewController
+@interface SATimeLineViewController : UITableViewController
 
 @end

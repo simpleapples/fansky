@@ -7,12 +7,24 @@
 //
 
 #import "SASplashViewController.h"
+#import "SAUserManager.h"
 
 @implementation SASplashViewController
 
 - (void)viewDidLoad
 {
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
     [self performSegueWithIdentifier:@"SplashToLoginNavigationSegue" sender:nil];
+}
+
+- (IBAction)exitToSplash:(UIStoryboardSegue *)segue
+{
+    
 }
 
 @end
