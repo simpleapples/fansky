@@ -11,12 +11,13 @@
 
 @implementation SAUser
 
-@dynamic userID;
-@dynamic token;
 @dynamic active;
 @dynamic local;
 @dynamic name;
-@dynamic email;
+@dynamic token;
 @dynamic tokenSecret;
+@dynamic userID;
+@dynamic profileImageURL;
+@dynamic location;
 
 @end

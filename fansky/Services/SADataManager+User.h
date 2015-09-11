@@ -13,6 +13,6 @@
 @interface SADataManager (User)
 
 - (SAUser *)currentUser;
-- (SAUser *)insertOrUpdateUserWithObject:(id)userObject;
+- (SAUser *)insertOrUpdateUserWithObject:(id)userObject local:(BOOL)local active:(BOOL)active token:(NSString *)token secret:(NSString *)secret;
 
 @end

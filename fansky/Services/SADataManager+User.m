@@ -31,10 +31,12 @@ static NSString *const ENTITY_NAME = @"SAUser";
     return resultUser;
 }
 
-- (SAUser *)insertOrUpdateUserWithObject:(id)userObject
+- (SAUser *)insertOrUpdateUserWithObject:(id)userObject local:(BOOL)local active:(BOOL)active token:(NSString *)token secret:(NSString *)secret
 {
     NSString *userID = (NSString *)[userObject objectForKey:@"id"];
     NSString *name = (NSString *)[userObject objectForKey:@"name"];
+    NSString *location = (NSString *)[userObject objectForKey:@"location"];
+    NSString *profileImageURL = (NSString *)[userObject objectForKey:@"profile_image_url"];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
     fetchRequest.fetchLimit = 1;
@@ -48,12 +50,28 @@ static NSString *const ENTITY_NAME = @"SAUser";
             SAUser *existUser = [fetchResult objectAtIndex:0];
             existUser.userID = userID;
             existUser.name = name;
+            existUser.location = location;
+            existUser.profileImageURL = profileImageURL;
+            existUser.local = @(local);
+            existUser.active = @(active);
+            if (local) {
+                existUser.token = token;
+                existUser.tokenSecret = secret;
+            }
             resultUser = existUser;
         } else {
             [self.managedObjectContext performBlockAndWait:^{
                 SAUser *user = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
                 user.userID = userID;
                 user.name = name;
+                user.location = location;
+                user.profileImageURL = profileImageURL;
+                user.local = @(local);
+                user.active = @(active);
+                if (local) {
+                    user.token = token;
+                    user.tokenSecret = secret;
+                }
                 resultUser = user;
             }];
         }

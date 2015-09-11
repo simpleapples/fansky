@@ -12,12 +12,13 @@
 
 @interface SAUser : NSManagedObject
 
-@property (nonatomic, retain) NSString * userID;
-@property (nonatomic, retain) NSString * token;
 @property (nonatomic, retain) NSNumber * active;
 @property (nonatomic, retain) NSNumber * local;
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSString * email;
+@property (nonatomic, retain) NSString * token;
 @property (nonatomic, retain) NSString * tokenSecret;
+@property (nonatomic, retain) NSString * userID;
+@property (nonatomic, retain) NSString * profileImageURL;
+@property (nonatomic, retain) NSString * location;
 
 @end

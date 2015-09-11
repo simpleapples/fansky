@@ -7,16 +7,24 @@
 //
 
 #import "SAUserListViewController.h"
+#import "SADataManager+User.h"
+#import "SAUserCell.h"
 
-@interface SAUserListViewController ()
+@interface SAUserListViewController () <NSFetchedResultsControllerDelegate>
+
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
 @implementation SAUserListViewController
 
+static NSString *const ENTITY_NAME = @"SAUser";
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self fetchedResultsController];
 }
 
 - (void)didReceiveMemoryWarning
@@ -24,27 +32,66 @@
     [super didReceiveMemoryWarning];
 }
 
+- (IBAction)exitToUserList:(UIStoryboardSegue *)segue
+{
+    
+}
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (!_fetchedResultsController) {
+        SADataManager *manager = [SADataManager sharedManager];
+        
+        NSSortDescriptor *userNameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
+        NSArray *sortArray = [[NSArray alloc] initWithObjects: userNameSortDescriptor, nil];
+        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"local = %@", @(YES)];
+        fetchRequest.sortDescriptors = sortArray;
+        fetchRequest.returnsObjectsAsFaults = NO;
+        fetchRequest.fetchBatchSize = 6;
+        
+        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:manager.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        _fetchedResultsController.delegate = self;
+        
+        [_fetchedResultsController performFetch:nil];
+    }
+    return _fetchedResultsController;
+}
+
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+    [self.tableView reloadData];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+{
+    [self.tableView reloadData];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 0;
+    return self.fetchedResultsController.sections.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 0;
+    NSInteger numberOfItems = [[self.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];
+    return numberOfItems;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+    SAUserCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SAUserCell" forIndexPath:indexPath];
+    if (cell) {
+        SAUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        [cell configWithUser:user];
+    }
     return cell;
 }
-*/
 
 /*
 // Override to support conditional editing of the table view.

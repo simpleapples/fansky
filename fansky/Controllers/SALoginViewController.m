@@ -39,7 +39,8 @@
     
     [[SAAPIService sharedSingleton] authorizeWithUsername:email password:password success:^(NSString *token, NSString *secret) {
         [[SAAPIService sharedSingleton] verifyCredentialsWithToken:token secret:secret success:^(id data) {
-            [[SADataManager sharedManager] insertOrUpdateUserWithObject:data];
+            [[SADataManager sharedManager] insertOrUpdateUserWithObject:data local:YES active:YES token:token secret:secret];
+            [self performSegueWithIdentifier:@"LoginExitToUserListSegue" sender:nil];
         } failure:^(NSError *error) {
             
         }];

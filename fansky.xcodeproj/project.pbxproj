@@ -18,12 +18,13 @@
 		5AD70F0D1B316A79009C5B84 /* fanskyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70F0C1B316A79009C5B84 /* fanskyTests.m */; };
 		5AD70F191B316B05009C5B84 /* SATimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70F181B316B05009C5B84 /* SATimeLineViewController.m */; };
 		5AD70F201B31716A009C5B84 /* SAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70F1F1B31716A009C5B84 /* SAConstants.m */; };
+		5AE38ADB1BA2E27E0022A35A /* SAUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE38ADA1BA2E27E0022A35A /* SAUser.m */; };
+		5AE38ADE1BA2E70F0022A35A /* SAUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE38ADD1BA2E70F0022A35A /* SAUserCell.m */; };
 		5AF5B1C71BA17EF500C7A18A /* SAUserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1C61BA17EF500C7A18A /* SAUserListViewController.m */; };
 		5AF5B1CA1BA17F7B00C7A18A /* SALoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1C91BA17F7B00C7A18A /* SALoginViewController.m */; };
 		5AF5B1CD1BA1813A00C7A18A /* SASplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1CC1BA1813A00C7A18A /* SASplashViewController.m */; };
 		5AF5B1D01BA1816600C7A18A /* SADataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1CF1BA1816600C7A18A /* SADataManager.m */; };
 		5AF5B1D31BA181CD00C7A18A /* SADataManager+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1D21BA181CD00C7A18A /* SADataManager+User.m */; };
-		5AF5B1E51BA2C64200C7A18A /* SAUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1E41BA2C64200C7A18A /* SAUser.m */; };
 		5D6682AEC625F452EE98BE7D /* libPods-fansky.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75586252364C76D55E3E00D4 /* libPods-fansky.a */; };
 /* End PBXBuildFile section */
 
@@ -59,6 +60,10 @@
 		5AD70F181B316B05009C5B84 /* SATimeLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SATimeLineViewController.m; sourceTree = "<group>"; };
 		5AD70F1F1B31716A009C5B84 /* SAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAConstants.m; sourceTree = "<group>"; };
 		5AD70F211B3171FA009C5B84 /* SAConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SAConstants.h; sourceTree = "<group>"; };
+		5AE38AD91BA2E27E0022A35A /* SAUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAUser.h; sourceTree = "<group>"; };
+		5AE38ADA1BA2E27E0022A35A /* SAUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUser.m; sourceTree = "<group>"; };
+		5AE38ADC1BA2E70F0022A35A /* SAUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAUserCell.h; sourceTree = "<group>"; };
+		5AE38ADD1BA2E70F0022A35A /* SAUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUserCell.m; sourceTree = "<group>"; };
 		5AF5B1C51BA17EF500C7A18A /* SAUserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAUserListViewController.h; sourceTree = "<group>"; };
 		5AF5B1C61BA17EF500C7A18A /* SAUserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUserListViewController.m; sourceTree = "<group>"; };
 		5AF5B1C81BA17F7B00C7A18A /* SALoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SALoginViewController.h; sourceTree = "<group>"; };
@@ -69,8 +74,6 @@
 		5AF5B1CF1BA1816600C7A18A /* SADataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SADataManager.m; sourceTree = "<group>"; };
 		5AF5B1D11BA181CD00C7A18A /* SADataManager+User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SADataManager+User.h"; sourceTree = "<group>"; };
 		5AF5B1D21BA181CD00C7A18A /* SADataManager+User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SADataManager+User.m"; sourceTree = "<group>"; };
-		5AF5B1E31BA2C64200C7A18A /* SAUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAUser.h; sourceTree = "<group>"; };
-		5AF5B1E41BA2C64200C7A18A /* SAUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUser.m; sourceTree = "<group>"; };
 		75586252364C76D55E3E00D4 /* libPods-fansky.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fansky.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD18F73F4E7C0D5101B87468 /* Pods-fansky.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fansky.release.xcconfig"; path = "Pods/Target Support Files/Pods-fansky/Pods-fansky.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,6 +102,8 @@
 			children = (
 				5A2365BB1B395FD200E1E73C /* SATimeLineCell.h */,
 				5A2365BC1B395FD200E1E73C /* SATimeLineCell.m */,
+				5AE38ADC1BA2E70F0022A35A /* SAUserCell.h */,
+				5AE38ADD1BA2E70F0022A35A /* SAUserCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -106,8 +111,8 @@
 		5A2365BE1B39619100E1E73C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5AF5B1E31BA2C64200C7A18A /* SAUser.h */,
-				5AF5B1E41BA2C64200C7A18A /* SAUser.m */,
+				5AE38AD91BA2E27E0022A35A /* SAUser.h */,
+				5AE38ADA1BA2E27E0022A35A /* SAUser.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -369,7 +374,8 @@
 				5AD70F191B316B05009C5B84 /* SATimeLineViewController.m in Sources */,
 				5AD70EF01B316A79009C5B84 /* main.m in Sources */,
 				5AF5B1C71BA17EF500C7A18A /* SAUserListViewController.m in Sources */,
-				5AF5B1E51BA2C64200C7A18A /* SAUser.m in Sources */,
+				5AE38ADE1BA2E70F0022A35A /* SAUserCell.m in Sources */,
+				5AE38ADB1BA2E27E0022A35A /* SAUser.m in Sources */,
 				5AF5B1D01BA1816600C7A18A /* SADataManager.m in Sources */,
 				5AD70EF61B316A79009C5B84 /* fansky.xcdatamodeld in Sources */,
 			);
