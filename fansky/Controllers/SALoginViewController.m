@@ -15,7 +15,7 @@
 
 @interface SALoginViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextField *usernameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 
 @end
@@ -34,14 +34,12 @@
 
 - (IBAction)loginButtonTouchUp:(id)sender
 {
-    NSString *username = self.usernameTextField.text;
+    NSString *email = self.emailTextField.text;
     NSString *password = self.passwordTextField.text;
     
-    [[SAAPIService sharedSingleton] authorizeWithUsername:username password:password success:^(NSString *token) {
-        [SSKeychain setPassword:token forService:SA_APP_DOMAIN account:username];
-                
-        [[SAAPIService sharedSingleton] userInfoWithToken:token success:^(NSString *userInfo) {
-            
+    [[SAAPIService sharedSingleton] authorizeWithUsername:email password:password success:^(NSString *token, NSString *secret) {
+        [[SAAPIService sharedSingleton] verifyCredentialsWithToken:token secret:secret success:^(id data) {
+            [[SADataManager sharedManager] insertOrUpdateUserWithObject:data];
         } failure:^(NSError *error) {
             
         }];

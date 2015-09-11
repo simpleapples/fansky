@@ -12,8 +12,8 @@
 
 + (SAAPIService *)sharedSingleton;
 
-- (void)authorizeWithUsername:(NSString *)username password:(NSString *)password success:(void(^)(NSString *token))success failure:(void(^)(NSError *error))failure;
+- (void)authorizeWithUsername:(NSString *)username password:(NSString *)password success:(void(^)(NSString *token, NSString *secret))success failure:(void(^)(NSError *error))failure;
 
-- (void)userInfoWithToken:(NSString *)token success:(void(^)(NSString *userInfo))success failure:(void(^)(NSError *error))failure;
+- (void)verifyCredentialsWithToken:(NSString *)token secret:(NSString *)secret success:(void(^)(id data))success failure:(void(^)(NSError *error))failure;
 
 @end

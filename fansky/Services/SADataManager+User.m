@@ -38,7 +38,7 @@ static NSString *const ENTITY_NAME = @"SAUser";
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
     fetchRequest.fetchLimit = 1;
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"id = %@", userID];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"userID = %@", userID];
     
     __block NSError *error;
     __block SAUser *resultUser;
@@ -46,11 +46,13 @@ static NSString *const ENTITY_NAME = @"SAUser";
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
         if (!error && fetchResult && fetchResult.count) {
             SAUser *existUser = [fetchResult objectAtIndex:0];
+            existUser.userID = userID;
             existUser.name = name;
             resultUser = existUser;
         } else {
             [self.managedObjectContext performBlockAndWait:^{
                 SAUser *user = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
+                user.userID = userID;
                 user.name = name;
                 resultUser = user;
             }];

@@ -45,54 +45,64 @@
     return self;
 }
 
-- (void)authorizeWithUsername:(NSString *)username password:(NSString *)password success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure
+- (void)authorizeWithUsername:(NSString *)username password:(NSString *)password success:(void (^)(NSString *, NSString *))success failure:(void (^)(NSError *))failure
 {
     NSURLRequest *URLRequest = [TDOAuth URLRequestForPath:SA_API_ACCESS_TOKEN_PATH GETParameters:@{@"x_auth_username": username, @"x_auth_password": password,  @"x_auth_mode": @"client_auth"} host:SA_API_BASE_HOST consumerKey:SA_API_COMSUMER_KEY consumerSecret:SA_API_COMSUMER_SECRET accessToken:nil tokenSecret:nil];
     
     [NSURLConnection sendAsynchronousRequest:URLRequest queue:self.operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (!connectionError) {
-            NSString *token = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            success(token);
+            NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            
+            NSRange startRange = [responseString rangeOfString:@"oauth_token="];
+            NSRange endRange = [responseString rangeOfString:@"&oauth_token_secret="];
+            
+            NSRange tokenRange = NSMakeRange(startRange.location + startRange.length, endRange.location - startRange.location - startRange.length);
+            NSString *token = [responseString substringWithRange:tokenRange];
+            NSString *secret = [responseString substringFromIndex:endRange.location + endRange.length];
+            
+            success(token, secret);
         } else {
             failure(connectionError);
         }
     }];
 }
 
-- (void)userInfoWithToken:(NSString *)token success:(void (^)(NSString *))success failure:(void (^)(NSError *))failure
+- (void)verifyCredentialsWithToken:(NSString *)token secret:(NSString *)secret success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
-    [self requestAPIWithPath:SA_API_VERIFY_CREDENTIALS_PATH method:@"POST" parametersDictionary:nil success:success failure:failure];
+    NSURLRequest *URLRequest = [TDOAuth URLRequestForPath:SA_API_VERIFY_CREDENTIALS_PATH parameters:@{@"mode": @"lite"} host:SA_API_HOST consumerKey:SA_API_COMSUMER_KEY consumerSecret:SA_API_COMSUMER_SECRET accessToken:token tokenSecret:secret scheme:@"http" requestMethod:@"POST" dataEncoding:TDOAuthContentTypeUrlEncodedForm headerValues:nil signatureMethod:TDOAuthSignatureMethodHmacSha1];
+    
+    [NSURLConnection sendAsynchronousRequest:URLRequest queue:self.operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (!connectionError) {
+            id responseJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            if (responseJSON && success) {
+                success(responseJSON);
+            } else if (failure) {
+                failure(nil);
+            }
+        } else if (failure) {
+            failure(connectionError);
+        }
+    }];
 }
 
 - (void)requestAPIWithPath:(NSString *)path method:(NSString *)method parametersDictionary:(NSDictionary *)parametersDictionary success:(void(^)(id responseObject))success failure:(void(^)(NSError *error))failure
 {
-    
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
-    if (currentUser) {
-        NSString *token = [SSKeychain passwordForService:SA_APP_DOMAIN account:currentUser.userID];
-        if (token) {
-            [self.operationManager.requestSerializer setAuthorizationHeaderFieldWithUsername:token password:@""];
-            NSString *headerString = [NSString stringWithFormat:@"OAuth realm=%@", currentUser.token];
-            [self.operationManager.requestSerializer setValue:headerString forHTTPHeaderField:@"X-asd"];
-        }
-    }
-    void (^successBlock)(AFHTTPRequestOperation *operation, id responseObject) = ^(AFHTTPRequestOperation *operation, id responseObject) {
-        if (success) {
-            success(responseObject);
-        }
-    };
-    void (^failureBlock)(AFHTTPRequestOperation *operation, NSError *error) = ^(AFHTTPRequestOperation *operation, NSError *error) {
-        if (failure) {
-            failure(error);
-        }
-    };
     
-    NSString *URLString = [NSString stringWithFormat:@"http://%@%@", SA_API_HOST, path];
-    if ([method isEqualToString:@"POST"]) {
-        [self.operationManager POST:URLString parameters:parametersDictionary success:successBlock failure:failureBlock];
-    } else {
-        [self.operationManager GET:URLString parameters:parametersDictionary success:successBlock failure:failureBlock];
-    }
+    NSURLRequest *URLRequest = [TDOAuth URLRequestForPath:path parameters:parametersDictionary host:SA_API_HOST consumerKey:SA_API_COMSUMER_KEY consumerSecret:SA_API_COMSUMER_SECRET accessToken:currentUser.token tokenSecret:currentUser.tokenSecret scheme:@"http" requestMethod:method dataEncoding:TDOAuthContentTypeUrlEncodedForm headerValues:nil signatureMethod:TDOAuthSignatureMethodHmacSha1];
+
+    [NSURLConnection sendAsynchronousRequest:URLRequest queue:self.operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        if (!connectionError) {
+            id responseJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            if (responseJSON && success) {
+                success(responseJSON);
+            } else if (failure) {
+                failure(nil);
+            }
+        } else if (failure) {
+            failure(connectionError);
+        }
+    }];
 }
 
 @end

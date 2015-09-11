@@ -19,5 +19,5 @@ NSString *const SA_API_AUTHORIZE_PATH = @"/oauth/authorize";
 NSString *const SA_API_AUTHORIZE_CALLBACK_URL = @"fansky://authorize-success";
 
 NSString *const SA_API_HOST = @"api.fanfou.com";
-NSString *const SA_API_VERIFY_CREDENTIALS_PATH = @"/users/verify_credentials.json";
+NSString *const SA_API_VERIFY_CREDENTIALS_PATH = @"/account/verify_credentials.json";
 

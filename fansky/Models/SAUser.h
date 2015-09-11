@@ -2,7 +2,7 @@
 //  SAUser.h
 //  fansky
 //
-//  Created by Zzy on 9/10/15.
+//  Created by Zzy on 9/11/15.
 //  Copyright (c) 2015 Zzy. All rights reserved.
 //
 
@@ -17,5 +17,7 @@
 @property (nonatomic, retain) NSNumber * active;
 @property (nonatomic, retain) NSNumber * local;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * email;
+@property (nonatomic, retain) NSString * tokenSecret;
 
 @end

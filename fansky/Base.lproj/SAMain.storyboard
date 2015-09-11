@@ -53,7 +53,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="邮箱" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aB7-7a-oA7">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="zangzhiya@hotmail.com" borderStyle="roundedRect" placeholder="邮箱" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aB7-7a-oA7">
                                 <rect key="frame" x="16" y="80" width="568" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="N02-LZ-cvL"/>
@@ -67,7 +67,7 @@
                                     </mask>
                                 </variation>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mgi-Ld-OUj">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="zzy568403" borderStyle="roundedRect" placeholder="密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mgi-Ld-OUj">
                                 <rect key="frame" x="16" y="140" width="568" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="P9q-Ve-vvN"/>
@@ -109,8 +109,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="登录" id="w1Q-AH-kkw"/>
                     <connections>
+                        <outlet property="emailTextField" destination="aB7-7a-oA7" id="Neq-5j-jRv"/>
                         <outlet property="passwordTextField" destination="Mgi-Ld-OUj" id="eM8-Ct-Z3a"/>
-                        <outlet property="usernameTextField" destination="aB7-7a-oA7" id="o1f-d9-Neg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CeZ-0b-F8E" userLabel="First Responder" sceneMemberID="firstResponder"/>
