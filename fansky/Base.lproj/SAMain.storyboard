@@ -314,6 +314,7 @@
                                     <outlet property="IDLabel" destination="quj-gi-3tK" id="CMH-Z6-v5t"/>
                                     <outlet property="avatarImageView" destination="UIF-u9-hUf" id="tMI-sZ-wCB"/>
                                     <outlet property="nameLabel" destination="Iqi-16-yan" id="yEW-Y6-Stj"/>
+                                    <segue destination="bcT-Eb-ogE" kind="show" id="qBy-9g-ujA"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -331,7 +332,6 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="o66-wq-Z6y"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="bcT-Eb-ogE" kind="show" identifier="UserListToTabBarSegue" id="wnA-Ic-AAl"/>
                         <segue destination="o2W-kd-yPy" kind="presentation" identifier="UserListToAuthNavigationSegue" id="H21-lO-l97"/>
                     </connections>
                 </tableViewController>
@@ -361,6 +361,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wnA-Ic-AAl"/>
+        <segue reference="qBy-9g-ujA"/>
     </inferredMetricsTieBreakers>
 </document>

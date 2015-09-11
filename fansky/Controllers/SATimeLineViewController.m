@@ -8,6 +8,9 @@
 //
 
 #import "SATimeLineViewController.h"
+#import "SADataManager+User.h"
+#import "SAUser.h"
+#import "SAAPIService.h"
 
 @interface SATimeLineViewController ()
 
@@ -17,7 +20,14 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];    
+    [super viewDidLoad];
+    
+    SAUser *currentUser = [SADataManager sharedManager].currentUser;
+    [[SAAPIService sharedSingleton] timelineWithUserID:currentUser.userID sinceID:nil maxID:nil count:60 success:^(id data) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)didReceiveMemoryWarning

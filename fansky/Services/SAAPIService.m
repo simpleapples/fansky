@@ -85,6 +85,11 @@
     }];
 }
 
+- (void)timelineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSError *))failure
+{
+    [self requestAPIWithPath:SA_API_HOME_TIMELINE_PATH method:@"GET" parametersDictionary:@{@"id": userID, @"since_id": sinceID, @"max_id": maxID, @"count": @(count)} success:success failure:failure];
+}
+
 - (void)requestAPIWithPath:(NSString *)path method:(NSString *)method parametersDictionary:(NSDictionary *)parametersDictionary success:(void(^)(id responseObject))success failure:(void(^)(NSError *error))failure
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
