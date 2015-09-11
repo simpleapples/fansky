@@ -8,11 +8,16 @@
 
 #import "SAConstants.h"
 
-NSString *const BASE_URL = @"http://fanfou.com";
-NSString *const COMSUMER_KEY = @"f1a7f5a8dc2faa0342bb8121de2f9b07";
-NSString *const COMSUMER_SECRET = @"6763155636ac7029f91cc7691d0e7939";
-NSString *const ACCESS_TOKEN_PATH = @"/oauth/access_token";
+NSString *const SA_APP_DOMAIN = @"com.zangzhiya.fansky";
 
-NSString *const API_BASE_URL = @"http://api.fanfou.com";
-NSString *const API_USER_SHOW_PATH = @"/users/show.json";
+NSString *const SA_API_BASE_HOST = @"fanfou.com";
+NSString *const SA_API_COMSUMER_KEY = @"f1a7f5a8dc2faa0342bb8121de2f9b07";
+NSString *const SA_API_COMSUMER_SECRET = @"6763155636ac7029f91cc7691d0e7939";
+NSString *const SA_API_ACCESS_TOKEN_PATH = @"/oauth/access_token";
+NSString *const SA_API_REQUEST_TOKEN_PATH = @"/oauth/request_token";
+NSString *const SA_API_AUTHORIZE_PATH = @"/oauth/authorize";
+NSString *const SA_API_AUTHORIZE_CALLBACK_URL = @"fansky://authorize-success";
+
+NSString *const SA_API_HOST = @"api.fanfou.com";
+NSString *const SA_API_VERIFY_CREDENTIALS_PATH = @"/users/verify_credentials.json";
 

@@ -1,6 +1,8 @@
 target 'fansky' do
 
-pod 'AFXAuthClient', '~> 1.1'
+pod 'AFNetworking', '~> 2.0'
+pod 'TDOAuth'
+pod 'SSKeychain'
 
 end
 

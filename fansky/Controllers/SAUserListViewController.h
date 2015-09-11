@@ -1,5 +1,5 @@
 //
-//  SALoginViewController.h
+//  SAUserListViewController.h
 //  fansky
 //
 //  Created by Zzy on 9/10/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SALoginViewController : UIViewController
+@interface SAUserListViewController : UITableViewController
 
 @end

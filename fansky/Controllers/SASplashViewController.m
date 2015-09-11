@@ -2,29 +2,31 @@
 //  SASplashViewController.m
 //  fansky
 //
-//  Created by Zzy on 6/17/15.
+//  Created by Zzy on 9/10/15.
 //  Copyright (c) 2015 Zzy. All rights reserved.
 //
 
 #import "SASplashViewController.h"
-#import "SAUserManager.h"
+#import "SAConstants.h"
+
+@interface SASplashViewController ()
+
+@end
 
 @implementation SASplashViewController
 
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self performSegueWithIdentifier:@"SplashToUserListSegue" sender:nil];
+    });
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)didReceiveMemoryWarning
 {
-    [super viewDidAppear:animated];
-    
-    [self performSegueWithIdentifier:@"SplashToLoginNavigationSegue" sender:nil];
-}
-
-- (IBAction)exitToSplash:(UIStoryboardSegue *)segue
-{
-    
+    [super didReceiveMemoryWarning];
 }
 
 @end

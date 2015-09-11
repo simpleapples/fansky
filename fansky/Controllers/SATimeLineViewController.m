@@ -8,7 +8,6 @@
 //
 
 #import "SATimeLineViewController.h"
-#import "AFXAuthClient.h"
 
 @interface SATimeLineViewController ()
 

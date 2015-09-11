@@ -10,4 +10,10 @@
 
 @interface SAAPIService : NSObject
 
++ (SAAPIService *)sharedSingleton;
+
+- (void)authorizeWithUsername:(NSString *)username password:(NSString *)password success:(void(^)(NSString *token))success failure:(void(^)(NSError *error))failure;
+
+- (void)userInfoWithToken:(NSString *)token success:(void(^)(NSString *userInfo))success failure:(void(^)(NSError *error))failure;
+
 @end
