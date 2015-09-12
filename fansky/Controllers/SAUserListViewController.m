@@ -32,6 +32,11 @@ static NSString *const ENTITY_NAME = @"SAUser";
     [super didReceiveMemoryWarning];
 }
 
+- (void)updateInterface
+{
+    self.tableView.tableFooterView = [UIView new];
+}
+
 - (IBAction)exitToUserList:(UIStoryboardSegue *)segue
 {
     

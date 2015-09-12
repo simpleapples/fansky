@@ -5,7 +5,7 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--关于我的-->
+        <!--提到我的-->
         <scene sceneID="XAk-OG-QHE">
             <objects>
                 <viewController id="Mep-ad-xaF" sceneMemberID="viewController">
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="关于我的" image="IconBell" id="uHT-x7-buP"/>
+                    <tabBarItem key="tabBarItem" title="提到我的" image="IconBell" id="uHT-x7-buP"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uTf-mV-ctu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -370,8 +370,13 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="RDa-Zw-pYu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="selectedImageTintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.33333333333333331" green="0.67450980392156867" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
                         <segue destination="ieL-P1-XG7" kind="relationship" relationship="viewControllers" id="3TY-n2-7zE"/>
@@ -393,4 +398,5 @@
     <inferredMetricsTieBreakers>
         <segue reference="qBy-9g-ujA"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>
