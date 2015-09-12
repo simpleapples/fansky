@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class SAStatus;
+
 @interface SATimeLineCell : UITableViewCell
+
+- (void)configWithStatus:(SAStatus *)status;
 
 @end

@@ -49,4 +49,9 @@
     }];
 }
 
+- (IBAction)cancelButtonTouchUp:(id)sender
+{
+    [self performSegueWithIdentifier:@"LoginExitToUserListSegue" sender:nil];
+}
+
 @end

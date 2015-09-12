@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="SAPhoto" representedClassName="SAPhoto" syncable="YES">
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="largeURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photoURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thumbURL" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="SAStatus" representedClassName="SAStatus" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="statusID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="localUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAUser" syncable="YES"/>
+        <relationship name="photo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAPhoto" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAUser" inverseName="status" inverseEntity="SAUser" syncable="YES"/>
+    </entity>
     <entity name="SAUser" representedClassName="SAUser" syncable="YES">
         <attribute name="active" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="local" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -9,8 +24,11 @@
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tokenSecret" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="status" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SAStatus" inverseName="user" inverseEntity="SAStatus" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SAUser" positionX="-63" positionY="-18" width="128" height="165"/>
+        <element name="SAUser" positionX="-63" positionY="-18" width="128" height="180"/>
+        <element name="SAStatus" positionX="-63" positionY="45" width="128" height="150"/>
+        <element name="SAPhoto" positionX="-36" positionY="81" width="128" height="105"/>
     </elements>
 </model>

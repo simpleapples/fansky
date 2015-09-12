@@ -27,6 +27,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    [[SADataManager sharedManager] saveContext];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

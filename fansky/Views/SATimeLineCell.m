@@ -7,6 +7,7 @@
 //
 
 #import "SATimeLineCell.h"
+#import "SAStatus.h"
 
 @interface SATimeLineCell ()
 
@@ -19,5 +20,10 @@
 @end
 
 @implementation SATimeLineCell
+
+- (void)configWithStatus:(SAStatus *)status
+{
+    
+}
 
 @end
