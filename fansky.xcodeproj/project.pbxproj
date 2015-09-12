@@ -12,6 +12,7 @@
 		5A3E6C4F1BA4271100C589BE /* SAPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3E6C4E1BA4271100C589BE /* SAPhoto.m */; };
 		5A3E6C521BA4271200C589BE /* SAUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3E6C511BA4271200C589BE /* SAUser.m */; };
 		5A3E6C551BA4271200C589BE /* SAStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3E6C541BA4271200C589BE /* SAStatus.m */; };
+		5A3E6C581BA441D100C589BE /* SADataManager+Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3E6C571BA441D100C589BE /* SADataManager+Status.m */; };
 		5AD70EF01B316A79009C5B84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EEF1B316A79009C5B84 /* main.m */; };
 		5AD70EF31B316A79009C5B84 /* SAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EF21B316A79009C5B84 /* SAAppDelegate.m */; };
 		5AD70EF61B316A79009C5B84 /* fansky.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EF41B316A79009C5B84 /* fansky.xcdatamodeld */; };
@@ -52,6 +53,8 @@
 		5A3E6C511BA4271200C589BE /* SAUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUser.m; sourceTree = "<group>"; };
 		5A3E6C531BA4271200C589BE /* SAStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAStatus.h; sourceTree = "<group>"; };
 		5A3E6C541BA4271200C589BE /* SAStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAStatus.m; sourceTree = "<group>"; };
+		5A3E6C561BA441D100C589BE /* SADataManager+Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SADataManager+Status.h"; sourceTree = "<group>"; };
+		5A3E6C571BA441D100C589BE /* SADataManager+Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SADataManager+Status.m"; sourceTree = "<group>"; };
 		5AD70EEA1B316A79009C5B84 /* fansky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fansky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD70EEE1B316A79009C5B84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AD70EEF1B316A79009C5B84 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -217,6 +220,8 @@
 				5AF5B1CF1BA1816600C7A18A /* SADataManager.m */,
 				5AF5B1D11BA181CD00C7A18A /* SADataManager+User.h */,
 				5AF5B1D21BA181CD00C7A18A /* SADataManager+User.m */,
+				5A3E6C561BA441D100C589BE /* SADataManager+Status.h */,
+				5A3E6C571BA441D100C589BE /* SADataManager+Status.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -378,6 +383,7 @@
 				5A3E6C4F1BA4271100C589BE /* SAPhoto.m in Sources */,
 				5AF5B1CD1BA1813A00C7A18A /* SASplashViewController.m in Sources */,
 				5AF5B1CA1BA17F7B00C7A18A /* SALoginViewController.m in Sources */,
+				5A3E6C581BA441D100C589BE /* SADataManager+Status.m in Sources */,
 				5AD70F201B31716A009C5B84 /* SAConstants.m in Sources */,
 				5AF5B1D31BA181CD00C7A18A /* SADataManager+User.m in Sources */,
 				5A3E6C521BA4271200C589BE /* SAUser.m in Sources */,
