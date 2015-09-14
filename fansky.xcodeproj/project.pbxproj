@@ -23,6 +23,8 @@
 		5AD70F191B316B05009C5B84 /* SATimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70F181B316B05009C5B84 /* SATimeLineViewController.m */; };
 		5AD70F201B31716A009C5B84 /* SAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70F1F1B31716A009C5B84 /* SAConstants.m */; };
 		5AE38ADE1BA2E70F0022A35A /* SAUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE38ADD1BA2E70F0022A35A /* SAUserCell.m */; };
+		5AED4B291BA672D100EDBF47 /* SADataManager+Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B281BA672D100EDBF47 /* SADataManager+Photo.m */; };
+		5AED4B2D1BA6C16300EDBF47 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B2C1BA6C16300EDBF47 /* NSString+Utils.m */; };
 		5AF5B1C71BA17EF500C7A18A /* SAUserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1C61BA17EF500C7A18A /* SAUserListViewController.m */; };
 		5AF5B1CA1BA17F7B00C7A18A /* SALoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1C91BA17F7B00C7A18A /* SALoginViewController.m */; };
 		5AF5B1CD1BA1813A00C7A18A /* SASplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1CC1BA1813A00C7A18A /* SASplashViewController.m */; };
@@ -73,6 +75,10 @@
 		5AD70F211B3171FA009C5B84 /* SAConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SAConstants.h; sourceTree = "<group>"; };
 		5AE38ADC1BA2E70F0022A35A /* SAUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAUserCell.h; sourceTree = "<group>"; };
 		5AE38ADD1BA2E70F0022A35A /* SAUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUserCell.m; sourceTree = "<group>"; };
+		5AED4B271BA672D100EDBF47 /* SADataManager+Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SADataManager+Photo.h"; sourceTree = "<group>"; };
+		5AED4B281BA672D100EDBF47 /* SADataManager+Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SADataManager+Photo.m"; sourceTree = "<group>"; };
+		5AED4B2B1BA6C16300EDBF47 /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
+		5AED4B2C1BA6C16300EDBF47 /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
 		5AF5B1C51BA17EF500C7A18A /* SAUserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAUserListViewController.h; sourceTree = "<group>"; };
 		5AF5B1C61BA17EF500C7A18A /* SAUserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUserListViewController.m; sourceTree = "<group>"; };
 		5AF5B1C81BA17F7B00C7A18A /* SALoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SALoginViewController.h; sourceTree = "<group>"; };
@@ -153,6 +159,7 @@
 		5AD70EEC1B316A79009C5B84 /* fansky */ = {
 			isa = PBXGroup;
 			children = (
+				5AED4B2A1BA6C16300EDBF47 /* Utils */,
 				5A2365BE1B39619100E1E73C /* Models */,
 				5A2365BA1B395FC100E1E73C /* Views */,
 				5AD70F1A1B316F4D009C5B84 /* Services */,
@@ -222,8 +229,19 @@
 				5AF5B1D21BA181CD00C7A18A /* SADataManager+User.m */,
 				5A3E6C561BA441D100C589BE /* SADataManager+Status.h */,
 				5A3E6C571BA441D100C589BE /* SADataManager+Status.m */,
+				5AED4B271BA672D100EDBF47 /* SADataManager+Photo.h */,
+				5AED4B281BA672D100EDBF47 /* SADataManager+Photo.m */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		5AED4B2A1BA6C16300EDBF47 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				5AED4B2B1BA6C16300EDBF47 /* NSString+Utils.h */,
+				5AED4B2C1BA6C16300EDBF47 /* NSString+Utils.m */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		7A012AD8EBD5286DCA3A07D7 /* Frameworks */ = {
@@ -384,6 +402,7 @@
 				5AF5B1CD1BA1813A00C7A18A /* SASplashViewController.m in Sources */,
 				5AF5B1CA1BA17F7B00C7A18A /* SALoginViewController.m in Sources */,
 				5A3E6C581BA441D100C589BE /* SADataManager+Status.m in Sources */,
+				5AED4B2D1BA6C16300EDBF47 /* NSString+Utils.m in Sources */,
 				5AD70F201B31716A009C5B84 /* SAConstants.m in Sources */,
 				5AF5B1D31BA181CD00C7A18A /* SADataManager+User.m in Sources */,
 				5A3E6C521BA4271200C589BE /* SAUser.m in Sources */,
@@ -391,6 +410,7 @@
 				5A2365BD1B395FD200E1E73C /* SATimeLineCell.m in Sources */,
 				5AD70F191B316B05009C5B84 /* SATimeLineViewController.m in Sources */,
 				5AD70EF01B316A79009C5B84 /* main.m in Sources */,
+				5AED4B291BA672D100EDBF47 /* SADataManager+Photo.m in Sources */,
 				5AF5B1C71BA17EF500C7A18A /* SAUserListViewController.m in Sources */,
 				5AE38ADE1BA2E70F0022A35A /* SAUserCell.m in Sources */,
 				5A3E6C551BA4271200C589BE /* SAStatus.m in Sources */,

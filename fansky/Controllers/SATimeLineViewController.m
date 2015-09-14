@@ -13,6 +13,7 @@
 #import "SATimeLineCell.h"
 #import "SAStatus.h"
 #import "SAAPIService.h"
+#import "SADataManager+Status.h"
 
 @interface SATimeLineViewController () <NSFetchedResultsControllerDelegate>
 
@@ -28,14 +29,23 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 {
     [super viewDidLoad];
     
+    [self updateInterface];
+    
     [self fetchedResultsController];
     
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     [[SAAPIService sharedSingleton] timelineWithUserID:currentUser.userID sinceID:nil maxID:nil count:60 success:^(id data) {
-        
+        NSArray *timeline = (NSArray *)data;
+        [[SADataManager sharedManager] insertStatusWithObjects:timeline];
     } failure:^(NSError *error) {
         
     }];
+}
+
+- (void)updateInterface
+{
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 140;
 }
 
 - (void)didReceiveMemoryWarning

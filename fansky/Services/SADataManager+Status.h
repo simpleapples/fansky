@@ -8,8 +8,11 @@
 
 #import "SADataManager.h"
 
+@class SAStatus;
+
 @interface SADataManager (Status)
 
+- (void)insertStatusWithObjects:(NSArray *)objects;
 - (SAStatus *)insertStatusWithObject:(id)object;
 
 @end
