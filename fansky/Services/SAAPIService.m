@@ -95,6 +95,16 @@
     [self requestAPIWithPath:SA_API_HOME_TIMELINE_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
 }
 
+- (void)sendStatus:(NSString *)status replyToStatusID:(NSString *)replayToStatusID repostStatusID:(NSString *)repostStatusID success:(void (^)(id))success failure:(void (^)(NSError *))failure
+{
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:status, @"status", nil];
+    if (replayToStatusID) {
+        [mutableDictionary setObject:replayToStatusID forKey:@"in_reply_to_status_id"];
+        [mutableDictionary setObject:repostStatusID forKey:@"repost_status_id"];
+    }
+    [self requestAPIWithPath:SA_API_UPDATE_STATUS_PATH method:@"POST" parametersDictionary:mutableDictionary success:success failure:failure];
+}
+
 - (void)requestAPIWithPath:(NSString *)path method:(NSString *)method parametersDictionary:(NSDictionary *)parametersDictionary success:(void(^)(id responseObject))success failure:(void(^)(NSError *error))failure
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;

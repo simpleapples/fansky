@@ -18,4 +18,6 @@
 
 - (void)timelineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSError *error))failure;
 
+- (void)sendStatus:(NSString *)status replyToStatusID:(NSString *)replayToStatusID repostStatusID:(NSString *)repostStatusID success:(void(^)(id data))success failure:(void(^)(NSError *error))failure;
+
 @end

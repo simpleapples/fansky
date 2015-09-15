@@ -14,5 +14,6 @@
 
 - (void)insertStatusWithObjects:(NSArray *)objects;
 - (SAStatus *)insertStatusWithObject:(id)object;
+- (SAStatus *)statusWithID:(NSString *)statusID;
 
 @end

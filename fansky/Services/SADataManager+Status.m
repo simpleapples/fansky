@@ -28,7 +28,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     NSString *statusID = [object objectForKey:@"id"];
     NSString *source = [object objectForKey:@"source"];
     NSString *text = [object objectForKey:@"text"];
-    NSString *createdAtString = [object objectForKey:@"createdat"];
+    NSString *createdAtString = [object objectForKey:@"created_at"];
     NSDate *createdAt = [createdAtString dateWithDefaultFormat];
     
     SAPhoto *photo = [[SADataManager sharedManager] insertPhotoWithObject:[object objectForKey:@"photo"]];
@@ -44,6 +44,24 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         status.user = user;
         status.createdAt = createdAt;
         resultStatus = status;
+    }];
+    return resultStatus;
+}
+
+- (SAStatus *)statusWithID:(NSString *)statusID
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
+    fetchRequest.fetchLimit = 1;
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"statusID = %@", statusID];
+    
+    __block NSError *error;
+    __block SAStatus *resultStatus;
+    [self.managedObjectContext performBlockAndWait:^{
+        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (!error && fetchResult && fetchResult.count) {
+            SAStatus *existStatus = [fetchResult objectAtIndex:0];
+            resultStatus = existStatus;
+        }
     }];
     return resultStatus;
 }

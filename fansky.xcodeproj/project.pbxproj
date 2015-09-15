@@ -25,6 +25,10 @@
 		5AE38ADE1BA2E70F0022A35A /* SAUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE38ADD1BA2E70F0022A35A /* SAUserCell.m */; };
 		5AED4B291BA672D100EDBF47 /* SADataManager+Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B281BA672D100EDBF47 /* SADataManager+Photo.m */; };
 		5AED4B2D1BA6C16300EDBF47 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B2C1BA6C16300EDBF47 /* NSString+Utils.m */; };
+		5AED4B301BA6D41D00EDBF47 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B2F1BA6D41D00EDBF47 /* NSDate+Utils.m */; };
+		5AED4B331BA6E48B00EDBF47 /* SAComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B321BA6E48B00EDBF47 /* SAComposeViewController.m */; };
+		5AED4B361BA6E52B00EDBF47 /* SATabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B351BA6E52B00EDBF47 /* SATabBarViewController.m */; };
+		5AED4B391BA7CFE100EDBF47 /* SAStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B381BA7CFE100EDBF47 /* SAStatusViewController.m */; };
 		5AF5B1C71BA17EF500C7A18A /* SAUserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1C61BA17EF500C7A18A /* SAUserListViewController.m */; };
 		5AF5B1CA1BA17F7B00C7A18A /* SALoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1C91BA17F7B00C7A18A /* SALoginViewController.m */; };
 		5AF5B1CD1BA1813A00C7A18A /* SASplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1CC1BA1813A00C7A18A /* SASplashViewController.m */; };
@@ -79,6 +83,14 @@
 		5AED4B281BA672D100EDBF47 /* SADataManager+Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SADataManager+Photo.m"; sourceTree = "<group>"; };
 		5AED4B2B1BA6C16300EDBF47 /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
 		5AED4B2C1BA6C16300EDBF47 /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
+		5AED4B2E1BA6D41D00EDBF47 /* NSDate+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utils.h"; sourceTree = "<group>"; };
+		5AED4B2F1BA6D41D00EDBF47 /* NSDate+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utils.m"; sourceTree = "<group>"; };
+		5AED4B311BA6E48B00EDBF47 /* SAComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAComposeViewController.h; sourceTree = "<group>"; };
+		5AED4B321BA6E48B00EDBF47 /* SAComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAComposeViewController.m; sourceTree = "<group>"; };
+		5AED4B341BA6E52B00EDBF47 /* SATabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SATabBarViewController.h; sourceTree = "<group>"; };
+		5AED4B351BA6E52B00EDBF47 /* SATabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SATabBarViewController.m; sourceTree = "<group>"; };
+		5AED4B371BA7CFE100EDBF47 /* SAStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAStatusViewController.h; sourceTree = "<group>"; };
+		5AED4B381BA7CFE100EDBF47 /* SAStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAStatusViewController.m; sourceTree = "<group>"; };
 		5AF5B1C51BA17EF500C7A18A /* SAUserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAUserListViewController.h; sourceTree = "<group>"; };
 		5AF5B1C61BA17EF500C7A18A /* SAUserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUserListViewController.m; sourceTree = "<group>"; };
 		5AF5B1C81BA17F7B00C7A18A /* SALoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SALoginViewController.h; sourceTree = "<group>"; };
@@ -214,6 +226,12 @@
 				5AF5B1C91BA17F7B00C7A18A /* SALoginViewController.m */,
 				5AF5B1CB1BA1813A00C7A18A /* SASplashViewController.h */,
 				5AF5B1CC1BA1813A00C7A18A /* SASplashViewController.m */,
+				5AED4B311BA6E48B00EDBF47 /* SAComposeViewController.h */,
+				5AED4B321BA6E48B00EDBF47 /* SAComposeViewController.m */,
+				5AED4B341BA6E52B00EDBF47 /* SATabBarViewController.h */,
+				5AED4B351BA6E52B00EDBF47 /* SATabBarViewController.m */,
+				5AED4B371BA7CFE100EDBF47 /* SAStatusViewController.h */,
+				5AED4B381BA7CFE100EDBF47 /* SAStatusViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -240,6 +258,8 @@
 			children = (
 				5AED4B2B1BA6C16300EDBF47 /* NSString+Utils.h */,
 				5AED4B2C1BA6C16300EDBF47 /* NSString+Utils.m */,
+				5AED4B2E1BA6D41D00EDBF47 /* NSDate+Utils.h */,
+				5AED4B2F1BA6D41D00EDBF47 /* NSDate+Utils.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -398,15 +418,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AD70EF31B316A79009C5B84 /* SAAppDelegate.m in Sources */,
+				5AED4B391BA7CFE100EDBF47 /* SAStatusViewController.m in Sources */,
 				5A3E6C4F1BA4271100C589BE /* SAPhoto.m in Sources */,
 				5AF5B1CD1BA1813A00C7A18A /* SASplashViewController.m in Sources */,
 				5AF5B1CA1BA17F7B00C7A18A /* SALoginViewController.m in Sources */,
+				5AED4B331BA6E48B00EDBF47 /* SAComposeViewController.m in Sources */,
+				5AED4B301BA6D41D00EDBF47 /* NSDate+Utils.m in Sources */,
 				5A3E6C581BA441D100C589BE /* SADataManager+Status.m in Sources */,
 				5AED4B2D1BA6C16300EDBF47 /* NSString+Utils.m in Sources */,
 				5AD70F201B31716A009C5B84 /* SAConstants.m in Sources */,
 				5AF5B1D31BA181CD00C7A18A /* SADataManager+User.m in Sources */,
 				5A3E6C521BA4271200C589BE /* SAUser.m in Sources */,
 				5A2365C41B39723900E1E73C /* SAAPIService.m in Sources */,
+				5AED4B361BA6E52B00EDBF47 /* SATabBarViewController.m in Sources */,
 				5A2365BD1B395FD200E1E73C /* SATimeLineCell.m in Sources */,
 				5AD70F191B316B05009C5B84 /* SATimeLineViewController.m in Sources */,
 				5AD70EF01B316A79009C5B84 /* main.m in Sources */,

@@ -14,10 +14,12 @@
 #import "SAStatus.h"
 #import "SAAPIService.h"
 #import "SADataManager+Status.h"
+#import "SAStatusViewController.h"
 
 @interface SATimeLineViewController () <NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (copy, nonatomic) NSString *selectedStatusID;
 
 @end
 
@@ -74,6 +76,14 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     return _fetchedResultsController;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[SAStatusViewController class]]) {
+        SAStatusViewController *statusViewController = (SAStatusViewController *)segue.destinationViewController;
+        statusViewController.statusID = self.selectedStatusID;
+    }
+}
+
 #pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
@@ -106,6 +116,13 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         [cell configWithStatus:status];
     }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SAStatus *status = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    self.selectedStatusID = status.statusID;
+    [self performSegueWithIdentifier:@"TimelineToStatusSegue" sender:nil];
 }
 
 @end

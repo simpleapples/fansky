@@ -10,6 +10,7 @@
 #import "SAStatus.h"
 #import "SAPhoto.h"
 #import "SAUser.h"
+#import "NSDate+Utils.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SATimeLineCell ()
@@ -29,12 +30,14 @@
 {
     self.usernameLabel.text = status.user.name;
     self.contentLabel.text = status.text;
+    self.timeLabel.text = [status.createdAt friendlyDateString];
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:status.user.profileImageURL]];
+    self.contentImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     
     if (status.photo.thumbURL) {
         self.contentImageView.hidden = NO;
         self.contentImageViewHeightConstraint.constant = (self.frame.size.width - 73) * 0.5;
-        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:status.photo.thumbURL]];
+        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:status.photo.largeURL]];
     } else {
         self.contentImageView.hidden = YES;
         self.contentImageViewHeightConstraint.constant = 1;

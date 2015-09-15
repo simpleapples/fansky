@@ -12,7 +12,7 @@
 
 - (NSDate *)dateWithDefaultFormat
 {
-    return [self dateWithFormat:@"E, dd MMM yyyy HH:mm:ss Z"];
+    return [self dateWithFormat:@"E MMM dd HH:mm:ss Z yyyy"];
 }
 
 - (NSDate *)dateWithFormat:(NSString *)format
