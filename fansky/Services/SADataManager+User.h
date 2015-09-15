@@ -14,5 +14,6 @@
 
 - (SAUser *)currentUser;
 - (SAUser *)insertOrUpdateUserWithObject:(id)userObject local:(BOOL)local active:(BOOL)active token:(NSString *)token secret:(NSString *)secret;
+- (void)setCurrentUserWithUserID:(NSString *)userID;
 
 @end

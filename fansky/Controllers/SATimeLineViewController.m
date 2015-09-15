@@ -63,7 +63,10 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         NSSortDescriptor *createdAtSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
         NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
         
+        SAUser *currentUser = [SADataManager sharedManager].currentUser;
+        
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@", currentUser.userID];
         fetchRequest.sortDescriptors = sortArray;
         fetchRequest.returnsObjectsAsFaults = NO;
         fetchRequest.fetchBatchSize = 6;

@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--提到我的-->
@@ -132,7 +133,7 @@
                         <viewControllerLayoutGuide type="bottom" id="bAI-f0-6uJ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ang-q8-Eg1">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B5I-2B-e8a">
@@ -191,7 +192,7 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="keyPath">
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                         <integer key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
@@ -203,24 +204,67 @@
                                     </mask>
                                 </variation>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dH-hH-Sw5">
+                                <rect key="frame" x="278" y="482" width="44" height="44"/>
+                                <state key="normal" image="IconRepost">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDA-dH-rO9">
+                                <rect key="frame" x="426" y="482" width="44" height="44"/>
+                                <state key="normal" image="IconStar">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNc-Nh-5O6">
+                                <rect key="frame" x="128" y="482" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="Tal-H0-7D0"/>
+                                    <constraint firstAttribute="height" constant="44" id="oo4-x0-oml"/>
+                                </constraints>
+                                <state key="normal" image="IconReply">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="centerX" secondItem="5dH-hH-Sw5" secondAttribute="centerX" id="1nU-24-mXN"/>
                             <constraint firstItem="B5I-2B-e8a" firstAttribute="top" secondItem="2z4-y4-Vq0" secondAttribute="bottom" constant="10" id="3E5-EJ-giF"/>
                             <constraint firstItem="dmJ-s8-GGA" firstAttribute="leading" secondItem="DAe-Np-dLq" secondAttribute="leading" id="3XM-1N-yHa"/>
+                            <constraint firstItem="PNc-Nh-5O6" firstAttribute="top" secondItem="dmJ-s8-GGA" secondAttribute="bottom" constant="10" id="5RM-BD-g2O"/>
+                            <constraint firstAttribute="centerX" secondItem="SDA-dH-rO9" secondAttribute="centerX" multiplier="0.67" id="6uJ-cw-Z1q"/>
+                            <constraint firstItem="PNc-Nh-5O6" firstAttribute="top" secondItem="5dH-hH-Sw5" secondAttribute="top" id="CsM-7B-OsQ"/>
                             <constraint firstItem="B5I-2B-e8a" firstAttribute="leading" secondItem="ang-q8-Eg1" secondAttribute="leading" constant="10" id="EAj-4R-l27"/>
                             <constraint firstItem="XOq-QZ-UUe" firstAttribute="top" secondItem="dmJ-s8-GGA" secondAttribute="bottom" constant="10" id="EGc-sf-ZRC"/>
+                            <constraint firstItem="XOq-QZ-UUe" firstAttribute="leading" secondItem="PNc-Nh-5O6" secondAttribute="leading" id="FcC-XC-nAT"/>
+                            <constraint firstItem="bAI-f0-6uJ" firstAttribute="top" secondItem="PNc-Nh-5O6" secondAttribute="bottom" constant="10" id="I3p-H3-W9p"/>
                             <constraint firstItem="XOq-QZ-UUe" firstAttribute="leading" secondItem="dmJ-s8-GGA" secondAttribute="leading" id="IZw-h2-Bb3"/>
                             <constraint firstItem="hzy-5A-jK0" firstAttribute="leading" secondItem="DAe-Np-dLq" secondAttribute="trailing" id="MGo-aA-1cB"/>
+                            <constraint firstItem="PNc-Nh-5O6" firstAttribute="bottom" secondItem="5dH-hH-Sw5" secondAttribute="bottom" id="NZe-be-vXz"/>
+                            <constraint firstItem="PNc-Nh-5O6" firstAttribute="top" secondItem="XOq-QZ-UUe" secondAttribute="bottom" constant="10" id="Pl4-uf-yyO"/>
                             <constraint firstItem="DAe-Np-dLq" firstAttribute="top" secondItem="B5I-2B-e8a" secondAttribute="top" id="RfG-Ol-ntg"/>
                             <constraint firstAttribute="trailing" secondItem="hzy-5A-jK0" secondAttribute="trailing" constant="10" id="VqV-IV-Pzd"/>
+                            <constraint firstItem="5dH-hH-Sw5" firstAttribute="bottom" secondItem="SDA-dH-rO9" secondAttribute="bottom" id="YKX-Lg-DS4"/>
                             <constraint firstItem="dmJ-s8-GGA" firstAttribute="top" secondItem="hzy-5A-jK0" secondAttribute="bottom" constant="10" id="e77-wo-emb"/>
                             <constraint firstItem="XOq-QZ-UUe" firstAttribute="trailing" secondItem="dmJ-s8-GGA" secondAttribute="trailing" id="eLq-UF-rsR"/>
+                            <constraint firstAttribute="centerX" secondItem="PNc-Nh-5O6" secondAttribute="centerX" multiplier="2" id="ehe-N9-55u"/>
                             <constraint firstItem="hzy-5A-jK0" firstAttribute="trailing" secondItem="dmJ-s8-GGA" secondAttribute="trailing" id="hlv-P4-D4a"/>
+                            <constraint firstItem="PNc-Nh-5O6" firstAttribute="width" secondItem="5dH-hH-Sw5" secondAttribute="width" id="lPD-0t-fxG"/>
                             <constraint firstItem="DAe-Np-dLq" firstAttribute="leading" secondItem="B5I-2B-e8a" secondAttribute="trailing" constant="10" id="ny7-z5-rn4"/>
+                            <constraint firstItem="5dH-hH-Sw5" firstAttribute="top" secondItem="SDA-dH-rO9" secondAttribute="top" id="ock-GF-e98"/>
                             <constraint firstItem="DAe-Np-dLq" firstAttribute="bottom" secondItem="hzy-5A-jK0" secondAttribute="bottom" id="tCl-LV-ibs"/>
+                            <constraint firstItem="5dH-hH-Sw5" firstAttribute="width" secondItem="SDA-dH-rO9" secondAttribute="width" id="x6O-M0-5yu"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="FcC-XC-nAT"/>
+                                <exclude reference="5RM-BD-g2O"/>
+                                <exclude reference="Pl4-uf-yyO"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="avatarImageView" destination="B5I-2B-e8a" id="614-wb-EWx"/>
                         <outlet property="contentImageView" destination="XOq-QZ-UUe" id="suF-u5-Iwb"/>
@@ -302,7 +346,7 @@
                                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                     <integer key="value" value="5"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="keyPath">
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                                     <integer key="value" value="1"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
@@ -690,6 +734,9 @@
         <image name="IconCompose" width="22" height="22"/>
         <image name="IconHome" width="25" height="25"/>
         <image name="IconPerson" width="22" height="22"/>
+        <image name="IconReply" width="22" height="22"/>
+        <image name="IconRepost" width="22" height="22"/>
+        <image name="IconStar" width="22" height="22"/>
         <image name="IconStop" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>

@@ -18,12 +18,13 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 
 - (void)insertStatusWithObjects:(NSArray *)objects
 {
+    SAUser *currentUser = [SADataManager sharedManager].currentUser;
     [objects enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
-        [self insertStatusWithObject:object];
+        [self insertStatusWithObject:object localUser:currentUser];
     }];
 }
 
-- (SAStatus *)insertStatusWithObject:(id)object
+- (SAStatus *)insertStatusWithObject:(id)object localUser:(id)localUser
 {
     NSString *statusID = [object objectForKey:@"id"];
     NSString *source = [object objectForKey:@"source"];
@@ -43,6 +44,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         status.photo = photo;
         status.user = user;
         status.createdAt = createdAt;
+        status.localUser = localUser;
         resultStatus = status;
     }];
     return resultStatus;

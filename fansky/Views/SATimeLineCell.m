@@ -32,7 +32,7 @@
     self.contentLabel.text = status.text;
     self.timeLabel.text = [status.createdAt friendlyDateString];
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:status.user.profileImageURL]];
-    self.contentImageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.contentImageView.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:1].CGColor;
     
     if (status.photo.thumbURL) {
         self.contentImageView.hidden = NO;

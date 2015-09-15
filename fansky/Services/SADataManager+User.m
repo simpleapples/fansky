@@ -79,4 +79,24 @@ static NSString *const ENTITY_NAME = @"SAUser";
     return resultUser;
 }
 
+- (void)setCurrentUserWithUserID:(NSString *)userID
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"local = %@", @(YES)];
+    
+    __block NSError *error;
+    [self.managedObjectContext performBlockAndWait:^{
+        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (!error && fetchResult && fetchResult.count) {
+            [fetchResult enumerateObjectsUsingBlock:^(SAUser *user, NSUInteger idx, BOOL *stop) {
+                if (user.userID == userID) {
+                    user.active = @(YES);
+                } else {
+                    user.active = @(NO);
+                }
+            }];
+        }
+    }];
+}
+
 @end

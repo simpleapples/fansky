@@ -9,11 +9,12 @@
 #import "SADataManager.h"
 
 @class SAStatus;
+@class SAUser;
 
 @interface SADataManager (Status)
 
 - (void)insertStatusWithObjects:(NSArray *)objects;
-- (SAStatus *)insertStatusWithObject:(id)object;
+- (SAStatus *)insertStatusWithObject:(id)object localUser:(SAUser *)localUser;
 - (SAStatus *)statusWithID:(NSString *)statusID;
 
 @end
