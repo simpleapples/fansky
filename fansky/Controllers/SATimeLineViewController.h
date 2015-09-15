@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ARSegmentPager/ARSegmentControllerDelegate.h>
 
-@interface SATimeLineViewController : UITableViewController
+@interface SATimeLineViewController : UITableViewController <ARSegmentControllerDelegate>
 
 @end

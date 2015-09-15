@@ -15,11 +15,13 @@
 #import "SAAPIService.h"
 #import "SADataManager+Status.h"
 #import "SAStatusViewController.h"
+#import "SAUserViewController.h"
 
-@interface SATimeLineViewController () <NSFetchedResultsControllerDelegate>
+@interface SATimeLineViewController () <NSFetchedResultsControllerDelegate, SATimeLineCellDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (copy, nonatomic) NSString *selectedStatusID;
+@property (copy, nonatomic) NSString *selectedUserID;
 
 @end
 
@@ -36,9 +38,9 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     [self fetchedResultsController];
     
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
-    [[SAAPIService sharedSingleton] timelineWithUserID:currentUser.userID sinceID:nil maxID:nil count:60 success:^(id data) {
-        NSArray *timeline = (NSArray *)data;
-        [[SADataManager sharedManager] insertStatusWithObjects:timeline];
+    [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:nil maxID:nil count:60 success:^(id data) {
+        NSArray *timeLine = (NSArray *)data;
+        [[SADataManager sharedManager] insertStatusWithObjects:timeLine];
     } failure:^(NSError *error) {
         
     }];
@@ -84,7 +86,18 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     if ([segue.destinationViewController isKindOfClass:[SAStatusViewController class]]) {
         SAStatusViewController *statusViewController = (SAStatusViewController *)segue.destinationViewController;
         statusViewController.statusID = self.selectedStatusID;
+    } else if ([segue.destinationViewController isKindOfClass:[SAUserViewController class]]) {
+        SAUserViewController *userViewController = (SAUserViewController *)segue.destinationViewController;
+        userViewController.userID = self.selectedUserID;
     }
+}
+
+#pragma mark - SATimeLineCellDelegate
+
+- (void)timeLineCell:(SATimeLineCell *)timeLineCell avatarImageViewTouchUp:(id)sender
+{
+    self.selectedUserID = timeLineCell.status.user.userID;
+    [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate
@@ -117,6 +130,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     if (cell) {
         SAStatus *status = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [cell configWithStatus:status];
+        cell.delegate = self;
     }
     return cell;
 }
@@ -126,6 +140,18 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     SAStatus *status = [self.fetchedResultsController objectAtIndexPath:indexPath];
     self.selectedStatusID = status.statusID;
     [self performSegueWithIdentifier:@"TimelineToStatusSegue" sender:nil];
+}
+
+#pragma mark - ARSegmentControllerDelegate
+
+- (NSString *)segmentTitle
+{
+    return @"时间线";
+}
+
+- (UIScrollView *)streachScrollView
+{
+    return self.tableView;
 }
 
 @end

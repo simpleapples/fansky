@@ -58,4 +58,8 @@
     [super didReceiveMemoryWarning];
 }
 
+- (IBAction)avatarImageViewTouchUp:(id)sender
+{
+    
+}
 @end

@@ -22,4 +22,5 @@ NSString *const SA_API_HOST = @"api.fanfou.com";
 NSString *const SA_API_VERIFY_CREDENTIALS_PATH = @"/account/verify_credentials.json";
 NSString *const SA_API_HOME_TIMELINE_PATH = @"/statuses/home_timeline.json";
 NSString *const SA_API_UPDATE_STATUS_PATH = @"/statuses/update.json";
+NSString *const SA_API_USER_SHOW_PATH = @"/users/show.json";
 

@@ -79,6 +79,24 @@ static NSString *const ENTITY_NAME = @"SAUser";
     return resultUser;
 }
 
+- (SAUser *)userWithID:(NSString *)userID
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
+    fetchRequest.fetchLimit = 1;
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"userID = %@", userID];
+    
+    __block NSError *error;
+    __block SAUser *resultUser;
+    [self.managedObjectContext performBlockAndWait:^{
+        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (!error && fetchResult && fetchResult.count) {
+            SAUser *existUser = [fetchResult objectAtIndex:0];
+            resultUser = existUser;
+        }
+    }];
+    return resultUser;
+}
+
 - (void)setCurrentUserWithUserID:(NSString *)userID
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];

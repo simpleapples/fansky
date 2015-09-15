@@ -87,14 +87,13 @@
 
 #pragma mark - UITextViewDelegate
 
-- (void)textViewDidBeginEditing:(UITextView *)textView
+- (void)textViewDidChange:(UITextView *)textView
 {
-    self.placeholderLabel.hidden = YES;
-}
-
-- (void)textViewDidEndEditing:(UITextView *)textView
-{
-    self.placeholderLabel.hidden = NO;
+    if (textView.text.length) {
+        self.placeholderLabel.hidden = YES;
+    } else {
+        self.placeholderLabel.hidden = NO;
+    }
 }
 
 #pragma mark - EventHandler

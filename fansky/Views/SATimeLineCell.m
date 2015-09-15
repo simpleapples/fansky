@@ -28,6 +28,8 @@
 
 - (void)configWithStatus:(SAStatus *)status
 {
+    self.status = status;
+    
     self.usernameLabel.text = status.user.name;
     self.contentLabel.text = status.text;
     self.timeLabel.text = [status.createdAt friendlyDateString];
@@ -41,6 +43,13 @@
     } else {
         self.contentImageView.hidden = YES;
         self.contentImageViewHeightConstraint.constant = 1;
+    }
+}
+
+- (IBAction)avatarImageViewTouchUp:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(timeLineCell:avatarImageViewTouchUp:)]) {
+        [self.delegate timeLineCell:self avatarImageViewTouchUp:sender];
     }
 }
 
