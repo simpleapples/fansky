@@ -11,4 +11,6 @@
 
 @interface SATimeLineViewController : UITableViewController <ARSegmentControllerDelegate>
 
+@property (copy, nonatomic) NSString *userID;
+
 @end

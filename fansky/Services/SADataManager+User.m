@@ -52,9 +52,9 @@ static NSString *const ENTITY_NAME = @"SAUser";
             existUser.name = name;
             existUser.location = location;
             existUser.profileImageURL = profileImageURL;
-            existUser.local = @(local);
-            existUser.active = @(active);
             if (local) {
+                existUser.local = @(local);
+                existUser.active = @(active);
                 existUser.token = token;
                 existUser.tokenSecret = secret;
             }
@@ -66,12 +66,55 @@ static NSString *const ENTITY_NAME = @"SAUser";
                 user.name = name;
                 user.location = location;
                 user.profileImageURL = profileImageURL;
-                user.local = @(local);
-                user.active = @(active);
                 if (local) {
+                    user.local = @(local);
+                    user.active = @(active);
                     user.token = token;
                     user.tokenSecret = secret;
                 }
+                resultUser = user;
+            }];
+        }
+    }];
+    return resultUser;
+}
+
+- (SAUser *)insertOrUpdateUserWithExtendObject:(id)userObject
+{
+    NSString *userID = (NSString *)[userObject objectForKey:@"id"];
+    NSString *name = (NSString *)[userObject objectForKey:@"name"];
+    NSString *location = (NSString *)[userObject objectForKey:@"location"];
+    NSString *profileImageURL = (NSString *)[userObject objectForKey:@"profile_image_url"];
+    NSNumber *following = [userObject objectForKey:@"following"];
+    NSNumber *friendsCount = [userObject objectForKey:@"friends_count"];
+    NSNumber *followersCount = [userObject objectForKey:@"followers_count"];
+
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
+    fetchRequest.fetchLimit = 1;
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"userID = %@", userID];
+    
+    __block NSError *error;
+    __block SAUser *resultUser;
+    [self.managedObjectContext performBlockAndWait:^{
+        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (!error && fetchResult && fetchResult.count) {
+            SAUser *existUser = [fetchResult objectAtIndex:0];
+            existUser.name = name;
+            existUser.location = location;
+            existUser.profileImageURL = profileImageURL;
+            existUser.following = following;
+            existUser.friendsCount = friendsCount;
+            existUser.followersCount = followersCount;
+            resultUser = existUser;
+        } else {
+            [self.managedObjectContext performBlockAndWait:^{
+                SAUser *user = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
+                user.name = name;
+                user.location = location;
+                user.profileImageURL = profileImageURL;
+                user.following = following;
+                user.friendsCount = friendsCount;
+                user.followersCount = followersCount;
                 resultUser = user;
             }];
         }

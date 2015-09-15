@@ -37,10 +37,13 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     
     [self fetchedResultsController];
     
-    SAUser *currentUser = [SADataManager sharedManager].currentUser;
-    [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:nil maxID:nil count:60 success:^(id data) {
-        NSArray *timeLine = (NSArray *)data;
-        [[SADataManager sharedManager] insertStatusWithObjects:timeLine];
+    NSString *userID = self.userID;
+    if (!userID) {
+        SAUser *currentUser = [SADataManager sharedManager].currentUser;
+        userID = currentUser.userID;
+    }
+    [[SAAPIService sharedSingleton] timeLineWithUserID:userID sinceID:nil maxID:nil count:60 success:^(id data) {
+        [[SADataManager sharedManager] insertStatusWithObjects:data];
     } failure:^(NSError *error) {
         
     }];
@@ -48,6 +51,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 
 - (void)updateInterface
 {
+    self.tableView.tableFooterView = [UIView new];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 140;
 }
@@ -68,7 +72,11 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@", currentUser.userID];
+        if (self.userID) {
+            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@", self.userID];
+        } else {
+            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@", currentUser.userID];
+        }
         fetchRequest.sortDescriptors = sortArray;
         fetchRequest.returnsObjectsAsFaults = NO;
         fetchRequest.fetchBatchSize = 6;

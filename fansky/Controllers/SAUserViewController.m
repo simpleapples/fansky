@@ -10,7 +10,9 @@
 #import "SATimeLineViewController.h"
 #import "SAUserHeaderView.h"
 #import "SADataManager+User.h"
-#import <ARSegmentPager/ARSegmentPageController.h>
+#import "SAUser.h"
+#import <ARSegmentPager/ARSegmentControllerDelegate.h>
+#import <ARSegmentPager/ARSegmentView.h>
 
 //void *SAUserHeaderViewInsetObserver = &SAUserHeaderViewInsetObserver;
 
@@ -22,25 +24,30 @@
 
 @implementation SAUserViewController
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SAMain" bundle:[NSBundle mainBundle]];
-    SATimeLineViewController *timeLineViewController = [storyboard instantiateViewControllerWithIdentifier:@"SATimeLineViewController"];
-    self = [super initWithControllers:timeLineViewController, timeLineViewController, nil];
-    if (self) {
-        self.headerHeight = 130;
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
+    if (!self.userID) {
+        SAUser *currentUser = [SADataManager sharedManager].currentUser;
+        self.userID = currentUser.userID;
+    }
+    
+    [self updateInterface];
+
     [super viewDidLoad];
     
-    SATimeLineViewController *timeLineViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SATimeLineViewController"];
-    [self setViewControllers:@[timeLineViewController]];
-    
 //    [self addObserver:self forKeyPath:@"segmentToInset" options:NSKeyValueObservingOptionNew context:SAUserHeaderViewInsetObserver];
+}
+
+- (void)updateInterface
+{
+    ARSegmentView *segmentView = [self valueForKey:@"segmentView"];
+    segmentView.segmentControl.tintColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
+    
+    self.headerHeight = 100;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SAMain" bundle:[NSBundle mainBundle]];
+    SATimeLineViewController *timeLineViewController = [storyboard instantiateViewControllerWithIdentifier:@"SATimeLineViewController"];
+    timeLineViewController.userID = self.userID;
+    [self setViewControllers:@[timeLineViewController]];
 }
 
 - (UIView<ARSegmentPageControllerHeaderProtocol> *)customHeaderView
@@ -62,22 +69,12 @@
 
 -(void)dealloc
 {
-    [self removeObserver:self forKeyPath:@"segmentToInset"];
+//    [self removeObserver:self forKeyPath:@"segmentToInset"];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

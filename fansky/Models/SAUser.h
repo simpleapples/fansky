@@ -2,7 +2,7 @@
 //  SAUser.h
 //  fansky
 //
-//  Created by Zzy on 9/12/15.
+//  Created by Zzy on 9/16/15.
 //  Copyright (c) 2015 Zzy. All rights reserved.
 //
 
@@ -21,6 +21,9 @@
 @property (nonatomic, retain) NSString * token;
 @property (nonatomic, retain) NSString * tokenSecret;
 @property (nonatomic, retain) NSString * userID;
+@property (nonatomic, retain) NSNumber * friendsCount;
+@property (nonatomic, retain) NSNumber * followersCount;
+@property (nonatomic, retain) NSNumber * following;
 @property (nonatomic, retain) NSSet *status;
 @end
 

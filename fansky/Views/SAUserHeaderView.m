@@ -28,27 +28,37 @@
 
 - (void)configWithUserID:(NSString *)userID
 {
-    self.user = [[SADataManager sharedManager] userWithID:userID];
-    if (!self.user) {
-        [[SAAPIService sharedSingleton] userWithID:userID success:^(id data) {
-            [[SADataManager sharedManager] insertOrUpdateUserWithObject:data local:NO active:NO token:nil secret:nil];
-            [self updateInterface];
-        } failure:^(NSError *error) {
-            
-        }];
+    if (!userID) {
+        self.user = [SADataManager sharedManager].currentUser;
     } else {
+        self.user = [[SADataManager sharedManager] userWithID:userID];
+    }
+    if (self.user) {
         [self updateInterface];
     }
+    [[SAAPIService sharedSingleton] userWithID:userID success:^(id data) {
+        self.user = [[SADataManager sharedManager] insertOrUpdateUserWithExtendObject:data];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateInterface];
+        });
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)updateInterface
-{
-    self.avatarImageView.layer.borderColor = [UIColor whiteColor].CGColor;
-    
+{    
     self.nameLabel.text = self.user.name;
     self.userIDLabel.text = [NSString stringWithFormat:@"@%@", self.user.userID];
-    self.descLabel.text = @"";
+    self.descLabel.text = [NSString stringWithFormat:@"%@关注者 %@关注", self.user.followersCount, self.user.friendsCount];
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.user.profileImageURL]];
+    if (self.user.following) {
+        [self.followButton setTitle:@"已关注" forState:UIControlStateNormal];
+        self.followButton.enabled = NO;
+    } else {
+        [self.followButton setTitle:@"+关注" forState:UIControlStateNormal];
+        self.followButton.enabled = YES;
+    }
 }
 
 - (IBAction)followButtonTouchUp:(id)sender

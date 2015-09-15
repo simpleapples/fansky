@@ -2,7 +2,7 @@
 //  SAUser.m
 //  fansky
 //
-//  Created by Zzy on 9/12/15.
+//  Created by Zzy on 9/16/15.
 //  Copyright (c) 2015 Zzy. All rights reserved.
 //
 
@@ -20,6 +20,9 @@
 @dynamic token;
 @dynamic tokenSecret;
 @dynamic userID;
+@dynamic friendsCount;
+@dynamic followersCount;
+@dynamic following;
 @dynamic status;
 
 @end

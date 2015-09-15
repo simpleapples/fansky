@@ -11,6 +11,8 @@
 #import "SAStatus.h"
 #import "SAUser.h"
 #import "SAPhoto.h"
+#import "SAUserViewController.h"
+#import "SADataManager+User.h"
 #import "NSDate+Utils.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
@@ -20,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *trashBarButton;
 
 @property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
 @property (strong, nonatomic) SAStatus *status;
@@ -38,7 +41,14 @@
 }
 
 - (void)updateInterface
-{    
+{
+    SAUser *currentUser = [SADataManager sharedManager].currentUser;
+    if ([self.status.user.userID isEqualToString:currentUser.userID]) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"IconTrash"] style:UIBarButtonItemStyleDone target:self action:@selector(trashBarButtonTouchUp:)];
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
+    
     self.usernameLabel.text = self.status.user.name;
     self.contentLabel.text = self.status.text;
     self.timeLabel.text = [self.status.createdAt friendlyDateString];
@@ -58,8 +68,16 @@
     [super didReceiveMemoryWarning];
 }
 
-- (IBAction)avatarImageViewTouchUp:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    
+    if ([segue.destinationViewController isKindOfClass:[SAUserViewController class]]) {
+        SAUserViewController *userViewController = (SAUserViewController *)segue.destinationViewController;
+        userViewController.userID = self.status.user.userID;
+    }
 }
+
+- (IBAction)trashBarButtonTouchUp:(id)sender
+{
+}
+
 @end

@@ -107,7 +107,7 @@
 
 - (void)userWithID:(NSString *)userID success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
-    [self requestAPIWithPath:SA_API_USER_SHOW_PATH method:@"POST" parametersDictionary:@{@"id": userID} success:success failure:failure];
+    [self requestAPIWithPath:SA_API_USER_SHOW_PATH method:@"GET" parametersDictionary:@{@"id": userID, @"mode": @"lite"} success:success failure:failure];
 }
 
 - (void)requestAPIWithPath:(NSString *)path method:(NSString *)method parametersDictionary:(NSDictionary *)parametersDictionary success:(void(^)(id responseObject))success failure:(void(^)(NSError *error))failure
