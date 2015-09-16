@@ -16,15 +16,15 @@
 
 static NSString *const ENTITY_NAME = @"SAStatus";
 
-- (void)insertStatusWithObjects:(NSArray *)objects
+- (void)insertStatusWithObjects:(NSArray *)objects isHomeTimeLine:(BOOL)isHomeTimeLine
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     [objects enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
-        [self insertOrUpdateStatusWithObject:object localUser:currentUser];
+        [self insertStatusWithObject:object localUser:currentUser isHomeTimeLine:isHomeTimeLine];
     }];
 }
 
-- (SAStatus *)insertOrUpdateStatusWithObject:(id)object localUser:(id)localUser
+- (SAStatus *)insertStatusWithObject:(id)object localUser:(SAUser *)localUser isHomeTimeLine:(BOOL)isHomeTimeLine
 {
     NSString *statusID = [object objectForKey:@"id"];
     NSString *source = [object objectForKey:@"source"];
@@ -44,7 +44,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     [self.managedObjectContext performBlockAndWait:^{
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
         if (!error && fetchResult && fetchResult.count) {
-            SAStatus *existStatus = [fetchResult objectAtIndex:0];
+            SAStatus *existStatus = [fetchResult firstObject];
             resultStatus = existStatus;
         } else {
             [self.managedObjectContext performBlockAndWait:^{
@@ -56,6 +56,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
                 status.user = user;
                 status.createdAt = createdAt;
                 status.localUser = localUser;
+                status.homeLine = @(isHomeTimeLine);
                 resultStatus = status;
             }];
         }
@@ -74,7 +75,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     [self.managedObjectContext performBlockAndWait:^{
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
         if (!error && fetchResult && fetchResult.count) {
-            SAStatus *existStatus = [fetchResult objectAtIndex:0];
+            SAStatus *existStatus = [fetchResult firstObject];
             resultStatus = existStatus;
         }
     }];

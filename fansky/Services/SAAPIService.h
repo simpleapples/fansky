@@ -24,4 +24,6 @@
 
 - (void)userWithID:(NSString *)userID success:(void(^)(id data))success failure:(void(^)(NSError *error))failure;
 
+- (void)userPhotoTimeLineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSError *error))failure;
+
 @end

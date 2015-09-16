@@ -50,13 +50,13 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     if (!self.userID) {
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
         [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
-            [[SADataManager sharedManager] insertStatusWithObjects:data];
+            [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:YES];
         } failure:^(NSError *error) {
             
         }];
     } else {
         [[SAAPIService sharedSingleton] userTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
-            [[SADataManager sharedManager] insertStatusWithObjects:data];
+            [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:NO];
         } failure:^(NSError *error) {
             
         }];
@@ -88,9 +88,9 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
         if (self.userID) {
-            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@", self.userID];
+            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@ AND homeLine = %@", self.userID, @(NO)];
         } else {
-            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@", currentUser.userID];
+            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@ AND homeLine = %@", currentUser.userID, @(YES)];
         }        fetchRequest.sortDescriptors = sortArray;
         fetchRequest.returnsObjectsAsFaults = NO;
         fetchRequest.fetchBatchSize = 6;
@@ -139,6 +139,16 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 {
 }
 
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView endUpdates];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -167,6 +177,12 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     SAStatus *status = [self.fetchedResultsController objectAtIndexPath:indexPath];
     self.selectedStatusID = status.statusID;
     [self performSegueWithIdentifier:@"TimelineToStatusSegue" sender:nil];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SATimeLineCell *timeLineCell = (SATimeLineCell *)cell;
+    [timeLineCell loadAllImages];
 }
 
 #pragma mark - UIScrollViewDelegate

@@ -333,6 +333,56 @@
             </objects>
             <point key="canvasLocation" x="1280" y="-724"/>
         </scene>
+        <!--Photo Time Line View Controller-->
+        <scene sceneID="CDj-bl-y4X">
+            <objects>
+                <collectionViewController storyboardIdentifier="SAPhotoTimeLineViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4uf-Ta-p1t" customClass="SAPhotoTimeLineViewController" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" id="hyB-Dk-WEo">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cBz-Dl-4Ii">
+                            <size key="itemSize" width="197" height="198"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SAPhotoTimeLineCell" id="1CD-z7-xDV" customClass="SAPhotoTimeLineCell">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Wwb-RC-ilG">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="Wwb-RC-ilG" firstAttribute="leading" secondItem="1CD-z7-xDV" secondAttribute="leading" id="36t-6n-fUt"/>
+                                    <constraint firstAttribute="bottom" secondItem="Wwb-RC-ilG" secondAttribute="bottom" id="NhK-NH-JQQ"/>
+                                    <constraint firstItem="Wwb-RC-ilG" firstAttribute="top" secondItem="1CD-z7-xDV" secondAttribute="top" id="i4H-4f-g43"/>
+                                    <constraint firstAttribute="trailing" secondItem="Wwb-RC-ilG" secondAttribute="trailing" id="wdz-QO-kpy"/>
+                                </constraints>
+                                <size key="customSize" width="200" height="200"/>
+                                <connections>
+                                    <outlet property="imageView" destination="Wwb-RC-ilG" id="Qf3-MI-V1N"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="4uf-Ta-p1t" id="vma-ME-q3d"/>
+                            <outlet property="delegate" destination="4uf-Ta-p1t" id="gyu-1h-234"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LfH-4Q-Zlc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2003" y="-724"/>
+        </scene>
         <!--时间线-->
         <scene sceneID="b7E-qj-3fp">
             <objects>

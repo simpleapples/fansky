@@ -2,7 +2,7 @@
 //  SAStatus.m
 //  fansky
 //
-//  Created by Zzy on 9/12/15.
+//  Created by Zzy on 9/17/15.
 //  Copyright (c) 2015 Zzy. All rights reserved.
 //
 
@@ -14,11 +14,12 @@
 @implementation SAStatus
 
 @dynamic createdAt;
+@dynamic source;
 @dynamic statusID;
 @dynamic text;
-@dynamic source;
-@dynamic user;
-@dynamic photo;
+@dynamic homeLine;
 @dynamic localUser;
+@dynamic photo;
+@dynamic user;
 
 @end

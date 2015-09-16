@@ -11,6 +11,7 @@
 #import "SAUserHeaderView.h"
 #import "SADataManager+User.h"
 #import "SAUser.h"
+#import "SAPhotoTimeLineViewController.h"
 #import <ARSegmentPager/ARSegmentControllerDelegate.h>
 #import <ARSegmentPager/ARSegmentView.h>
 
@@ -47,7 +48,9 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SAMain" bundle:[NSBundle mainBundle]];
     SATimeLineViewController *timeLineViewController = [storyboard instantiateViewControllerWithIdentifier:@"SATimeLineViewController"];
     timeLineViewController.userID = self.userID;
-    [self setViewControllers:@[timeLineViewController]];
+    SAPhotoTimeLineViewController *photoTimeLineViewController = [storyboard instantiateViewControllerWithIdentifier:@"SAPhotoTimeLineViewController"];
+    photoTimeLineViewController.userID = self.userID;
+    [self setViewControllers:@[timeLineViewController, photoTimeLineViewController]];
 }
 
 - (UIView<ARSegmentPageControllerHeaderProtocol> *)customHeaderView

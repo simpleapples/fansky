@@ -59,16 +59,22 @@
     self.contentLabel.delegate = self;
     
     self.timeLabel.text = [self.status.createdAt friendlyDateString];
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL]];
     self.contentImageView.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:1].CGColor;
     
     if (self.status.photo.thumbURL) {
         self.contentImageView.hidden = NO;
         self.contentImageViewHeightConstraint.constant = (self.frame.size.width - 73) * 0.5;
-        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL]];
     } else {
         self.contentImageView.hidden = YES;
         self.contentImageViewHeightConstraint.constant = 1;
+    }
+}
+
+- (void)loadAllImages
+{
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL]];
+    if (self.status.photo.thumbURL) {
+        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL]];
     }
 }
 

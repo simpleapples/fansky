@@ -24,4 +24,5 @@ NSString *const SA_API_HOME_TIMELINE_PATH = @"/statuses/home_timeline.json";
 NSString *const SA_API_USER_TIMELINE_PATH = @"/statuses/user_timeline.json";
 NSString *const SA_API_UPDATE_STATUS_PATH = @"/statuses/update.json";
 NSString *const SA_API_USER_SHOW_PATH = @"/users/show.json";
+NSString *const SA_API_USER_PHOTO_TIMELINE_PATH = @"/photos/user_timeline.json";
 

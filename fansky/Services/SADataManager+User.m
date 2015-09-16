@@ -24,7 +24,7 @@ static NSString *const ENTITY_NAME = @"SAUser";
     [self.managedObjectContext performBlockAndWait:^{
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
         if (!error && fetchResult && fetchResult.count) {
-            SAUser *existUser = [fetchResult objectAtIndex:0];
+            SAUser *existUser = [fetchResult firstObject];
             resultUser = existUser;
         }
     }];
@@ -47,7 +47,7 @@ static NSString *const ENTITY_NAME = @"SAUser";
     [self.managedObjectContext performBlockAndWait:^{
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
         if (!error && fetchResult && fetchResult.count) {
-            SAUser *existUser = [fetchResult objectAtIndex:0];
+            SAUser *existUser = [fetchResult firstObject];
             existUser.userID = userID;
             existUser.name = name;
             existUser.location = location;
@@ -98,7 +98,7 @@ static NSString *const ENTITY_NAME = @"SAUser";
     [self.managedObjectContext performBlockAndWait:^{
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
         if (!error && fetchResult && fetchResult.count) {
-            SAUser *existUser = [fetchResult objectAtIndex:0];
+            SAUser *existUser = [fetchResult firstObject];
             existUser.name = name;
             existUser.location = location;
             existUser.profileImageURL = profileImageURL;
@@ -133,7 +133,7 @@ static NSString *const ENTITY_NAME = @"SAUser";
     [self.managedObjectContext performBlockAndWait:^{
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
         if (!error && fetchResult && fetchResult.count) {
-            SAUser *existUser = [fetchResult objectAtIndex:0];
+            SAUser *existUser = [fetchResult firstObject];
             resultUser = existUser;
         }
     }];

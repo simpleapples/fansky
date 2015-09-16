@@ -23,5 +23,6 @@
 @property (strong, nonatomic) SAStatus *status;
 
 - (void)configWithStatus:(SAStatus *)status;
+- (void)loadAllImages;
 
 @end
