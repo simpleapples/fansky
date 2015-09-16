@@ -49,13 +49,13 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     }
     if (!self.userID) {
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
-        [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:nil maxID:maxID count:60 success:^(id data) {
+        [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
             [[SADataManager sharedManager] insertStatusWithObjects:data];
         } failure:^(NSError *error) {
             
         }];
     } else {
-        [[SAAPIService sharedSingleton] userTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:60 success:^(id data) {
+        [[SAAPIService sharedSingleton] userTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
             [[SADataManager sharedManager] insertStatusWithObjects:data];
         } failure:^(NSError *error) {
             
@@ -126,12 +126,17 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
-    [self.tableView reloadData];
+    if (type == NSFetchedResultsChangeInsert) {
+        if (controller.fetchedObjects.count) {
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+        } else {
+            [self.tableView reloadData];
+        }
+    }
 }
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
 {
-    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source

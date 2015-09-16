@@ -14,13 +14,14 @@
 #import "SAUserViewController.h"
 #import "SADataManager+User.h"
 #import "NSDate+Utils.h"
+#import "TTTAttributedLabel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface SAStatusViewController ()
+@interface SAStatusViewController () <TTTAttributedLabelDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property (weak, nonatomic) IBOutlet TTTAttributedLabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *trashBarButton;
 
@@ -55,6 +56,26 @@
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL]];
     self.contentImageView.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:1].CGColor;
     
+    NSDictionary *linkAttributesDict = @{NSForegroundColorAttributeName: [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1]};
+    self.contentLabel.linkAttributes = linkAttributesDict;
+    self.contentLabel.activeLinkAttributes = linkAttributesDict;
+    self.contentLabel.text = [[NSAttributedString alloc] initWithData:[self.status.text dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+    
+    UIFont *newFont = [UIFont systemFontOfSize:14];
+    NSMutableAttributedString* attributedString = [self.contentLabel.attributedText mutableCopy];
+    [attributedString beginEditing];
+    [attributedString enumerateAttribute:NSFontAttributeName inRange:NSMakeRange(0, attributedString.length) options:0 usingBlock:^(id value, NSRange range, BOOL *stop) {
+        NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:4];
+        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:range];
+        [attributedString removeAttribute:NSFontAttributeName range:range];
+        [attributedString addAttribute:NSFontAttributeName value:newFont range:range];
+    }];
+    [attributedString endEditing];
+    self.contentLabel.text = [attributedString copy];
+    self.contentLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+    self.contentLabel.delegate = self;
+    
     if (self.status.photo.thumbURL) {
         self.contentImageView.hidden = NO;
         [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL]];
@@ -74,6 +95,11 @@
         SAUserViewController *userViewController = (SAUserViewController *)segue.destinationViewController;
         userViewController.userID = self.status.user.userID;
     }
+}
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
+{
+    
 }
 
 - (IBAction)trashBarButtonTouchUp:(id)sender

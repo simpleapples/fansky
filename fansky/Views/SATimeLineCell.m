@@ -37,8 +37,11 @@
 - (void)updateInterface
 {
     self.usernameLabel.text = self.status.user.name;
-    NSString *contentString = [NSString stringWithFormat:@"<style>.former{color:#55ACEE}</style>%@", self.status.text];
-    self.contentLabel.text = [[NSAttributedString alloc] initWithData:[contentString dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+    
+    NSDictionary *linkAttributesDict = @{NSForegroundColorAttributeName: [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1]};
+    self.contentLabel.linkAttributes = linkAttributesDict;
+    self.contentLabel.activeLinkAttributes = linkAttributesDict;
+    self.contentLabel.text = [[NSAttributedString alloc] initWithData:[self.status.text dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
     
     UIFont *newFont = [UIFont systemFontOfSize:14];
     NSMutableAttributedString* attributedString = [self.contentLabel.attributedText mutableCopy];
@@ -47,7 +50,6 @@
         NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         [paragraphStyle setLineSpacing:4];
         [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:range];
-        [attributedString addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlineStyleNone) range:range];
         [attributedString removeAttribute:NSFontAttributeName range:range];
         [attributedString addAttribute:NSFontAttributeName value:newFont range:range];
     }];
@@ -55,6 +57,7 @@
     self.contentLabel.text = [attributedString copy];
     self.contentLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink;
     self.contentLabel.delegate = self;
+    
     self.timeLabel.text = [self.status.createdAt friendlyDateString];
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL]];
     self.contentImageView.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:1].CGColor;
