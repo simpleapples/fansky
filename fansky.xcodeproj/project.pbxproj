@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A01639B1BA96A470065F1F1 /* TTTAttributedLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A01639A1BA96A470065F1F1 /* TTTAttributedLabel.framework */; };
 		5A0D78271BA87DD0001CBE88 /* SAUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D78261BA87DD0001CBE88 /* SAUser.m */; };
 		5A2365BD1B395FD200E1E73C /* SATimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2365BC1B395FD200E1E73C /* SATimeLineCell.m */; };
 		5A2365C41B39723900E1E73C /* SAAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2365C31B39723900E1E73C /* SAAPIService.m */; };
@@ -37,7 +38,7 @@
 		5AF5B1CD1BA1813A00C7A18A /* SASplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1CC1BA1813A00C7A18A /* SASplashViewController.m */; };
 		5AF5B1D01BA1816600C7A18A /* SADataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1CF1BA1816600C7A18A /* SADataManager.m */; };
 		5AF5B1D31BA181CD00C7A18A /* SADataManager+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1D21BA181CD00C7A18A /* SADataManager+User.m */; };
-		5D6682AEC625F452EE98BE7D /* libPods-fansky.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75586252364C76D55E3E00D4 /* libPods-fansky.a */; };
+		A5780EF56B5B4E2B090419E4 /* Pods_fansky.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E43255F77409845B17D05D0 /* Pods_fansky.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +52,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3E43255F77409845B17D05D0 /* Pods_fansky.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fansky.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA0B1D52B50FFEAB4E792B5 /* Pods-fansky.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fansky.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fansky/Pods-fansky.debug.xcconfig"; sourceTree = "<group>"; };
+		5A01639A1BA96A470065F1F1 /* TTTAttributedLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TTTAttributedLabel.framework; path = "Pods/../build/Debug-iphoneos/TTTAttributedLabel.framework"; sourceTree = "<group>"; };
 		5A0D78251BA87DD0001CBE88 /* SAUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAUser.h; sourceTree = "<group>"; };
 		5A0D78261BA87DD0001CBE88 /* SAUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUser.m; sourceTree = "<group>"; };
 		5A2365BB1B395FD200E1E73C /* SATimeLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SATimeLineCell.h; sourceTree = "<group>"; };
@@ -109,7 +112,6 @@
 		5AF5B1CF1BA1816600C7A18A /* SADataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SADataManager.m; sourceTree = "<group>"; };
 		5AF5B1D11BA181CD00C7A18A /* SADataManager+User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SADataManager+User.h"; sourceTree = "<group>"; };
 		5AF5B1D21BA181CD00C7A18A /* SADataManager+User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SADataManager+User.m"; sourceTree = "<group>"; };
-		75586252364C76D55E3E00D4 /* libPods-fansky.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fansky.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD18F73F4E7C0D5101B87468 /* Pods-fansky.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fansky.release.xcconfig"; path = "Pods/Target Support Files/Pods-fansky/Pods-fansky.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,7 +120,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D6682AEC625F452EE98BE7D /* libPods-fansky.a in Frameworks */,
+				5A01639B1BA96A470065F1F1 /* TTTAttributedLabel.framework in Frameworks */,
+				A5780EF56B5B4E2B090419E4 /* Pods_fansky.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,7 +283,8 @@
 		7A012AD8EBD5286DCA3A07D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				75586252364C76D55E3E00D4 /* libPods-fansky.a */,
+				5A01639A1BA96A470065F1F1 /* TTTAttributedLabel.framework */,
+				3E43255F77409845B17D05D0 /* Pods_fansky.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -306,6 +310,7 @@
 				5AD70EE71B316A79009C5B84 /* Frameworks */,
 				5AD70EE81B316A79009C5B84 /* Resources */,
 				E3A3D1275D399D3442815DA5 /* Copy Pods Resources */,
+				A8D80BEA510F48F57A33657B /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -407,6 +412,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A8D80BEA510F48F57A33657B /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fansky/Pods-fansky-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E3A3D1275D399D3442815DA5 /* Copy Pods Resources */ = {
@@ -584,6 +604,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = fansky/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -599,6 +623,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = fansky/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

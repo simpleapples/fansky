@@ -53,7 +53,7 @@
     self.descLabel.text = [NSString stringWithFormat:@"%@关注者 %@关注", self.user.followersCount, self.user.friendsCount];
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.user.profileImageURL]];
     if (self.user.following) {
-        [self.followButton setTitle:@"已关注" forState:UIControlStateNormal];
+        [self.followButton setTitle:@"取消关注" forState:UIControlStateNormal];
         self.followButton.enabled = NO;
     } else {
         [self.followButton setTitle:@"+关注" forState:UIControlStateNormal];

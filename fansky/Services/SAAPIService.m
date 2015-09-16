@@ -87,12 +87,26 @@
 
 - (void)timeLineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
-    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:sinceID, @"since_id", maxID, @"max_id", nil];
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userID, @"id", @(count), @"count", @"html", @"format", nil];
     if (sinceID) {
         [mutableDictionary setObject:sinceID forKey:@"since_id"];
+    }
+    if (maxID) {
         [mutableDictionary setObject:maxID forKey:@"max_id"];
     }
     [self requestAPIWithPath:SA_API_HOME_TIMELINE_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
+}
+
+- (void)userTimeLineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSError *))failure
+{
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userID, @"id", @(count), @"count", nil];
+    if (sinceID) {
+        [mutableDictionary setObject:sinceID forKey:@"since_id"];
+    }
+    if (maxID) {
+        [mutableDictionary setObject:maxID forKey:@"max_id"];
+    }
+    [self requestAPIWithPath:SA_API_USER_TIMELINE_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
 }
 
 - (void)sendStatus:(NSString *)status replyToStatusID:(NSString *)replayToStatusID repostStatusID:(NSString *)repostStatusID success:(void (^)(id))success failure:(void (^)(NSError *))failure

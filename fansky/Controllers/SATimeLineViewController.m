@@ -37,20 +37,35 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     
     [self fetchedResultsController];
     
-    NSString *userID = self.userID;
-    if (!userID) {
-        SAUser *currentUser = [SADataManager sharedManager].currentUser;
-        userID = currentUser.userID;
+    [self updateData];
+}
+
+- (void)updateData
+{
+    SAStatus *lastStatus = self.fetchedResultsController.fetchedObjects.lastObject;
+    NSString *maxID = nil;
+    if (lastStatus) {
+        maxID = lastStatus.statusID;
     }
-    [[SAAPIService sharedSingleton] timeLineWithUserID:userID sinceID:nil maxID:nil count:60 success:^(id data) {
-        [[SADataManager sharedManager] insertStatusWithObjects:data];
-    } failure:^(NSError *error) {
-        
-    }];
+    if (!self.userID) {
+        SAUser *currentUser = [SADataManager sharedManager].currentUser;
+        [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:nil maxID:maxID count:60 success:^(id data) {
+            [[SADataManager sharedManager] insertStatusWithObjects:data];
+        } failure:^(NSError *error) {
+            
+        }];
+    } else {
+        [[SAAPIService sharedSingleton] userTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:60 success:^(id data) {
+            [[SADataManager sharedManager] insertStatusWithObjects:data];
+        } failure:^(NSError *error) {
+            
+        }];
+    }
 }
 
 - (void)updateInterface
 {
+    self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 140;
@@ -76,8 +91,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
             fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@", self.userID];
         } else {
             fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@", currentUser.userID];
-        }
-        fetchRequest.sortDescriptors = sortArray;
+        }        fetchRequest.sortDescriptors = sortArray;
         fetchRequest.returnsObjectsAsFaults = NO;
         fetchRequest.fetchBatchSize = 6;
         
@@ -148,6 +162,15 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     SAStatus *status = [self.fetchedResultsController objectAtIndexPath:indexPath];
     self.selectedStatusID = status.statusID;
     [self performSegueWithIdentifier:@"TimelineToStatusSegue" sender:nil];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (fabs(scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y) < 1.f) {
+        [self updateData];
+    }
 }
 
 #pragma mark - ARSegmentControllerDelegate
