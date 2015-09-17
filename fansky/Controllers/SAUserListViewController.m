@@ -26,7 +26,6 @@ static NSString *const ENTITY_NAME = @"SAUser";
     [super viewDidLoad];
     
     [self updateInterface];
-    
     [self fetchedResultsController];
 }
 

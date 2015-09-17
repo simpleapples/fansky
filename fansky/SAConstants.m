@@ -20,9 +20,14 @@ NSString *const SA_API_AUTHORIZE_CALLBACK_URL = @"fansky://authorize-success";
 
 NSString *const SA_API_HOST = @"api.fanfou.com";
 NSString *const SA_API_VERIFY_CREDENTIALS_PATH = @"/account/verify_credentials.json";
+
 NSString *const SA_API_HOME_TIMELINE_PATH = @"/statuses/home_timeline.json";
 NSString *const SA_API_USER_TIMELINE_PATH = @"/statuses/user_timeline.json";
 NSString *const SA_API_UPDATE_STATUS_PATH = @"/statuses/update.json";
-NSString *const SA_API_USER_SHOW_PATH = @"/users/show.json";
+NSString *const SA_API_UPDATE_PHOTO_STATUS_PATH = @"/photos/upload.json";
 NSString *const SA_API_USER_PHOTO_TIMELINE_PATH = @"/photos/user_timeline.json";
+
+NSString *const SA_API_USER_SHOW_PATH = @"/users/show.json";
+NSString *const SA_API_FOLLOW_USER_PATH = @"/friendships/create.json";
+NSString *const SA_API_UNFOLLOW_USER_PATH = @"/friendships/destroy.json";
 

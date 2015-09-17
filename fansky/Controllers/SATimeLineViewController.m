@@ -41,15 +41,22 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     
     [self fetchedResultsController];
     
-    [self updateData];
+    [self refreshData];
 }
 
-- (void)updateData
+- (void)refreshData
 {
-    SAStatus *lastStatus = self.fetchedResultsController.fetchedObjects.lastObject;
+    [self updateDataWithRefresh:YES];
+}
+
+- (void)updateDataWithRefresh:(BOOL)refresh
+{
     NSString *maxID = nil;
-    if (lastStatus) {
-        maxID = lastStatus.statusID;
+    if (!refresh) {
+        SAStatus *lastStatus = self.fetchedResultsController.fetchedObjects.lastObject;
+        if (lastStatus) {
+            maxID = lastStatus.statusID;
+        }
     }
     [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];
     if (!self.userID) {
@@ -59,7 +66,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
             [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
             [self.refreshControl endRefreshing];
         } failure:^(NSString *error) {
-            [SAMessageDisplayUtils showErrorWithMessage:@"刷新失败"];
+            [SAMessageDisplayUtils showErrorWithMessage:error];
             [self.refreshControl endRefreshing];
         }];
     } else {
@@ -68,7 +75,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
             [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
             [self.refreshControl endRefreshing];
         } failure:^(NSString *error) {
-            [SAMessageDisplayUtils showErrorWithMessage:@"刷新失败"];
+            [SAMessageDisplayUtils showErrorWithMessage:error];
             [self.refreshControl endRefreshing];
         }];
     }
@@ -76,7 +83,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 
 - (void)updateInterface
 {
-    [self.refreshControl addTarget:self action:@selector(updateData) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
     self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -206,7 +213,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 {
     SAStatus *status = [self.fetchedResultsController objectAtIndexPath:indexPath];
     self.selectedStatusID = status.statusID;
-    [self performSegueWithIdentifier:@"TimelineToStatusSegue" sender:nil];
+    [self performSegueWithIdentifier:@"TimeLineToStatusSegue" sender:nil];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -220,7 +227,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     if (fabs(scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y) < 1.f) {
-        [self updateData];
+        [self updateDataWithRefresh:NO];
     }
 }
 

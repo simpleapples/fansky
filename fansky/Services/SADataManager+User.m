@@ -109,6 +109,7 @@ static NSString *const ENTITY_NAME = @"SAUser";
         } else {
             [self.managedObjectContext performBlockAndWait:^{
                 SAUser *user = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
+                user.userID = userID;
                 user.name = name;
                 user.location = location;
                 user.profileImageURL = profileImageURL;

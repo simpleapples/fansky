@@ -11,5 +11,6 @@
 @interface NSDate (Utils)
 
 - (NSString *)friendlyDateString;
+- (NSString *)defaultDateString;
 
 @end

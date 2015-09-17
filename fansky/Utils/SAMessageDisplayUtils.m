@@ -14,7 +14,7 @@
 + (void)initialize
 {
     [JDStatusBarNotification addStyleNamed:@"SAErrorMessage" prepare:^JDStatusBarStyle *(JDStatusBarStyle *style) {
-        style.barColor = [UIColor redColor];
+        style.barColor = [UIColor colorWithRed:190 / 255.0 green:25 / 255.0 blue:49 / 255.0 alpha:1];
         style.textColor = [UIColor whiteColor];
         return style;
     }];

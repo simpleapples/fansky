@@ -35,7 +35,7 @@
                         <viewControllerLayoutGuide type="bottom" id="xKK-jt-4X2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EQS-sZ-x8I">
-                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -170,7 +170,7 @@
             </objects>
             <point key="canvasLocation" x="1280" y="-1480"/>
         </scene>
-        <!--Status View Controller-->
+        <!--状态-->
         <scene sceneID="oxY-WC-qhL">
             <objects>
                 <viewController storyboardIdentifier="SAStatusViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sUO-Mb-465" customClass="SAStatusViewController" sceneMemberID="viewController">
@@ -200,28 +200,13 @@
                                 </connections>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAe-Np-dLq">
-                                <rect key="frame" x="64" y="10" width="426" height="20"/>
+                                <rect key="frame" x="64" y="10" width="526" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="qoz-oR-TRQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hzy-5A-jK0">
-                                <rect key="frame" x="490" y="13" width="100" height="17"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="3bk-BU-b1V"/>
-                                    <constraint firstAttribute="width" constant="100" id="oyk-gp-310"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="3bk-BU-b1V"/>
-                                    </mask>
-                                </variation>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmJ-s8-GGA" customClass="TTTAttributedLabel">
                                 <rect key="frame" x="64" y="40" width="526" height="18"/>
@@ -296,12 +281,19 @@
                                     <action selector="replyButtonTouchUp:" destination="sUO-Mb-465" eventType="touchUpInside" id="53Y-Bb-Nyw"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1970年1月1日 00:00 通过网页" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kd-aw-gbx">
+                                <rect key="frame" x="64" y="341" width="189" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="5dH-hH-Sw5" secondAttribute="centerX" id="1nU-24-mXN"/>
                             <constraint firstItem="B5I-2B-e8a" firstAttribute="top" secondItem="2z4-y4-Vq0" secondAttribute="bottom" constant="10" id="3E5-EJ-giF"/>
                             <constraint firstItem="dmJ-s8-GGA" firstAttribute="leading" secondItem="DAe-Np-dLq" secondAttribute="leading" id="3XM-1N-yHa"/>
+                            <constraint firstAttribute="trailing" secondItem="DAe-Np-dLq" secondAttribute="trailing" constant="10" id="3ri-VW-d2f"/>
                             <constraint firstItem="PNc-Nh-5O6" firstAttribute="top" secondItem="dmJ-s8-GGA" secondAttribute="bottom" constant="10" id="5RM-BD-g2O"/>
                             <constraint firstAttribute="centerX" secondItem="SDA-dH-rO9" secondAttribute="centerX" multiplier="0.67" id="6uJ-cw-Z1q"/>
                             <constraint firstItem="PNc-Nh-5O6" firstAttribute="top" secondItem="5dH-hH-Sw5" secondAttribute="top" id="CsM-7B-OsQ"/>
@@ -310,20 +302,20 @@
                             <constraint firstItem="XOq-QZ-UUe" firstAttribute="leading" secondItem="PNc-Nh-5O6" secondAttribute="leading" id="FcC-XC-nAT"/>
                             <constraint firstItem="bAI-f0-6uJ" firstAttribute="top" secondItem="PNc-Nh-5O6" secondAttribute="bottom" constant="10" id="I3p-H3-W9p"/>
                             <constraint firstItem="XOq-QZ-UUe" firstAttribute="leading" secondItem="dmJ-s8-GGA" secondAttribute="leading" id="IZw-h2-Bb3"/>
-                            <constraint firstItem="hzy-5A-jK0" firstAttribute="leading" secondItem="DAe-Np-dLq" secondAttribute="trailing" id="MGo-aA-1cB"/>
                             <constraint firstItem="PNc-Nh-5O6" firstAttribute="bottom" secondItem="5dH-hH-Sw5" secondAttribute="bottom" id="NZe-be-vXz"/>
                             <constraint firstItem="PNc-Nh-5O6" firstAttribute="top" secondItem="XOq-QZ-UUe" secondAttribute="bottom" constant="10" id="Pl4-uf-yyO"/>
                             <constraint firstItem="DAe-Np-dLq" firstAttribute="top" secondItem="B5I-2B-e8a" secondAttribute="top" id="RfG-Ol-ntg"/>
-                            <constraint firstAttribute="trailing" secondItem="hzy-5A-jK0" secondAttribute="trailing" constant="10" id="VqV-IV-Pzd"/>
+                            <constraint firstItem="dmJ-s8-GGA" firstAttribute="trailing" secondItem="DAe-Np-dLq" secondAttribute="trailing" id="SV3-GV-5u3"/>
+                            <constraint firstItem="5kd-aw-gbx" firstAttribute="top" secondItem="dmJ-s8-GGA" secondAttribute="bottom" priority="250" constant="10" id="Woh-BM-b4C"/>
                             <constraint firstItem="5dH-hH-Sw5" firstAttribute="bottom" secondItem="SDA-dH-rO9" secondAttribute="bottom" id="YKX-Lg-DS4"/>
-                            <constraint firstItem="dmJ-s8-GGA" firstAttribute="top" secondItem="hzy-5A-jK0" secondAttribute="bottom" constant="10" id="e77-wo-emb"/>
+                            <constraint firstItem="5kd-aw-gbx" firstAttribute="top" secondItem="XOq-QZ-UUe" secondAttribute="bottom" priority="750" constant="10" id="ZLs-gE-AHV"/>
                             <constraint firstItem="XOq-QZ-UUe" firstAttribute="trailing" secondItem="dmJ-s8-GGA" secondAttribute="trailing" id="eLq-UF-rsR"/>
                             <constraint firstAttribute="centerX" secondItem="PNc-Nh-5O6" secondAttribute="centerX" multiplier="2" id="ehe-N9-55u"/>
-                            <constraint firstItem="hzy-5A-jK0" firstAttribute="trailing" secondItem="dmJ-s8-GGA" secondAttribute="trailing" id="hlv-P4-D4a"/>
                             <constraint firstItem="PNc-Nh-5O6" firstAttribute="width" secondItem="5dH-hH-Sw5" secondAttribute="width" id="lPD-0t-fxG"/>
                             <constraint firstItem="DAe-Np-dLq" firstAttribute="leading" secondItem="B5I-2B-e8a" secondAttribute="trailing" constant="10" id="ny7-z5-rn4"/>
                             <constraint firstItem="5dH-hH-Sw5" firstAttribute="top" secondItem="SDA-dH-rO9" secondAttribute="top" id="ock-GF-e98"/>
-                            <constraint firstItem="DAe-Np-dLq" firstAttribute="bottom" secondItem="hzy-5A-jK0" secondAttribute="bottom" id="tCl-LV-ibs"/>
+                            <constraint firstItem="5kd-aw-gbx" firstAttribute="leading" secondItem="dmJ-s8-GGA" secondAttribute="leading" id="sBc-PE-qLN"/>
+                            <constraint firstItem="dmJ-s8-GGA" firstAttribute="top" secondItem="DAe-Np-dLq" secondAttribute="bottom" constant="10" id="tVX-kO-k52"/>
                             <constraint firstItem="5dH-hH-Sw5" firstAttribute="width" secondItem="SDA-dH-rO9" secondAttribute="width" id="x6O-M0-5yu"/>
                         </constraints>
                         <variation key="default">
@@ -335,21 +327,24 @@
                         </variation>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="HMl-h7-ulL"/>
+                    <navigationItem key="navigationItem" title="状态" id="HMl-h7-ulL"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="avatarImageView" destination="B5I-2B-e8a" id="614-wb-EWx"/>
                         <outlet property="contentImageView" destination="XOq-QZ-UUe" id="suF-u5-Iwb"/>
                         <outlet property="contentLabel" destination="dmJ-s8-GGA" id="k5N-ll-MbY"/>
-                        <outlet property="timeLabel" destination="hzy-5A-jK0" id="Kmj-3N-rUI"/>
+                        <outlet property="timeLabel" destination="5kd-aw-gbx" id="Qfs-hI-REC"/>
+                        <outlet property="timeLabelTopToImageViewMarginConstraint" destination="ZLs-gE-AHV" id="k6g-hH-I2W"/>
+                        <outlet property="timeLabelTopToLabelMarginConstraint" destination="Woh-BM-b4C" id="z6F-AN-ZCg"/>
                         <outlet property="usernameLabel" destination="DAe-Np-dLq" id="omP-ki-e5p"/>
                         <segue destination="oxA-mI-Ol2" kind="presentation" identifier="StatusToComposeNavigationSegue" id="Btz-3b-6W7"/>
+                        <segue destination="cTU-GI-tki" kind="show" identifier="StatusToUserSegue" id="lZq-8d-hBO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5oT-1U-SXP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="IY1-NW-XHe">
                     <connections>
-                        <segue destination="cTU-GI-tki" kind="show" id="Enu-1x-MPi"/>
+                        <action selector="avatarImageViewTouchUp:" destination="sUO-Mb-465" id="8rN-Kp-Cf5"/>
                     </connections>
                 </tapGestureRecognizer>
                 <tapGestureRecognizer id="xsV-Gl-OJw">
@@ -437,7 +432,7 @@
                                 <rect key="frame" x="0.0" y="22" width="600" height="290"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ct5-mU-aN9" id="XVg-qR-N0P">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="289.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="289"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i0k-9j-GSW">
@@ -582,7 +577,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
-                        <segue destination="sUO-Mb-465" kind="show" identifier="TimelineToStatusSegue" id="0sX-T1-HFd"/>
+                        <segue destination="sUO-Mb-465" kind="show" identifier="TimeLineToStatusSegue" id="0sX-T1-HFd"/>
                         <segue destination="cTU-GI-tki" kind="show" identifier="TimeLineToUserSegue" id="bot-28-IHL"/>
                     </connections>
                 </tableViewController>
@@ -648,7 +643,7 @@
                                 <rect key="frame" x="0.0" y="22" width="600" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xr0-f9-F4Y" id="1rI-pZ-iu8">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UIF-u9-hUf">
@@ -732,7 +727,7 @@
                     <navigationItem key="navigationItem" title="时间线" id="KGp-NT-lvm">
                         <barButtonItem key="leftBarButtonItem" image="IconAccount" id="rTU-y5-VGN">
                             <connections>
-                                <segue destination="OZh-yy-yDm" kind="unwind" unwindAction="exitToUserList:" id="EYD-TN-Jcm"/>
+                                <action selector="accountButtonTouchUp:" destination="bcT-Eb-ogE" id="0ev-pw-003"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="IconCompose" id="tlu-3n-EV2">
@@ -761,7 +756,6 @@
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tQ7-Lk-vfz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="OZh-yy-yDm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-153" y="359"/>
         </scene>
@@ -836,7 +830,7 @@
                                 </connections>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你在做什么？" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aqh-tS-ahx">
-                                <rect key="frame" x="15" y="78" width="102" height="20.5"/>
+                                <rect key="frame" x="15" y="78" width="102" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="w1o-1r-wDa"/>
                                 </constraints>
@@ -940,9 +934,9 @@
         <image name="IconStop" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qBy-9g-ujA"/>
-        <segue reference="H7G-PZ-sGt"/>
-        <segue reference="bot-28-IHL"/>
+        <segue reference="lZq-8d-hBO"/>
+        <segue reference="iMi-TQ-GAa"/>
+        <segue reference="Btz-3b-6W7"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>

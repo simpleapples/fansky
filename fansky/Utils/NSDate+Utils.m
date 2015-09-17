@@ -29,4 +29,11 @@
     return [NSString stringWithFormat:@"刚才"];
 }
 
+- (NSString *)defaultDateString
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm";
+    return [dateFormatter stringFromDate:self];
+}
+
 @end

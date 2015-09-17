@@ -27,8 +27,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+}
+
+-  (void)viewWillAppear:(BOOL)animated
+{
     [self.emailTextField becomeFirstResponder];
+    [super viewWillAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.view endEditing:YES];
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning

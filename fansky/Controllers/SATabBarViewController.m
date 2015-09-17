@@ -7,6 +7,7 @@
 //
 
 #import "SATabBarViewController.h"
+#import "SAUserListViewController.h"
 
 @interface SATabBarViewController ()
 
@@ -34,6 +35,21 @@
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
     self.navigationItem.title = item.title;
+}
+
+#pragma mark - EventHandler
+
+- (IBAction)accountButtonTouchUp:(id)sender
+{
+    NSUInteger length = self.navigationController.viewControllers.count;
+    id viewController = [self.navigationController.viewControllers objectAtIndex:length - 2];
+    if (![viewController isKindOfClass:[SAUserListViewController class]]) {
+        NSMutableArray *viewControllers = [self.navigationController.viewControllers mutableCopy];
+        SAUserListViewController *userListViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAUserListViewController"];
+        [viewControllers insertObject:userListViewController atIndex:length - 1];
+        self.navigationController.viewControllers = viewControllers;
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

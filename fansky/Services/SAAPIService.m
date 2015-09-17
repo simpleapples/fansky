@@ -45,6 +45,8 @@
     return self;
 }
 
+#pragma mark - User
+
 - (void)authorizeWithUsername:(NSString *)username password:(NSString *)password success:(void (^)(NSString *, NSString *))success failure:(void (^)(NSString *))failure
 {
     NSURLRequest *URLRequest = [TDOAuth URLRequestForPath:SA_API_ACCESS_TOKEN_PATH GETParameters:@{@"x_auth_username": username, @"x_auth_password": password,  @"x_auth_mode": @"client_auth"} host:SA_API_BASE_HOST consumerKey:SA_API_COMSUMER_KEY consumerSecret:SA_API_COMSUMER_SECRET accessToken:nil tokenSecret:nil];
@@ -86,6 +88,23 @@
     }];
 }
 
+- (void)userWithID:(NSString *)userID success:(void (^)(id))success failure:(void (^)(NSString *error))failure
+{
+    [self requestAPIWithPath:SA_API_USER_SHOW_PATH method:@"GET" parametersDictionary:@{@"id": userID, @"mode": @"lite"} success:success failure:failure];
+}
+
+- (void)followUserWithID:(NSString *)userID success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    [self requestAPIWithPath:SA_API_FOLLOW_USER_PATH method:@"POST" parametersDictionary:@{@"id": userID, @"mode": @"lite"} success:success failure:failure];
+}
+
+- (void)unfollowUserWithID:(NSString *)userID success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    [self requestAPIWithPath:SA_API_UNFOLLOW_USER_PATH method:@"POST" parametersDictionary:@{@"id": userID, @"mode": @"lite"} success:success failure:failure];
+}
+
+#pragma mark - Status
+
 - (void)timeLineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *error))failure
 {
     NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userID, @"id", @(count), @"count", @"html", @"format", nil];
@@ -120,11 +139,6 @@
     [self requestAPIWithPath:SA_API_UPDATE_STATUS_PATH method:@"POST" parametersDictionary:mutableDictionary success:success failure:failure];
 }
 
-- (void)userWithID:(NSString *)userID success:(void (^)(id))success failure:(void (^)(NSString *error))failure
-{
-    [self requestAPIWithPath:SA_API_USER_SHOW_PATH method:@"GET" parametersDictionary:@{@"id": userID, @"mode": @"lite"} success:success failure:failure];
-}
-
 - (void)userPhotoTimeLineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *error))failure
 {
     NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userID, @"id", @(count), @"count", nil];
@@ -136,6 +150,8 @@
     }
     [self requestAPIWithPath:SA_API_USER_PHOTO_TIMELINE_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
 }
+
+#pragma mark - Base
 
 - (void)requestAPIWithPath:(NSString *)path method:(NSString *)method parametersDictionary:(NSDictionary *)parametersDictionary success:(void(^)(id responseObject))success failure:(void(^)(NSString *error))failure
 {

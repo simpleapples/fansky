@@ -15,6 +15,7 @@
 #import "SADataManager+User.h"
 #import "SAComposeViewController.h"
 #import "NSDate+Utils.h"
+#import "NSString+Utils.h"
 #import "TTTAttributedLabel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <URBMediaFocusViewController/URBMediaFocusViewController.h>
@@ -26,8 +27,11 @@
 @property (weak, nonatomic) IBOutlet TTTAttributedLabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelTopToLabelMarginConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelTopToImageViewMarginConstraint;
 @property (strong, nonatomic) URBMediaFocusViewController *imageViewController;
 @property (strong, nonatomic) SAStatus *status;
+@property (copy, nonatomic) NSString *selectedUserID;
 
 @end
 
@@ -53,7 +57,7 @@
     
     self.usernameLabel.text = self.status.user.name;
     self.contentLabel.text = self.status.text;
-    self.timeLabel.text = [self.status.createdAt friendlyDateString];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@ ∙ 通过%@", [self.status.createdAt defaultDateString], [self.status.source flattenHTML]];
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL]];
     self.contentImageView.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:1].CGColor;
     
@@ -80,8 +84,10 @@
     if (self.status.photo.thumbURL) {
         self.contentImageView.hidden = NO;
         [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL]];
+        self.timeLabelTopToImageViewMarginConstraint.priority = UILayoutPriorityRequired;
     } else {
         self.contentImageView.hidden = YES;
+        self.timeLabelTopToLabelMarginConstraint.priority = UILayoutPriorityRequired;
     }
 }
 
@@ -94,7 +100,7 @@
 {
     if ([segue.destinationViewController isKindOfClass:[SAUserViewController class]]) {
         SAUserViewController *userViewController = (SAUserViewController *)segue.destinationViewController;
-        userViewController.userID = self.status.user.userID;
+        userViewController.userID = self.selectedUserID;
     } else if ([segue.destinationViewController isKindOfClass:[UINavigationController class]]) {
         UINavigationController *navigationController = segue.destinationViewController;
         if ([[navigationController.viewControllers firstObject] isKindOfClass:[SAComposeViewController class]]) {
@@ -111,10 +117,19 @@
 
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
 {
-    
+    if ([url.host isEqualToString:@"fanfou.com"]) {
+        self.selectedUserID = url.lastPathComponent;
+        [self performSegueWithIdentifier:@"StatusToUserSegue" sender:nil];
+    }
 }
 
 #pragma mark - EventHandler
+
+- (IBAction)avatarImageViewTouchUp:(id)sender
+{
+    self.selectedUserID = self.status.user.userID;
+    [self performSegueWithIdentifier:@"StatusToUserSegue" sender:nil];
+}
 
 - (IBAction)contentImageViewTouchUp:(id)sender
 {

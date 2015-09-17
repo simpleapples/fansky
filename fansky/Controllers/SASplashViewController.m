@@ -8,6 +8,8 @@
 
 #import "SASplashViewController.h"
 #import "SAConstants.h"
+#import "SAUser.h"
+#import "SADataManager+User.h"
 
 @interface SASplashViewController ()
 
@@ -19,8 +21,13 @@
 {
     [super viewDidLoad];
     
+    SAUser *currentUser = [SADataManager sharedManager].currentUser;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self performSegueWithIdentifier:@"SplashToUserListSegue" sender:nil];
+        if (currentUser) {
+            [self performSegueWithIdentifier:@"SplashToTabBarSegue" sender:nil];
+        } else {
+            [self performSegueWithIdentifier:@"SplashToUserListSegue" sender:nil];
+        }
     });
 }
 
