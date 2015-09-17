@@ -28,6 +28,19 @@
         style.textColor = [UIColor whiteColor];
         return style;
     }];
+    [JDStatusBarNotification addStyleNamed:@"SAInfoMessage" prepare:^JDStatusBarStyle *(JDStatusBarStyle *style) {
+        style.barColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
+        style.textColor = [UIColor whiteColor];
+        return style;
+    }];
+}
+
++ (void)showInfoWithMessage:(NSString *)message
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [JDStatusBarNotification showWithStatus:message styleName:@"SAInfoMessage"];
+        [JDStatusBarNotification showActivityIndicator:YES indicatorStyle:UIActivityIndicatorViewStyleWhite];
+    });
 }
 
 + (void)showActivityIndicatorWithMessage:(NSString *)message
@@ -38,7 +51,7 @@
     });
 }
 
-+ (void)showSuccessWithMesssage:(NSString *)message
++ (void)showSuccessWithMessage:(NSString *)message
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         [JDStatusBarNotification showWithStatus:message dismissAfter:3 styleName:@"SASuccessMessage"];

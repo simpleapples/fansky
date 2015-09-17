@@ -24,4 +24,18 @@
     return date;
 }
 
+- (NSString *)flattenHTML
+{
+    NSScanner *theScanner;
+    NSString *text;
+    NSString *result = [self copy];
+    theScanner = [NSScanner scannerWithString:self];
+    while ([theScanner isAtEnd] == NO) {
+        [theScanner scanUpToString:@"<" intoString:NULL] ;
+        [theScanner scanUpToString:@">" intoString:&text] ;
+        result = [self stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@>", text] withString:@""];
+    }
+    return result;
+}
+
 @end

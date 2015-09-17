@@ -43,12 +43,12 @@
     self.contentLabel.activeLinkAttributes = linkAttributesDict;
     self.contentLabel.text = [[NSAttributedString alloc] initWithData:[self.status.text dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
     
-    UIFont *newFont = [UIFont systemFontOfSize:14];
+    UIFont *newFont = [UIFont systemFontOfSize:16];
     NSMutableAttributedString* attributedString = [self.contentLabel.attributedText mutableCopy];
     [attributedString beginEditing];
     [attributedString enumerateAttribute:NSFontAttributeName inRange:NSMakeRange(0, attributedString.length) options:0 usingBlock:^(id value, NSRange range, BOOL *stop) {
         NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        [paragraphStyle setLineSpacing:4];
+        [paragraphStyle setLineSpacing:8];
         [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:range];
         [attributedString removeAttribute:NSFontAttributeName range:range];
         [attributedString addAttribute:NSFontAttributeName value:newFont range:range];

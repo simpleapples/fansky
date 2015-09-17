@@ -13,6 +13,7 @@
 #import "SAPhoto.h"
 #import "SAUserViewController.h"
 #import "SADataManager+User.h"
+#import "SAComposeViewController.h"
 #import "NSDate+Utils.h"
 #import "TTTAttributedLabel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -61,12 +62,12 @@
     self.contentLabel.activeLinkAttributes = linkAttributesDict;
     self.contentLabel.text = [[NSAttributedString alloc] initWithData:[self.status.text dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
     
-    UIFont *newFont = [UIFont systemFontOfSize:14];
+    UIFont *newFont = [UIFont systemFontOfSize:16];
     NSMutableAttributedString* attributedString = [self.contentLabel.attributedText mutableCopy];
     [attributedString beginEditing];
     [attributedString enumerateAttribute:NSFontAttributeName inRange:NSMakeRange(0, attributedString.length) options:0 usingBlock:^(id value, NSRange range, BOOL *stop) {
         NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        [paragraphStyle setLineSpacing:4];
+        [paragraphStyle setLineSpacing:8];
         [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:range];
         [attributedString removeAttribute:NSFontAttributeName range:range];
         [attributedString addAttribute:NSFontAttributeName value:newFont range:range];
@@ -94,6 +95,17 @@
     if ([segue.destinationViewController isKindOfClass:[SAUserViewController class]]) {
         SAUserViewController *userViewController = (SAUserViewController *)segue.destinationViewController;
         userViewController.userID = self.status.user.userID;
+    } else if ([segue.destinationViewController isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        if ([[navigationController.viewControllers firstObject] isKindOfClass:[SAComposeViewController class]]) {
+            SAComposeViewController *composeViewController = (SAComposeViewController *)[navigationController.viewControllers firstObject];
+            UIButton *button = (UIButton *)sender;
+            if (button.tag == 1) {
+                composeViewController.replyToStatusID = self.status.statusID;
+            } else if (button.tag == 2) {
+                composeViewController.repostStatusID = self.status.statusID;
+            }
+        }
     }
 }
 
@@ -111,6 +123,20 @@
     }
     NSURL *imageURL = [NSURL URLWithString:self.status.photo.largeURL];
     [self.imageViewController showImageFromURL:imageURL fromView:self.view];
+}
+
+- (IBAction)replyButtonTouchUp:(id)sender
+{
+    [self performSegueWithIdentifier:@"StatusToComposeNavigationSegue" sender:sender];
+}
+
+- (IBAction)repostButtonTouchUp:(id)sender
+{
+    [self performSegueWithIdentifier:@"StatusToComposeNavigationSegue" sender:sender];
+}
+
+- (IBAction)starButtonTouchUp:(id)sender
+{
 }
 
 - (IBAction)trashBarButtonTouchUp:(id)sender

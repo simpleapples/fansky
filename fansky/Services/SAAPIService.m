@@ -110,11 +110,11 @@
     [self requestAPIWithPath:SA_API_USER_TIMELINE_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
 }
 
-- (void)sendStatus:(NSString *)status replyToStatusID:(NSString *)replayToStatusID repostStatusID:(NSString *)repostStatusID success:(void (^)(id))success failure:(void (^)(NSString *error))failure
+- (void)sendStatus:(NSString *)status replyToStatusID:(NSString *)replyToStatusID repostStatusID:(NSString *)repostStatusID success:(void (^)(id))success failure:(void (^)(NSString *error))failure
 {
     NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:status, @"status", nil];
-    if (replayToStatusID) {
-        [mutableDictionary setObject:replayToStatusID forKey:@"in_reply_to_status_id"];
+    if (replyToStatusID) {
+        [mutableDictionary setObject:replyToStatusID forKey:@"in_reply_to_status_id"];
         [mutableDictionary setObject:repostStatusID forKey:@"repost_status_id"];
     }
     [self requestAPIWithPath:SA_API_UPDATE_STATUS_PATH method:@"POST" parametersDictionary:mutableDictionary success:success failure:failure];

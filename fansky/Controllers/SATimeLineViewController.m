@@ -17,6 +17,7 @@
 #import "SADataManager+Status.h"
 #import "SAStatusViewController.h"
 #import "SAUserViewController.h"
+#import "SAMessageDisplayUtils.h"
 #import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 
 @interface SATimeLineViewController () <NSFetchedResultsControllerDelegate, SATimeLineCellDelegate>
@@ -50,18 +51,22 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     if (lastStatus) {
         maxID = lastStatus.statusID;
     }
+    [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];
     if (!self.userID) {
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
         [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
             [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:YES];
+            [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
         } failure:^(NSString *error) {
-            
+            [SAMessageDisplayUtils showErrorWithMessage:@"刷新失败"];
         }];
     } else {
         [[SAAPIService sharedSingleton] userTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
             [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:NO];
+            [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
         } failure:^(NSString *error) {
-            
+            [SAMessageDisplayUtils showErrorWithMessage:@"刷新失败"];
+
         }];
     }
 }

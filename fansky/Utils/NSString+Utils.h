@@ -13,4 +13,6 @@
 - (NSDate *)dateWithDefaultFormat;
 - (NSDate *)dateWithFormat:(NSString *)format;
 
+- (NSString *)flattenHTML;
+
 @end

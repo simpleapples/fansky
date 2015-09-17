@@ -47,7 +47,7 @@
     [[SAAPIService sharedSingleton] authorizeWithUsername:email password:password success:^(NSString *token, NSString *secret) {
         [[SAAPIService sharedSingleton] verifyCredentialsWithToken:token secret:secret success:^(id data) {
             self.loginButton.enabled = YES;
-            [SAMessageDisplayUtils showSuccessWithMesssage:@"登录成功"];
+            [SAMessageDisplayUtils showSuccessWithMessage:@"登录成功"];
             [[SADataManager sharedManager] insertOrUpdateUserWithObject:data local:YES active:YES token:token secret:secret];
             [self performSegueWithIdentifier:@"LoginExitToUserListSegue" sender:nil];
         } failure:^(NSString *error) {

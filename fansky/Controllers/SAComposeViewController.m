@@ -8,8 +8,12 @@
 
 #import "SAComposeViewController.h"
 #import "SADataManager+User.h"
+#import "SADataManager+Status.h"
 #import "SAUser.h"
+#import "SAStatus.h"
 #import "SAAPIService.h"
+#import "SAMessageDisplayUtils.h"
+#import "NSString+Utils.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SAComposeViewController () <UITextViewDelegate>
@@ -48,6 +52,17 @@
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:currentUser.profileImageURL]];
+    
+    if (self.replyToStatusID) {
+        self.placeholderLabel.hidden = YES;
+        SAStatus *status = [[SADataManager sharedManager] statusWithID:self.replyToStatusID];
+        self.contentTextView.text = [NSString stringWithFormat:@"@%@", status.user.name];
+    }
+    if (self.repostStatusID) {
+        self.placeholderLabel.hidden = YES;
+        SAStatus *status = [[SADataManager sharedManager] statusWithID:self.repostStatusID];
+        self.contentTextView.text = [NSString stringWithFormat:@"「@%@ %@」", status.user.name, [status.text flattenHTML]];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,15 +119,16 @@
 
 - (IBAction)sendButtonTouchUp:(id)sender
 {
-    [[SAAPIService sharedSingleton] sendStatus:self.contentTextView.text replyToStatusID:nil repostStatusID:nil success:^(id data) {
-        NSString *error = [data objectForKey:@"error"];
-        if (!error) {
-            [self performSegueWithIdentifier:@"ComposeExitToTabBarSegue" sender:nil];
-        } else {
-
-        }
+    if (!self.contentTextView.text.length) {
+        [SAMessageDisplayUtils showInfoWithMessage:@"说点什么吧"];
+        return;
+    }
+    [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在发送"];
+    [[SAAPIService sharedSingleton] sendStatus:self.contentTextView.text replyToStatusID:self.replyToStatusID repostStatusID:self.repostStatusID success:^(id data) {
+        [SAMessageDisplayUtils showSuccessWithMessage:@"发送完成"];
+        [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(NSString *error) {
-        
+        [SAMessageDisplayUtils showErrorWithMessage:error];
     }];
 }
 
