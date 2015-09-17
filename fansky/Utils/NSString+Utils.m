@@ -33,7 +33,7 @@
     while ([theScanner isAtEnd] == NO) {
         [theScanner scanUpToString:@"<" intoString:NULL] ;
         [theScanner scanUpToString:@">" intoString:&text] ;
-        result = [self stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@>", text] withString:@""];
+        result = [result stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@"%@>", text] withString:@""];
     }
     return result;
 }

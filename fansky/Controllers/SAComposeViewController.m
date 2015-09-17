@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
+@property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *functionViewBottomConstraint;
 
 @end
@@ -54,11 +55,13 @@
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:currentUser.profileImageURL]];
     
     if (self.replyToStatusID) {
+        self.cameraButton.hidden = YES;
         self.placeholderLabel.hidden = YES;
         SAStatus *status = [[SADataManager sharedManager] statusWithID:self.replyToStatusID];
         self.contentTextView.text = [NSString stringWithFormat:@"@%@", status.user.name];
     }
     if (self.repostStatusID) {
+        self.cameraButton.hidden = YES;
         self.placeholderLabel.hidden = YES;
         SAStatus *status = [[SADataManager sharedManager] statusWithID:self.repostStatusID];
         self.contentTextView.text = [NSString stringWithFormat:@"「@%@ %@」", status.user.name, [status.text flattenHTML]];

@@ -57,22 +57,26 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
             [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:YES];
             [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
+            [self.refreshControl endRefreshing];
         } failure:^(NSString *error) {
             [SAMessageDisplayUtils showErrorWithMessage:@"刷新失败"];
+            [self.refreshControl endRefreshing];
         }];
     } else {
         [[SAAPIService sharedSingleton] userTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
             [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:NO];
             [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
+            [self.refreshControl endRefreshing];
         } failure:^(NSString *error) {
             [SAMessageDisplayUtils showErrorWithMessage:@"刷新失败"];
-
+            [self.refreshControl endRefreshing];
         }];
     }
 }
 
 - (void)updateInterface
 {
+    [self.refreshControl addTarget:self action:@selector(updateData) forControlEvents:UIControlEventValueChanged];
     self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.rowHeight = UITableViewAutomaticDimension;

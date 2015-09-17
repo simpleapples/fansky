@@ -35,7 +35,7 @@
                         <viewControllerLayoutGuide type="bottom" id="xKK-jt-4X2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EQS-sZ-x8I">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -578,6 +578,9 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="时间线" image="IconHome" id="Yf8-Wi-yvB"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="2LC-AG-z64">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                     <connections>
                         <segue destination="sUO-Mb-465" kind="show" identifier="TimelineToStatusSegue" id="0sX-T1-HFd"/>
                         <segue destination="cTU-GI-tki" kind="show" identifier="TimeLineToUserSegue" id="bot-28-IHL"/>
@@ -819,15 +822,15 @@
                                     <segue destination="7U6-Dh-kHY" kind="unwind" identifier="ComposeExitToTabBarSegue" unwindAction="exitToTabBar:" id="coM-qO-m85"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IwN-Bh-hWg">
-                                <rect key="frame" x="10" y="70" width="580" height="120"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IwN-Bh-hWg">
+                                <rect key="frame" x="10" y="70" width="580" height="180"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="7gc-Yx-qTJ"/>
+                                    <constraint firstAttribute="height" constant="180" id="7gc-Yx-qTJ"/>
                                 </constraints>
                                 <color key="textColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="AEP-as-v9Y" id="jYC-F7-naE"/>
                                 </connections>
@@ -910,6 +913,7 @@
                     <navigationItem key="navigationItem" id="m0Y-BV-VDI"/>
                     <connections>
                         <outlet property="avatarImageView" destination="qET-TX-KAn" id="0ag-ZD-Y4g"/>
+                        <outlet property="cameraButton" destination="JAC-Fo-Ulm" id="9oF-kk-LDx"/>
                         <outlet property="contentTextView" destination="IwN-Bh-hWg" id="J7o-0V-SFB"/>
                         <outlet property="functionViewBottomConstraint" destination="Nqg-pE-kGU" id="dlQ-tu-WNC"/>
                         <outlet property="placeholderLabel" destination="Aqh-tS-ahx" id="4cd-Q5-z67"/>
@@ -937,8 +941,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="qBy-9g-ujA"/>
-        <segue reference="Btz-3b-6W7"/>
-        <segue reference="Enu-1x-MPi"/>
+        <segue reference="H7G-PZ-sGt"/>
+        <segue reference="bot-28-IHL"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>
