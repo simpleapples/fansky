@@ -12,16 +12,19 @@
 #import "SAUser.h"
 #import "SATimeLineCell.h"
 #import "SAStatus.h"
+#import "SAPhoto.h"
 #import "SAAPIService.h"
 #import "SADataManager+Status.h"
 #import "SAStatusViewController.h"
 #import "SAUserViewController.h"
+#import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 
 @interface SATimeLineViewController () <NSFetchedResultsControllerDelegate, SATimeLineCellDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (copy, nonatomic) NSString *selectedStatusID;
 @property (copy, nonatomic) NSString *selectedUserID;
+@property (strong, nonatomic) URBMediaFocusViewController *imageViewController;
 
 @end
 
@@ -51,13 +54,13 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
         [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
             [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:YES];
-        } failure:^(NSError *error) {
+        } failure:^(NSString *error) {
             
         }];
     } else {
         [[SAAPIService sharedSingleton] userTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
             [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:NO];
-        } failure:^(NSError *error) {
+        } failure:^(NSString *error) {
             
         }];
     }
@@ -87,15 +90,24 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
+        NSString *userID;
+        BOOL isHomeLine;
         if (self.userID) {
-            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@ AND homeLine = %@", self.userID, @(NO)];
+            userID = self.userID;
+            isHomeLine = NO;
+            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@ AND homeLine = %@", userID, @(isHomeLine)];
         } else {
-            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@ AND homeLine = %@", currentUser.userID, @(YES)];
-        }        fetchRequest.sortDescriptors = sortArray;
+            userID = currentUser.userID;
+            isHomeLine = YES;
+            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@ AND homeLine = %@", userID, @(isHomeLine)];
+        }
+        fetchRequest.sortDescriptors = sortArray;
         fetchRequest.returnsObjectsAsFaults = NO;
         fetchRequest.fetchBatchSize = 6;
         
-        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:manager.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        
+        NSString *cacheName = [NSString stringWithFormat:@"user-%@-homeline-%zd", userID, isHomeLine];
+        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:manager.managedObjectContext sectionNameKeyPath:nil cacheName:cacheName];
         _fetchedResultsController.delegate = self;
         
         [_fetchedResultsController performFetch:nil];
@@ -120,6 +132,15 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 {
     self.selectedUserID = timeLineCell.status.user.userID;
     [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
+}
+
+- (void)timeLineCell:(SATimeLineCell *)timeLineCell contentImageViewTouchUp:(id)sender
+{
+    if (!self.imageViewController){
+        self.imageViewController = [[URBMediaFocusViewController alloc] init];
+    }
+    NSURL *imageURL = [NSURL URLWithString:timeLineCell.status.photo.largeURL];
+    [self.imageViewController showImageFromURL:imageURL fromView:self.view];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate

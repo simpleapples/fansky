@@ -74,7 +74,7 @@
 {
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL]];
     if (self.status.photo.thumbURL) {
-        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL]];
+        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.thumbURL]];
     }
 }
 
@@ -83,10 +83,19 @@
     
 }
 
+#pragma mark - EventHandler
+
 - (IBAction)avatarImageViewTouchUp:(id)sender
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(timeLineCell:avatarImageViewTouchUp:)]) {
         [self.delegate timeLineCell:self avatarImageViewTouchUp:sender];
+    }
+}
+
+- (IBAction)contentImageViewTouchUp:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(timeLineCell:contentImageViewTouchUp:)]) {
+        [self.delegate timeLineCell:self contentImageViewTouchUp:sender];
     }
 }
 

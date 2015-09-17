@@ -15,8 +15,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
-@property (strong, nonatomic) SAStatus *status;
-
 @end
 
 @implementation SAPhotoTimeLineCell
@@ -28,7 +26,13 @@
 
 - (void)loadImage
 {
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.imageURL]];
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.imageURL] placeholderImage:nil options:(SDWebImageRetryFailed|SDWebImageLowPriority)];
 }
 
+- (IBAction)imageViewTouchUp:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(photoTimeLineCell:imageViewTouchUp:)]) {
+        [self.delegate photoTimeLineCell:self imageViewTouchUp:sender];
+    }
+}
 @end

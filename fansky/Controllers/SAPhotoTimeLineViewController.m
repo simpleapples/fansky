@@ -11,10 +11,15 @@
 #import "SAPhotoTimeLineCell.h"
 #import "SAStatus.h"
 #import "SAAPIService.h"
+#import "SAPhoto.h"
+#import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 
-@interface SAPhotoTimeLineViewController () <NSFetchedResultsControllerDelegate>
+@interface SAPhotoTimeLineViewController () <NSFetchedResultsControllerDelegate, SAPhotoTimeLineCellDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) URBMediaFocusViewController *imageViewController;
+
+@property (strong, nonatomic) NSMutableArray *itemChangeList;
 
 @end
 
@@ -25,7 +30,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     [self updateData];
 }
 
@@ -43,7 +48,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     }
     [[SAAPIService sharedSingleton] userPhotoTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
         [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:NO];
-    } failure:^(NSError *error) {
+    } failure:^(NSString *error) {
         
     }];
 }
@@ -57,7 +62,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@ AND homeLine = %@", self.userID, @(NO)];
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@ AND photo.imageURL != nil", self.userID, @(NO)];
         fetchRequest.sortDescriptors = sortArray;
         fetchRequest.returnsObjectsAsFaults = NO;
         fetchRequest.fetchBatchSize = 6;
@@ -82,9 +87,10 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 {
     if (type == NSFetchedResultsChangeInsert) {
         if (controller.fetchedObjects.count) {
-            [self.collectionView performBatchUpdates:^{
+            NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
                 [self.collectionView insertItemsAtIndexPaths:@[newIndexPath]];
-            } completion:nil];
+            }];
+            [self.itemChangeList addObject:blockOperation];
         } else {
             [self.collectionView reloadData];
         }
@@ -97,17 +103,28 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
+    if (!self.itemChangeList) {
+        self.itemChangeList = [[NSMutableArray alloc] init];
+    } else {
+        [self.itemChangeList removeAllObjects];
+    }
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
+    [self.collectionView performBatchUpdates:^{
+        [self.itemChangeList enumerateObjectsUsingBlock:^(NSBlockOperation *blockOperation, NSUInteger idx, BOOL * _Nonnull stop) {
+            [blockOperation start];
+        }];
+    } completion:nil];
 }
 
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return self.fetchedResultsController.sections.count;
+    NSInteger count = self.fetchedResultsController.sections.count;
+    return count;
 }
 
 
@@ -123,7 +140,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     if (cell) {
         SAStatus *status = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [cell configWithStatus:status];
-//        cell.delegate = self;
+        cell.delegate = self;
     }
     return cell;
 }
@@ -144,6 +161,17 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 - (UIScrollView *)streachScrollView
 {
     return self.collectionView;
+}
+
+#pragma mark - SAPhotoTimeLineCellDelegate
+
+- (void)photoTimeLineCell:(SAPhotoTimeLineCell *)photoTimeLineCell imageViewTouchUp:(id)sender
+{
+    if (!self.imageViewController){
+        self.imageViewController = [[URBMediaFocusViewController alloc] init];
+    }
+    NSURL *imageURL = [NSURL URLWithString:photoTimeLineCell.status.photo.largeURL];
+    [self.imageViewController showImageFromURL:imageURL fromView:self.view];
 }
 
 @end

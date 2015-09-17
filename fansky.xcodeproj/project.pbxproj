@@ -16,6 +16,7 @@
 		5A7E1F201BA9CD67000E7E62 /* SAPhotoTimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7E1F1F1BA9CD67000E7E62 /* SAPhotoTimeLineViewController.m */; };
 		5A7E1F231BA9CDA4000E7E62 /* SAPhotoTimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7E1F221BA9CDA4000E7E62 /* SAPhotoTimeLineCell.m */; };
 		5A7E1F261BA9D025000E7E62 /* SAStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7E1F251BA9D025000E7E62 /* SAStatus.m */; };
+		5A9AD6B01BAA6CD50058916A /* SAMessageDisplayUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */; settings = {ASSET_TAGS = (); }; };
 		5AD70EF01B316A79009C5B84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EEF1B316A79009C5B84 /* main.m */; };
 		5AD70EF31B316A79009C5B84 /* SAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EF21B316A79009C5B84 /* SAAppDelegate.m */; };
 		5AD70EF61B316A79009C5B84 /* fansky.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EF41B316A79009C5B84 /* fansky.xcdatamodeld */; };
@@ -73,6 +74,8 @@
 		5A7E1F221BA9CDA4000E7E62 /* SAPhotoTimeLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPhotoTimeLineCell.m; sourceTree = "<group>"; };
 		5A7E1F241BA9D025000E7E62 /* SAStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAStatus.h; sourceTree = "<group>"; };
 		5A7E1F251BA9D025000E7E62 /* SAStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAStatus.m; sourceTree = "<group>"; };
+		5A9AD6AE1BAA6CD50058916A /* SAMessageDisplayUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessageDisplayUtils.h; sourceTree = "<group>"; };
+		5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageDisplayUtils.m; sourceTree = "<group>"; };
 		5AD70EEA1B316A79009C5B84 /* fansky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fansky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD70EEE1B316A79009C5B84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AD70EEF1B316A79009C5B84 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -286,6 +289,8 @@
 				5AED4B2C1BA6C16300EDBF47 /* NSString+Utils.m */,
 				5AED4B2E1BA6D41D00EDBF47 /* NSDate+Utils.h */,
 				5AED4B2F1BA6D41D00EDBF47 /* NSDate+Utils.m */,
+				5A9AD6AE1BAA6CD50058916A /* SAMessageDisplayUtils.h */,
+				5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -463,6 +468,7 @@
 			files = (
 				5AD70EF31B316A79009C5B84 /* SAAppDelegate.m in Sources */,
 				5AED4B391BA7CFE100EDBF47 /* SAStatusViewController.m in Sources */,
+				5A9AD6B01BAA6CD50058916A /* SAMessageDisplayUtils.m in Sources */,
 				5A3E6C4F1BA4271100C589BE /* SAPhoto.m in Sources */,
 				5A7E1F201BA9CD67000E7E62 /* SAPhotoTimeLineViewController.m in Sources */,
 				5AED4B711BA8521B00EDBF47 /* SAUserHeaderView.m in Sources */,

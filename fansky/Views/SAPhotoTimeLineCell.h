@@ -9,8 +9,18 @@
 #import <UIKit/UIKit.h>
 
 @class SAStatus;
+@class SAPhotoTimeLineCell;
+
+@protocol SAPhotoTimeLineCellDelegate <NSObject>
+
+- (void)photoTimeLineCell:(SAPhotoTimeLineCell *)photoTimeLineCell imageViewTouchUp:(id)sender;
+
+@end
 
 @interface SAPhotoTimeLineCell : UICollectionViewCell
+
+@property (weak, nonatomic) SAStatus *status;
+@property (weak, nonatomic) id<SAPhotoTimeLineCellDelegate> delegate;
 
 - (void)configWithStatus:(SAStatus *)status;
 - (void)loadImage;

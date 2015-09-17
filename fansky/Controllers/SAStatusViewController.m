@@ -16,6 +16,7 @@
 #import "NSDate+Utils.h"
 #import "TTTAttributedLabel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 
 @interface SAStatusViewController () <TTTAttributedLabelDelegate>
 
@@ -23,9 +24,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet TTTAttributedLabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *trashBarButton;
-
 @property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
+@property (strong, nonatomic) URBMediaFocusViewController *imageViewController;
 @property (strong, nonatomic) SAStatus *status;
 
 @end
@@ -100,6 +100,17 @@
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
 {
     
+}
+
+#pragma mark - EventHandler
+
+- (IBAction)contentImageViewTouchUp:(id)sender
+{
+    if (!self.imageViewController){
+        self.imageViewController = [[URBMediaFocusViewController alloc] init];
+    }
+    NSURL *imageURL = [NSURL URLWithString:self.status.photo.largeURL];
+    [self.imageViewController showImageFromURL:imageURL fromView:self.view];
 }
 
 - (IBAction)trashBarButtonTouchUp:(id)sender

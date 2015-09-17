@@ -98,6 +98,10 @@
 
 #pragma mark - EventHandler
 
+- (IBAction)cameraButtonTouchUp:(id)sender
+{
+}
+
 - (IBAction)sendButtonTouchUp:(id)sender
 {
     [[SAAPIService sharedSingleton] sendStatus:self.contentTextView.text replyToStatusID:nil repostStatusID:nil success:^(id data) {
@@ -107,7 +111,7 @@
         } else {
 
         }
-    } failure:^(NSError *error) {
+    } failure:^(NSString *error) {
         
     }];
 }

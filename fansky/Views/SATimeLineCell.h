@@ -14,13 +14,14 @@
 @protocol SATimeLineCellDelegate <NSObject>
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell avatarImageViewTouchUp:(id)sender;
+- (void)timeLineCell:(SATimeLineCell *)timeLineCell contentImageViewTouchUp:(id)sender;
 
 @end
 
 @interface SATimeLineCell : UITableViewCell
 
 @property (weak, nonatomic) id<SATimeLineCellDelegate> delegate;
-@property (strong, nonatomic) SAStatus *status;
+@property (weak, nonatomic) SAStatus *status;
 
 - (void)configWithStatus:(SAStatus *)status;
 - (void)loadAllImages;

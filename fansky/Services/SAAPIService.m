@@ -45,7 +45,7 @@
     return self;
 }
 
-- (void)authorizeWithUsername:(NSString *)username password:(NSString *)password success:(void (^)(NSString *, NSString *))success failure:(void (^)(NSError *))failure
+- (void)authorizeWithUsername:(NSString *)username password:(NSString *)password success:(void (^)(NSString *, NSString *))success failure:(void (^)(NSString *))failure
 {
     NSURLRequest *URLRequest = [TDOAuth URLRequestForPath:SA_API_ACCESS_TOKEN_PATH GETParameters:@{@"x_auth_username": username, @"x_auth_password": password,  @"x_auth_mode": @"client_auth"} host:SA_API_BASE_HOST consumerKey:SA_API_COMSUMER_KEY consumerSecret:SA_API_COMSUMER_SECRET accessToken:nil tokenSecret:nil];
     
@@ -62,30 +62,31 @@
             
             success(token, secret);
         } else {
-            failure(connectionError);
+            failure(@"登录失败");
         }
     }];
 }
 
-- (void)verifyCredentialsWithToken:(NSString *)token secret:(NSString *)secret success:(void (^)(id))success failure:(void (^)(NSError *))failure
+- (void)verifyCredentialsWithToken:(NSString *)token secret:(NSString *)secret success:(void (^)(id))success failure:(void (^)(NSString *))failure
 {
     NSURLRequest *URLRequest = [TDOAuth URLRequestForPath:SA_API_VERIFY_CREDENTIALS_PATH parameters:@{@"mode": @"lite"} host:SA_API_HOST consumerKey:SA_API_COMSUMER_KEY consumerSecret:SA_API_COMSUMER_SECRET accessToken:token tokenSecret:secret scheme:@"http" requestMethod:@"POST" dataEncoding:TDOAuthContentTypeUrlEncodedForm headerValues:nil signatureMethod:TDOAuthSignatureMethodHmacSha1];
     
     [NSURLConnection sendAsynchronousRequest:URLRequest queue:self.operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (!connectionError) {
             id responseJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            if (responseJSON && success) {
+            NSString *error = [responseJSON objectForKey:@"error"];
+            if (responseJSON && !error && success) {
                 success(responseJSON);
             } else if (failure) {
-                failure(nil);
+                failure(error);
             }
         } else if (failure) {
-            failure(connectionError);
+            failure(@"网络故障");
         }
     }];
 }
 
-- (void)timeLineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSError *))failure
+- (void)timeLineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *error))failure
 {
     NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userID, @"id", @(count), @"count", @"html", @"format", nil];
     if (sinceID) {
@@ -97,7 +98,7 @@
     [self requestAPIWithPath:SA_API_HOME_TIMELINE_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
 }
 
-- (void)userTimeLineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSError *))failure
+- (void)userTimeLineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *error))failure
 {
     NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userID, @"id", @(count), @"count", nil];
     if (sinceID) {
@@ -109,7 +110,7 @@
     [self requestAPIWithPath:SA_API_USER_TIMELINE_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
 }
 
-- (void)sendStatus:(NSString *)status replyToStatusID:(NSString *)replayToStatusID repostStatusID:(NSString *)repostStatusID success:(void (^)(id))success failure:(void (^)(NSError *))failure
+- (void)sendStatus:(NSString *)status replyToStatusID:(NSString *)replayToStatusID repostStatusID:(NSString *)repostStatusID success:(void (^)(id))success failure:(void (^)(NSString *error))failure
 {
     NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:status, @"status", nil];
     if (replayToStatusID) {
@@ -119,12 +120,12 @@
     [self requestAPIWithPath:SA_API_UPDATE_STATUS_PATH method:@"POST" parametersDictionary:mutableDictionary success:success failure:failure];
 }
 
-- (void)userWithID:(NSString *)userID success:(void (^)(id))success failure:(void (^)(NSError *))failure
+- (void)userWithID:(NSString *)userID success:(void (^)(id))success failure:(void (^)(NSString *error))failure
 {
     [self requestAPIWithPath:SA_API_USER_SHOW_PATH method:@"GET" parametersDictionary:@{@"id": userID, @"mode": @"lite"} success:success failure:failure];
 }
 
-- (void)userPhotoTimeLineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSError *))failure
+- (void)userPhotoTimeLineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *error))failure
 {
     NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userID, @"id", @(count), @"count", nil];
     if (sinceID) {
@@ -136,7 +137,7 @@
     [self requestAPIWithPath:SA_API_USER_PHOTO_TIMELINE_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
 }
 
-- (void)requestAPIWithPath:(NSString *)path method:(NSString *)method parametersDictionary:(NSDictionary *)parametersDictionary success:(void(^)(id responseObject))success failure:(void(^)(NSError *error))failure
+- (void)requestAPIWithPath:(NSString *)path method:(NSString *)method parametersDictionary:(NSDictionary *)parametersDictionary success:(void(^)(id responseObject))success failure:(void(^)(NSString *error))failure
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     
@@ -145,13 +146,17 @@
     [NSURLConnection sendAsynchronousRequest:URLRequest queue:self.operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (!connectionError) {
             id responseJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-            if (responseJSON && success) {
+            NSString *error = nil;
+            if ([responseJSON respondsToSelector:@selector(objectForKey:)]) {
+                error = [responseJSON objectForKey:@"error"];
+            }
+            if (responseJSON && !error && success) {
                 success(responseJSON);
             } else if (failure) {
-                failure(nil);
+                failure(error);
             }
         } else if (failure) {
-            failure(connectionError);
+            failure(@"网络故障");
         }
     }];
 }
