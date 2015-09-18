@@ -47,9 +47,9 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         maxID = lastStatus.statusID;
     }
     [[SAAPIService sharedSingleton] userPhotoTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
-        [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:NO isMention:NO];
+        [[SADataManager sharedManager] insertStatusWithObjects:data type:SAStatusTypeUserStatus];
     } failure:^(NSString *error) {
-        
+
     }];
 }
 
@@ -62,7 +62,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@ AND photo.imageURL != nil", self.userID, @(NO)];
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@ AND photo.imageURL != nil", self.userID];
         fetchRequest.sortDescriptors = sortArray;
         fetchRequest.returnsObjectsAsFaults = NO;
         fetchRequest.fetchBatchSize = 6;

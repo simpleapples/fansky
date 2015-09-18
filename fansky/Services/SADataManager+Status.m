@@ -7,7 +7,6 @@
 //
 
 #import "SADataManager+Status.h"
-#import "SAStatus+CoreDataProperties.h"
 #import "SADataManager+Photo.h"
 #import "SADataManager+User.h"
 #import "NSString+Utils.h"
@@ -16,15 +15,15 @@
 
 static NSString *const ENTITY_NAME = @"SAStatus";
 
-- (void)insertStatusWithObjects:(NSArray *)objects isHomeTimeLine:(BOOL)isHomeTimeLine isMention:(BOOL)isMention
+- (void)insertStatusWithObjects:(NSArray *)objects type:(SAStatusTypes)type
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     [objects enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
-        [self insertStatusWithObject:object localUser:currentUser isHomeTimeLine:isHomeTimeLine isMention:isMention];
+        [self insertStatusWithObject:object localUser:currentUser type:type];
     }];
 }
 
-- (SAStatus *)insertStatusWithObject:(id)object localUser:(SAUser *)localUser isHomeTimeLine:(BOOL)isHomeTimeLine isMention:(BOOL)isMention
+- (SAStatus *)insertStatusWithObject:(id)object localUser:(SAUser *)localUser type:(SAStatusTypes)type
 {
     NSString *statusID = [object objectForKey:@"id"];
     NSString *source = [object objectForKey:@"source"];
@@ -45,8 +44,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
         if (!error && fetchResult && fetchResult.count) {
             SAStatus *existStatus = [fetchResult firstObject];
-            existStatus.homeLine = @(isHomeTimeLine);
-            existStatus.mention = @(isMention);
+            existStatus.type = @(type | existStatus.type.integerValue);
             resultStatus = existStatus;
         } else {
             [self.managedObjectContext performBlockAndWait:^{
@@ -58,8 +56,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
                 status.user = user;
                 status.createdAt = createdAt;
                 status.localUser = localUser;
-                status.homeLine = @(isHomeTimeLine);
-                status.mention = @(isMention);
+                status.type = @(type | status.type.integerValue);
                 resultStatus = status;
             }];
         }

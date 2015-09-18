@@ -17,5 +17,6 @@
 - (SAUser *)insertOrUpdateUserWithExtendObject:(id)userObject;
 - (SAUser *)userWithID:(NSString *)userID;
 - (void)setCurrentUserWithUserID:(NSString *)userID;
+- (void)deleteUserWithUserID:(NSString *)userID;
 
 @end

@@ -130,7 +130,7 @@
     [[SAAPIService sharedSingleton] sendStatus:self.contentTextView.text replyToStatusID:self.replyToStatusID repostStatusID:self.repostStatusID success:^(id data) {
         [SAMessageDisplayUtils showSuccessWithMessage:@"发送完成"];
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
-        [[SADataManager sharedManager] insertStatusWithObject:data localUser:currentUser isHomeTimeLine:YES isMention:NO];
+        [[SADataManager sharedManager] insertStatusWithObject:data localUser:currentUser type:(SAStatusTypeTimeLine & SAStatusTypeUserStatus)];
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];

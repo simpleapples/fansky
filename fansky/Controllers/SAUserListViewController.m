@@ -14,6 +14,7 @@
 @interface SAUserListViewController () <NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editButton;
 
 @end
 
@@ -106,11 +107,31 @@ static NSString *const ENTITY_NAME = @"SAUser";
     [[SADataManager sharedManager] setCurrentUserWithUserID:user.userID];
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        SAUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        [[SADataManager sharedManager] deleteUserWithUserID:user.userID];
+    }
+}
+
 #pragma mark - EventHandler
 
 - (IBAction)addButtonTouchUp:(id)sender
 {
     [self performSegueWithIdentifier:@"UserListToAuthNavigationSegue" sender:nil];
+}
+
+- (IBAction)editButtonTouchUp:(id)sender
+{
+    UIBarButtonItem *editButton = (UIBarButtonItem *)sender;
+    if ([editButton.title isEqualToString:@"编辑"]) {
+        self.tableView.editing = YES;
+        editButton.title = @"完成";
+    } else if ([editButton.title isEqualToString:@"完成"]) {
+        self.tableView.editing = NO;
+        editButton.title = @"编辑";
+    }
 }
 
 @end

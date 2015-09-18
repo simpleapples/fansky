@@ -161,4 +161,10 @@ static NSString *const ENTITY_NAME = @"SAUser";
     }];
 }
 
+- (void)deleteUserWithUserID:(NSString *)userID
+{
+    SAUser *user = [self userWithID:userID];
+    [self.managedObjectContext deleteObject:user];
+}
+
 @end

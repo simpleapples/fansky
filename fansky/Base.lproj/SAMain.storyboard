@@ -597,9 +597,14 @@
                                 <action selector="addButtonTouchUp:" destination="2Iu-V0-1wH" id="3b9-8x-4wm"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="o66-wq-Z6y"/>
+                        <barButtonItem key="rightBarButtonItem" title="编辑" id="o66-wq-Z6y">
+                            <connections>
+                                <action selector="editButtonTouchUp:" destination="2Iu-V0-1wH" id="hcN-a8-gTy"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editButton" destination="o66-wq-Z6y" id="9zM-Hn-IUu"/>
                         <segue destination="o2W-kd-yPy" kind="presentation" identifier="UserListToAuthNavigationSegue" id="H21-lO-l97"/>
                     </connections>
                 </tableViewController>
@@ -821,7 +826,7 @@
         <image name="IconStop" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iMi-TQ-GAa"/>
+        <segue reference="qBy-9g-ujA"/>
         <segue reference="ReM-oc-LQN"/>
         <segue reference="cOW-5L-KIN"/>
         <segue reference="Btz-3b-6W7"/>

@@ -14,7 +14,6 @@
 @protocol SATimeLineCellDelegate <NSObject>
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell avatarImageViewTouchUp:(id)sender;
-- (void)timeLineCell:(SATimeLineCell *)timeLineCell contentImageViewTouchUp:(id)sender;
 
 @end
 

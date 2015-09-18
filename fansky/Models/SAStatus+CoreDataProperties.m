@@ -14,11 +14,10 @@
 @implementation SAStatus (CoreDataProperties)
 
 @dynamic createdAt;
-@dynamic homeLine;
 @dynamic source;
 @dynamic statusID;
 @dynamic text;
-@dynamic mention;
+@dynamic type;
 @dynamic localUser;
 @dynamic photo;
 @dynamic user;

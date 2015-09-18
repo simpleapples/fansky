@@ -64,7 +64,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     if (!self.userID) {
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
         [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
-            [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:YES isMention:NO];
+            [[SADataManager sharedManager] insertStatusWithObjects:data type:SAStatusTypeTimeLine];
             [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
             [self.refreshControl endRefreshing];
         } failure:^(NSString *error) {
@@ -73,7 +73,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         }];
     } else {
         [[SAAPIService sharedSingleton] userTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
-            [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:NO isMention:NO];
+            [[SADataManager sharedManager] insertStatusWithObjects:data type:SAStatusTypeUserStatus];
             [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
             [self.refreshControl endRefreshing];
         } failure:^(NSString *error) {
@@ -109,22 +109,21 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
         NSString *userID;
-        BOOL isHomeLine;
+        SAStatusTypes type;
         if (self.userID) {
             userID = self.userID;
-            isHomeLine = NO;
-            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@ AND homeLine = %@", userID, @(isHomeLine)];
+            type = SAStatusTypeUserStatus;
+            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@ AND (type | %d) = type", userID, type];
         } else {
             userID = currentUser.userID;
-            isHomeLine = YES;
-            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@ AND homeLine = %@", userID, @(isHomeLine)];
+            type = SAStatusTypeTimeLine;
+            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@ AND (type | %d) = type", userID, type];
         }
         fetchRequest.sortDescriptors = sortArray;
         fetchRequest.returnsObjectsAsFaults = NO;
         fetchRequest.fetchBatchSize = 6;
         
-        
-        NSString *cacheName = [NSString stringWithFormat:@"user-%@-homeline-%zd", userID, isHomeLine];
+        NSString *cacheName = [NSString stringWithFormat:@"user-%@-type-%zd", userID, type];
         _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:manager.managedObjectContext sectionNameKeyPath:nil cacheName:cacheName];
         _fetchedResultsController.delegate = self;
         
@@ -188,12 +187,16 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.tableView beginUpdates];
+    if (controller.fetchedObjects.count) {
+        [self.tableView beginUpdates];
+    }
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.tableView endUpdates];
+    if (controller.fetchedObjects.count) {
+        [self.tableView endUpdates];
+    }
 }
 
 #pragma mark - Table view data source

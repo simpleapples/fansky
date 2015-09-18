@@ -7,14 +7,14 @@
 //
 
 #import "SADataManager.h"
+#import "SAStatus+CoreDataProperties.h"
 
 @class SAStatus;
-@class SAUser;
 
 @interface SADataManager (Status)
 
-- (void)insertStatusWithObjects:(NSArray *)objects isHomeTimeLine:(BOOL)isHomeTimeLine isMention:(BOOL)isMention;
-- (SAStatus *)insertStatusWithObject:(id)object localUser:(SAUser *)localUser isHomeTimeLine:(BOOL)isHomeTimeLine isMention:(BOOL)isMention;
+- (void)insertStatusWithObjects:(NSArray *)objects type:(SAStatusTypes)type;
+- (SAStatus *)insertStatusWithObject:(id)object localUser:(SAUser *)localUser type:(SAStatusTypes)type;
 - (SAStatus *)statusWithID:(NSString *)statusID;
 
 @end

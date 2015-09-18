@@ -9,6 +9,15 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+typedef NS_OPTIONS(NSUInteger, SAStatusTypes)
+{
+    SAStatusTypeTimeLine = 1 << 0,
+    
+    SAStatusTypeUserStatus = 1 << 1,
+    
+    SAStatusTypeMentionStatus = 1 << 2
+};
+
 @class SAPhoto, SAUser;
 
 NS_ASSUME_NONNULL_BEGIN
