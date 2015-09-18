@@ -126,7 +126,7 @@
     [self requestAPIWithPath:SA_API_USER_TIMELINE_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
 }
 
-- (void)sendStatus:(NSString *)status replyToStatusID:(NSString *)replyToStatusID repostStatusID:(NSString *)repostStatusID success:(void (^)(id))success failure:(void (^)(NSString *error))failure
+- (void)sendStatus:(NSString *)status replyToStatusID:(NSString *)replyToStatusID repostStatusID:(NSString *)repostStatusID image:(NSData *)image success:(void (^)(id))success failure:(void (^)(NSString *error))failure
 {
     NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:status, @"status", @"lite", @"mode", nil];
     if (replyToStatusID) {
@@ -135,7 +135,12 @@
     if (repostStatusID) {
         [mutableDictionary setObject:repostStatusID forKey:@"repost_status_id"];
     }
-    [self requestAPIWithPath:SA_API_UPDATE_STATUS_PATH method:@"POST" parametersDictionary:mutableDictionary success:success failure:failure];
+    if (image) {
+        [mutableDictionary setObject:image forKey:@"photo"];
+        [self requestAPIWithPath:SA_API_UPDATE_PHOTO_STATUS_PATH method:@"POST" parametersDictionary:mutableDictionary success:success failure:failure];
+    } else {
+        [self requestAPIWithPath:SA_API_UPDATE_STATUS_PATH method:@"POST" parametersDictionary:mutableDictionary success:success failure:failure];
+    }
 }
 
 - (void)userPhotoTimeLineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *error))failure

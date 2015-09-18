@@ -16,13 +16,15 @@
 #import "NSString+Utils.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface SAComposeViewController () <UITextViewDelegate>
+@interface SAComposeViewController () <UITextViewDelegate, UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *functionViewBottomConstraint;
+
+@property (strong, nonatomic) UIImage *uploadImage;
 
 @end
 
@@ -103,6 +105,38 @@
     } completion:nil];
 }
 
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    UIImagePickerControllerSourceType type;
+    if (buttonIndex == 0 && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        type = UIImagePickerControllerSourceTypeCamera;
+    } else if (buttonIndex == 1 && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        type = UIImagePickerControllerSourceTypePhotoLibrary;
+    } else {
+        return;
+    }
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.allowsEditing = YES;
+    imagePickerController.sourceType = type;
+    [self presentViewController:imagePickerController animated:YES completion:nil];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    self.uploadImage = [info objectForKey:UIImagePickerControllerEditedImage];
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidChange:(UITextView *)textView
@@ -118,6 +152,8 @@
 
 - (IBAction)cameraButtonTouchUp:(id)sender
 {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍摄照片", @"从相册中选择", nil];
+    [actionSheet showInView:self.view];
 }
 
 - (IBAction)sendButtonTouchUp:(id)sender
@@ -126,8 +162,9 @@
         [SAMessageDisplayUtils showInfoWithMessage:@"说点什么吧"];
         return;
     }
+    NSData *imageData = UIImageJPEGRepresentation(self.uploadImage, 0.8);
     [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在发送"];
-    [[SAAPIService sharedSingleton] sendStatus:self.contentTextView.text replyToStatusID:self.replyToStatusID repostStatusID:self.repostStatusID success:^(id data) {
+    [[SAAPIService sharedSingleton] sendStatus:self.contentTextView.text replyToStatusID:self.replyToStatusID repostStatusID:self.repostStatusID image:imageData success:^(id data) {
         [SAMessageDisplayUtils showSuccessWithMessage:@"发送完成"];
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
         [[SADataManager sharedManager] insertStatusWithObject:data localUser:currentUser type:(SAStatusTypeTimeLine & SAStatusTypeUserStatus)];

@@ -187,16 +187,12 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    if (controller.fetchedObjects.count) {
-        [self.tableView beginUpdates];
-    }
+    [self.tableView beginUpdates];
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    if (controller.fetchedObjects.count) {
-        [self.tableView endUpdates];
-    }
+    [self.tableView endUpdates];
 }
 
 #pragma mark - Table view data source
