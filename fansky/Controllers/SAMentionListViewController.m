@@ -17,9 +17,10 @@
 #import "SAAPIService.h"
 #import "SAPhoto.h"
 #import "SAUserViewController.h"
+#import "SATimeLinePhotoCell.h"
 #import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 
-@interface SAMentionListViewController () <NSFetchedResultsControllerDelegate, SATimeLineCellDelegate>
+@interface SAMentionListViewController () <NSFetchedResultsControllerDelegate, SATimeLineCellDelegate, SATimeLinePhotoCellDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (copy, nonatomic) NSString *selectedStatusID;
@@ -128,7 +129,15 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     [self performSegueWithIdentifier:@"MentionListToUserSegue" sender:nil];
 }
 
-- (void)timeLineCell:(SATimeLineCell *)timeLineCell contentImageViewTouchUp:(id)sender
+#pragma mark - SATimeLinePhotoCellDelegate
+
+- (void)timeLinePhotoCell:(SATimeLinePhotoCell *)timeLineCell avatarImageViewTouchUp:(id)sender
+{
+    self.selectedUserID = timeLineCell.status.user.userID;
+    [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
+}
+
+- (void)timeLinePhotoCell:(SATimeLinePhotoCell *)timeLineCell contentImageViewTouchUp:(id)sender
 {
     if (!self.imageViewController){
         self.imageViewController = [[URBMediaFocusViewController alloc] init];
@@ -179,16 +188,22 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *const cellName = @"SATimeLineCell";
+    static NSString *const photoCellName = @"SATimeLinePhotoCell";
     if (!self.isCellRegistered) {
         [tableView registerNib:[UINib nibWithNibName:cellName bundle:nil] forCellReuseIdentifier:cellName];
+        [tableView registerNib:[UINib nibWithNibName:photoCellName bundle:nil] forCellReuseIdentifier:photoCellName];
         self.cellRegistered = YES;
     }
-    SATimeLineCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SATimeLineCell" forIndexPath:indexPath];
-    if (cell) {
-        SAStatus *status = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    SAStatus *status = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    if (status.photo.imageURL) {
+        SATimeLinePhotoCell *cell = [tableView dequeueReusableCellWithIdentifier:photoCellName forIndexPath:indexPath];
         [cell configWithStatus:status];
         cell.delegate = self;
+        return cell;
     }
+    SATimeLineCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
+    [cell configWithStatus:status];
+    cell.delegate = self;
     return cell;
 }
 
@@ -201,8 +216,13 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SATimeLineCell *timeLineCell = (SATimeLineCell *)cell;
-    [timeLineCell loadAllImages];
+    if ([cell isKindOfClass:[SATimeLineCell class]]) {
+        SATimeLineCell *timeLineCell = (SATimeLineCell *)cell;
+        [timeLineCell loadAllImages];
+    } else if ([cell isKindOfClass:[SATimeLinePhotoCell class]]) {
+        SATimeLinePhotoCell *timeLinePhotoCell = (SATimeLinePhotoCell *)cell;
+        [timeLinePhotoCell loadAllImages];
+    }
 }
 
 #pragma mark - UIScrollViewDelegate

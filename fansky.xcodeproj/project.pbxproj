@@ -17,6 +17,8 @@
 		5A1811C51BABF681004B6C54 /* SAUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811BF1BABF681004B6C54 /* SAUser.m */; settings = {ASSET_TAGS = (); }; };
 		5A1811C61BABF681004B6C54 /* SAPhoto+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811C11BABF681004B6C54 /* SAPhoto+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
 		5A1811C71BABF681004B6C54 /* SAPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811C31BABF681004B6C54 /* SAPhoto.m */; settings = {ASSET_TAGS = (); }; };
+		5A1811CB1BAC1C40004B6C54 /* SATimeLinePhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811C91BAC1C40004B6C54 /* SATimeLinePhotoCell.m */; settings = {ASSET_TAGS = (); }; };
+		5A1811CC1BAC1C40004B6C54 /* SATimeLinePhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1811CA1BAC1C40004B6C54 /* SATimeLinePhotoCell.xib */; settings = {ASSET_TAGS = (); }; };
 		5A2365BD1B395FD200E1E73C /* SATimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2365BC1B395FD200E1E73C /* SATimeLineCell.m */; };
 		5A2365C41B39723900E1E73C /* SAAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2365C31B39723900E1E73C /* SAAPIService.m */; };
 		5A3E6C581BA441D100C589BE /* SADataManager+Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3E6C571BA441D100C589BE /* SADataManager+Status.m */; };
@@ -81,6 +83,9 @@
 		5A1811C11BABF681004B6C54 /* SAPhoto+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAPhoto+CoreDataProperties.m"; sourceTree = "<group>"; };
 		5A1811C21BABF681004B6C54 /* SAPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPhoto.h; sourceTree = "<group>"; };
 		5A1811C31BABF681004B6C54 /* SAPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPhoto.m; sourceTree = "<group>"; };
+		5A1811C81BAC1C40004B6C54 /* SATimeLinePhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SATimeLinePhotoCell.h; sourceTree = "<group>"; };
+		5A1811C91BAC1C40004B6C54 /* SATimeLinePhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SATimeLinePhotoCell.m; sourceTree = "<group>"; };
+		5A1811CA1BAC1C40004B6C54 /* SATimeLinePhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SATimeLinePhotoCell.xib; sourceTree = "<group>"; };
 		5A2365BB1B395FD200E1E73C /* SATimeLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SATimeLineCell.h; sourceTree = "<group>"; };
 		5A2365BC1B395FD200E1E73C /* SATimeLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SATimeLineCell.m; sourceTree = "<group>"; };
 		5A2365C21B39723900E1E73C /* SAAPIService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAPIService.h; sourceTree = "<group>"; };
@@ -174,6 +179,9 @@
 				5AED4B721BA8522C00EDBF47 /* SAUserHeaderView.xib */,
 				5A7E1F211BA9CDA4000E7E62 /* SAPhotoTimeLineCell.h */,
 				5A7E1F221BA9CDA4000E7E62 /* SAPhotoTimeLineCell.m */,
+				5A1811C81BAC1C40004B6C54 /* SATimeLinePhotoCell.h */,
+				5A1811C91BAC1C40004B6C54 /* SATimeLinePhotoCell.m */,
+				5A1811CA1BAC1C40004B6C54 /* SATimeLinePhotoCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -426,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5AED4B731BA8522C00EDBF47 /* SAUserHeaderView.xib in Resources */,
+				5A1811CC1BAC1C40004B6C54 /* SATimeLinePhotoCell.xib in Resources */,
 				5AD70EFC1B316A79009C5B84 /* SAMain.storyboard in Resources */,
 				5AD70F011B316A79009C5B84 /* LaunchScreen.xib in Resources */,
 				5AD70EFE1B316A79009C5B84 /* Images.xcassets in Resources */,
@@ -504,6 +513,7 @@
 				5AED4B711BA8521B00EDBF47 /* SAUserHeaderView.m in Sources */,
 				5A1811C51BABF681004B6C54 /* SAUser.m in Sources */,
 				5AF5B1CD1BA1813A00C7A18A /* SASplashViewController.m in Sources */,
+				5A1811CB1BAC1C40004B6C54 /* SATimeLinePhotoCell.m in Sources */,
 				5AF5B1CA1BA17F7B00C7A18A /* SALoginViewController.m in Sources */,
 				5AED4B331BA6E48B00EDBF47 /* SAComposeViewController.m in Sources */,
 				5AED4B301BA6D41D00EDBF47 /* NSDate+Utils.m in Sources */,

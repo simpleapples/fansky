@@ -1,12 +1,12 @@
 //
-//  SATimeLineCell.m
+//  SATimeLinePhotoCell.m
 //  fansky
 //
-//  Created by Zzy on 6/23/15.
-//  Copyright (c) 2015 Zzy. All rights reserved.
+//  Created by Zzy on 9/18/15.
+//  Copyright © 2015 Zzy. All rights reserved.
 //
 
-#import "SATimeLineCell.h"
+#import "SATimeLinePhotoCell.h"
 #import "SAStatus+CoreDataProperties.h"
 #import "SAPhoto.h"
 #import "SAUser+CoreDataProperties.h"
@@ -14,16 +14,17 @@
 #import "TTTAttributedLabel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface SATimeLineCell () <TTTAttributedLabelDelegate>
+@interface SATimeLinePhotoCell () <TTTAttributedLabelDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet TTTAttributedLabel *contentLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
 
 @end
 
-@implementation SATimeLineCell
+@implementation SATimeLinePhotoCell
 
 - (void)configWithStatus:(SAStatus *)status
 {
@@ -57,11 +58,15 @@
     self.contentLabel.delegate = self;
     
     self.timeLabel.text = [self.status.createdAt friendlyDateString];
+    self.contentImageView.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:1].CGColor;
 }
 
 - (void)loadAllImages
 {
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL]];
+    if (self.status.photo.thumbURL) {
+        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.thumbURL]];
+    }
 }
 
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
@@ -73,8 +78,15 @@
 
 - (IBAction)avatarImageViewTouchUp:(id)sender
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(timeLineCell:avatarImageViewTouchUp:)]) {
-        [self.delegate timeLineCell:self avatarImageViewTouchUp:sender];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(timeLinePhotoCell:avatarImageViewTouchUp:)]) {
+        [self.delegate timeLinePhotoCell:self avatarImageViewTouchUp:sender];
+    }
+}
+
+- (IBAction)contentImageViewTouchUp:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(timeLinePhotoCell:contentImageViewTouchUp:)]) {
+        [self.delegate timeLinePhotoCell:self contentImageViewTouchUp:sender];
     }
 }
 
