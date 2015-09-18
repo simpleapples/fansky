@@ -47,7 +47,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         maxID = lastStatus.statusID;
     }
     [[SAAPIService sharedSingleton] userPhotoTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
-        [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:NO];
+        [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:NO isMention:NO];
     } failure:^(NSString *error) {
         
     }];

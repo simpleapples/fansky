@@ -16,15 +16,15 @@
 
 static NSString *const ENTITY_NAME = @"SAStatus";
 
-- (void)insertStatusWithObjects:(NSArray *)objects isHomeTimeLine:(BOOL)isHomeTimeLine
+- (void)insertStatusWithObjects:(NSArray *)objects isHomeTimeLine:(BOOL)isHomeTimeLine isMention:(BOOL)isMention
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     [objects enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
-        [self insertStatusWithObject:object localUser:currentUser isHomeTimeLine:isHomeTimeLine];
+        [self insertStatusWithObject:object localUser:currentUser isHomeTimeLine:isHomeTimeLine isMention:isMention];
     }];
 }
 
-- (SAStatus *)insertStatusWithObject:(id)object localUser:(SAUser *)localUser isHomeTimeLine:(BOOL)isHomeTimeLine
+- (SAStatus *)insertStatusWithObject:(id)object localUser:(SAUser *)localUser isHomeTimeLine:(BOOL)isHomeTimeLine isMention:(BOOL)isMention
 {
     NSString *statusID = [object objectForKey:@"id"];
     NSString *source = [object objectForKey:@"source"];
@@ -45,6 +45,8 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
         if (!error && fetchResult && fetchResult.count) {
             SAStatus *existStatus = [fetchResult firstObject];
+            existStatus.homeLine = @(isHomeTimeLine);
+            existStatus.mention = @(isMention);
             resultStatus = existStatus;
         } else {
             [self.managedObjectContext performBlockAndWait:^{
@@ -57,6 +59,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
                 status.createdAt = createdAt;
                 status.localUser = localUser;
                 status.homeLine = @(isHomeTimeLine);
+                status.mention = @(isMention);
                 resultStatus = status;
             }];
         }

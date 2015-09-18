@@ -62,7 +62,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];
     
     [[SAAPIService sharedSingleton] mentionStatusWithSinceID:nil maxID:maxID count:20 success:^(id data) {
-        [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:YES];
+        [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:NO isMention:YES];
         [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
         [self.refreshControl endRefreshing];
     } failure:^(NSString *error) {
@@ -96,7 +96,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"%@ IN text", currentUser.userID];
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@ AND mention = %@", currentUser.userID, @(YES)];
         fetchRequest.sortDescriptors = sortArray;
         fetchRequest.returnsObjectsAsFaults = NO;
         fetchRequest.fetchBatchSize = 6;
