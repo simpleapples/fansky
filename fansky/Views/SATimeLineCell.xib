@@ -3,16 +3,15 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="SATimeLineCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SATimeLineCell" rowHeight="290" id="ied-Va-MeJ" customClass="SATimeLineCell">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="290"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="SATimeLineCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SATimeLineCell" rowHeight="185" id="ied-Va-MeJ" customClass="SATimeLineCell">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="185"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ied-Va-MeJ" id="DyM-OM-Yqb">
-                <rect key="frame" x="0.0" y="0.0" width="600" height="289.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="600" height="184.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lnm-D3-GSg">
@@ -30,12 +29,10 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OpE-hY-QMd">
-                        <rect key="frame" x="64" y="67" width="526" height="212"/>
+                        <rect key="frame" x="64" y="68.5" width="526" height="106"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="OpE-hY-QMd" secondAttribute="height" multiplier="2:1" id="32e-4t-pl1"/>
-                            <constraint firstAttribute="height" constant="212" id="eWo-3i-OHW"/>
-                            <constraint firstAttribute="width" secondItem="OpE-hY-QMd" secondAttribute="height" multiplier="2:1" id="zHn-35-jON"/>
+                            <constraint firstAttribute="height" constant="106" id="OVe-la-G2v"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
@@ -46,12 +43,6 @@
                                 <integer key="value" value="1"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="32e-4t-pl1"/>
-                                <exclude reference="zHn-35-jON"/>
-                            </mask>
-                        </variation>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kaf-EG-HUj">
                         <rect key="frame" x="10" y="10" width="44" height="44"/>
@@ -87,7 +78,7 @@
                         </variation>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cks-QO-2ZC" customClass="TTTAttributedLabel">
-                        <rect key="frame" x="64" y="40" width="526" height="17"/>
+                        <rect key="frame" x="64" y="40" width="526" height="19"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -98,7 +89,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wdi-F1-TfK">
-                        <rect key="frame" x="64" y="67" width="526" height="212"/>
+                        <rect key="frame" x="64" y="68" width="526" height="106"/>
                         <connections>
                             <action selector="contentImageViewTouchUp:" destination="ied-Va-MeJ" eventType="touchUpInside" id="w39-1g-r0l"/>
                         </connections>
@@ -106,6 +97,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Sel-Vi-zsx" firstAttribute="top" secondItem="lnm-D3-GSg" secondAttribute="top" id="01f-Xp-lcK"/>
+                    <constraint firstAttribute="bottom" secondItem="cks-QO-2ZC" secondAttribute="bottom" priority="750" constant="10" id="0pr-jJ-XPc"/>
                     <constraint firstItem="Sel-Vi-zsx" firstAttribute="leading" secondItem="cks-QO-2ZC" secondAttribute="leading" id="5eR-2y-3lC"/>
                     <constraint firstAttribute="trailing" secondItem="SjV-c1-VTy" secondAttribute="trailing" constant="10" id="87F-wr-QVW"/>
                     <constraint firstItem="Wdi-F1-TfK" firstAttribute="leading" secondItem="OpE-hY-QMd" secondAttribute="leading" id="8xd-nc-1Np"/>
@@ -134,17 +126,19 @@
                 <variation key="default">
                     <mask key="constraints">
                         <exclude reference="qkd-x1-SUg"/>
+                        <exclude reference="0pr-jJ-XPc"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="avatarImageView" destination="lnm-D3-GSg" id="J2w-lQ-eBD"/>
                 <outlet property="contentImageView" destination="OpE-hY-QMd" id="LoA-TM-kZ3"/>
-                <outlet property="contentImageViewHeightConstraint" destination="eWo-3i-OHW" id="Zow-ck-dHm"/>
+                <outlet property="contentImageViewHeightConstraint" destination="OVe-la-G2v" id="0gN-3K-eBl"/>
                 <outlet property="contentLabel" destination="cks-QO-2ZC" id="IWf-HW-sCx"/>
                 <outlet property="timeLabel" destination="SjV-c1-VTy" id="qPC-lI-tJz"/>
                 <outlet property="usernameLabel" destination="Sel-Vi-zsx" id="g3m-PG-c2P"/>
             </connections>
+            <point key="canvasLocation" x="211" y="197.5"/>
         </tableViewCell>
     </objects>
 </document>

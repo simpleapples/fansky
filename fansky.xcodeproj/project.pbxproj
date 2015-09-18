@@ -166,6 +166,7 @@
 			children = (
 				5A2365BB1B395FD200E1E73C /* SATimeLineCell.h */,
 				5A2365BC1B395FD200E1E73C /* SATimeLineCell.m */,
+				5A1811AE1BABF3AC004B6C54 /* SATimeLineCell.xib */,
 				5AE38ADC1BA2E70F0022A35A /* SAUserCell.h */,
 				5AE38ADD1BA2E70F0022A35A /* SAUserCell.m */,
 				5AED4B6F1BA8521B00EDBF47 /* SAUserHeaderView.h */,
@@ -173,7 +174,6 @@
 				5AED4B721BA8522C00EDBF47 /* SAUserHeaderView.xib */,
 				5A7E1F211BA9CDA4000E7E62 /* SAPhotoTimeLineCell.h */,
 				5A7E1F221BA9CDA4000E7E62 /* SAPhotoTimeLineCell.m */,
-				5A1811AE1BABF3AC004B6C54 /* SATimeLineCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";

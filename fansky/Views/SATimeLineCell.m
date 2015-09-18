@@ -62,11 +62,15 @@
     self.contentImageView.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:1].CGColor;
     
     if (self.status.photo.thumbURL) {
-        self.contentImageView.hidden = NO;
-        self.contentImageViewHeightConstraint.constant = (self.frame.size.width - 73) * 0.5;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.contentImageView.hidden = NO;
+            self.contentImageViewHeightConstraint.constant = self.contentImageView.frame.size.width * 0.5;
+        });
     } else {
-        self.contentImageView.hidden = YES;
-        self.contentImageViewHeightConstraint.constant = 1;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.contentImageView.hidden = YES;
+            self.contentImageViewHeightConstraint.constant = 0;
+        });
     }
 }
 
