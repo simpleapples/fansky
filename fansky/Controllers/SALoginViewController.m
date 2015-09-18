@@ -10,7 +10,7 @@
 #import "SAAPIService.h"
 #import "SAConstants.h"
 #import "SADataManager+User.h"
-#import "SAUser.h"
+#import "SAUser+CoreDataProperties.h"
 #import "SAMessageDisplayUtils.h"
 #import <SSKeychain/SSKeychain.h>
 

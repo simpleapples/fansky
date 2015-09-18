@@ -9,8 +9,8 @@
 #import "SAComposeViewController.h"
 #import "SADataManager+User.h"
 #import "SADataManager+Status.h"
-#import "SAUser.h"
-#import "SAStatus.h"
+#import "SAUser+CoreDataProperties.h"
+#import "SAStatus+CoreDataProperties.h"
 #import "SAAPIService.h"
 #import "SAMessageDisplayUtils.h"
 #import "NSString+Utils.h"
@@ -129,6 +129,8 @@
     [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在发送"];
     [[SAAPIService sharedSingleton] sendStatus:self.contentTextView.text replyToStatusID:self.replyToStatusID repostStatusID:self.repostStatusID success:^(id data) {
         [SAMessageDisplayUtils showSuccessWithMessage:@"发送完成"];
+        SAUser *currentUser = [SADataManager sharedManager].currentUser;
+        [[SADataManager sharedManager] insertStatusWithObject:data localUser:currentUser isHomeTimeLine:YES];
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];

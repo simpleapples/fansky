@@ -8,12 +8,14 @@
 
 #import "SAStatusViewController.h"
 #import "SADataManager+Status.h"
-#import "SAStatus.h"
-#import "SAUser.h"
+#import "SAStatus+CoreDataProperties.h"
+#import "SAUser+CoreDataProperties.h"
 #import "SAPhoto.h"
 #import "SAUserViewController.h"
 #import "SADataManager+User.h"
 #import "SAComposeViewController.h"
+#import "SAAPIService.h"
+#import "SAMessageDisplayUtils.h"
 #import "NSDate+Utils.h"
 #import "NSString+Utils.h"
 #import "TTTAttributedLabel.h"
@@ -115,11 +117,15 @@
     }
 }
 
+#pragma mark - TTTAttributedLabelDelegate
+
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
 {
     if ([url.host isEqualToString:@"fanfou.com"]) {
         self.selectedUserID = url.lastPathComponent;
         [self performSegueWithIdentifier:@"StatusToUserSegue" sender:nil];
+    } else if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
+        [[UIApplication sharedApplication] openURL:url];
     }
 }
 
@@ -156,6 +162,12 @@
 
 - (IBAction)trashBarButtonTouchUp:(id)sender
 {
+    [[SAAPIService sharedSingleton] deleteStatusWithID:self.statusID success:^(id data) {
+        [SAMessageDisplayUtils showSuccessWithMessage:@"删除成功"];
+        [self.navigationController popViewControllerAnimated:YES];
+    } failure:^(NSString *error) {
+        [SAMessageDisplayUtils showErrorWithMessage:error];
+    }];
 }
 
 @end

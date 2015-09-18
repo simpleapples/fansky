@@ -9,7 +9,7 @@
 #import "SAUserListViewController.h"
 #import "SADataManager+User.h"
 #import "SAUserCell.h"
-#import "SAUser.h"
+#import "SAUser+CoreDataProperties.h"
 
 @interface SAUserListViewController () <NSFetchedResultsControllerDelegate>
 

@@ -8,16 +8,14 @@
 
 #import "SAAPIService.h"
 #import "SAConstants.h"
-#import "SAUser.h"
+#import "SAUser+CoreDataProperties.h"
 #import "SADataManager+User.h"
 #import <SSKeychain/SSKeychain.h>
 #import <TDOAuth/TDOAuth.h>
-#import <AFNetworking/AFNetworking.h>
 
 @interface SAAPIService ()
 
 @property (strong, nonatomic) NSOperationQueue *operationQueue;
-@property (strong, nonatomic) AFHTTPRequestOperationManager *operationManager;
 
 @end
 
@@ -40,7 +38,6 @@
     self = [super init];
     if (self) {
         self.operationQueue = [[NSOperationQueue alloc] init];
-        self.operationManager = [AFHTTPRequestOperationManager manager];
     }
     return self;
 }
@@ -131,9 +128,11 @@
 
 - (void)sendStatus:(NSString *)status replyToStatusID:(NSString *)replyToStatusID repostStatusID:(NSString *)repostStatusID success:(void (^)(id))success failure:(void (^)(NSString *error))failure
 {
-    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:status, @"status", nil];
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:status, @"status", @"lite", @"mode", nil];
     if (replyToStatusID) {
         [mutableDictionary setObject:replyToStatusID forKey:@"in_reply_to_status_id"];
+    }
+    if (repostStatusID) {
         [mutableDictionary setObject:repostStatusID forKey:@"repost_status_id"];
     }
     [self requestAPIWithPath:SA_API_UPDATE_STATUS_PATH method:@"POST" parametersDictionary:mutableDictionary success:success failure:failure];
@@ -149,6 +148,28 @@
         [mutableDictionary setObject:maxID forKey:@"max_id"];
     }
     [self requestAPIWithPath:SA_API_USER_PHOTO_TIMELINE_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
+}
+
+- (void)deleteStatusWithID:(NSString *)statusID success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    [self requestAPIWithPath:SA_API_DELETE_STATUS_PATH method:@"POST" parametersDictionary:@{@"id": statusID, @"mode": @"lite"} success:success failure:failure];
+}
+
+- (void)privateMessageConversationListWithCount:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    [self requestAPIWithPath:SA_API_DELETE_STATUS_PATH method:@"POST" parametersDictionary:@{@"count": @(count), @"mode": @"lite"} success:success failure:failure];
+}
+
+- (void)mentionStatusWithSinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@(count), @"count", nil];
+    if (sinceID) {
+        [mutableDictionary setObject:sinceID forKey:@"since_id"];
+    }
+    if (maxID) {
+        [mutableDictionary setObject:maxID forKey:@"max_id"];
+    }
+    [self requestAPIWithPath:SA_API_MENTION_STATUS_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
 }
 
 #pragma mark - Base

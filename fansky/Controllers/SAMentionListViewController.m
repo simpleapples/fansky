@@ -1,26 +1,25 @@
-
 //
-//  TimeLineViewController.m
+//  SAMentionListViewController.m
 //  fansky
 //
-//  Created by Zzy on 6/17/15.
-//  Copyright (c) 2015 Zzy. All rights reserved.
+//  Created by Zzy on 9/18/15.
+//  Copyright © 2015 Zzy. All rights reserved.
 //
 
-#import "SATimeLineViewController.h"
+#import "SAMentionListViewController.h"
 #import "SADataManager+User.h"
-#import "SATimeLineCell.h"
 #import "SAUser+CoreDataProperties.h"
-#import "SAStatus+CoreDataProperties.h"
-#import "SAPhoto.h"
-#import "SAAPIService.h"
-#import "SADataManager+Status.h"
+#import "SATimeLineCell.h"
 #import "SAStatusViewController.h"
-#import "SAUserViewController.h"
+#import "SADataManager+Status.h"
 #import "SAMessageDisplayUtils.h"
+#import "SAStatus+CoreDataProperties.h"
+#import "SAAPIService.h"
+#import "SAPhoto.h"
+#import "SAUserViewController.h"
 #import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 
-@interface SATimeLineViewController () <NSFetchedResultsControllerDelegate, SATimeLineCellDelegate>
+@interface SAMentionListViewController () <NSFetchedResultsControllerDelegate, SATimeLineCellDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (copy, nonatomic) NSString *selectedStatusID;
@@ -30,7 +29,7 @@
 
 @end
 
-@implementation SATimeLineViewController
+@implementation SAMentionListViewController
 
 static NSString *const ENTITY_NAME = @"SAStatus";
 
@@ -60,26 +59,15 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         }
     }
     [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];
-    if (!self.userID) {
-        SAUser *currentUser = [SADataManager sharedManager].currentUser;
-        [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
-            [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:YES];
-            [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
-            [self.refreshControl endRefreshing];
-        } failure:^(NSString *error) {
-            [SAMessageDisplayUtils showErrorWithMessage:error];
-            [self.refreshControl endRefreshing];
-        }];
-    } else {
-        [[SAAPIService sharedSingleton] userTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
-            [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:NO];
-            [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
-            [self.refreshControl endRefreshing];
-        } failure:^(NSString *error) {
-            [SAMessageDisplayUtils showErrorWithMessage:error];
-            [self.refreshControl endRefreshing];
-        }];
-    }
+    
+    [[SAAPIService sharedSingleton] mentionStatusWithSinceID:nil maxID:maxID count:20 success:^(id data) {
+        [[SADataManager sharedManager] insertStatusWithObjects:data isHomeTimeLine:YES];
+        [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
+        [self.refreshControl endRefreshing];
+    } failure:^(NSString *error) {
+        [SAMessageDisplayUtils showErrorWithMessage:error];
+        [self.refreshControl endRefreshing];
+    }];
 }
 
 - (void)updateInterface
@@ -107,23 +95,12 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-        NSString *userID;
-        BOOL isHomeLine;
-        if (self.userID) {
-            userID = self.userID;
-            isHomeLine = NO;
-            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@ AND homeLine = %@", userID, @(isHomeLine)];
-        } else {
-            userID = currentUser.userID;
-            isHomeLine = YES;
-            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@ AND homeLine = %@", userID, @(isHomeLine)];
-        }
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"%@ IN text", currentUser.userID];
         fetchRequest.sortDescriptors = sortArray;
         fetchRequest.returnsObjectsAsFaults = NO;
         fetchRequest.fetchBatchSize = 6;
         
-        
-        NSString *cacheName = [NSString stringWithFormat:@"user-%@-homeline-%zd", userID, isHomeLine];
+        NSString *cacheName = [NSString stringWithFormat:@"user-%@-mention", currentUser.userID];
         _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:manager.managedObjectContext sectionNameKeyPath:nil cacheName:cacheName];
         _fetchedResultsController.delegate = self;
         
@@ -148,7 +125,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell avatarImageViewTouchUp:(id)sender
 {
     self.selectedUserID = timeLineCell.status.user.userID;
-    [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
+    [self performSegueWithIdentifier:@"MentionListToUserSegue" sender:nil];
 }
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell contentImageViewTouchUp:(id)sender
@@ -200,14 +177,13 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     return numberOfItems;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *const cellName = @"SATimeLineCell";
     if (!self.isCellRegistered) {
         [tableView registerNib:[UINib nibWithNibName:cellName bundle:nil] forCellReuseIdentifier:cellName];
         self.cellRegistered = YES;
     }
-    SATimeLineCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
+    SATimeLineCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SATimeLineCell" forIndexPath:indexPath];
     if (cell) {
         SAStatus *status = [self.fetchedResultsController objectAtIndexPath:indexPath];
         [cell configWithStatus:status];
@@ -220,7 +196,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 {
     SAStatus *status = [self.fetchedResultsController objectAtIndexPath:indexPath];
     self.selectedStatusID = status.statusID;
-    [self performSegueWithIdentifier:@"TimeLineToStatusSegue" sender:nil];
+    [self performSegueWithIdentifier:@"MentionListToStatusSegue" sender:nil];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -236,18 +212,6 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     if (fabs(scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y) < 1.f) {
         [self updateDataWithRefresh:NO];
     }
-}
-
-#pragma mark - ARSegmentControllerDelegate
-
-- (NSString *)segmentTitle
-{
-    return @"时间线";
-}
-
-- (UIScrollView *)streachScrollView
-{
-    return self.tableView;
 }
 
 @end

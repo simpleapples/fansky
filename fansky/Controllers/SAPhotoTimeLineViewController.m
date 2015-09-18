@@ -9,7 +9,7 @@
 #import "SAPhotoTimeLineViewController.h"
 #import "SADataManager+Status.h"
 #import "SAPhotoTimeLineCell.h"
-#import "SAStatus.h"
+#import "SAStatus+CoreDataProperties.h"
 #import "SAAPIService.h"
 #import "SAPhoto.h"
 #import <URBMediaFocusViewController/URBMediaFocusViewController.h>

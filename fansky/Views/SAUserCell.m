@@ -7,7 +7,7 @@
 //
 
 #import "SAUserCell.h"
-#import "SAUser.h"
+#import "SAUser+CoreDataProperties.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SAUserCell ()

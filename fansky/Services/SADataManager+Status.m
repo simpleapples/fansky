@@ -7,7 +7,7 @@
 //
 
 #import "SADataManager+Status.h"
-#import "SAStatus.h"
+#import "SAStatus+CoreDataProperties.h"
 #import "SADataManager+Photo.h"
 #import "SADataManager+User.h"
 #import "NSString+Utils.h"

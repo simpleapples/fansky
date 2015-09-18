@@ -2,27 +2,15 @@
 //  SAUser.m
 //  fansky
 //
-//  Created by Zzy on 9/16/15.
-//  Copyright (c) 2015 Zzy. All rights reserved.
+//  Created by Zzy on 9/18/15.
+//  Copyright © 2015 Zzy. All rights reserved.
 //
 
-#import "SAUser.h"
+#import "SAUser+CoreDataProperties.h"
 #import "SAStatus.h"
-
 
 @implementation SAUser
 
-@dynamic active;
-@dynamic local;
-@dynamic location;
-@dynamic name;
-@dynamic profileImageURL;
-@dynamic token;
-@dynamic tokenSecret;
-@dynamic userID;
-@dynamic friendsCount;
-@dynamic followersCount;
-@dynamic following;
-@dynamic status;
+// Insert code here to add functionality to your managed object subclass
 
 @end

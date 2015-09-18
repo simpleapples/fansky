@@ -10,7 +10,7 @@
 #import "SATimeLineViewController.h"
 #import "SAUserHeaderView.h"
 #import "SADataManager+User.h"
-#import "SAUser.h"
+#import "SAUser+CoreDataProperties.h"
 #import "SAPhotoTimeLineViewController.h"
 #import <ARSegmentPager/ARSegmentControllerDelegate.h>
 #import <ARSegmentPager/ARSegmentView.h>

@@ -7,9 +7,9 @@
 //
 
 #import "SATimeLineCell.h"
-#import "SAStatus.h"
+#import "SAStatus+CoreDataProperties.h"
 #import "SAPhoto.h"
-#import "SAUser.h"
+#import "SAUser+CoreDataProperties.h"
 #import "NSDate+Utils.h"
 #import "TTTAttributedLabel.h"
 #import <SDWebImage/UIImageView+WebCache.h>

@@ -7,7 +7,7 @@
 //
 
 #import "SAUserHeaderView.h"
-#import "SAUser.h"
+#import "SAUser+CoreDataProperties.h"
 #import "SADataManager+User.h"
 #import "SAAPIService.h"
 #import "SAMessageDisplayUtils.h"

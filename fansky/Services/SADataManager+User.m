@@ -7,7 +7,7 @@
 //
 
 #import "SADataManager+User.h"
-#import "SAUser.h"
+#import "SAUser+CoreDataProperties.h"
 
 @implementation SADataManager (User)
 

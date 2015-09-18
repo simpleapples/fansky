@@ -2,18 +2,14 @@
 //  SAPhoto.m
 //  fansky
 //
-//  Created by Zzy on 9/12/15.
-//  Copyright (c) 2015 Zzy. All rights reserved.
+//  Created by Zzy on 9/18/15.
+//  Copyright © 2015 Zzy. All rights reserved.
 //
 
 #import "SAPhoto.h"
 
-
 @implementation SAPhoto
 
-@dynamic imageURL;
-@dynamic largeURL;
-@dynamic thumbURL;
-@dynamic photoURL;
+// Insert code here to add functionality to your managed object subclass
 
 @end

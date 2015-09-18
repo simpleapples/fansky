@@ -2,24 +2,16 @@
 //  SAStatus.m
 //  fansky
 //
-//  Created by Zzy on 9/17/15.
-//  Copyright (c) 2015 Zzy. All rights reserved.
+//  Created by Zzy on 9/18/15.
+//  Copyright © 2015 Zzy. All rights reserved.
 //
 
-#import "SAStatus.h"
+#import "SAStatus+CoreDataProperties.h"
 #import "SAPhoto.h"
-#import "SAUser.h"
-
+#import "SAUser+CoreDataProperties.h"
 
 @implementation SAStatus
 
-@dynamic createdAt;
-@dynamic source;
-@dynamic statusID;
-@dynamic text;
-@dynamic homeLine;
-@dynamic localUser;
-@dynamic photo;
-@dynamic user;
+// Insert code here to add functionality to your managed object subclass
 
 @end

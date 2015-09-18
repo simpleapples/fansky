@@ -2,8 +2,8 @@
 //  SAStatus.h
 //  fansky
 //
-//  Created by Zzy on 9/17/15.
-//  Copyright (c) 2015 Zzy. All rights reserved.
+//  Created by Zzy on 9/18/15.
+//  Copyright © 2015 Zzy. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -11,15 +11,14 @@
 
 @class SAPhoto, SAUser;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface SAStatus : NSManagedObject
 
-@property (nonatomic, retain) NSDate * createdAt;
-@property (nonatomic, retain) NSString * source;
-@property (nonatomic, retain) NSString * statusID;
-@property (nonatomic, retain) NSString * text;
-@property (nonatomic, retain) NSNumber * homeLine;
-@property (nonatomic, retain) SAUser *localUser;
-@property (nonatomic, retain) SAPhoto *photo;
-@property (nonatomic, retain) SAUser *user;
+// Insert code here to declare functionality of your managed object subclass
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "SAStatus+CoreDataProperties.h"

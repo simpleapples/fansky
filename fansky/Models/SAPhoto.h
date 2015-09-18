@@ -2,19 +2,21 @@
 //  SAPhoto.h
 //  fansky
 //
-//  Created by Zzy on 9/12/15.
-//  Copyright (c) 2015 Zzy. All rights reserved.
+//  Created by Zzy on 9/18/15.
+//  Copyright © 2015 Zzy. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface SAPhoto : NSManagedObject
 
-@property (nonatomic, retain) NSString * imageURL;
-@property (nonatomic, retain) NSString * largeURL;
-@property (nonatomic, retain) NSString * thumbURL;
-@property (nonatomic, retain) NSString * photoURL;
+// Insert code here to declare functionality of your managed object subclass
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "SAPhoto+CoreDataProperties.h"
