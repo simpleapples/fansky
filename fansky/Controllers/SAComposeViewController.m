@@ -109,19 +109,25 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    UIImagePickerControllerSourceType type;
-    if (buttonIndex == 0 && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        type = UIImagePickerControllerSourceTypeCamera;
-    } else if (buttonIndex == 1 && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        type = UIImagePickerControllerSourceTypePhotoLibrary;
-    } else {
-        return;
+    if (actionSheet.tag == 1) {
+        UIImagePickerControllerSourceType type;
+        if (buttonIndex == 0 && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            type = UIImagePickerControllerSourceTypeCamera;
+        } else if (buttonIndex == 1 && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+            type = UIImagePickerControllerSourceTypePhotoLibrary;
+        } else {
+            return;
+        }
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.delegate = self;
+        imagePickerController.allowsEditing = YES;
+        imagePickerController.sourceType = type;
+        [self presentViewController:imagePickerController animated:YES completion:nil];
+    } else if (actionSheet.tag == 2) {
+        if (buttonIndex == 0) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
     }
-    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-    imagePickerController.delegate = self;
-    imagePickerController.allowsEditing = YES;
-    imagePickerController.sourceType = type;
-    [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
@@ -153,6 +159,7 @@
 - (IBAction)cameraButtonTouchUp:(id)sender
 {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍摄照片", @"从相册中选择", nil];
+    actionSheet.tag = 2;
     [actionSheet showInView:self.view];
 }
 
@@ -174,5 +181,15 @@
     }];
 }
 
+- (IBAction)closeButtonTouchUp:(id)sender
+{
+    if (self.contentTextView.text.length) {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"放弃更改" otherButtonTitles: nil];
+        actionSheet.tag = 2;
+        [actionSheet showInView:self.view];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+}
 
 @end

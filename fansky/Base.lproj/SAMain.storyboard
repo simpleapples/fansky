@@ -708,7 +708,7 @@
                                 </constraints>
                                 <state key="normal" image="IconStop"/>
                                 <connections>
-                                    <segue destination="7U6-Dh-kHY" kind="unwind" identifier="ComposeExitToTabBarSegue" unwindAction="exitToTabBar:" id="coM-qO-m85"/>
+                                    <action selector="closeButtonTouchUp:" destination="AEP-as-v9Y" eventType="touchUpInside" id="508-63-Jnh"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IwN-Bh-hWg">
@@ -809,7 +809,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2kJ-fM-wFM" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="7U6-Dh-kHY" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="566" y="2194"/>
         </scene>
