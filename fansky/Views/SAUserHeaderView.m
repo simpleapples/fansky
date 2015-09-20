@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UIButton *modifyInfoButton;
 @property (weak, nonatomic) IBOutlet UIButton *settingButton;
+@property (weak, nonatomic) IBOutlet UIImageView *lockImageView;
 
 @property (strong, nonatomic) SAUser *user;
 @property (nonatomic, getter = isMineInfo) BOOL mineInfo;
@@ -70,6 +71,11 @@
         self.followButton.hidden = NO;
         self.modifyInfoButton.hidden = YES;
         self.settingButton.hidden = YES;
+    }
+    if ([self.user.protected isEqualToNumber:@(YES)]) {
+        self.lockImageView.hidden = NO;
+    } else {
+        self.lockImageView.hidden = YES;
     }
     if ([self.user.following isEqualToNumber:@(NO)]) {
         [self.followButton setTitle:@"+关注" forState:UIControlStateNormal];

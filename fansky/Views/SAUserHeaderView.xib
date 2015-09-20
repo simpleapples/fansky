@@ -26,7 +26,7 @@
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knh-Eh-eIb">
-                    <rect key="frame" x="10" y="105" width="580" height="24"/>
+                    <rect key="frame" x="10" y="105" width="53" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="mAE-0p-AJL"/>
                     </constraints>
@@ -36,23 +36,6 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="mAE-0p-AJL"/>
-                        </mask>
-                    </variation>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jo-yX-kz8">
-                    <rect key="frame" x="10" y="129" width="580" height="17"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="100" id="IBg-wZ-rbP"/>
-                        <constraint firstAttribute="width" constant="100" id="OeX-t6-HXc"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                    <size key="shadowOffset" width="0.0" height="1"/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="IBg-wZ-rbP"/>
-                            <exclude reference="OeX-t6-HXc"/>
                         </mask>
                     </variation>
                 </label>
@@ -78,7 +61,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NWz-1S-X5Q">
-                    <rect key="frame" x="10" y="161" width="580" height="17"/>
+                    <rect key="frame" x="10" y="161" width="36" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -114,6 +97,30 @@
                         <action selector="modifyInfoButtonTouchUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="yMF-Cf-r1r"/>
                     </connections>
                 </button>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconLock" translatesAutoresizingMaskIntoConstraints="NO" id="oBX-MO-GVE">
+                    <rect key="frame" x="68" y="107" width="18" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18" id="FdL-JG-XzJ"/>
+                        <constraint firstAttribute="width" constant="18" id="Jua-VV-dGZ"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jo-yX-kz8">
+                    <rect key="frame" x="10" y="129" width="36" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="IBg-wZ-rbP"/>
+                        <constraint firstAttribute="width" constant="100" id="OeX-t6-HXc"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                    <size key="shadowOffset" width="0.0" height="1"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="IBg-wZ-rbP"/>
+                            <exclude reference="OeX-t6-HXc"/>
+                        </mask>
+                    </variation>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -123,6 +130,7 @@
                 <constraint firstItem="tKW-4T-klq" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-40" id="F5I-el-YkJ"/>
                 <constraint firstItem="TGB-kn-MPY" firstAttribute="leading" secondItem="Tdy-SX-wTB" secondAttribute="trailing" constant="10" id="JdW-Qm-G0L"/>
                 <constraint firstItem="8jo-yX-kz8" firstAttribute="leading" secondItem="knh-Eh-eIb" secondAttribute="leading" id="Mf5-Bd-56N"/>
+                <constraint firstItem="oBX-MO-GVE" firstAttribute="leading" secondItem="knh-Eh-eIb" secondAttribute="trailing" constant="5" id="O5u-SA-KGj"/>
                 <constraint firstItem="tKW-4T-klq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="ZXZ-NU-jli"/>
                 <constraint firstItem="TGB-kn-MPY" firstAttribute="top" secondItem="Tdy-SX-wTB" secondAttribute="top" id="a8u-7H-gTJ"/>
                 <constraint firstItem="8jo-yX-kz8" firstAttribute="top" secondItem="knh-Eh-eIb" secondAttribute="bottom" id="dJu-ve-pWn"/>
@@ -136,27 +144,33 @@
                 <constraint firstAttribute="trailing" secondItem="TGB-kn-MPY" secondAttribute="trailing" constant="10" id="saW-77-LEB"/>
                 <constraint firstItem="dCq-wB-nbf" firstAttribute="top" secondItem="tKW-4T-klq" secondAttribute="top" id="uSo-OK-mmO"/>
                 <constraint firstItem="dCq-wB-nbf" firstAttribute="trailing" secondItem="knh-Eh-eIb" secondAttribute="trailing" id="vrP-7B-AcV"/>
+                <constraint firstItem="oBX-MO-GVE" firstAttribute="bottom" secondItem="knh-Eh-eIb" secondAttribute="bottom" constant="-4" id="xUl-cN-MYb"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="ZXZ-NU-jli"/>
+                    <exclude reference="pSt-i0-dqr"/>
+                    <exclude reference="jVF-3j-g6K"/>
+                    <exclude reference="vrP-7B-AcV"/>
                 </mask>
             </variation>
             <connections>
                 <outlet property="avatarImageView" destination="tKW-4T-klq" id="CXk-H3-4qy"/>
                 <outlet property="descLabel" destination="NWz-1S-X5Q" id="fWE-RO-mfc"/>
                 <outlet property="followButton" destination="dCq-wB-nbf" id="ezn-os-9AA"/>
+                <outlet property="lockImageView" destination="oBX-MO-GVE" id="Wfb-cB-3Tc"/>
                 <outlet property="modifyInfoButton" destination="TGB-kn-MPY" id="t0P-1s-0xT"/>
                 <outlet property="nameLabel" destination="knh-Eh-eIb" id="Srz-b8-5qv"/>
                 <outlet property="settingButton" destination="Tdy-SX-wTB" id="ENZ-dQ-fm9"/>
                 <outlet property="userIDLabel" destination="8jo-yX-kz8" id="JT4-Bh-EUW"/>
             </connections>
-            <point key="canvasLocation" x="319" y="23.5"/>
+            <point key="canvasLocation" x="319" y="23"/>
         </view>
     </objects>
     <resources>
+        <image name="IconLock" width="22" height="22"/>
         <image name="IconSetting" width="22" height="22"/>
     </resources>
 </document>

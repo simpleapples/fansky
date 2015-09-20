@@ -26,6 +26,7 @@
         <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="profileImageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="protected" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="tokenSecret" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
@@ -34,6 +35,6 @@
     <elements>
         <element name="SAPhoto" positionX="-36" positionY="81" width="128" height="105"/>
         <element name="SAStatus" positionX="-63" positionY="45" width="128" height="180"/>
-        <element name="SAUser" positionX="-63" positionY="-18" width="128" height="225"/>
+        <element name="SAUser" positionX="-63" positionY="-18" width="128" height="240"/>
     </elements>
 </model>

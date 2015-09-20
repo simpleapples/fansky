@@ -2,7 +2,7 @@
 //  SAUser+CoreDataProperties.m
 //  fansky
 //
-//  Created by Zzy on 9/18/15.
+//  Created by Zzy on 9/20/15.
 //  Copyright © 2015 Zzy. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -24,6 +24,7 @@
 @dynamic token;
 @dynamic tokenSecret;
 @dynamic userID;
+@dynamic protected;
 @dynamic status;
 
 @end

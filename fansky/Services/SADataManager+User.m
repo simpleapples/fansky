@@ -33,10 +33,11 @@ static NSString *const ENTITY_NAME = @"SAUser";
 
 - (SAUser *)insertOrUpdateUserWithObject:(id)userObject local:(BOOL)local active:(BOOL)active token:(NSString *)token secret:(NSString *)secret
 {
-    NSString *userID = (NSString *)[userObject objectForKey:@"id"];
-    NSString *name = (NSString *)[userObject objectForKey:@"name"];
-    NSString *location = (NSString *)[userObject objectForKey:@"location"];
-    NSString *profileImageURL = (NSString *)[userObject objectForKey:@"profile_image_url"];
+    NSString *userID = [userObject objectForKey:@"id"];
+    NSString *name = [userObject objectForKey:@"name"];
+    NSString *location = [userObject objectForKey:@"location"];
+    NSNumber *protected = [userObject objectForKey:@"protected"];
+    NSString *profileImageURL = [userObject objectForKey:@"profile_image_url"];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
     fetchRequest.fetchLimit = 1;
@@ -52,6 +53,7 @@ static NSString *const ENTITY_NAME = @"SAUser";
             existUser.name = name;
             existUser.location = location;
             existUser.profileImageURL = profileImageURL;
+            existUser.protected = protected;
             if (local) {
                 existUser.local = @(local);
                 existUser.active = @(active);
@@ -66,6 +68,7 @@ static NSString *const ENTITY_NAME = @"SAUser";
                 user.name = name;
                 user.location = location;
                 user.profileImageURL = profileImageURL;
+                user.protected = protected;
                 if (local) {
                     user.local = @(local);
                     user.active = @(active);
@@ -88,6 +91,7 @@ static NSString *const ENTITY_NAME = @"SAUser";
     NSNumber *following = [userObject objectForKey:@"following"];
     NSNumber *friendsCount = [userObject objectForKey:@"friends_count"];
     NSNumber *followersCount = [userObject objectForKey:@"followers_count"];
+    NSNumber *protected = [userObject objectForKey:@"protected"];
 
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
     fetchRequest.fetchLimit = 1;
@@ -105,6 +109,7 @@ static NSString *const ENTITY_NAME = @"SAUser";
             existUser.following = following;
             existUser.friendsCount = friendsCount;
             existUser.followersCount = followersCount;
+            existUser.protected = protected;
             resultUser = existUser;
         } else {
             [self.managedObjectContext performBlockAndWait:^{
@@ -116,6 +121,7 @@ static NSString *const ENTITY_NAME = @"SAUser";
                 user.following = following;
                 user.friendsCount = friendsCount;
                 user.followersCount = followersCount;
+                user.protected = protected;
                 resultUser = user;
             }];
         }
