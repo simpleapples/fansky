@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="345"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6FZ-IE-DTy" id="7hb-tO-ueK">
-                <rect key="frame" x="0.0" y="0.0" width="600" height="344.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="600" height="344"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EH6-m5-hgu">
@@ -29,8 +29,8 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dRH-S7-m6F">
-                        <rect key="frame" x="64" y="71.5" width="526" height="263"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dRH-S7-m6F">
+                        <rect key="frame" x="64" y="72" width="526" height="263"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="dRH-S7-m6F" secondAttribute="height" multiplier="2:1" id="Eqi-r5-nMf"/>
@@ -78,8 +78,8 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ta-BO-lFm" customClass="TTTAttributedLabel">
-                        <rect key="frame" x="64" y="40" width="526" height="21.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ta-BO-lFm" customClass="TTTAttributedLabel">
+                        <rect key="frame" x="64" y="40" width="526" height="22"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -92,8 +92,8 @@
                             <outlet property="delegate" destination="-1" id="Q1r-I0-2Bx"/>
                         </connections>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijl-FY-P4u">
-                        <rect key="frame" x="64" y="71.5" width="526" height="263"/>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijl-FY-P4u">
+                        <rect key="frame" x="64" y="72" width="526" height="263"/>
                         <connections>
                             <action selector="contentImageViewTouchUp:" destination="6FZ-IE-DTy" eventType="touchUpInside" id="V3F-Aa-VLi"/>
                         </connections>

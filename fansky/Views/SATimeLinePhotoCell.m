@@ -71,7 +71,10 @@
 
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
 {
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(timeLinePhotoCell:contentURLTouchUp:)]) {
+        self.selectedURL = url;
+        [self.delegate timeLinePhotoCell:self contentURLTouchUp:nil];
+    }
 }
 
 #pragma mark - EventHandler

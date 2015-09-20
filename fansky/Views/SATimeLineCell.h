@@ -14,6 +14,7 @@
 @protocol SATimeLineCellDelegate <NSObject>
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell avatarImageViewTouchUp:(id)sender;
+- (void)timeLineCell:(SATimeLineCell *)timeLineCell contentURLTouchUp:(id)sender;
 
 @end
 
@@ -21,6 +22,7 @@
 
 @property (weak, nonatomic) id<SATimeLineCellDelegate> delegate;
 @property (weak, nonatomic) SAStatus *status;
+@property (strong, nonatomic) NSURL *selectedURL;
 
 - (void)configWithStatus:(SAStatus *)status;
 - (void)loadAllImages;

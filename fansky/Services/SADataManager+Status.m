@@ -29,6 +29,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     NSString *source = [object objectForKey:@"source"];
     NSString *text = [object objectForKey:@"text"];
     NSString *createdAtString = [object objectForKey:@"created_at"];
+    NSString *repostStatusID = [object objectForKey:@"repost_status_id"];
     NSDate *createdAt = [createdAtString dateWithDefaultFormat];
     
     SAPhoto *photo = [[SADataManager sharedManager] insertPhotoWithObject:[object objectForKey:@"photo"]];
@@ -54,6 +55,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
                 status.text = text;
                 status.photo = photo;
                 status.user = user;
+                status.repostStatusID = repostStatusID;
                 status.createdAt = createdAt;
                 status.localUser = localUser;
                 status.type = @(type | status.type.integerValue);

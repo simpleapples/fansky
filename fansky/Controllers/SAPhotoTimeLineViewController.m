@@ -62,7 +62,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@ AND photo.imageURL != nil", self.userID];
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@ AND photo.imageURL != nil AND repostStatusID = nil", self.userID];
         fetchRequest.sortDescriptors = sortArray;
         fetchRequest.returnsObjectsAsFaults = NO;
         fetchRequest.fetchBatchSize = 6;
