@@ -109,6 +109,9 @@
 
 - (IBAction)settingButtonTouchUp:(id)sender
 {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(userHeaderView:settingButtonTouchUp:)]) {
+        [self.delegate userHeaderView:self settingButtonTouchUp:sender];
+    }
 }
 
 @end

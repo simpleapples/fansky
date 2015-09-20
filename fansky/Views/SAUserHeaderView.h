@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class SAUserHeaderView;
+
+@protocol SAUserHeaderViewDelegate <NSObject>
+
+- (void)userHeaderView:(SAUserHeaderView *)userHeaderView settingButtonTouchUp:(id)sender;
+
+@end
+
 @interface SAUserHeaderView : UIView
+
+@property (weak, nonatomic) id<SAUserHeaderViewDelegate> delegate;
 
 - (void)configWithUserID:(NSString *)userID;
 

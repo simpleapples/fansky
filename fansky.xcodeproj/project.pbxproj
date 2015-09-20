@@ -35,6 +35,7 @@
 		5AD70F191B316B05009C5B84 /* SATimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70F181B316B05009C5B84 /* SATimeLineViewController.m */; };
 		5AD70F201B31716A009C5B84 /* SAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70F1F1B31716A009C5B84 /* SAConstants.m */; };
 		5AE38ADE1BA2E70F0022A35A /* SAUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE38ADD1BA2E70F0022A35A /* SAUserCell.m */; };
+		5AE98AA81BAEB0A900B7F105 /* SASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AA71BAEB0A900B7F105 /* SASettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		5AED4B291BA672D100EDBF47 /* SADataManager+Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B281BA672D100EDBF47 /* SADataManager+Photo.m */; };
 		5AED4B2D1BA6C16300EDBF47 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B2C1BA6C16300EDBF47 /* NSString+Utils.m */; };
 		5AED4B301BA6D41D00EDBF47 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B2F1BA6D41D00EDBF47 /* NSDate+Utils.m */; };
@@ -116,6 +117,8 @@
 		5AD70F211B3171FA009C5B84 /* SAConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SAConstants.h; sourceTree = "<group>"; };
 		5AE38ADC1BA2E70F0022A35A /* SAUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAUserCell.h; sourceTree = "<group>"; };
 		5AE38ADD1BA2E70F0022A35A /* SAUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUserCell.m; sourceTree = "<group>"; };
+		5AE98AA61BAEB0A900B7F105 /* SASettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASettingsViewController.h; sourceTree = "<group>"; };
+		5AE98AA71BAEB0A900B7F105 /* SASettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASettingsViewController.m; sourceTree = "<group>"; };
 		5AED4B271BA672D100EDBF47 /* SADataManager+Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SADataManager+Photo.h"; sourceTree = "<group>"; };
 		5AED4B281BA672D100EDBF47 /* SADataManager+Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SADataManager+Photo.m"; sourceTree = "<group>"; };
 		5AED4B2B1BA6C16300EDBF47 /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
@@ -297,6 +300,8 @@
 				5A1811A91BABE288004B6C54 /* SAPrivateMessageViewController.m */,
 				5A1811AB1BABED3D004B6C54 /* SAMentionListViewController.h */,
 				5A1811AC1BABED3D004B6C54 /* SAMentionListViewController.m */,
+				5AE98AA61BAEB0A900B7F105 /* SASettingsViewController.h */,
+				5AE98AA71BAEB0A900B7F105 /* SASettingsViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -511,6 +516,7 @@
 				5A1811AA1BABE288004B6C54 /* SAPrivateMessageViewController.m in Sources */,
 				5A7E1F201BA9CD67000E7E62 /* SAPhotoTimeLineViewController.m in Sources */,
 				5AED4B711BA8521B00EDBF47 /* SAUserHeaderView.m in Sources */,
+				5AE98AA81BAEB0A900B7F105 /* SASettingsViewController.m in Sources */,
 				5A1811C51BABF681004B6C54 /* SAUser.m in Sources */,
 				5AF5B1CD1BA1813A00C7A18A /* SASplashViewController.m in Sources */,
 				5A1811CB1BAC1C40004B6C54 /* SATimeLinePhotoCell.m in Sources */,

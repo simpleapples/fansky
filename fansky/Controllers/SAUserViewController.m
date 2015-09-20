@@ -15,7 +15,7 @@
 #import <ARSegmentPager/ARSegmentControllerDelegate.h>
 #import <ARSegmentPager/ARSegmentView.h>
 
-@interface SAUserViewController ()
+@interface SAUserViewController () <SAUserHeaderViewDelegate>
 
 @end
 
@@ -58,6 +58,7 @@
 - (UIView<ARSegmentPageControllerHeaderProtocol> *)customHeaderView
 {
     SAUserHeaderView *userHeaderView = [[[NSBundle mainBundle] loadNibNamed:@"SAUserHeaderView" owner:nil options:nil] lastObject];
+    userHeaderView.delegate = self;
     [userHeaderView configWithUserID:self.userID];
     return userHeaderView;
 }
@@ -65,6 +66,13 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - SAUserHeaderViewDelegate
+
+- (void)userHeaderView:(SAUserHeaderView *)userHeaderView settingButtonTouchUp:(id)sender
+{
+    [self performSegueWithIdentifier:@"UserToSettingsNavigationSegue" sender:nil];
 }
 
 @end
