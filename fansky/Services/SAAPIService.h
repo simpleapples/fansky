@@ -40,8 +40,8 @@
 
 #pragma mark - Message
 
-- (void)messageInboxWithSinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
+- (void)conversationListWithCount:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
 
-- (void)privateMessageConversationListWithCount:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
+- (void)conversationWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
 
 @end

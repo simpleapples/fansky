@@ -10,4 +10,6 @@
 
 @interface SAMessageViewController : JSQMessagesViewController
 
+@property (copy, nonatomic) NSString *userID;
+
 @end

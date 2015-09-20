@@ -1,31 +1,32 @@
 //
-//  SAMessageListViewController.m
+//  SAConversationViewController.m
 //  fansky
 //
 //  Created by Zzy on 9/20/15.
 //  Copyright © 2015 Zzy. All rights reserved.
 //
 
-#import "SAMessageListViewController.h"
-#import "SADataManager+Message.h"
-#import "SAMessage+CoreDataProperties.h"
+#import "SAConversationViewController.h"
 #import "SAMessageDisplayUtils.h"
 #import "SADataManager+User.h"
 #import "SAUser+CoreDataProperties.h"
 #import "SAAPIService.h"
-#import "SAMessageCell.h"
+#import "SADataManager+Conversation.h"
+#import "SAConversationCell.h"
+#import "SAUser+CoreDataProperties.h"
 #import "SAMessageViewController.h"
+#import "SAConversation+CoreDataProperties.h"
 
-@interface SAMessageListViewController () <NSFetchedResultsControllerDelegate>
+@interface SAConversationViewController () <NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (copy, nonatomic) NSString *selectedUserID;
 
 @end
 
-@implementation SAMessageListViewController
+@implementation SAConversationViewController
 
-static NSString *const ENTITY_NAME = @"SAMessage";
+static NSString *const ENTITY_NAME = @"SAConversation";
 
 - (void)viewDidLoad
 {
@@ -45,17 +46,10 @@ static NSString *const ENTITY_NAME = @"SAMessage";
 
 - (void)updateDataWithRefresh:(BOOL)refresh
 {
-    NSString *maxID = nil;
-    if (!refresh) {
-        SAMessage *lastMessage = self.fetchedResultsController.fetchedObjects.lastObject;
-        if (lastMessage) {
-            maxID = lastMessage.messageID;
-        }
-    }
     [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];
     
-    [[SAAPIService sharedSingleton] messageInboxWithSinceID:nil maxID:maxID count:20 success:^(id data) {
-        [[SADataManager sharedManager] insertMessageWithObjects:data];
+    [[SAAPIService sharedSingleton] conversationListWithCount:60 success:^(id data) {
+        [[SADataManager sharedManager] insertConversationWithObjects:data];
         [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
         [self.refreshControl endRefreshing];
     } failure:^(NSString *error) {
@@ -83,7 +77,7 @@ static NSString *const ENTITY_NAME = @"SAMessage";
     if (!_fetchedResultsController) {
         SADataManager *manager = [SADataManager sharedManager];
         
-        NSSortDescriptor *createdAtSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
+        NSSortDescriptor *createdAtSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"otherUserID" ascending:NO];
         NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
         
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
@@ -94,7 +88,7 @@ static NSString *const ENTITY_NAME = @"SAMessage";
         fetchRequest.returnsObjectsAsFaults = NO;
         fetchRequest.fetchBatchSize = 6;
         
-        NSString *cacheName = [NSString stringWithFormat:@"user-%@-message", currentUser.userID];
+        NSString *cacheName = [NSString stringWithFormat:@"user-%@-conversation", currentUser.userID];
         _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:manager.managedObjectContext sectionNameKeyPath:nil cacheName:cacheName];
         _fetchedResultsController.delegate = self;
         
@@ -107,6 +101,7 @@ static NSString *const ENTITY_NAME = @"SAMessage";
 {
     if ([segue.destinationViewController isKindOfClass:[SAMessageViewController class]]) {
         SAMessageViewController *messageViewController = (SAMessageViewController *)segue.destinationViewController;
+        messageViewController.userID = self.selectedUserID;
     }
 }
 
@@ -150,27 +145,32 @@ static NSString *const ENTITY_NAME = @"SAMessage";
     return numberOfItems;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *const cellName = @"SAMessageCell";
-    SAMessage *message = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    SAMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
-    [cell configWithMessage:message];
+    static NSString *const cellName = @"SAConversationCell";
+    SAConversation *conversation = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    SAConversationCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
+    [cell configWithMessage:conversation];
 //    cell.delegate = self;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SAMessage *message = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    self.selectedUserID = message.recipient.userID;
-    [self performSegueWithIdentifier:@"MessageListToMessageSegue" sender:nil];
+    SAConversation *conversation = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    self.selectedUserID = conversation.otherUserID;
+    [self performSegueWithIdentifier:@"ConversationToMessageSegue" sender:nil];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([cell isKindOfClass:[SAMessageCell class]]) {
-        SAMessageCell *messageCell = (SAMessageCell *)cell;
-        [messageCell loadImage];
+    if ([cell isKindOfClass:[SAConversationCell class]]) {
+        SAConversationCell *conversationCell = (SAConversationCell *)cell;
+        [conversationCell loadImage];
     }
 }
 

@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 
 @class SAMessage;
+@class SAUser;
 
 NS_ASSUME_NONNULL_BEGIN
 

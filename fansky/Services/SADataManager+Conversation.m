@@ -30,7 +30,7 @@ static NSString *const ENTITY_NAME = @"SAConversation";
     NSNumber *count = [object objectForKey:@"msg_num"];
     NSNumber *newConversation = [object objectForKey:@"new_conv"];
     
-    SAMessage *dm = [[SADataManager sharedManager] insertMessageWithObject:[object objectForKey:@"dm"] localUser:localUser];
+    SAMessage *message = [[SADataManager sharedManager] insertMessageWithObject:[object objectForKey:@"dm"] localUser:localUser];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
     fetchRequest.fetchLimit = 1;
@@ -45,7 +45,8 @@ static NSString *const ENTITY_NAME = @"SAConversation";
             existConversation.otherUserID = otherUserID;
             existConversation.count = count;
             existConversation.newConversation = newConversation;
-            existConversation.dm = dm;
+            existConversation.message = message;
+            existConversation.localUser = localUser;
             resultConversation = existConversation;
         } else {
             [self.managedObjectContext performBlockAndWait:^{
@@ -53,7 +54,8 @@ static NSString *const ENTITY_NAME = @"SAConversation";
                 conversation.otherUserID = otherUserID;
                 conversation.count = count;
                 conversation.newConversation = newConversation;
-                conversation.dm = dm;
+                conversation.message = message;
+                conversation.localUser = localUser;
                 resultConversation = conversation;
             }];
         }

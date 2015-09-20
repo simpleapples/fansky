@@ -8,6 +8,7 @@
 
 #import "SAConversation.h"
 #import "SAMessage.h"
+#import "SAUser.h"
 
 @implementation SAConversation
 

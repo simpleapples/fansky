@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *count;
 @property (nullable, nonatomic, retain) NSNumber *newConversation;
 @property (nullable, nonatomic, retain) SAMessage *message;
+@property (nullable, nonatomic, retain) SAUser *localUser;
 
 @end
 

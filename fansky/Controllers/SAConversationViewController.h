@@ -1,5 +1,5 @@
 //
-//  SAMessageListViewController.h
+//  SAConversationViewController.h
 //  fansky
 //
 //  Created by Zzy on 9/20/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SAMessageListViewController : UITableViewController
+@interface SAConversationViewController : UITableViewController
 
 @end

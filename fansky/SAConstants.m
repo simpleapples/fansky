@@ -33,6 +33,7 @@ NSString *const SA_API_USER_SHOW_PATH = @"/users/show.json";
 NSString *const SA_API_FOLLOW_USER_PATH = @"/friendships/create.json";
 NSString *const SA_API_UNFOLLOW_USER_PATH = @"/friendships/destroy.json";
 
-NSString *const SA_API_PRIVATE_MESSAGE_CONVERSATION_LIST_PATH = @"/privete_messages/conversation_list.json";
+NSString *const SA_API_CONVERSATION_LIST_PATH = @"/direct_messages/conversation_list.json";
+NSString *const SA_API_CONVERSATION_PATH = @"/direct_messages/conversation.json";
 NSString *const SA_API_MESSAGE_INBOX_PATH = @"/direct_messages/inbox.json";
 

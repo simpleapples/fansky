@@ -17,5 +17,6 @@
 @dynamic count;
 @dynamic newConversation;
 @dynamic message;
+@dynamic localUser;
 
 @end

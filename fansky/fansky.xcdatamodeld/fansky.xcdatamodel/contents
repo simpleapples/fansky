@@ -4,6 +4,7 @@
         <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="newConversation" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="otherUserID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="localUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAUser" syncable="YES"/>
         <relationship name="message" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAMessage" syncable="YES"/>
     </entity>
     <entity name="SAMessage" representedClassName="SAMessage" syncable="YES">
@@ -51,6 +52,6 @@
         <element name="SAStatus" positionX="-63" positionY="45" width="128" height="180"/>
         <element name="SAUser" positionX="-63" positionY="-18" width="128" height="240"/>
         <element name="SAMessage" positionX="-45" positionY="90" width="128" height="135"/>
-        <element name="SAConversation" positionX="-45" positionY="99" width="128" height="105"/>
+        <element name="SAConversation" positionX="-45" positionY="99" width="128" height="120"/>
     </elements>
 </model>
