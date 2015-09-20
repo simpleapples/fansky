@@ -36,8 +36,12 @@
 
 - (void)deleteStatusWithID:(NSString *)statusID success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
 
-- (void)privateMessageConversationListWithCount:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
-
 - (void)mentionStatusWithSinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
+
+#pragma mark - Message
+
+- (void)messageInboxWithSinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
+
+- (void)privateMessageConversationListWithCount:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
 
 @end

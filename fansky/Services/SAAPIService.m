@@ -145,7 +145,7 @@
 
 - (void)userPhotoTimeLineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *error))failure
 {
-    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userID, @"id", @(count), @"count", nil];
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userID, @"id", @(count), @"count", @"lite", @"mode",  nil];
     if (sinceID) {
         [mutableDictionary setObject:sinceID forKey:@"since_id"];
     }
@@ -160,14 +160,9 @@
     [self requestAPIWithPath:SA_API_DELETE_STATUS_PATH method:@"POST" parametersDictionary:@{@"id": statusID, @"mode": @"lite"} success:success failure:failure];
 }
 
-- (void)privateMessageConversationListWithCount:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *))failure
-{
-    [self requestAPIWithPath:SA_API_DELETE_STATUS_PATH method:@"POST" parametersDictionary:@{@"count": @(count), @"mode": @"lite"} success:success failure:failure];
-}
-
 - (void)mentionStatusWithSinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *))failure
 {
-    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@(count), @"count", nil];
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@(count), @"count", @"lite", @"mode", nil];
     if (sinceID) {
         [mutableDictionary setObject:sinceID forKey:@"since_id"];
     }
@@ -175,6 +170,26 @@
         [mutableDictionary setObject:maxID forKey:@"max_id"];
     }
     [self requestAPIWithPath:SA_API_MENTION_STATUS_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
+}
+
+
+#pragma mark - Message
+
+- (void)messageInboxWithSinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@(count), @"count", @"lite", @"mode", nil];
+    if (sinceID) {
+        [mutableDictionary setObject:sinceID forKey:@"since_id"];
+    }
+    if (maxID) {
+        [mutableDictionary setObject:maxID forKey:@"max_id"];
+    }
+    [self requestAPIWithPath:SA_API_MESSAGE_INBOX_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
+}
+
+- (void)privateMessageConversationListWithCount:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    [self requestAPIWithPath:SA_API_DELETE_STATUS_PATH method:@"POST" parametersDictionary:@{@"count": @(count), @"mode": @"lite"} success:success failure:failure];
 }
 
 #pragma mark - Base

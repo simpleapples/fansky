@@ -129,6 +129,17 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     [self performSegueWithIdentifier:@"MentionListToUserSegue" sender:nil];
 }
 
+- (void)timeLineCell:(SATimeLineCell *)timeLineCell contentURLTouchUp:(id)sender
+{
+    NSURL *url = timeLineCell.selectedURL;
+    if ([url.host isEqualToString:@"fanfou.com"]) {
+        self.selectedUserID = url.lastPathComponent;
+        [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
+    } else if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
+        [[UIApplication sharedApplication] openURL:url];
+    }
+}
+
 #pragma mark - SATimeLinePhotoCellDelegate
 
 - (void)timeLinePhotoCell:(SATimeLinePhotoCell *)timeLineCell avatarImageViewTouchUp:(id)sender
@@ -144,6 +155,17 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     }
     NSURL *imageURL = [NSURL URLWithString:timeLineCell.status.photo.largeURL];
     [self.imageViewController showImageFromURL:imageURL fromView:self.view];
+}
+
+- (void)timeLinePhotoCell:(SATimeLinePhotoCell *)timeLineCell contentURLTouchUp:(id)sender
+{
+    NSURL *url = timeLineCell.selectedURL;
+    if ([url.host isEqualToString:@"fanfou.com"]) {
+        self.selectedUserID = url.lastPathComponent;
+        [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
+    } else if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate

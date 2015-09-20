@@ -36,6 +36,15 @@
 		5AD70F201B31716A009C5B84 /* SAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70F1F1B31716A009C5B84 /* SAConstants.m */; };
 		5AE38ADE1BA2E70F0022A35A /* SAUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE38ADD1BA2E70F0022A35A /* SAUserCell.m */; };
 		5AE98AA81BAEB0A900B7F105 /* SASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AA71BAEB0A900B7F105 /* SASettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		5AE98AAB1BAECDAA00B7F105 /* SADataManager+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AAA1BAECDAA00B7F105 /* SADataManager+Message.m */; settings = {ASSET_TAGS = (); }; };
+		5AE98AB01BAECE7E00B7F105 /* SAMessage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AAD1BAECE7E00B7F105 /* SAMessage+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		5AE98AB11BAECE7E00B7F105 /* SAMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AAF1BAECE7E00B7F105 /* SAMessage.m */; settings = {ASSET_TAGS = (); }; };
+		5AE98AB41BAED16300B7F105 /* SAMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AB31BAED16300B7F105 /* SAMessageListViewController.m */; settings = {ASSET_TAGS = (); }; };
+		5AE98AB71BAED1B400B7F105 /* SAMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AB61BAED1B400B7F105 /* SAMessageCell.m */; settings = {ASSET_TAGS = (); }; };
+		5AE98ABA1BAEDF0000B7F105 /* SAMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AB91BAEDF0000B7F105 /* SAMessageViewController.m */; settings = {ASSET_TAGS = (); }; };
+		5AE98ABF1BAEE3F000B7F105 /* SAConversation+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98ABC1BAEE3F000B7F105 /* SAConversation+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		5AE98AC01BAEE3F000B7F105 /* SAConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98ABE1BAEE3F000B7F105 /* SAConversation.m */; settings = {ASSET_TAGS = (); }; };
+		5AE98AC31BAEE43300B7F105 /* SADataManager+Conversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AC21BAEE43300B7F105 /* SADataManager+Conversation.m */; settings = {ASSET_TAGS = (); }; };
 		5AED4B291BA672D100EDBF47 /* SADataManager+Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B281BA672D100EDBF47 /* SADataManager+Photo.m */; };
 		5AED4B2D1BA6C16300EDBF47 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B2C1BA6C16300EDBF47 /* NSString+Utils.m */; };
 		5AED4B301BA6D41D00EDBF47 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B2F1BA6D41D00EDBF47 /* NSDate+Utils.m */; };
@@ -119,6 +128,24 @@
 		5AE38ADD1BA2E70F0022A35A /* SAUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUserCell.m; sourceTree = "<group>"; };
 		5AE98AA61BAEB0A900B7F105 /* SASettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASettingsViewController.h; sourceTree = "<group>"; };
 		5AE98AA71BAEB0A900B7F105 /* SASettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASettingsViewController.m; sourceTree = "<group>"; };
+		5AE98AA91BAECDAA00B7F105 /* SADataManager+Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SADataManager+Message.h"; sourceTree = "<group>"; };
+		5AE98AAA1BAECDAA00B7F105 /* SADataManager+Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SADataManager+Message.m"; sourceTree = "<group>"; };
+		5AE98AAC1BAECE7E00B7F105 /* SAMessage+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SAMessage+CoreDataProperties.h"; sourceTree = "<group>"; };
+		5AE98AAD1BAECE7E00B7F105 /* SAMessage+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAMessage+CoreDataProperties.m"; sourceTree = "<group>"; };
+		5AE98AAE1BAECE7E00B7F105 /* SAMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessage.h; sourceTree = "<group>"; };
+		5AE98AAF1BAECE7E00B7F105 /* SAMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessage.m; sourceTree = "<group>"; };
+		5AE98AB21BAED16300B7F105 /* SAMessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessageListViewController.h; sourceTree = "<group>"; };
+		5AE98AB31BAED16300B7F105 /* SAMessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageListViewController.m; sourceTree = "<group>"; };
+		5AE98AB51BAED1B400B7F105 /* SAMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessageCell.h; sourceTree = "<group>"; };
+		5AE98AB61BAED1B400B7F105 /* SAMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageCell.m; sourceTree = "<group>"; };
+		5AE98AB81BAEDF0000B7F105 /* SAMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessageViewController.h; sourceTree = "<group>"; };
+		5AE98AB91BAEDF0000B7F105 /* SAMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageViewController.m; sourceTree = "<group>"; };
+		5AE98ABB1BAEE3F000B7F105 /* SAConversation+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SAConversation+CoreDataProperties.h"; sourceTree = "<group>"; };
+		5AE98ABC1BAEE3F000B7F105 /* SAConversation+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAConversation+CoreDataProperties.m"; sourceTree = "<group>"; };
+		5AE98ABD1BAEE3F000B7F105 /* SAConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAConversation.h; sourceTree = "<group>"; };
+		5AE98ABE1BAEE3F000B7F105 /* SAConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAConversation.m; sourceTree = "<group>"; };
+		5AE98AC11BAEE43300B7F105 /* SADataManager+Conversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SADataManager+Conversation.h"; sourceTree = "<group>"; };
+		5AE98AC21BAEE43300B7F105 /* SADataManager+Conversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SADataManager+Conversation.m"; sourceTree = "<group>"; };
 		5AED4B271BA672D100EDBF47 /* SADataManager+Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SADataManager+Photo.h"; sourceTree = "<group>"; };
 		5AED4B281BA672D100EDBF47 /* SADataManager+Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SADataManager+Photo.m"; sourceTree = "<group>"; };
 		5AED4B2B1BA6C16300EDBF47 /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
@@ -185,6 +212,8 @@
 				5A1811C81BAC1C40004B6C54 /* SATimeLinePhotoCell.h */,
 				5A1811C91BAC1C40004B6C54 /* SATimeLinePhotoCell.m */,
 				5A1811CA1BAC1C40004B6C54 /* SATimeLinePhotoCell.xib */,
+				5AE98AB51BAED1B400B7F105 /* SAMessageCell.h */,
+				5AE98AB61BAED1B400B7F105 /* SAMessageCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,6 +221,14 @@
 		5A2365BE1B39619100E1E73C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5AE98ABB1BAEE3F000B7F105 /* SAConversation+CoreDataProperties.h */,
+				5AE98ABC1BAEE3F000B7F105 /* SAConversation+CoreDataProperties.m */,
+				5AE98ABD1BAEE3F000B7F105 /* SAConversation.h */,
+				5AE98ABE1BAEE3F000B7F105 /* SAConversation.m */,
+				5AE98AAC1BAECE7E00B7F105 /* SAMessage+CoreDataProperties.h */,
+				5AE98AAD1BAECE7E00B7F105 /* SAMessage+CoreDataProperties.m */,
+				5AE98AAE1BAECE7E00B7F105 /* SAMessage.h */,
+				5AE98AAF1BAECE7E00B7F105 /* SAMessage.m */,
 				5A1811BC1BABF681004B6C54 /* SAUser+CoreDataProperties.h */,
 				5A1811BD1BABF681004B6C54 /* SAUser+CoreDataProperties.m */,
 				5A1811BE1BABF681004B6C54 /* SAUser.h */,
@@ -302,6 +339,10 @@
 				5A1811AC1BABED3D004B6C54 /* SAMentionListViewController.m */,
 				5AE98AA61BAEB0A900B7F105 /* SASettingsViewController.h */,
 				5AE98AA71BAEB0A900B7F105 /* SASettingsViewController.m */,
+				5AE98AB21BAED16300B7F105 /* SAMessageListViewController.h */,
+				5AE98AB31BAED16300B7F105 /* SAMessageListViewController.m */,
+				5AE98AB81BAEDF0000B7F105 /* SAMessageViewController.h */,
+				5AE98AB91BAEDF0000B7F105 /* SAMessageViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -319,6 +360,10 @@
 				5A3E6C571BA441D100C589BE /* SADataManager+Status.m */,
 				5AED4B271BA672D100EDBF47 /* SADataManager+Photo.h */,
 				5AED4B281BA672D100EDBF47 /* SADataManager+Photo.m */,
+				5AE98AA91BAECDAA00B7F105 /* SADataManager+Message.h */,
+				5AE98AAA1BAECDAA00B7F105 /* SADataManager+Message.m */,
+				5AE98AC11BAEE43300B7F105 /* SADataManager+Conversation.h */,
+				5AE98AC21BAEE43300B7F105 /* SADataManager+Conversation.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -516,23 +561,29 @@
 				5A1811AA1BABE288004B6C54 /* SAPrivateMessageViewController.m in Sources */,
 				5A7E1F201BA9CD67000E7E62 /* SAPhotoTimeLineViewController.m in Sources */,
 				5AED4B711BA8521B00EDBF47 /* SAUserHeaderView.m in Sources */,
+				5AE98AB11BAECE7E00B7F105 /* SAMessage.m in Sources */,
 				5AE98AA81BAEB0A900B7F105 /* SASettingsViewController.m in Sources */,
 				5A1811C51BABF681004B6C54 /* SAUser.m in Sources */,
 				5AF5B1CD1BA1813A00C7A18A /* SASplashViewController.m in Sources */,
 				5A1811CB1BAC1C40004B6C54 /* SATimeLinePhotoCell.m in Sources */,
+				5AE98AB01BAECE7E00B7F105 /* SAMessage+CoreDataProperties.m in Sources */,
 				5AF5B1CA1BA17F7B00C7A18A /* SALoginViewController.m in Sources */,
 				5AED4B331BA6E48B00EDBF47 /* SAComposeViewController.m in Sources */,
 				5AED4B301BA6D41D00EDBF47 /* NSDate+Utils.m in Sources */,
 				5A1811AD1BABED3D004B6C54 /* SAMentionListViewController.m in Sources */,
 				5A3E6C581BA441D100C589BE /* SADataManager+Status.m in Sources */,
+				5AE98AC31BAEE43300B7F105 /* SADataManager+Conversation.m in Sources */,
 				5AED4B2D1BA6C16300EDBF47 /* NSString+Utils.m in Sources */,
+				5AE98AB41BAED16300B7F105 /* SAMessageListViewController.m in Sources */,
 				5AD70F201B31716A009C5B84 /* SAConstants.m in Sources */,
 				5AF5B1D31BA181CD00C7A18A /* SADataManager+User.m in Sources */,
 				5A1811C61BABF681004B6C54 /* SAPhoto+CoreDataProperties.m in Sources */,
+				5AE98ABA1BAEDF0000B7F105 /* SAMessageViewController.m in Sources */,
 				5AED4B6E1BA8429300EDBF47 /* SAUserViewController.m in Sources */,
 				5A2365C41B39723900E1E73C /* SAAPIService.m in Sources */,
 				5AED4B361BA6E52B00EDBF47 /* SATabBarViewController.m in Sources */,
 				5A1811C41BABF681004B6C54 /* SAUser+CoreDataProperties.m in Sources */,
+				5AE98AB71BAED1B400B7F105 /* SAMessageCell.m in Sources */,
 				5A1811BA1BABF617004B6C54 /* SAStatus+CoreDataProperties.m in Sources */,
 				5A2365BD1B395FD200E1E73C /* SATimeLineCell.m in Sources */,
 				5AD70F191B316B05009C5B84 /* SATimeLineViewController.m in Sources */,
@@ -541,9 +592,12 @@
 				5A7E1F231BA9CDA4000E7E62 /* SAPhotoTimeLineCell.m in Sources */,
 				5A1811BB1BABF617004B6C54 /* SAStatus.m in Sources */,
 				5AF5B1C71BA17EF500C7A18A /* SAUserListViewController.m in Sources */,
+				5AE98AC01BAEE3F000B7F105 /* SAConversation.m in Sources */,
 				5AE38ADE1BA2E70F0022A35A /* SAUserCell.m in Sources */,
+				5AE98ABF1BAEE3F000B7F105 /* SAConversation+CoreDataProperties.m in Sources */,
 				5AF5B1D01BA1816600C7A18A /* SADataManager.m in Sources */,
 				5AD70EF61B316A79009C5B84 /* fansky.xcdatamodeld in Sources */,
+				5AE98AAB1BAECDAA00B7F105 /* SADataManager+Message.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
