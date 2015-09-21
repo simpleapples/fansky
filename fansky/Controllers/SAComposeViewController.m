@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
+@property (weak, nonatomic) IBOutlet UILabel *remainLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *functionViewBottomConstraint;
 
 @property (strong, nonatomic) UIImage *uploadImage;
@@ -43,12 +44,22 @@
 {
     [super viewWillAppear:animated];
     [self.contentTextView becomeFirstResponder];
+    [self updateRemainLabel];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self.view endEditing:YES];
     [super viewWillDisappear:animated];
+}
+
+- (void)updateRemainLabel
+{
+    if (self.contentTextView.text.length > 140) {
+        self.remainLabel.text = [NSString stringWithFormat:@"超出%zd字", self.contentTextView.text.length - 140];
+    } else {
+        self.remainLabel.text = [NSString stringWithFormat:@"剩余%zd字", 140 - self.contentTextView.text.length];
+    }
 }
 
 - (void)updateInterface
@@ -68,6 +79,20 @@
         SAStatus *status = [[SADataManager sharedManager] statusWithID:self.repostStatusID];
         self.contentTextView.text = [NSString stringWithFormat:@"「@%@ %@」", status.user.name, [status.text flattenHTML]];
     }
+}
+
+- (void)send
+{
+    NSData *imageData = UIImageJPEGRepresentation(self.uploadImage, 0.8);
+    [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在发送"];
+    [[SAAPIService sharedSingleton] sendStatus:self.contentTextView.text replyToStatusID:self.replyToStatusID repostStatusID:self.repostStatusID image:imageData success:^(id data) {
+        [SAMessageDisplayUtils showSuccessWithMessage:@"发送完成"];
+        SAUser *currentUser = [SADataManager sharedManager].currentUser;
+        [[SADataManager sharedManager] insertStatusWithObject:data localUser:currentUser type:(SAStatusTypeTimeLine & SAStatusTypeUserStatus)];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } failure:^(NSString *error) {
+        [SAMessageDisplayUtils showErrorWithMessage:error];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -116,8 +141,10 @@
         } else if (buttonIndex == 1 && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
             type = UIImagePickerControllerSourceTypePhotoLibrary;
         } else {
+            [self.contentTextView becomeFirstResponder];
             return;
         }
+        [self.view endEditing:YES];
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
         imagePickerController.delegate = self;
         imagePickerController.allowsEditing = YES;
@@ -126,6 +153,14 @@
     } else if (actionSheet.tag == 2) {
         if (buttonIndex == 0) {
             [self dismissViewControllerAnimated:YES completion:nil];
+        } else {
+            [self.contentTextView becomeFirstResponder];
+        }
+    } else if (actionSheet.tag == 3) {
+        if (buttonIndex == 0) {
+            [self send];
+        } else {
+            [self.contentTextView becomeFirstResponder];
         }
     }
 }
@@ -152,14 +187,16 @@
     } else {
         self.placeholderLabel.hidden = NO;
     }
+    [self updateRemainLabel];
 }
 
 #pragma mark - EventHandler
 
 - (IBAction)cameraButtonTouchUp:(id)sender
 {
+    [self.view endEditing:YES];
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍摄照片", @"从相册中选择", nil];
-    actionSheet.tag = 2;
+    actionSheet.tag = 1;
     [actionSheet showInView:self.view];
 }
 
@@ -168,22 +205,20 @@
     if (!self.contentTextView.text.length) {
         [SAMessageDisplayUtils showInfoWithMessage:@"说点什么吧"];
         return;
+    } else if (self.contentTextView.text.length > 140) {
+        [self.view endEditing:YES];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"超出140个字符部分将被丢弃" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"继续发送" otherButtonTitles:nil];
+        actionSheet.tag = 3;
+        [actionSheet showInView:self.view];
+    } else {
+        [self send];
     }
-    NSData *imageData = UIImageJPEGRepresentation(self.uploadImage, 0.8);
-    [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在发送"];
-    [[SAAPIService sharedSingleton] sendStatus:self.contentTextView.text replyToStatusID:self.replyToStatusID repostStatusID:self.repostStatusID image:imageData success:^(id data) {
-        [SAMessageDisplayUtils showSuccessWithMessage:@"发送完成"];
-        SAUser *currentUser = [SADataManager sharedManager].currentUser;
-        [[SADataManager sharedManager] insertStatusWithObject:data localUser:currentUser type:(SAStatusTypeTimeLine & SAStatusTypeUserStatus)];
-        [self dismissViewControllerAnimated:YES completion:nil];
-    } failure:^(NSString *error) {
-        [SAMessageDisplayUtils showErrorWithMessage:error];
-    }];
 }
 
 - (IBAction)closeButtonTouchUp:(id)sender
 {
     if (self.contentTextView.text.length) {
+        [self.view endEditing:YES];
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"放弃更改" otherButtonTitles: nil];
         actionSheet.tag = 2;
         [actionSheet showInView:self.view];
