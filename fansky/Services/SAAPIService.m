@@ -136,8 +136,34 @@
         [mutableDictionary setObject:repostStatusID forKey:@"repost_status_id"];
     }
     if (image) {
-        [mutableDictionary setObject:image forKey:@"photo"];
-        [self requestAPIWithPath:SA_API_UPDATE_PHOTO_STATUS_PATH method:@"POST" parametersDictionary:mutableDictionary success:success failure:failure];
+        NSString *boundary = [self generateBoundaryString];
+        NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
+        
+        NSMutableDictionary *authParametersDictionary = [mutableDictionary mutableCopy];
+        [authParametersDictionary setObject:@"photo" forKey:@"photo"];
+        
+        NSData *httpBody = [self createBodyWithBoundary:boundary parameters:mutableDictionary data:image];
+        SAUser *currentUser = [SADataManager sharedManager].currentUser;
+        NSMutableURLRequest *mutableURLRequest = [[TDOAuth URLRequestForPath:SA_API_UPDATE_PHOTO_STATUS_PATH parameters:nil host:SA_API_HOST consumerKey:SA_API_COMSUMER_KEY consumerSecret:SA_API_COMSUMER_SECRET accessToken:currentUser.token tokenSecret:currentUser.tokenSecret scheme:@"http" requestMethod:@"POST" dataEncoding:TDOAuthContentTypeUrlEncodedForm headerValues:nil signatureMethod:TDOAuthSignatureMethodHmacSha1] mutableCopy];
+        [mutableURLRequest setValue:contentType forHTTPHeaderField: @"Content-Type"];
+        [mutableURLRequest setHTTPBody:httpBody];
+        
+        [NSURLConnection sendAsynchronousRequest:mutableURLRequest queue:self.operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+            if (!connectionError) {
+                id responseJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+                NSString *error = nil;
+                if ([responseJSON respondsToSelector:@selector(objectForKey:)]) {
+                    error = [responseJSON objectForKey:@"error"];
+                }
+                if (responseJSON && !error && success) {
+                    success(responseJSON);
+                } else if (failure) {
+                    failure(error);
+                }
+            } else if (failure) {
+                failure(@"网络故障");
+            }
+        }];
     } else {
         [self requestAPIWithPath:SA_API_UPDATE_STATUS_PATH method:@"POST" parametersDictionary:mutableDictionary success:success failure:failure];
     }
@@ -216,6 +242,39 @@
             failure(@"网络故障");
         }
     }];
+}
+
+#pragma mark - PhotoUpload
+
+- (NSData *)createBodyWithBoundary:(NSString *)boundary
+                        parameters:(NSDictionary *)parameters
+                             data:(NSData *)data
+{
+    NSMutableData *httpBody = [NSMutableData data];
+    
+    // add params (all params are strings)
+    
+    [parameters enumerateKeysAndObjectsUsingBlock:^(NSString *parameterKey, NSString *parameterValue, BOOL *stop) {
+        [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", parameterKey] dataUsingEncoding:NSUTF8StringEncoding]];
+        [httpBody appendData:[[NSString stringWithFormat:@"%@\r\n", parameterValue] dataUsingEncoding:NSUTF8StringEncoding]];
+    }];
+    
+    // add image data
+    [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[@"Content-Disposition: form-data; name=\"photo\"; filename=\"photo\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[[NSString stringWithFormat:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:data];
+    [httpBody appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    [httpBody appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    return httpBody;
+}
+
+- (NSString *)generateBoundaryString
+{
+    return [NSString stringWithFormat:@"Boundary-%@", [[NSUUID UUID] UUIDString]];
 }
 
 @end
