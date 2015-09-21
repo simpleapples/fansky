@@ -144,6 +144,7 @@
             [self.contentTextView becomeFirstResponder];
             return;
         }
+        [self.view endEditing:YES];
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
         imagePickerController.delegate = self;
         imagePickerController.allowsEditing = YES;
