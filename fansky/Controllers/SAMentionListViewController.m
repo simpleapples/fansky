@@ -173,11 +173,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
     if (type == NSFetchedResultsChangeInsert) {
-        if (controller.fetchedObjects.count) {
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-        } else {
-            [self.tableView reloadData];
-        }
+        [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
 

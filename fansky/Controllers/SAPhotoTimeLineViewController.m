@@ -86,14 +86,10 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
     if (type == NSFetchedResultsChangeInsert) {
-        if (controller.fetchedObjects.count) {
-            NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
-                [self.collectionView insertItemsAtIndexPaths:@[newIndexPath]];
-            }];
-            [self.itemChangeList addObject:blockOperation];
-        } else {
-            [self.collectionView reloadData];
-        }
+        NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
+            [self.collectionView insertItemsAtIndexPaths:@[newIndexPath]];
+        }];
+        [self.itemChangeList addObject:blockOperation];
     }
 }
 

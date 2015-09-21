@@ -16,6 +16,8 @@
 #import <JSQMessagesViewController/JSQMessage.h>
 #import <JSQMessagesViewController/UIColor+JSQMessages.h>
 #import <JSQMessagesViewController/JSQMessagesBubbleImageFactory.h>
+#import <JSQMessagesViewController/JSQSystemSoundPlayer+JSQMessages.h>
+#import <JSQSystemSoundPlayer/JSQSystemSoundPlayer.h>
 
 @interface SAMessageViewController () <JSQMessagesCollectionViewDataSource, JSQMessagesCollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate>
 
@@ -58,6 +60,7 @@ static NSString *const ENTITY_NAME = @"SAMessage";
     self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleBlueColor]];
     self.incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
     
+    self.inputToolbar.contentView.leftBarButtonItem = nil;
     self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
 }
@@ -163,6 +166,17 @@ static NSString *const ENTITY_NAME = @"SAMessage";
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
 {
     return kJSQMessagesCollectionViewCellLabelHeightDefault;
+}
+
+- (void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date
+{
+    [JSQSystemSoundPlayer jsq_playMessageSentSound];
+    
+    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:senderDisplayName date:date text:text];
+    
+//    [self.demoData.messages addObject:message];
+    
+    [self finishSendingMessageAnimated:YES];
 }
 
 @end
