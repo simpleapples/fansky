@@ -145,7 +145,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 - (void)timeLinePhotoCell:(SATimeLinePhotoCell *)timeLineCell avatarImageViewTouchUp:(id)sender
 {
     self.selectedUserID = timeLineCell.status.user.userID;
-    [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
+    [self performSegueWithIdentifier:@"MentionToUserSegue" sender:nil];
 }
 
 - (void)timeLinePhotoCell:(SATimeLinePhotoCell *)timeLineCell contentImageViewTouchUp:(id)sender
@@ -162,7 +162,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     NSURL *url = timeLineCell.selectedURL;
     if ([url.host isEqualToString:@"fanfou.com"]) {
         self.selectedUserID = url.lastPathComponent;
-        [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
+        [self performSegueWithIdentifier:@"MentionToUserSegue" sender:nil];
     } else if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
         [[UIApplication sharedApplication] openURL:url];
     }
