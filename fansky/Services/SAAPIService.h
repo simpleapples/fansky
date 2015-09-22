@@ -44,4 +44,6 @@
 
 - (void)conversationWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
 
+- (void)sendMessageWithUserID:(NSString *)userID text:(NSString *)text replyToID:(NSString *)replyToID success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
+
 @end

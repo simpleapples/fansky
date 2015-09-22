@@ -13,6 +13,7 @@
 #import "SAMessage+CoreDataProperties.h"
 #import "SAAPIService.h"
 #import "SAMessageDisplayUtils.h"
+#import "SAMessage+CoreDataProperties.h"
 #import <JSQMessagesViewController/JSQMessage.h>
 #import <JSQMessagesViewController/UIColor+JSQMessages.h>
 #import <JSQMessagesViewController/JSQMessagesBubbleImageFactory.h>
@@ -172,9 +173,16 @@ static NSString *const ENTITY_NAME = @"SAMessage";
 {
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     
-    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:senderDisplayName date:date text:text];
-    
-//    [self.demoData.messages addObject:message];
+    JSQMessage *lastMessage = self.fetchedResultsController.fetchedObjects.lastObject;
+    NSString *replyUserID = nil;
+    if (![lastMessage.senderId isEqualToString:senderId]) {
+        replyUserID = lastMessage.senderId;
+    }
+    [[SAAPIService sharedSingleton] sendMessageWithUserID:senderId text:text replyToID:replyUserID success:^(id data) {
+        
+    } failure:^(NSString *error) {
+        [SAMessageDisplayUtils showErrorWithMessage:error];
+    }];
     
     [self finishSendingMessageAnimated:YES];
 }
