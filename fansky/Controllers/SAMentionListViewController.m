@@ -77,6 +77,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 140;
 }
 
 - (void)didReceiveMemoryWarning

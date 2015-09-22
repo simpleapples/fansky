@@ -218,9 +218,9 @@
     [self requestAPIWithPath:SA_API_CONVERSATION_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
 }
 
-- (void)sendMessageWithUserID:(NSString *)userID text:(NSString *)text replyToID:(NSString *)replyToID success:(void (^)(id))success failure:(void (^)(NSString *))failure
+- (void)sendMessageWithUserID:(NSString *)userID text:(NSString *)text replyToMessageID:(NSString *)replyToMessageID success:(void (^)(id))success failure:(void (^)(NSString *))failure
 {
-    [self requestAPIWithPath:SA_API_SEND_NEW_MESSAGE_PATH method:@"POST" parametersDictionary:@{@"userID": userID, @"text": text, @"in_reply_to_id": replyToID, @"mode": @"lite"} success:success failure:failure];
+    [self requestAPIWithPath:SA_API_SEND_NEW_MESSAGE_PATH method:@"POST" parametersDictionary:@{@"user": userID, @"text": text, @"in_reply_to_id": replyToMessageID, @"mode": @"lite"} success:success failure:failure];
 }
 
 #pragma mark - Base

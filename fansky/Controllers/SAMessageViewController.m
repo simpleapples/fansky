@@ -173,12 +173,12 @@ static NSString *const ENTITY_NAME = @"SAMessage";
 {
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     
-    JSQMessage *lastMessage = self.fetchedResultsController.fetchedObjects.lastObject;
-    NSString *replyUserID = nil;
-    if (![lastMessage.senderId isEqualToString:senderId]) {
-        replyUserID = lastMessage.senderId;
+    SAMessage *lastMessage = self.fetchedResultsController.fetchedObjects.lastObject;
+    NSString *replyToMessageID = nil;
+    if (![lastMessage.sender.userID isEqualToString:senderId]) {
+        replyToMessageID = lastMessage.messageID;
     }
-    [[SAAPIService sharedSingleton] sendMessageWithUserID:senderId text:text replyToID:replyUserID success:^(id data) {
+    [[SAAPIService sharedSingleton] sendMessageWithUserID:self.userID text:text replyToMessageID:replyToMessageID success:^(id data) {
         
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
