@@ -62,7 +62,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];
     
     [[SAAPIService sharedSingleton] mentionStatusWithSinceID:nil maxID:maxID count:20 success:^(id data) {
-        [[SADataManager sharedManager] insertStatusWithObjects:data type:SAStatusTypeMentionStatus];
+        [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:data type:SAStatusTypeMentionStatus];
         [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
         [self.refreshControl endRefreshing];
     } failure:^(NSString *error) {

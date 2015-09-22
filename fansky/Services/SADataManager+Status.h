@@ -13,8 +13,8 @@
 
 @interface SADataManager (Status)
 
-- (void)insertStatusWithObjects:(NSArray *)objects type:(SAStatusTypes)type;
-- (SAStatus *)insertStatusWithObject:(id)object localUser:(SAUser *)localUser type:(SAStatusTypes)type;
+- (void)insertOrUpdateStatusWithObjects:(NSArray *)objects type:(SAStatusTypes)type;
+- (SAStatus *)insertOrUpdateStatusWithObject:(id)object localUser:(SAUser *)localUser type:(SAStatusTypes)type;
 - (SAStatus *)statusWithID:(NSString *)statusID;
 
 @end

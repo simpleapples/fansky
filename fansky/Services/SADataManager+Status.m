@@ -15,12 +15,57 @@
 
 static NSString *const ENTITY_NAME = @"SAStatus";
 
-- (void)insertStatusWithObjects:(NSArray *)objects type:(SAStatusTypes)type
+- (void)insertOrUpdateStatusWithObjects:(NSArray *)objects type:(SAStatusTypes)type
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
-    [objects enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
-        [self insertStatusWithObject:object localUser:currentUser type:type];
+    
+    NSMutableDictionary *statusIDDictionary = [NSMutableDictionary new];
+    [objects enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSString *statusID = [obj objectForKey:@"id"];
+        [statusIDDictionary setValue:obj forKey:statusID];
     }];
+
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"statusID IN %@", [statusIDDictionary allKeys]];
+    
+    __block NSError *error;
+    [self.managedObjectContext performBlockAndWait:^{
+        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (!error && fetchResult) {
+            [fetchResult enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                SAStatus *existStatus = (SAStatus *)obj;
+                id statusObject = [statusIDDictionary objectForKey:existStatus.statusID];
+                [self updateStatusWithObject:statusObject status:existStatus type:type];
+                [statusIDDictionary removeObjectForKey:existStatus.statusID];
+            }];
+        }
+    }];
+    
+    [statusIDDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        [self insertStatusWithObject:obj localUser:currentUser type:type];
+    }];
+}
+
+- (SAStatus *)insertOrUpdateStatusWithObject:(id)object localUser:(SAUser *)localUser type:(SAStatusTypes)type
+{
+    NSString *statusID = [object objectForKey:@"id"];
+
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
+    fetchRequest.fetchLimit = 1;
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"statusID = %@", statusID];
+    
+    __block NSError *error;
+    __block SAStatus *resultStatus;
+    [self.managedObjectContext performBlockAndWait:^{
+        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (!error && fetchResult && fetchResult.count) {
+            SAStatus *existStatus = [fetchResult firstObject];
+            resultStatus = [self updateStatusWithObject:object status:existStatus type:type];
+        } else {
+            resultStatus = [self insertStatusWithObject:object localUser:localUser type:type];
+        }
+    }];
+    return resultStatus;
 }
 
 - (SAStatus *)insertStatusWithObject:(id)object localUser:(SAUser *)localUser type:(SAStatusTypes)type
@@ -35,35 +80,27 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     SAPhoto *photo = [[SADataManager sharedManager] insertPhotoWithObject:[object objectForKey:@"photo"]];
     SAUser *user = [[SADataManager sharedManager] insertOrUpdateUserWithObject:[object objectForKey:@"user"] local:NO active:NO token:nil secret:nil];
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-    fetchRequest.fetchLimit = 1;
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"statusID = %@", statusID];
-    
-    __block NSError *error;
     __block SAStatus *resultStatus;
     [self.managedObjectContext performBlockAndWait:^{
-        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (!error && fetchResult && fetchResult.count) {
-            SAStatus *existStatus = [fetchResult firstObject];
-            existStatus.type = @(type | existStatus.type.integerValue);
-            resultStatus = existStatus;
-        } else {
-            [self.managedObjectContext performBlockAndWait:^{
-                SAStatus *status = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
-                status.statusID = statusID;
-                status.source = source;
-                status.text = text;
-                status.photo = photo;
-                status.user = user;
-                status.repostStatusID = repostStatusID;
-                status.createdAt = createdAt;
-                status.localUser = localUser;
-                status.type = @(type | status.type.integerValue);
-                resultStatus = status;
-            }];
-        }
+        SAStatus *status = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
+        status.statusID = statusID;
+        status.source = source;
+        status.text = text;
+        status.photo = photo;
+        status.user = user;
+        status.repostStatusID = repostStatusID;
+        status.createdAt = createdAt;
+        status.localUser = localUser;
+        status.type = @(type | status.type.integerValue);
+        resultStatus = status;
     }];
     return resultStatus;
+}
+
+- (SAStatus *)updateStatusWithObject:(id)object status:(SAStatus *)status type:(SAStatusTypes)type
+{
+    status.type = @(type | status.type.integerValue);
+    return status;
 }
 
 - (SAStatus *)statusWithID:(NSString *)statusID

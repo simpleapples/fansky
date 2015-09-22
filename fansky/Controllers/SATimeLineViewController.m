@@ -64,7 +64,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     if (!self.userID) {
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
         [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
-            [[SADataManager sharedManager] insertStatusWithObjects:data type:SAStatusTypeTimeLine];
+            [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:data type:SAStatusTypeTimeLine];
             [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
             [self.refreshControl endRefreshing];
         } failure:^(NSString *error) {
@@ -73,7 +73,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         }];
     } else {
         [[SAAPIService sharedSingleton] userTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
-            [[SADataManager sharedManager] insertStatusWithObjects:data type:SAStatusTypeUserStatus];
+            [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:data type:SAStatusTypeUserStatus];
             [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
             [self.refreshControl endRefreshing];
         } failure:^(NSString *error) {
@@ -126,7 +126,6 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         NSString *cacheName = [NSString stringWithFormat:@"user-%@-type-%zd", userID, type];
         _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:manager.managedObjectContext sectionNameKeyPath:nil cacheName:cacheName];
         _fetchedResultsController.delegate = self;
-        
         [_fetchedResultsController performFetch:nil];
     }
     return _fetchedResultsController;
@@ -205,12 +204,22 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.tableView beginUpdates];
+    @try {
+        [self.tableView beginUpdates];
+    }
+    @catch (NSException *exception) {
+        
+    }
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    [self.tableView endUpdates];
+    @try {
+        [self.tableView endUpdates];
+    }
+    @catch (NSException *exception) {
+        
+    }
 }
 
 #pragma mark - Table view data source

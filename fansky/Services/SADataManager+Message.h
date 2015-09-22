@@ -14,6 +14,6 @@
 @interface SADataManager (Message)
 
 - (void)insertMessageWithObjects:(id)objects;
-- (SAMessage *)insertMessageWithObject:(id)object localUser:(SAUser *)localUser;
+- (SAMessage *)insertOrUpdateMessageWithObject:(id)object localUser:(SAUser *)localUser;
 
 @end

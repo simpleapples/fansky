@@ -12,6 +12,8 @@
 #import "SAStatus+CoreDataProperties.h"
 #import "SAAPIService.h"
 #import "SAPhoto.h"
+#import "SADataManager+User.h"
+#import "SAUser+CoreDataProperties.h"
 #import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 
 @interface SAPhotoTimeLineViewController () <NSFetchedResultsControllerDelegate, SAPhotoTimeLineCellDelegate>
@@ -47,7 +49,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         maxID = lastStatus.statusID;
     }
     [[SAAPIService sharedSingleton] userPhotoTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
-        [[SADataManager sharedManager] insertStatusWithObjects:data type:SAStatusTypeUserStatus];
+        [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:data type:SAStatusTypeUserStatus];
     } failure:^(NSString *error) {
 
     }];
@@ -67,7 +69,9 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         fetchRequest.returnsObjectsAsFaults = NO;
         fetchRequest.fetchBatchSize = 6;
         
-        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:manager.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        SAUser *currentUser = [SADataManager sharedManager].currentUser;
+        NSString *cacheName = [NSString stringWithFormat:@"user-%@-photo", currentUser.userID];
+        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:manager.managedObjectContext sectionNameKeyPath:nil cacheName:cacheName];
         _fetchedResultsController.delegate = self;
         
         [_fetchedResultsController performFetch:nil];

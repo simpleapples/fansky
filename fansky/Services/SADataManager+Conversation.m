@@ -30,7 +30,7 @@ static NSString *const ENTITY_NAME = @"SAConversation";
     NSNumber *count = [object objectForKey:@"msg_num"];
     NSNumber *newConversation = [object objectForKey:@"new_conv"];
     
-    SAMessage *message = [[SADataManager sharedManager] insertMessageWithObject:[object objectForKey:@"dm"] localUser:localUser];
+    SAMessage *message = [[SADataManager sharedManager] insertOrUpdateMessageWithObject:[object objectForKey:@"dm"] localUser:localUser];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
     fetchRequest.fetchLimit = 1;
