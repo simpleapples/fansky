@@ -94,4 +94,9 @@
     [self performSegueWithIdentifier:@"LoginExitToUserListSegue" sender:nil];
 }
 
+- (IBAction)registerButtonTouchUp:(id)sender
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://m.fanfou.com/register"]];
+}
+
 @end

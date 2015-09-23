@@ -33,6 +33,7 @@
 		5AD70F0D1B316A79009C5B84 /* fanskyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70F0C1B316A79009C5B84 /* fanskyTests.m */; };
 		5AD70F191B316B05009C5B84 /* SATimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70F181B316B05009C5B84 /* SATimeLineViewController.m */; };
 		5AD70F201B31716A009C5B84 /* SAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70F1F1B31716A009C5B84 /* SAConstants.m */; };
+		5ADA99E01BB2676B0068C0FF /* SAPushWithoutAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA99DF1BB2676B0068C0FF /* SAPushWithoutAnimation.m */; settings = {ASSET_TAGS = (); }; };
 		5AE38ADE1BA2E70F0022A35A /* SAUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE38ADD1BA2E70F0022A35A /* SAUserCell.m */; };
 		5AE98AA81BAEB0A900B7F105 /* SASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AA71BAEB0A900B7F105 /* SASettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		5AE98AAB1BAECDAA00B7F105 /* SADataManager+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AAA1BAECDAA00B7F105 /* SADataManager+Message.m */; settings = {ASSET_TAGS = (); }; };
@@ -122,6 +123,8 @@
 		5AD70F181B316B05009C5B84 /* SATimeLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SATimeLineViewController.m; sourceTree = "<group>"; };
 		5AD70F1F1B31716A009C5B84 /* SAConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAConstants.m; sourceTree = "<group>"; };
 		5AD70F211B3171FA009C5B84 /* SAConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SAConstants.h; sourceTree = "<group>"; };
+		5ADA99DE1BB2676B0068C0FF /* SAPushWithoutAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPushWithoutAnimation.h; sourceTree = "<group>"; };
+		5ADA99DF1BB2676B0068C0FF /* SAPushWithoutAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPushWithoutAnimation.m; sourceTree = "<group>"; };
 		5AE38ADC1BA2E70F0022A35A /* SAUserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAUserCell.h; sourceTree = "<group>"; };
 		5AE38ADD1BA2E70F0022A35A /* SAUserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUserCell.m; sourceTree = "<group>"; };
 		5AE98AA61BAEB0A900B7F105 /* SASettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASettingsViewController.h; sourceTree = "<group>"; };
@@ -270,6 +273,7 @@
 		5AD70EEC1B316A79009C5B84 /* fansky */ = {
 			isa = PBXGroup;
 			children = (
+				5ADA99DD1BB267550068C0FF /* Segues */,
 				5AED4B2A1BA6C16300EDBF47 /* Utils */,
 				5A2365BE1B39619100E1E73C /* Models */,
 				5A2365BA1B395FC100E1E73C /* Views */,
@@ -366,6 +370,15 @@
 				5AE98AC21BAEE43300B7F105 /* SADataManager+Conversation.m */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		5ADA99DD1BB267550068C0FF /* Segues */ = {
+			isa = PBXGroup;
+			children = (
+				5ADA99DE1BB2676B0068C0FF /* SAPushWithoutAnimation.h */,
+				5ADA99DF1BB2676B0068C0FF /* SAPushWithoutAnimation.m */,
+			);
+			path = Segues;
 			sourceTree = "<group>";
 		};
 		5AED4B2A1BA6C16300EDBF47 /* Utils */ = {
@@ -569,6 +582,7 @@
 				5AE98AB01BAECE7E00B7F105 /* SAMessage+CoreDataProperties.m in Sources */,
 				5AF5B1CA1BA17F7B00C7A18A /* SALoginViewController.m in Sources */,
 				5AED4B331BA6E48B00EDBF47 /* SAComposeViewController.m in Sources */,
+				5ADA99E01BB2676B0068C0FF /* SAPushWithoutAnimation.m in Sources */,
 				5AED4B301BA6D41D00EDBF47 /* NSDate+Utils.m in Sources */,
 				5A1811AD1BABED3D004B6C54 /* SAMentionListViewController.m in Sources */,
 				5A3E6C581BA441D100C589BE /* SADataManager+Status.m in Sources */,

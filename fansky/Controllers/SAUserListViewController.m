@@ -30,6 +30,16 @@ static NSString *const ENTITY_NAME = @"SAUser";
     [self fetchedResultsController];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+
+    SAUser *currentUser = [SADataManager sharedManager].currentUser;
+    if (!currentUser) {
+        [self performSegueWithIdentifier:@"UserListToAuthNavigationSegue" sender:nil];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

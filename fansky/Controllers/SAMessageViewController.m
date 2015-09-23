@@ -179,7 +179,8 @@ static NSString *const ENTITY_NAME = @"SAMessage";
         replyToMessageID = lastMessage.messageID;
     }
     [[SAAPIService sharedSingleton] sendMessageWithUserID:self.userID text:text replyToMessageID:replyToMessageID success:^(id data) {
-        
+        SAUser *currentUser = [SADataManager sharedManager].currentUser;
+        [[SADataManager sharedManager] insertOrUpdateMessageWithObject:data localUser:currentUser];
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
     }];

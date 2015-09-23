@@ -220,7 +220,11 @@
 
 - (void)sendMessageWithUserID:(NSString *)userID text:(NSString *)text replyToMessageID:(NSString *)replyToMessageID success:(void (^)(id))success failure:(void (^)(NSString *))failure
 {
-    [self requestAPIWithPath:SA_API_SEND_NEW_MESSAGE_PATH method:@"POST" parametersDictionary:@{@"user": userID, @"text": text, @"in_reply_to_id": replyToMessageID, @"mode": @"lite"} success:success failure:failure];
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userID, @"user", text, @"text", @"lite", @"mode", nil];
+    if (replyToMessageID) {
+        [mutableDictionary setValue:replyToMessageID forKey:@"in_reply_to_id"];
+    }
+    [self requestAPIWithPath:SA_API_SEND_NEW_MESSAGE_PATH method:@"POST" parametersDictionary:mutableDictionary success:success failure:failure];
 }
 
 #pragma mark - Base
