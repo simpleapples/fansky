@@ -8,7 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" restorationIdentifier="SAUserHeaderView" id="iN0-l3-epB" customClass="SAUserHeaderView">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SAUserHeaderView">
             <rect key="frame" x="0.0" y="0.0" width="600" height="190"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -61,7 +61,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0关注者 0关注" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NWz-1S-X5Q">
-                    <rect key="frame" x="10" y="161" width="91.5" height="17"/>
+                    <rect key="frame" x="10" y="161" width="92" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -105,7 +105,7 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="载入中..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jo-yX-kz8">
-                    <rect key="frame" x="10" y="129" width="54.5" height="17"/>
+                    <rect key="frame" x="10" y="129" width="55" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="IBg-wZ-rbP"/>
                         <constraint firstAttribute="width" constant="100" id="OeX-t6-HXc"/>
