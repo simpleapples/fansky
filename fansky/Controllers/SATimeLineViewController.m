@@ -21,9 +21,10 @@
 #import "SATimeLinePhotoCell.h"
 #import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 
-@interface SATimeLineViewController () <NSFetchedResultsControllerDelegate, SATimeLineCellDelegate, SATimeLinePhotoCellDelegate>
+@interface SATimeLineViewController () <SATimeLineCellDelegate, SATimeLinePhotoCellDelegate>
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSMutableArray *timeLineList;
+@property (copy, nonatomic) NSString *maxID;
 @property (copy, nonatomic) NSString *selectedStatusID;
 @property (copy, nonatomic) NSString *selectedUserID;
 @property (nonatomic, getter = isCellRegistered) BOOL cellRegistered;
@@ -42,8 +43,6 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     [self updateInterface];
     
     [self refreshData];
-    
-    [self fetchedResultsController];
 }
 
 - (void)refreshData
@@ -53,18 +52,16 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 
 - (void)updateDataWithRefresh:(BOOL)refresh
 {
-    NSString *maxID = nil;
-    if (!refresh) {
-        SAStatus *lastStatus = self.fetchedResultsController.fetchedObjects.lastObject;
-        if (lastStatus) {
-            maxID = lastStatus.statusID;
-        }
+    if (!self.timeLineList) {
+        self.timeLineList = [[NSMutableArray alloc] init];
     }
     [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];
-    if (!self.userID) {
+    if (refresh) {
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
-        [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
+        [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:nil maxID:nil count:20 success:^(id data) {
             [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:data type:SAStatusTypeTimeLine];
+            self.timeLineList = [[[SADataManager sharedManager] currentStatusWithUserID:currentUser.userID type:SAStatusTypeTimeLine limit:20] mutableCopy];
+            [self.tableView reloadData];
             [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
             [self.refreshControl endRefreshing];
         } failure:^(NSString *error) {
@@ -72,8 +69,9 @@ static NSString *const ENTITY_NAME = @"SAStatus";
             [self.refreshControl endRefreshing];
         }];
     } else {
-        [[SAAPIService sharedSingleton] userTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
+        [[SAAPIService sharedSingleton] userTimeLineWithUserID:self.userID sinceID:nil maxID:self.maxID count:20 success:^(id data) {
             [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:data type:SAStatusTypeUserStatus];
+            [self.tableView reloadData];
             [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
             [self.refreshControl endRefreshing];
         } failure:^(NSString *error) {
@@ -95,40 +93,6 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-}
-
-- (NSFetchedResultsController *)fetchedResultsController
-{
-    if (!_fetchedResultsController) {
-        SADataManager *manager = [SADataManager sharedManager];
-        
-        NSSortDescriptor *createdAtSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
-        NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
-        
-        SAUser *currentUser = [SADataManager sharedManager].currentUser;
-        
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-        NSString *userID;
-        SAStatusTypes type;
-        if (self.userID) {
-            userID = self.userID;
-            type = SAStatusTypeUserStatus;
-            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@ AND (type | %d) = type", userID, type];
-        } else {
-            userID = currentUser.userID;
-            type = SAStatusTypeTimeLine;
-            fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@ AND (type | %d) = type", userID, type];
-        }
-        fetchRequest.sortDescriptors = sortArray;
-        fetchRequest.returnsObjectsAsFaults = NO;
-        fetchRequest.fetchBatchSize = 6;
-        
-        NSString *cacheName = [NSString stringWithFormat:@"user-%@-type-%zd", userID, type];
-        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:manager.managedObjectContext sectionNameKeyPath:nil cacheName:cacheName];
-        _fetchedResultsController.delegate = self;
-        [_fetchedResultsController performFetch:nil];
-    }
-    return _fetchedResultsController;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -189,50 +153,16 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     }
 }
 
-#pragma mark - NSFetchedResultsControllerDelegate
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
-{
-    if (type == NSFetchedResultsChangeInsert) {
-        [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
-{
-}
-
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-    @try {
-        [self.tableView beginUpdates];
-    }
-    @catch (NSException *exception) {
-        
-    }
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    @try {
-        [self.tableView endUpdates];
-    }
-    @catch (NSException *exception) {
-        
-    }
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.fetchedResultsController.sections.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger numberOfItems = [[self.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];
-    return numberOfItems;
+    return self.timeLineList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -244,7 +174,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         [tableView registerNib:[UINib nibWithNibName:photoCellName bundle:nil] forCellReuseIdentifier:photoCellName];
         self.cellRegistered = YES;
     }
-    SAStatus *status = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
     if (status.photo.imageURL) {
         SATimeLinePhotoCell *cell = [tableView dequeueReusableCellWithIdentifier:photoCellName forIndexPath:indexPath];
         [cell configWithStatus:status];
@@ -259,7 +189,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SAStatus *status = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
     self.selectedStatusID = status.statusID;
     [self performSegueWithIdentifier:@"TimeLineToStatusSegue" sender:nil];
 }

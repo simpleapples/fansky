@@ -15,6 +15,7 @@
 
 - (void)insertOrUpdateStatusWithObjects:(NSArray *)objects type:(SAStatusTypes)type;
 - (SAStatus *)insertOrUpdateStatusWithObject:(id)object localUser:(SAUser *)localUser type:(SAStatusTypes)type;
+- (NSArray *)currentStatusWithUserID:(NSString *)userID type:(SAStatusTypes)type limit:(NSUInteger)limit;
 - (SAStatus *)statusWithID:(NSString *)statusID;
 
 @end

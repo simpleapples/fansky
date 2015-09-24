@@ -48,10 +48,10 @@
         <relationship name="status" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SAStatus" inverseName="user" inverseEntity="SAStatus" syncable="YES"/>
     </entity>
     <elements>
+        <element name="SAConversation" positionX="-45" positionY="99" width="128" height="120"/>
+        <element name="SAMessage" positionX="-45" positionY="90" width="128" height="135"/>
         <element name="SAPhoto" positionX="-36" positionY="81" width="128" height="105"/>
         <element name="SAStatus" positionX="-63" positionY="45" width="128" height="180"/>
         <element name="SAUser" positionX="-63" positionY="-18" width="128" height="240"/>
-        <element name="SAMessage" positionX="-45" positionY="90" width="128" height="135"/>
-        <element name="SAConversation" positionX="-45" positionY="99" width="128" height="120"/>
     </elements>
 </model>
