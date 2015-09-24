@@ -15,5 +15,6 @@
 
 - (void)insertMessageWithObjects:(id)objects;
 - (SAMessage *)insertOrUpdateMessageWithObject:(id)object localUser:(SAUser *)localUser;
+- (NSArray *)currentMessageWithUserID:(NSString *)userID localUserID:(NSString *)localUserID limit:(NSUInteger)limit;
 
 @end

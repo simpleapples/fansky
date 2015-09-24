@@ -15,7 +15,9 @@
 
 - (void)insertOrUpdateStatusWithObjects:(NSArray *)objects type:(SAStatusTypes)type;
 - (SAStatus *)insertOrUpdateStatusWithObject:(id)object localUser:(SAUser *)localUser type:(SAStatusTypes)type;
-- (NSArray *)currentStatusWithUserID:(NSString *)userID type:(SAStatusTypes)type limit:(NSUInteger)limit;
+- (NSArray *)currentTimeLineWithUserID:(NSString *)userID type:(SAStatusTypes)type limit:(NSUInteger)limit;
+- (NSArray *)currentMentionTimeLineWithUserID:(NSString *)userID limit:(NSUInteger)limit;
+- (NSArray *)currentPhotoTimeLineWithUserID:(NSString *)userID limit:(NSUInteger)limit;
 - (SAStatus *)statusWithID:(NSString *)statusID;
 
 @end

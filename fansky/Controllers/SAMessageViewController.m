@@ -22,9 +22,10 @@
 
 @interface SAMessageViewController () <JSQMessagesCollectionViewDataSource, JSQMessagesCollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate>
 
+@property (strong, nonatomic) NSArray *messageList;
+@property (copy, nonatomic) NSString *maxID;
 @property (strong, nonatomic) SAUser *currentUser;
 @property (strong, nonatomic) SAUser *user;
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubbleImageData;
 @property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageData;
 
@@ -33,6 +34,7 @@
 @implementation SAMessageViewController
 
 static NSString *const ENTITY_NAME = @"SAMessage";
+static NSUInteger MESSAGE_LIST_COUNT = 20;
 
 - (void)viewDidLoad
 {
@@ -41,9 +43,11 @@ static NSString *const ENTITY_NAME = @"SAMessage";
     self.currentUser = [SADataManager sharedManager].currentUser;
     self.user = [[SADataManager sharedManager] userWithID:self.userID];
     
-    [self updateData];
-    
     [self updateInterface];
+    
+    [self getLocalData];
+    
+    [self refreshData];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -66,54 +70,47 @@ static NSString *const ENTITY_NAME = @"SAMessage";
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
 }
 
-- (void)updateData
+- (void)getLocalData
 {
-    SAMessage *lastMessage = self.fetchedResultsController.fetchedObjects.lastObject;
-    NSString *maxID = nil;
-    if (lastMessage) {
-        maxID = lastMessage.messageID;
+    self.messageList = [[SADataManager sharedManager] currentMessageWithUserID:self.userID localUserID:self.currentUser.userID limit:MESSAGE_LIST_COUNT];
+    [self.collectionView reloadData];
+}
+
+- (void)refreshData
+{
+    [self updateDataWithRefresh:YES];
+}
+
+- (void)updateDataWithRefresh:(BOOL)refresh
+{
+    [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];
+    
+    NSString *maxID;
+    if (!refresh) {
+        maxID = self.maxID;
     }
-    [[SAAPIService sharedSingleton] conversationWithUserID:self.userID sinceID:nil maxID:maxID count:60 success:^(id data) {
+    [[SAAPIService sharedSingleton] conversationWithUserID:self.userID sinceID:nil maxID:maxID count:MESSAGE_LIST_COUNT success:^(id data) {
         [[SADataManager sharedManager] insertMessageWithObjects:data];
-        [self.collectionView reloadData];
+        self.messageList = [[SADataManager sharedManager] currentMessageWithUserID:self.userID localUserID:self.currentUser.userID limit:MESSAGE_LIST_COUNT];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+            [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
+        });
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
     }];
-}
-
-- (NSFetchedResultsController *)fetchedResultsController
-{
-    if (!_fetchedResultsController) {
-        SADataManager *manager = [SADataManager sharedManager];
-        
-        NSSortDescriptor *createdAtSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
-        NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
-        
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@ AND (sender.userID = %@ OR recipient.userID = %@)", self.currentUser.userID, self.userID, self.userID];
-        fetchRequest.sortDescriptors = sortArray;
-        fetchRequest.returnsObjectsAsFaults = NO;
-        fetchRequest.fetchBatchSize = 6;
-        
-        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:manager.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
-        _fetchedResultsController.delegate = self;
-        
-        [_fetchedResultsController performFetch:nil];
-    }
-    return _fetchedResultsController;
 }
 
 #pragma mark - 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSUInteger count = [[self.fetchedResultsController.sections objectAtIndex:0] numberOfObjects];
-    return count;
+    return self.messageList.count;
 }
 
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    SAMessage *message = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    SAMessage *message = [self.messageList objectAtIndex:indexPath.row];
     JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     if ([message.sender.userID isEqualToString:self.senderId]) {
         cell.textView.textColor = [UIColor whiteColor];
@@ -139,7 +136,8 @@ static NSString *const ENTITY_NAME = @"SAMessage";
 
 - (id<JSQMessageData>)collectionView:(JSQMessagesCollectionView *)collectionView messageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    SAMessage *originalMessage = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    SAMessage *originalMessage = [self.messageList objectAtIndex:indexPath.row];
+
     JSQMessage *message = [[JSQMessage alloc] initWithSenderId:originalMessage.sender.userID senderDisplayName:originalMessage.sender.name date:originalMessage.createdAt text:originalMessage.text];
     return message;
 }
@@ -151,7 +149,7 @@ static NSString *const ENTITY_NAME = @"SAMessage";
 
 - (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    SAMessage *message = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    SAMessage *message = [self.messageList objectAtIndex:indexPath.row];
     if ([message.sender.userID isEqualToString:self.senderId]) {
         return self.outgoingBubbleImageData;
     }
@@ -173,7 +171,7 @@ static NSString *const ENTITY_NAME = @"SAMessage";
 {
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     
-    SAMessage *lastMessage = self.fetchedResultsController.fetchedObjects.lastObject;
+    SAMessage *lastMessage = self.messageList.lastObject;
     NSString *replyToMessageID = nil;
     if (![lastMessage.sender.userID isEqualToString:senderId]) {
         replyToMessageID = lastMessage.messageID;

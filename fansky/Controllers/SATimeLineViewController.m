@@ -1,4 +1,3 @@
-
 //
 //  TimeLineViewController.m
 //  fansky
@@ -23,7 +22,7 @@
 
 @interface SATimeLineViewController () <SATimeLineCellDelegate, SATimeLinePhotoCellDelegate>
 
-@property (strong, nonatomic) NSMutableArray *timeLineList;
+@property (strong, nonatomic) NSArray *timeLineList;
 @property (copy, nonatomic) NSString *maxID;
 @property (copy, nonatomic) NSString *selectedStatusID;
 @property (copy, nonatomic) NSString *selectedUserID;
@@ -35,6 +34,7 @@
 @implementation SATimeLineViewController
 
 static NSString *const ENTITY_NAME = @"SAStatus";
+static NSUInteger TIME_LINE_COUNT = 20;
 
 - (void)viewDidLoad
 {
@@ -42,7 +42,22 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     
     [self updateInterface];
     
+    [self getLocalData];
+    
     [self refreshData];
+}
+
+- (void)getLocalData
+{
+    NSString *userID = self.userID;
+    SAStatusTypes type = SAStatusTypeUserStatus;
+    if (!userID) {
+        SAUser *currentUser = [SADataManager sharedManager].currentUser;
+        userID = currentUser.userID;
+        type = SAStatusTypeTimeLine;
+    }
+    self.timeLineList = [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type limit:TIME_LINE_COUNT];
+    [self.tableView reloadData];
 }
 
 - (void)refreshData
@@ -53,31 +68,48 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 - (void)updateDataWithRefresh:(BOOL)refresh
 {
     if (!self.timeLineList) {
-        self.timeLineList = [[NSMutableArray alloc] init];
+        self.timeLineList = [[NSArray alloc] init];
     }
-    [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];
-    if (refresh) {
+    NSString *maxID;
+    if (!refresh) {
+        maxID = self.maxID;
+    }
+    NSString *userID = self.userID;
+    SAStatusTypes type = SAStatusTypeUserStatus;
+    if (!userID) {
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
-        [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:nil maxID:nil count:20 success:^(id data) {
-            [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:data type:SAStatusTypeTimeLine];
-            self.timeLineList = [[[SADataManager sharedManager] currentStatusWithUserID:currentUser.userID type:SAStatusTypeTimeLine limit:20] mutableCopy];
+        userID = currentUser.userID;
+        type = SAStatusTypeTimeLine;
+    }
+    void (^success)(id data) = ^(id data) {
+        [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:data type:type];
+        NSUInteger limit = TIME_LINE_COUNT;
+        if (!refresh) {
+            limit = self.timeLineList.count + TIME_LINE_COUNT;
+        }
+        self.timeLineList = [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type limit:limit];
+        if (self.timeLineList.count) {
+            SAStatus *lastStatus = [self.timeLineList lastObject];
+            self.maxID = lastStatus.statusID;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
             [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
             [self.refreshControl endRefreshing];
-        } failure:^(NSString *error) {
+        });
+    };
+    void (^failure)(NSString *error) = ^(NSString *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
             [SAMessageDisplayUtils showErrorWithMessage:error];
             [self.refreshControl endRefreshing];
-        }];
+        });
+    };
+    
+    [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];
+    if (!self.userID) {
+        [[SAAPIService sharedSingleton] timeLineWithUserID:userID sinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
     } else {
-        [[SAAPIService sharedSingleton] userTimeLineWithUserID:self.userID sinceID:nil maxID:self.maxID count:20 success:^(id data) {
-            [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:data type:SAStatusTypeUserStatus];
-            [self.tableView reloadData];
-            [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
-            [self.refreshControl endRefreshing];
-        } failure:^(NSString *error) {
-            [SAMessageDisplayUtils showErrorWithMessage:error];
-            [self.refreshControl endRefreshing];
-        }];
+        [[SAAPIService sharedSingleton] userTimeLineWithUserID:userID sinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
     }
 }
 

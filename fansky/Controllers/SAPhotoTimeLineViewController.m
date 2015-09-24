@@ -14,26 +14,29 @@
 #import "SAPhoto.h"
 #import "SADataManager+User.h"
 #import "SAUser+CoreDataProperties.h"
+#import "SAMessageDisplayUtils.h"
 #import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 
-@interface SAPhotoTimeLineViewController () <NSFetchedResultsControllerDelegate, SAPhotoTimeLineCellDelegate>
+@interface SAPhotoTimeLineViewController () <SAPhotoTimeLineCellDelegate>
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSArray *photoTimeLineList;
+@property (copy, nonatomic) NSString *maxID;
 @property (strong, nonatomic) URBMediaFocusViewController *imageViewController;
-
-@property (strong, nonatomic) NSMutableArray *itemChangeList;
 
 @end
 
 @implementation SAPhotoTimeLineViewController
 
 static NSString *const ENTITY_NAME = @"SAStatus";
+static NSUInteger PHOTO_TIME_LINE_COUNT = 20;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    [self updateData];
+    [self getLocalData];
+    
+    [self refreshData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -41,45 +44,53 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     [super didReceiveMemoryWarning];
 }
 
-- (void)updateData
+- (void)getLocalData
 {
-    SAStatus *lastStatus = self.fetchedResultsController.fetchedObjects.lastObject;
-    NSString *maxID = nil;
-    if (lastStatus) {
-        maxID = lastStatus.statusID;
+    self.photoTimeLineList = [[SADataManager sharedManager] currentPhotoTimeLineWithUserID:self.userID limit:PHOTO_TIME_LINE_COUNT];
+    [self.collectionView reloadData];
+}
+
+- (void)refreshData
+{
+    [self updateDataWithRefresh:YES];
+}
+
+- (void)updateDataWithRefresh:(BOOL)refresh
+{
+    if (!self.photoTimeLineList) {
+        self.photoTimeLineList = [[NSArray alloc] init];
     }
-    [[SAAPIService sharedSingleton] userPhotoTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:20 success:^(id data) {
+    NSString *maxID;
+    if (!refresh) {
+        maxID = self.maxID;
+    }
+    void (^success)(id data) = ^(id data) {
         [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:data type:SAStatusTypeUserStatus];
-    } failure:^(NSString *error) {
-
-    }];
+        NSUInteger limit = PHOTO_TIME_LINE_COUNT;
+        if (!refresh) {
+            limit = self.photoTimeLineList.count + PHOTO_TIME_LINE_COUNT;
+        }
+        self.photoTimeLineList = [[SADataManager sharedManager] currentPhotoTimeLineWithUserID:self.userID limit:limit];
+        if (self.photoTimeLineList.count) {
+            SAStatus *lastStatus = [self.photoTimeLineList lastObject];
+            self.maxID = lastStatus.statusID;
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.collectionView reloadData];
+            [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
+        });
+    };
+    void (^failure)(NSString *error) = ^(NSString *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [SAMessageDisplayUtils showErrorWithMessage:error];
+        });
+    };
+    
+    [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];
+    [[SAAPIService sharedSingleton] userPhotoTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:PHOTO_TIME_LINE_COUNT success:success failure:failure];
 }
 
-- (NSFetchedResultsController *)fetchedResultsController
-{
-    if (!_fetchedResultsController) {
-        SADataManager *manager = [SADataManager sharedManager];
-        
-        NSSortDescriptor *createdAtSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
-        NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
-        
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@ AND photo.imageURL != nil AND repostStatusID = nil", self.userID];
-        fetchRequest.sortDescriptors = sortArray;
-        fetchRequest.returnsObjectsAsFaults = NO;
-        fetchRequest.fetchBatchSize = 6;
-        
-        SAUser *currentUser = [SADataManager sharedManager].currentUser;
-        NSString *cacheName = [NSString stringWithFormat:@"user-%@-photo", currentUser.userID];
-        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:manager.managedObjectContext sectionNameKeyPath:nil cacheName:cacheName];
-        _fetchedResultsController.delegate = self;
-        
-        [_fetchedResultsController performFetch:nil];
-    }
-    return _fetchedResultsController;
-}
-
-#pragma mark - NSFetchedResultsControllerDelegate
+#pragma mark - UICollectionViewDataSource
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -87,58 +98,16 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     return CGSizeMake(width, width);
 }
 
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
-{
-    if (type == NSFetchedResultsChangeInsert) {
-        NSBlockOperation *blockOperation = [NSBlockOperation blockOperationWithBlock:^{
-            [self.collectionView insertItemsAtIndexPaths:@[newIndexPath]];
-        }];
-        [self.itemChangeList addObject:blockOperation];
-    }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
-{
-}
-
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-    if (!self.itemChangeList) {
-        self.itemChangeList = [[NSMutableArray alloc] init];
-    } else {
-        [self.itemChangeList removeAllObjects];
-    }
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.collectionView performBatchUpdates:^{
-        [self.itemChangeList enumerateObjectsUsingBlock:^(NSBlockOperation *blockOperation, NSUInteger idx, BOOL * _Nonnull stop) {
-            [blockOperation start];
-        }];
-    } completion:nil];
-}
-
-#pragma mark - UICollectionViewDataSource
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    NSInteger count = self.fetchedResultsController.sections.count;
-    return count;
-}
-
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    NSInteger numberOfItems = [[self.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];
-    return numberOfItems;
+    return self.photoTimeLineList.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SAPhotoTimeLineCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"SAPhotoTimeLineCell" forIndexPath:indexPath];
     if (cell) {
-        SAStatus *status = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        SAStatus *status = [self.photoTimeLineList objectAtIndex:indexPath.row];
         [cell configWithStatus:status];
         cell.delegate = self;
     }

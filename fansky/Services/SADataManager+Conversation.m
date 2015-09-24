@@ -63,4 +63,27 @@ static NSString *const ENTITY_NAME = @"SAConversation";
     return resultConversation;
 }
 
+- (NSArray *)currentConversationListWithUserID:(NSString *)userID limit:(NSUInteger)limit
+{
+    NSSortDescriptor *otherUserIDSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"otherUserID" ascending:NO];
+    NSArray *sortArray = [[NSArray alloc] initWithObjects: otherUserIDSortDescriptor, nil];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@", userID];
+    fetchRequest.sortDescriptors = sortArray;
+    fetchRequest.returnsObjectsAsFaults = NO;
+    fetchRequest.fetchBatchSize = 6;
+    fetchRequest.fetchLimit = limit;
+    
+    __block NSError *error;
+    __block NSArray *resultArray = [[NSArray alloc] init];
+    [self.managedObjectContext performBlockAndWait:^{
+        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (!error && fetchResult && fetchResult.count) {
+            resultArray = fetchResult;
+        }
+    }];
+    return resultArray;
+}
+
 @end

@@ -17,9 +17,9 @@
 #import "SAMessageViewController.h"
 #import "SAConversation+CoreDataProperties.h"
 
-@interface SAConversationViewController () <NSFetchedResultsControllerDelegate>
+@interface SAConversationViewController ()
 
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSArray *conversationList;
 @property (copy, nonatomic) NSString *selectedUserID;
 
 @end
@@ -27,6 +27,7 @@
 @implementation SAConversationViewController
 
 static NSString *const ENTITY_NAME = @"SAConversation";
+static NSUInteger CONVERSATION_LIST_COUNT = 60;
 
 - (void)viewDidLoad
 {
@@ -34,9 +35,16 @@ static NSString *const ENTITY_NAME = @"SAConversation";
     
     [self updateInterface];
     
-    [self fetchedResultsController];
+    [self getLocalData];
     
     [self refreshData];
+}
+
+- (void)getLocalData
+{
+    SAUser *currentUser = [SADataManager sharedManager].currentUser;
+    self.conversationList = [[SADataManager sharedManager] currentConversationListWithUserID:currentUser.userID limit:CONVERSATION_LIST_COUNT];
+    [self.tableView reloadData];
 }
 
 - (void)refreshData
@@ -48,10 +56,15 @@ static NSString *const ENTITY_NAME = @"SAConversation";
 {
     [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];
     
-    [[SAAPIService sharedSingleton] conversationListWithCount:60 success:^(id data) {
+    [[SAAPIService sharedSingleton] conversationListWithCount:CONVERSATION_LIST_COUNT success:^(id data) {
         [[SADataManager sharedManager] insertConversationWithObjects:data];
-        [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
-        [self.refreshControl endRefreshing];
+        SAUser *currentUser = [SADataManager sharedManager].currentUser;
+        self.conversationList = [[SADataManager sharedManager] currentConversationListWithUserID:currentUser.userID limit:CONVERSATION_LIST_COUNT];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
+            [self.refreshControl endRefreshing];
+        });
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
         [self.refreshControl endRefreshing];
@@ -72,31 +85,6 @@ static NSString *const ENTITY_NAME = @"SAConversation";
     [super didReceiveMemoryWarning];
 }
 
-- (NSFetchedResultsController *)fetchedResultsController
-{
-    if (!_fetchedResultsController) {
-        SADataManager *manager = [SADataManager sharedManager];
-        
-        NSSortDescriptor *createdAtSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"otherUserID" ascending:NO];
-        NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
-        
-        SAUser *currentUser = [SADataManager sharedManager].currentUser;
-        
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@", currentUser.userID];
-        fetchRequest.sortDescriptors = sortArray;
-        fetchRequest.returnsObjectsAsFaults = NO;
-        fetchRequest.fetchBatchSize = 6;
-        
-        NSString *cacheName = [NSString stringWithFormat:@"user-%@-conversation", currentUser.userID];
-        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:manager.managedObjectContext sectionNameKeyPath:nil cacheName:cacheName];
-        _fetchedResultsController.delegate = self;
-        
-        [_fetchedResultsController performFetch:nil];
-    }
-    return _fetchedResultsController;
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.destinationViewController isKindOfClass:[SAMessageViewController class]]) {
@@ -105,44 +93,11 @@ static NSString *const ENTITY_NAME = @"SAConversation";
     }
 }
 
-#pragma mark - NSFetchedResultsControllerDelegate
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
-{
-    if (type == NSFetchedResultsChangeInsert) {
-        if (controller.fetchedObjects.count) {
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationNone];
-        } else {
-            [self.tableView reloadData];
-        }
-    }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id<NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
-{
-}
-
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.tableView beginUpdates];
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.tableView endUpdates];
-}
-
 #pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return self.fetchedResultsController.sections.count;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger numberOfItems = [[self.fetchedResultsController.sections objectAtIndex:section] numberOfObjects];
-    return numberOfItems;
+    return self.conversationList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -152,7 +107,7 @@ static NSString *const ENTITY_NAME = @"SAConversation";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *const cellName = @"SAConversationCell";
-    SAConversation *conversation = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    SAConversation *conversation = [self.conversationList objectAtIndex:indexPath.row];
     SAConversationCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
     [cell configWithMessage:conversation];
 //    cell.delegate = self;
@@ -161,7 +116,7 @@ static NSString *const ENTITY_NAME = @"SAConversation";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SAConversation *conversation = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    SAConversation *conversation = [self.conversationList objectAtIndex:indexPath.row];
     self.selectedUserID = conversation.otherUserID;
     [self performSegueWithIdentifier:@"ConversationToMessageSegue" sender:nil];
 }
