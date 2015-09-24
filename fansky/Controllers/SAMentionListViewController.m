@@ -135,7 +135,7 @@ static NSUInteger TIME_LINE_COUNT = 20;
     NSURL *url = timeLineCell.selectedURL;
     if ([url.host isEqualToString:@"fanfou.com"]) {
         self.selectedUserID = url.lastPathComponent;
-        [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
+        [self performSegueWithIdentifier:@"MentionListToUserSegue" sender:nil];
     } else if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
         [[UIApplication sharedApplication] openURL:url];
     }
@@ -146,7 +146,7 @@ static NSUInteger TIME_LINE_COUNT = 20;
 - (void)timeLinePhotoCell:(SATimeLinePhotoCell *)timeLineCell avatarImageViewTouchUp:(id)sender
 {
     self.selectedUserID = timeLineCell.status.user.userID;
-    [self performSegueWithIdentifier:@"MentionToUserSegue" sender:nil];
+    [self performSegueWithIdentifier:@"MentionListToUserSegue" sender:nil];
 }
 
 - (void)timeLinePhotoCell:(SATimeLinePhotoCell *)timeLineCell contentImageViewTouchUp:(id)sender
@@ -163,7 +163,7 @@ static NSUInteger TIME_LINE_COUNT = 20;
     NSURL *url = timeLineCell.selectedURL;
     if ([url.host isEqualToString:@"fanfou.com"]) {
         self.selectedUserID = url.lastPathComponent;
-        [self performSegueWithIdentifier:@"MentionToUserSegue" sender:nil];
+        [self performSegueWithIdentifier:@"MentionListToUserSegue" sender:nil];
     } else if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
         [[UIApplication sharedApplication] openURL:url];
     }

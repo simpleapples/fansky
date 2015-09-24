@@ -1076,10 +1076,10 @@
         <image name="IconStop" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cOW-5L-KIN"/>
         <segue reference="iMi-TQ-GAa"/>
-        <segue reference="0Pu-GB-V4M"/>
         <segue reference="H7G-PZ-sGt"/>
+        <segue reference="cOW-5L-KIN"/>
+        <segue reference="ReM-oc-LQN"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>
