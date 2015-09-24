@@ -72,7 +72,7 @@
 
 - (void)userHeaderView:(SAUserHeaderView *)userHeaderView settingButtonTouchUp:(id)sender
 {
-    [self performSegueWithIdentifier:@"UserToSettingsNavigationSegue" sender:nil];
+    [self performSegueWithIdentifier:@"UserToSettingNavigationSegue" sender:nil];
 }
 
 @end

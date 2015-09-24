@@ -1,5 +1,5 @@
 //
-//  SASettingsViewController.h
+//  SASettingViewController.h
 //  fansky
 //
 //  Created by Zzy on 9/20/15.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SASettingsViewController : UITableViewController
+@interface SASettingViewController : UITableViewController
 
 @end

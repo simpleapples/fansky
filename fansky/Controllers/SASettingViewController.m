@@ -1,18 +1,18 @@
 //
-//  SASettingsViewController.m
+//  SASettingViewController.m
 //  fansky
 //
 //  Created by Zzy on 9/20/15.
 //  Copyright © 2015 Zzy. All rights reserved.
 //
 
-#import "SASettingsViewController.h"
+#import "SASettingViewController.h"
 
-@interface SASettingsViewController ()
+@interface SASettingViewController ()
 
 @end
 
-@implementation SASettingsViewController
+@implementation SASettingViewController
 
 - (void)viewDidLoad
 {
