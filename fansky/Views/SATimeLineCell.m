@@ -25,6 +25,17 @@
 
 @implementation SATimeLineCell
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    
+    self.usernameLabel.text = nil;
+    self.timeLabel.text = nil;
+    self.contentLabel.text = nil;
+    self.contentLabel.delegate = nil;
+    [self.avatarImageView setImage:nil];
+}
+
 - (void)configWithStatus:(SAStatus *)status
 {
     self.status = status;

@@ -19,6 +19,13 @@
 
 @implementation SAPhotoTimeLineCell
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    
+    [self.imageView setImage:nil];
+}
+
 - (void)configWithStatus:(SAStatus *)status
 {
     self.status = status;
