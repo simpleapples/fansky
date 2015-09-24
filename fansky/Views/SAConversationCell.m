@@ -25,6 +25,15 @@
 
 @implementation SAConversationCell
 
+- (void)prepareForReuse
+{
+    [super prepareForReuse];
+    
+    self.nameLabel.text = nil;
+    self.userIDLabel.text = nil;
+    [self.avatarImageView setImage:nil];
+}
+
 - (void)configWithMessage:(SAConversation *)conversation
 {
     self.conversation = conversation;
