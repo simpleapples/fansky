@@ -21,6 +21,8 @@
 		5A2365BD1B395FD200E1E73C /* SATimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2365BC1B395FD200E1E73C /* SATimeLineCell.m */; };
 		5A2365C41B39723900E1E73C /* SAAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2365C31B39723900E1E73C /* SAAPIService.m */; };
 		5A3E6C581BA441D100C589BE /* SADataManager+Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3E6C571BA441D100C589BE /* SADataManager+Status.m */; };
+		5A5C21281BB51B1100C1277F /* SAFriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5C21271BB51B1100C1277F /* SAFriendListViewController.m */; settings = {ASSET_TAGS = (); }; };
+		5A5C212B1BB52BA400C1277F /* SAFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5C212A1BB52BA400C1277F /* SAFriendCell.m */; settings = {ASSET_TAGS = (); }; };
 		5A7E1F201BA9CD67000E7E62 /* SAPhotoTimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7E1F1F1BA9CD67000E7E62 /* SAPhotoTimeLineViewController.m */; };
 		5A7E1F231BA9CDA4000E7E62 /* SAPhotoTimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7E1F221BA9CDA4000E7E62 /* SAPhotoTimeLineCell.m */; };
 		5A9AD6B01BAA6CD50058916A /* SAMessageDisplayUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */; settings = {ASSET_TAGS = (); }; };
@@ -101,6 +103,10 @@
 		5A2365C31B39723900E1E73C /* SAAPIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAPIService.m; sourceTree = "<group>"; };
 		5A3E6C561BA441D100C589BE /* SADataManager+Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SADataManager+Status.h"; sourceTree = "<group>"; };
 		5A3E6C571BA441D100C589BE /* SADataManager+Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SADataManager+Status.m"; sourceTree = "<group>"; };
+		5A5C21261BB51B1100C1277F /* SAFriendListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFriendListViewController.h; sourceTree = "<group>"; };
+		5A5C21271BB51B1100C1277F /* SAFriendListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFriendListViewController.m; sourceTree = "<group>"; };
+		5A5C21291BB52BA400C1277F /* SAFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFriendCell.h; sourceTree = "<group>"; };
+		5A5C212A1BB52BA400C1277F /* SAFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFriendCell.m; sourceTree = "<group>"; };
 		5A7E1F1E1BA9CD67000E7E62 /* SAPhotoTimeLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPhotoTimeLineViewController.h; sourceTree = "<group>"; };
 		5A7E1F1F1BA9CD67000E7E62 /* SAPhotoTimeLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPhotoTimeLineViewController.m; sourceTree = "<group>"; };
 		5A7E1F211BA9CDA4000E7E62 /* SAPhotoTimeLineCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPhotoTimeLineCell.h; sourceTree = "<group>"; };
@@ -219,6 +225,8 @@
 				5AE98AB61BAED1B400B7F105 /* SAMessageCell.m */,
 				5AE98AC41BAEE90800B7F105 /* SAConversationCell.h */,
 				5AE98AC51BAEE90800B7F105 /* SAConversationCell.m */,
+				5A5C21291BB52BA400C1277F /* SAFriendCell.h */,
+				5A5C212A1BB52BA400C1277F /* SAFriendCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -347,6 +355,8 @@
 				5AE98AB31BAED16300B7F105 /* SAConversationViewController.m */,
 				5AE98AB81BAEDF0000B7F105 /* SAMessageViewController.h */,
 				5AE98AB91BAEDF0000B7F105 /* SAMessageViewController.m */,
+				5A5C21261BB51B1100C1277F /* SAFriendListViewController.h */,
+				5A5C21271BB51B1100C1277F /* SAFriendListViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -595,6 +605,7 @@
 				5AE98ABA1BAEDF0000B7F105 /* SAMessageViewController.m in Sources */,
 				5AED4B6E1BA8429300EDBF47 /* SAUserViewController.m in Sources */,
 				5A2365C41B39723900E1E73C /* SAAPIService.m in Sources */,
+				5A5C21281BB51B1100C1277F /* SAFriendListViewController.m in Sources */,
 				5AED4B361BA6E52B00EDBF47 /* SATabBarViewController.m in Sources */,
 				5A1811C41BABF681004B6C54 /* SAUser+CoreDataProperties.m in Sources */,
 				5AE98AB71BAED1B400B7F105 /* SAMessageCell.m in Sources */,
@@ -611,6 +622,7 @@
 				5AE98ABF1BAEE3F000B7F105 /* SAConversation+CoreDataProperties.m in Sources */,
 				5AF5B1D01BA1816600C7A18A /* SADataManager.m in Sources */,
 				5AD70EF61B316A79009C5B84 /* fansky.xcdatamodeld in Sources */,
+				5A5C212B1BB52BA400C1277F /* SAFriendCell.m in Sources */,
 				5AE98AAB1BAECDAA00B7F105 /* SADataManager+Message.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -24,6 +24,10 @@
 
 - (void)unfollowUserWithID:(NSString *)userID success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
 
+- (void)userFriendsWithUserID:(NSString *)userID count:(NSUInteger)count page:(NSUInteger)page success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
+
+- (void)userFollowersWithUserID:(NSString *)userID count:(NSUInteger)count page:(NSUInteger)page success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
+
 #pragma mark - Status
 
 - (void)timeLineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;

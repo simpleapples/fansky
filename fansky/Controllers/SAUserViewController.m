@@ -46,7 +46,7 @@
     ARSegmentView *segmentView = [self valueForKey:@"segmentView"];
     segmentView.segmentControl.tintColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
     
-    self.headerHeight = 190;
+    self.headerHeight = 195;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SAMain" bundle:[NSBundle mainBundle]];
     SATimeLineViewController *timeLineViewController = [storyboard instantiateViewControllerWithIdentifier:@"SATimeLineViewController"];
     timeLineViewController.userID = self.userID;
@@ -73,6 +73,21 @@
 - (void)userHeaderView:(SAUserHeaderView *)userHeaderView settingButtonTouchUp:(id)sender
 {
     [self performSegueWithIdentifier:@"UserToSettingNavigationSegue" sender:nil];
+}
+
+- (void)userHeaderView:(SAUserHeaderView *)userHeaderView friendsCountButtonTouchUp:(id)sender
+{
+    
+}
+
+- (void)userHeaderView:(SAUserHeaderView *)userHeaderView followersCountButtonTouchUp:(id)sender
+{
+    
+}
+
+- (void)userHeaderView:(SAUserHeaderView *)userHeaderView detailButtonTouchUp:(id)sender
+{
+    
 }
 
 @end

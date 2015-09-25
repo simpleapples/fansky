@@ -32,6 +32,8 @@ NSString *const SA_API_MENTION_STATUS_PATH = @"/statuses/mentions.json";
 NSString *const SA_API_USER_SHOW_PATH = @"/users/show.json";
 NSString *const SA_API_FOLLOW_USER_PATH = @"/friendships/create.json";
 NSString *const SA_API_UNFOLLOW_USER_PATH = @"/friendships/destroy.json";
+NSString *const SA_API_USER_FRIEND_PATH = @"/users/friends.json";
+NSString *const SA_API_USER_FOLLOWER_PATH = @"/users/followers.json";
 
 NSString *const SA_API_CONVERSATION_LIST_PATH = @"/direct_messages/conversation_list.json";
 NSString *const SA_API_CONVERSATION_PATH = @"/direct_messages/conversation.json";

@@ -13,6 +13,9 @@
 @protocol SAUserHeaderViewDelegate <NSObject>
 
 - (void)userHeaderView:(SAUserHeaderView *)userHeaderView settingButtonTouchUp:(id)sender;
+- (void)userHeaderView:(SAUserHeaderView *)userHeaderView friendsCountButtonTouchUp:(id)sender;
+- (void)userHeaderView:(SAUserHeaderView *)userHeaderView followersCountButtonTouchUp:(id)sender;
+- (void)userHeaderView:(SAUserHeaderView *)userHeaderView detailButtonTouchUp:(id)sender;
 
 @end
 

@@ -18,7 +18,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userIDLabel;
-@property (weak, nonatomic) IBOutlet UILabel *descLabel;
+@property (weak, nonatomic) IBOutlet UIButton *followersCountButton;
+@property (weak, nonatomic) IBOutlet UIButton *friendsCountButton;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UIButton *modifyInfoButton;
 @property (weak, nonatomic) IBOutlet UIButton *settingButton;
@@ -61,7 +62,8 @@
 {
     self.nameLabel.text = self.user.name;
     self.userIDLabel.text = [NSString stringWithFormat:@"@%@", self.user.userID];
-    self.descLabel.text = [NSString stringWithFormat:@"%@关注者 %@关注", self.user.followersCount, self.user.friendsCount];
+    [self.friendsCountButton setTitle:[NSString stringWithFormat:@"%@ 关注", self.user.friendsCount] forState:UIControlStateNormal];
+    [self.followersCountButton setTitle:[NSString stringWithFormat:@"%@ 关注我", self.user.followersCount] forState:UIControlStateNormal];
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.user.profileImageURL]];
     if (self.isMineInfo) {
         self.followButton.hidden = YES;
@@ -117,6 +119,27 @@
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(userHeaderView:settingButtonTouchUp:)]) {
         [self.delegate userHeaderView:self settingButtonTouchUp:sender];
+    }
+}
+
+- (IBAction)friendsCountButtonTouchUp:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(userHeaderView:friendsCountButtonTouchUp:)]) {
+        [self.delegate userHeaderView:self friendsCountButtonTouchUp:sender];
+    }
+}
+
+- (IBAction)followersCountButtonTouchUp:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(userHeaderView:followersCountButtonTouchUp:)]) {
+        [self.delegate userHeaderView:self followersCountButtonTouchUp:sender];
+    }
+}
+
+- (IBAction)detailButtonTouchUp:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(userHeaderView:detailButtonTouchUp:)]) {
+        [self.delegate userHeaderView:self detailButtonTouchUp:sender];
     }
 }
 
