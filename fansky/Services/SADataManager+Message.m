@@ -96,7 +96,7 @@ static NSString *const ENTITY_NAME = @"SAMessage";
 
 - (NSArray *)currentMessageWithUserID:(NSString *)userID localUserID:(NSString *)localUserID limit:(NSUInteger)limit
 {
-    NSSortDescriptor *createdAtSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:YES];
+    NSSortDescriptor *createdAtSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
     NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
@@ -111,7 +111,7 @@ static NSString *const ENTITY_NAME = @"SAMessage";
     [self.managedObjectContext performBlockAndWait:^{
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
         if (!error && fetchResult && fetchResult.count) {
-            resultArray = fetchResult;
+            resultArray = [[fetchResult reverseObjectEnumerator] allObjects];
         }
     }];
     return resultArray;

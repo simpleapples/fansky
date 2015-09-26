@@ -179,6 +179,8 @@ static NSUInteger MESSAGE_LIST_COUNT = 20;
     [[SAAPIService sharedSingleton] sendMessageWithUserID:self.userID text:text replyToMessageID:replyToMessageID success:^(id data) {
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
         [[SADataManager sharedManager] insertOrUpdateMessageWithObject:data localUser:currentUser];
+        [self refreshData];
+        [self.collectionView reloadData];
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
     }];
