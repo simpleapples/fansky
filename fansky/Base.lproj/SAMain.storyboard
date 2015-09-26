@@ -938,8 +938,8 @@
                                                 <action selector="followButtonTouchUp:" destination="Jjw-zi-DJr" eventType="touchUpInside" id="5D7-QG-7rv"/>
                                             </connections>
                                         </button>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1cg-hd-W6D">
-                                            <rect key="frame" x="8" y="10" width="40" height="40"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1cg-hd-W6D">
+                                            <rect key="frame" x="10" y="10" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="9yP-iT-nz6"/>
                                                 <constraint firstAttribute="height" constant="40" id="d9n-B7-MhY"/>
