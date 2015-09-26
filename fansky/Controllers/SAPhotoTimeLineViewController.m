@@ -75,15 +75,11 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 20;
             SAStatus *lastStatus = [self.photoTimeLineList lastObject];
             self.maxID = lastStatus.statusID;
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
-            [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
-        });
+        [self.collectionView reloadData];
+        [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SAMessageDisplayUtils showErrorWithMessage:error];
-        });
+        [SAMessageDisplayUtils showErrorWithMessage:error];
     };
     
     [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];

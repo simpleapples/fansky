@@ -92,10 +92,8 @@ static NSUInteger MESSAGE_LIST_COUNT = 20;
     [[SAAPIService sharedSingleton] conversationWithUserID:self.userID sinceID:nil maxID:maxID count:MESSAGE_LIST_COUNT success:^(id data) {
         [[SADataManager sharedManager] insertMessageWithObjects:data];
         self.messageList = [[SADataManager sharedManager] currentMessageWithUserID:self.userID localUserID:self.currentUser.userID limit:MESSAGE_LIST_COUNT];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.collectionView reloadData];
-            [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
-        });
+        [self.collectionView reloadData];
+        [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
     }];

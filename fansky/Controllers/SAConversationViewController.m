@@ -60,11 +60,9 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
         [[SADataManager sharedManager] insertConversationWithObjects:data];
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
         self.conversationList = [[SADataManager sharedManager] currentConversationListWithUserID:currentUser.userID limit:CONVERSATION_LIST_COUNT];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-            [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
-            [self.refreshControl endRefreshing];
-        });
+        [self.tableView reloadData];
+        [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
+        [self.refreshControl endRefreshing];
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
         [self.refreshControl endRefreshing];

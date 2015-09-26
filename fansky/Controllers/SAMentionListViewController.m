@@ -80,17 +80,13 @@ static NSUInteger TIME_LINE_COUNT = 20;
             SAStatus *lastStatus = [self.timeLineList lastObject];
             self.maxID = lastStatus.statusID;
         }
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.tableView reloadData];
-            [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
-            [self.refreshControl endRefreshing];
-        });
+        [self.tableView reloadData];
+        [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
+        [self.refreshControl endRefreshing];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [SAMessageDisplayUtils showErrorWithMessage:error];
-            [self.refreshControl endRefreshing];
-        });
+        [SAMessageDisplayUtils showErrorWithMessage:error];
+        [self.refreshControl endRefreshing];
     };
     
     [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];

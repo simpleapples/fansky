@@ -59,16 +59,22 @@
             NSString *token = [responseString substringWithRange:tokenRange];
             NSString *secret = [responseString substringFromIndex:endRange.location + endRange.length];
             
-            success(token, secret);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                success(token, secret);
+            });
         } else {
             NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             NSRange startRange = [responseString rangeOfString:@"<error>"];
             NSRange endRange = [responseString rangeOfString:@"</error>"];
             if (startRange.location && endRange.location && endRange.location > startRange.location) {
                 NSString *error = [responseString substringWithRange:NSMakeRange(startRange.location + startRange.length, endRange.location - startRange.location - startRange.length)];
-                failure(error);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    failure(error);
+                });
             } else {
-                failure(@"网络故障");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    failure(@"网络故障");
+                });
             }
         }
     }];
@@ -83,12 +89,18 @@
             id responseJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
             NSString *error = [responseJSON objectForKey:@"error"];
             if (responseJSON && !error && success) {
-                success(responseJSON);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    success(responseJSON);
+                });
             } else if (failure) {
-                failure(error);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    failure(error);
+                });
             }
         } else if (failure) {
-            failure(@"获取身份信息失败");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(@"获取身份信息失败");
+            });
         }
     }];
 }
@@ -174,12 +186,18 @@
                     error = [responseJSON objectForKey:@"error"];
                 }
                 if (responseJSON && !error && success) {
-                    success(responseJSON);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        success(responseJSON);
+                    });
                 } else if (failure) {
-                    failure(error);
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        failure(error);
+                    });
                 }
             } else if (failure) {
-                failure(@"网络故障");
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    failure(@"网络故障");
+                });
             }
         }];
     } else {
@@ -261,12 +279,18 @@
                 error = [responseJSON objectForKey:@"error"];
             }
             if (responseJSON && !error && success) {
-                success(responseJSON);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    success(responseJSON);
+                });
             } else if (failure) {
-                failure(error);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    failure(error);
+                });
             }
         } else if (failure) {
-            failure(@"网络故障");
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(@"网络故障");
+            });
         }
     }];
 }

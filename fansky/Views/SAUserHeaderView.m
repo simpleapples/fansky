@@ -50,9 +50,7 @@
     }
     [[SAAPIService sharedSingleton] userWithID:userID success:^(id data) {
         self.user = [[SADataManager sharedManager] insertOrUpdateUserWithExtendObject:data];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self updateInterface];
-        });
+        [self updateInterface];
     } failure:^(NSString *error) {
         
     }];
@@ -92,9 +90,7 @@
         [[SAAPIService sharedSingleton] followUserWithID:self.user.userID success:^(id data) {
             [SAMessageDisplayUtils showSuccessWithMessage:@"关注成功"];
             self.user.following = @(YES);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self updateInterface];
-            });
+            [self updateInterface];
         } failure:^(NSString *error) {
             [SAMessageDisplayUtils showErrorWithMessage:error];
         }];
@@ -102,9 +98,7 @@
         [[SAAPIService sharedSingleton] unfollowUserWithID:self.user.userID success:^(id data) {
             [SAMessageDisplayUtils showSuccessWithMessage:@"取消关注成功"];
             self.user.following = @(NO);
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self updateInterface];
-            });
+            [self updateInterface];
         } failure:^(NSString *error) {
             [SAMessageDisplayUtils showErrorWithMessage:error];
         }];
