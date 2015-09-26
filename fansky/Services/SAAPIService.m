@@ -61,7 +61,15 @@
             
             success(token, secret);
         } else {
-            failure(@"登录失败");
+            NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            NSRange startRange = [responseString rangeOfString:@"<error>"];
+            NSRange endRange = [responseString rangeOfString:@"</error>"];
+            if (startRange.location && endRange.location && endRange.location > startRange.location) {
+                NSString *error = [responseString substringWithRange:NSMakeRange(startRange.location + startRange.length, endRange.location - startRange.location - startRange.length)];
+                failure(error);
+            } else {
+                failure(@"网络故障");
+            }
         }
     }];
 }
@@ -80,7 +88,7 @@
                 failure(error);
             }
         } else if (failure) {
-            failure(@"网络故障");
+            failure(@"获取身份信息失败");
         }
     }];
 }
