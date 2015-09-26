@@ -67,12 +67,12 @@
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.user.profileImageURL]];
     if (self.isMineInfo) {
         self.followButton.hidden = YES;
-//        self.modifyInfoButton.hidden = NO;
-//        self.settingButton.hidden = NO;
+        self.modifyInfoButton.hidden = NO;
+        self.settingButton.hidden = NO;
     } else {
         self.followButton.hidden = NO;
-//        self.modifyInfoButton.hidden = YES;
-//        self.settingButton.hidden = YES;
+        self.modifyInfoButton.hidden = YES;
+        self.settingButton.hidden = YES;
     }
     if ([self.user.protected isEqualToNumber:@(YES)]) {
         self.lockImageView.hidden = NO;

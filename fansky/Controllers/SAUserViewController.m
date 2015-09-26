@@ -12,6 +12,7 @@
 #import "SADataManager+User.h"
 #import "SAUser+CoreDataProperties.h"
 #import "SAPhotoTimeLineViewController.h"
+#import "SAAPIService.h"
 #import <ARSegmentPager/ARSegmentControllerDelegate.h>
 #import <ARSegmentPager/ARSegmentView.h>
 
@@ -29,7 +30,7 @@
     }
     
     [self updateInterface];
-
+    
     [super viewDidLoad];
 }
 
@@ -37,10 +38,19 @@
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     SAUser *user = [[SADataManager sharedManager] userWithID:self.userID];
-    if ([currentUser.userID isEqualToString:user.userID]) {
-        self.title = @"我";
+    if (user) {
+        if ([currentUser.userID isEqualToString:user.userID]) {
+            self.title = @"我";
+        } else {
+            self.title = user.name;
+        }
     } else {
-        self.title = user.name;
+        [[SAAPIService sharedSingleton] userWithID:self.userID success:^(id data) {
+            SAUser *user = [[SADataManager sharedManager] insertOrUpdateUserWithExtendObject:data];
+            self.title = user.name;
+        } failure:^(NSString *error) {
+            
+        }];
     }
     
     ARSegmentView *segmentView = [self valueForKey:@"segmentView"];
