@@ -156,10 +156,6 @@
     [self performSegueWithIdentifier:@"StatusToComposeNavigationSegue" sender:sender];
 }
 
-- (IBAction)starButtonTouchUp:(id)sender
-{
-}
-
 - (IBAction)trashBarButtonTouchUp:(id)sender
 {
     [[SAAPIService sharedSingleton] deleteStatusWithID:self.statusID success:^(id data) {

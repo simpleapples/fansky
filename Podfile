@@ -9,6 +9,7 @@ pod 'TTTAttributedLabel'
 pod 'URBMediaFocusViewController'
 pod 'JDStatusBarNotification'
 pod 'JSQMessagesViewController'
+pod 'UMengAnalytics-NO-IDFA'
 
 end
 

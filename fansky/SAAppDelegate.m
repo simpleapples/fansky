@@ -8,6 +8,7 @@
 
 #import "SAAppDelegate.h"
 #import "SADataManager.h"
+#import <MobClick.h>
 
 @interface SAAppDelegate ()
 
@@ -18,6 +19,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [MobClick startWithAppkey:@"560676ece0f55a154f0002d5" reportPolicy:BATCH channelId:@"AppStore"];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
+    
     return YES;
 }
 
