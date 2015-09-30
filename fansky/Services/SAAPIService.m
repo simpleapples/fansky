@@ -42,7 +42,7 @@
     return self;
 }
 
-#pragma mark - User
+#pragma mark - Account
 
 - (void)authorizeWithUsername:(NSString *)username password:(NSString *)password success:(void (^)(NSString *, NSString *))success failure:(void (^)(NSString *))failure
 {
@@ -84,6 +84,13 @@
         }
     }];
 }
+
+- (void)accountNotificationWithSuccess:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    [self requestAPIWithPath:SA_API_ACCOUNT_NOTIFICATION_PATH method:@"GET" parametersDictionary:nil success:success failure:failure];
+}
+
+#pragma mark - User
 
 - (void)userWithID:(NSString *)userID success:(void (^)(id))success failure:(void (^)(NSString *error))failure
 {

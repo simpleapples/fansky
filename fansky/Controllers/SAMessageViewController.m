@@ -34,7 +34,7 @@
 @implementation SAMessageViewController
 
 static NSString *const ENTITY_NAME = @"SAMessage";
-static NSUInteger MESSAGE_LIST_COUNT = 20;
+static NSUInteger MESSAGE_LIST_COUNT = 40;
 
 - (void)viewDidLoad
 {

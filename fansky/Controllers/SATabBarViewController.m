@@ -8,6 +8,7 @@
 
 #import "SATabBarViewController.h"
 #import "SAUserListViewController.h"
+#import "SANotificationManager.h"
 
 @interface SATabBarViewController ()
 
@@ -18,6 +19,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[SANotificationManager sharedManager] addObserver:self forKeyPath:@"timeLineCount" options:(NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew) context:nil];
+    [[SANotificationManager sharedManager] addObserver:self forKeyPath:@"mentionCount" options:(NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew) context:nil];
+    [[SANotificationManager sharedManager] addObserver:self forKeyPath:@"messageCount" options:(NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew) context:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -30,11 +35,44 @@
     
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"timeLineCount"]) {
+        if ([SANotificationManager sharedManager].timeLineCount) {
+            NSString *badgeString = @"...";
+            if ([SANotificationManager sharedManager].timeLineCount < 60) {
+                badgeString = [NSString stringWithFormat:@"%zd", [SANotificationManager sharedManager].timeLineCount];
+            }
+            UITabBarItem *mentionItem = [self.tabBar.items objectAtIndex:0];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                mentionItem.badgeValue = badgeString;
+            });
+        }
+    } else if ([keyPath isEqualToString:@"mentionCount"]) {
+        if ([SANotificationManager sharedManager].mentionCount) {
+            NSString *badgeString = [NSString stringWithFormat:@"%zd", [SANotificationManager sharedManager].mentionCount];
+            UITabBarItem *mentionItem = [self.tabBar.items objectAtIndex:1];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                mentionItem.badgeValue = badgeString;
+            });
+        }
+    } else if ([keyPath isEqualToString:@"messageCount"]) {
+        if ([SANotificationManager sharedManager].messageCount) {
+            NSString *badgeString = [NSString stringWithFormat:@"%zd", [SANotificationManager sharedManager].messageCount];
+            UITabBarItem *messageItem = [self.tabBar.items objectAtIndex:2];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                messageItem.badgeValue = badgeString;
+            });
+        }
+    }
+}
+
 #pragma mark - UITabBarControllerDelegate
 
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
     self.navigationItem.title = item.title;
+    item.badgeValue = nil;
 }
 
 #pragma mark - EventHandler

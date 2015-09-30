@@ -12,11 +12,15 @@
 
 + (SAAPIService *)sharedSingleton;
 
-#pragma mark - User
+#pragma mark - Account
 
 - (void)authorizeWithUsername:(NSString *)username password:(NSString *)password success:(void(^)(NSString *token, NSString *secret))success failure:(void(^)(NSString *error))failure;
 
 - (void)verifyCredentialsWithToken:(NSString *)token secret:(NSString *)secret success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
+
+- (void)accountNotificationWithSuccess:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
+
+#pragma mark - User
 
 - (void)userWithID:(NSString *)userID success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
 
