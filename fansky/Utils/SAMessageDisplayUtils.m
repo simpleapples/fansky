@@ -38,8 +38,7 @@
 + (void)showInfoWithMessage:(NSString *)message
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [JDStatusBarNotification showWithStatus:message styleName:@"SAInfoMessage"];
-        [JDStatusBarNotification showActivityIndicator:YES indicatorStyle:UIActivityIndicatorViewStyleWhite];
+        [JDStatusBarNotification showWithStatus:message dismissAfter:2 styleName:@"SAInfoMessage"];
     });
 }
 
@@ -54,14 +53,14 @@
 + (void)showSuccessWithMessage:(NSString *)message
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [JDStatusBarNotification showWithStatus:message dismissAfter:3 styleName:@"SASuccessMessage"];
+        [JDStatusBarNotification showWithStatus:message dismissAfter:2 styleName:@"SASuccessMessage"];
     });
 }
 
 + (void)showErrorWithMessage:(NSString *)message
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [JDStatusBarNotification showWithStatus:message dismissAfter:3 styleName:@"SAErrorMessage"];
+        [JDStatusBarNotification showWithStatus:message dismissAfter:2 styleName:@"SAErrorMessage"];
     });
 }
 

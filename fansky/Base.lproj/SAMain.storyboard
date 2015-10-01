@@ -698,6 +698,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
+                        <outlet property="delegate" destination="OKk-EU-NVX" id="2hF-8C-KUC"/>
                         <segue destination="ieL-P1-XG7" kind="relationship" relationship="viewControllers" id="3TY-n2-7zE"/>
                         <segue destination="PDW-gp-csN" kind="relationship" relationship="viewControllers" id="pXo-Ej-HRv"/>
                         <segue destination="DHD-J2-3SL" kind="relationship" relationship="viewControllers" id="eWC-d6-eqi"/>
@@ -706,6 +707,7 @@
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tQ7-Lk-vfz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="OKk-EU-NVX" customClass="SATabBarViewControllerDelegate"/>
             </objects>
             <point key="canvasLocation" x="-153" y="359"/>
         </scene>
@@ -1159,10 +1161,10 @@
         <image name="IconStop" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="lU6-CF-20t"/>
         <segue reference="iMi-TQ-GAa"/>
+        <segue reference="H7G-PZ-sGt"/>
         <segue reference="cOW-5L-KIN"/>
-        <segue reference="ReM-oc-LQN"/>
-        <segue reference="Btz-3b-6W7"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>

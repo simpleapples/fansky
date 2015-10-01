@@ -13,4 +13,6 @@
 
 @property (copy, nonatomic) NSString *userID;
 
+- (void)refreshData;
+
 @end
