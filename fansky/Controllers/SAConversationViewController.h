@@ -10,4 +10,6 @@
 
 @interface SAConversationViewController : UITableViewController
 
+- (void)refreshData;
+
 @end

@@ -8,6 +8,7 @@
 
 #import "SAAppDelegate.h"
 #import "SADataManager.h"
+#import "SANotificationManager.h"
 #import <MobClick.h>
 
 @interface SAAppDelegate ()
@@ -28,6 +29,7 @@
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
+    [[SANotificationManager sharedManager] stopFetchNotificationCount];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -41,6 +43,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
+    [[SANotificationManager sharedManager] startFetchNotificationCount];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

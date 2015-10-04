@@ -34,7 +34,7 @@
 @implementation SAMentionListViewController
 
 static NSString *const ENTITY_NAME = @"SAStatus";
-static NSUInteger TIME_LINE_COUNT = 20;
+static NSUInteger TIME_LINE_COUNT = 40;
 
 - (void)viewDidLoad
 {

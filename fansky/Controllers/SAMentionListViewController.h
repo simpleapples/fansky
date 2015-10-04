@@ -10,4 +10,6 @@
 
 @interface SAMentionListViewController : UITableViewController
 
+- (void)refreshData;
+
 @end

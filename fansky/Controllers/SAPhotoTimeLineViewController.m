@@ -28,7 +28,7 @@
 @implementation SAPhotoTimeLineViewController
 
 static NSString *const ENTITY_NAME = @"SAStatus";
-static NSUInteger PHOTO_TIME_LINE_COUNT = 20;
+static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
 
 - (void)viewDidLoad
 {
