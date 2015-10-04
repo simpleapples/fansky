@@ -49,7 +49,7 @@
 - (void)login
 {
     self.loginButton.enabled = NO;
-    [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在登录"];
+    [SAMessageDisplayUtils showProgressWithMessage:@"正在登录"];
     
     NSString *email = self.emailTextField.text;
     NSString *password = self.passwordTextField.text;

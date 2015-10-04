@@ -76,13 +76,11 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
             self.maxID = lastStatus.statusID;
         }
         [self.collectionView reloadData];
-        [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
     };
     
-    [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];
     [[SAAPIService sharedSingleton] userPhotoTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:PHOTO_TIME_LINE_COUNT success:success failure:failure];
 }
 

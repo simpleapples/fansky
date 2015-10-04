@@ -54,14 +54,11 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
 
 - (void)updateDataWithRefresh:(BOOL)refresh
 {
-    [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];
-    
     [[SAAPIService sharedSingleton] conversationListWithCount:CONVERSATION_LIST_COUNT success:^(id data) {
         [[SADataManager sharedManager] insertConversationWithObjects:data];
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
         self.conversationList = [[SADataManager sharedManager] currentConversationListWithUserID:currentUser.userID limit:CONVERSATION_LIST_COUNT];
         [self.tableView reloadData];
-        [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
         [self.refreshControl endRefreshing];
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];

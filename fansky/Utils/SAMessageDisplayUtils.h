@@ -10,8 +10,7 @@
 
 @interface SAMessageDisplayUtils : NSObject
 
-+ (void)showActivityIndicatorWithMessage:(NSString *)message;
-+ (void)showInfoWithMessage:(NSString *)message;
++ (void)showProgressWithMessage:(NSString *)message;
 + (void)showSuccessWithMessage:(NSString *)message;
 + (void)showErrorWithMessage:(NSString *)message;
 + (void)dismiss;

@@ -73,6 +73,8 @@ static NSUInteger TIME_LINE_COUNT = 40;
     NSString *maxID;
     if (!refresh) {
         maxID = self.maxID;
+    } else {
+        [self.refreshControl beginRefreshing];
     }
     NSString *userID = self.userID;
     SAStatusTypes type = SAStatusTypeUserStatus;
@@ -93,7 +95,6 @@ static NSUInteger TIME_LINE_COUNT = 40;
             self.maxID = lastStatus.statusID;
         }
         [self.tableView reloadData];
-        [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
         [self.refreshControl endRefreshing];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
@@ -101,7 +102,6 @@ static NSUInteger TIME_LINE_COUNT = 40;
         [self.refreshControl endRefreshing];
     };
     
-    [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];
     if (!self.userID) {
         [[SAAPIService sharedSingleton] timeLineWithUserID:userID sinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
     } else {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -105,27 +105,13 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLT-zW-NIB">
-                    <rect key="frame" x="10" y="156" width="41" height="30"/>
+                    <rect key="frame" x="10" y="156" width="41" height="29"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="0 关注">
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="friendsCountButtonTouchUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="Acd-VN-06v"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1xv-iV-UGy">
-                    <rect key="frame" x="540" y="156" width="50" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="8Vh-Yv-YMp"/>
-                        <constraint firstAttribute="width" constant="50" id="Unc-En-gTq"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <state key="normal" title=" 详细" image="IconInfo">
-                        <color key="titleColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="detailButtonTouchUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="Bgc-eh-g98"/>
                     </connections>
                 </button>
             </subviews>
@@ -138,14 +124,11 @@
                 <constraint firstItem="8jo-yX-kz8" firstAttribute="leading" secondItem="knh-Eh-eIb" secondAttribute="leading" id="Mf5-Bd-56N"/>
                 <constraint firstItem="oBX-MO-GVE" firstAttribute="leading" secondItem="knh-Eh-eIb" secondAttribute="trailing" constant="5" id="O5u-SA-KGj"/>
                 <constraint firstItem="xLT-zW-NIB" firstAttribute="leading" secondItem="8jo-yX-kz8" secondAttribute="leading" id="PLy-tV-OW8"/>
-                <constraint firstItem="1xv-iV-UGy" firstAttribute="top" secondItem="xlN-K8-wkC" secondAttribute="top" id="Q4L-hP-FZi"/>
                 <constraint firstItem="Tdy-SX-wTB" firstAttribute="top" secondItem="dCq-wB-nbf" secondAttribute="top" id="SVS-N1-lIH"/>
                 <constraint firstItem="Tdy-SX-wTB" firstAttribute="top" secondItem="dCq-wB-nbf" secondAttribute="top" id="Stw-xP-8gu"/>
                 <constraint firstItem="xlN-K8-wkC" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Z0r-6Z-eIY"/>
                 <constraint firstItem="tKW-4T-klq" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="ZXZ-NU-jli"/>
                 <constraint firstItem="xLT-zW-NIB" firstAttribute="top" secondItem="8jo-yX-kz8" secondAttribute="bottom" constant="10" id="aRp-7L-P0R"/>
-                <constraint firstItem="1xv-iV-UGy" firstAttribute="trailing" secondItem="dCq-wB-nbf" secondAttribute="trailing" id="b7Q-n4-Ryv"/>
-                <constraint firstItem="1xv-iV-UGy" firstAttribute="bottom" secondItem="xlN-K8-wkC" secondAttribute="bottom" id="bRs-f5-W7R"/>
                 <constraint firstItem="Tdy-SX-wTB" firstAttribute="trailing" secondItem="dCq-wB-nbf" secondAttribute="trailing" id="bha-MB-r5b"/>
                 <constraint firstItem="8jo-yX-kz8" firstAttribute="top" secondItem="knh-Eh-eIb" secondAttribute="bottom" id="dJu-ve-pWn"/>
                 <constraint firstItem="tKW-4T-klq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="l8Q-PA-KYS"/>
@@ -155,7 +138,6 @@
                 <constraint firstItem="Tdy-SX-wTB" firstAttribute="bottom" secondItem="dCq-wB-nbf" secondAttribute="bottom" id="tdX-m8-Mxb"/>
                 <constraint firstItem="xlN-K8-wkC" firstAttribute="top" secondItem="xLT-zW-NIB" secondAttribute="top" id="ti5-RG-mpI"/>
                 <constraint firstItem="dCq-wB-nbf" firstAttribute="top" secondItem="tKW-4T-klq" secondAttribute="top" id="uSo-OK-mmO"/>
-                <constraint firstAttribute="bottom" secondItem="1xv-iV-UGy" secondAttribute="bottom" constant="10" id="us4-NF-aiz"/>
                 <constraint firstItem="xlN-K8-wkC" firstAttribute="bottom" secondItem="xLT-zW-NIB" secondAttribute="bottom" id="vDk-RK-9az"/>
                 <constraint firstItem="dCq-wB-nbf" firstAttribute="trailing" secondItem="knh-Eh-eIb" secondAttribute="trailing" id="vrP-7B-AcV"/>
                 <constraint firstItem="oBX-MO-GVE" firstAttribute="bottom" secondItem="knh-Eh-eIb" secondAttribute="bottom" constant="-4" id="xUl-cN-MYb"/>
@@ -170,7 +152,6 @@
                     <exclude reference="Z0r-6Z-eIY"/>
                     <exclude reference="vrP-7B-AcV"/>
                     <exclude reference="Stw-xP-8gu"/>
-                    <exclude reference="us4-NF-aiz"/>
                 </mask>
             </variation>
             <connections>
@@ -187,7 +168,6 @@
         </view>
     </objects>
     <resources>
-        <image name="IconInfo" width="11" height="11"/>
         <image name="IconLock" width="22" height="22"/>
         <image name="IconSetting" width="22" height="22"/>
     </resources>

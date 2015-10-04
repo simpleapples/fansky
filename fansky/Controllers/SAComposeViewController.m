@@ -85,7 +85,7 @@
 - (void)send
 {
     NSData *imageData = UIImageJPEGRepresentation(self.uploadImage, 0.8);
-    [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在发送"];
+    [SAMessageDisplayUtils showProgressWithMessage:@"正在发送"];
     [[SAAPIService sharedSingleton] sendStatus:self.contentTextView.text replyToStatusID:self.replyToStatusID repostStatusID:self.repostStatusID image:imageData success:^(id data) {
         [SAMessageDisplayUtils showSuccessWithMessage:@"发送完成"];
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
@@ -204,7 +204,7 @@
 - (IBAction)sendButtonTouchUp:(id)sender
 {
     if (!self.contentTextView.text.length) {
-        [SAMessageDisplayUtils showInfoWithMessage:@"说点什么吧"];
+        [SAMessageDisplayUtils showErrorWithMessage:@"说点什么吧"];
         return;
     } else if (self.contentTextView.text.length > 140) {
         [self.view endEditing:YES];

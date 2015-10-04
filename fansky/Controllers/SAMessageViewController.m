@@ -83,8 +83,6 @@ static NSUInteger MESSAGE_LIST_COUNT = 40;
 
 - (void)updateDataWithRefresh:(BOOL)refresh
 {
-    [SAMessageDisplayUtils showActivityIndicatorWithMessage:@"正在刷新"];
-    
     NSString *maxID;
     if (!refresh) {
         maxID = self.maxID;
@@ -93,7 +91,6 @@ static NSUInteger MESSAGE_LIST_COUNT = 40;
         [[SADataManager sharedManager] insertMessageWithObjects:data];
         self.messageList = [[SADataManager sharedManager] currentMessageWithUserID:self.userID localUserID:self.currentUser.userID limit:MESSAGE_LIST_COUNT];
         [self.collectionView reloadData];
-        [SAMessageDisplayUtils showSuccessWithMessage:@"刷新完成"];
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
     }];

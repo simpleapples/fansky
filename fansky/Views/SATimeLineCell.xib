@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -16,6 +16,7 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lnm-D3-GSg">
                         <rect key="frame" x="10" y="10" width="44" height="44"/>
+                        <animations/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="width" constant="44" id="UvV-CK-yWg"/>
@@ -30,6 +31,7 @@
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kaf-EG-HUj">
                         <rect key="frame" x="10" y="10" width="44" height="44"/>
+                        <animations/>
                         <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -39,6 +41,7 @@
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sel-Vi-zsx">
                         <rect key="frame" x="64" y="10" width="426" height="20"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="ipl-le-Zzq"/>
                         </constraints>
@@ -48,6 +51,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SjV-c1-VTy">
                         <rect key="frame" x="490" y="10" width="100" height="20"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="FLG-Yz-8p3"/>
                             <constraint firstAttribute="width" constant="100" id="Y38-GY-kk3"/>
@@ -63,6 +67,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cks-QO-2ZC" customClass="TTTAttributedLabel">
                         <rect key="frame" x="64" y="40" width="526" height="24"/>
+                        <animations/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -76,6 +81,7 @@
                         </connections>
                     </label>
                 </subviews>
+                <animations/>
                 <constraints>
                     <constraint firstItem="Sel-Vi-zsx" firstAttribute="top" secondItem="lnm-D3-GSg" secondAttribute="top" id="01f-Xp-lcK"/>
                     <constraint firstItem="Sel-Vi-zsx" firstAttribute="leading" secondItem="cks-QO-2ZC" secondAttribute="leading" id="5eR-2y-3lC"/>
@@ -96,6 +102,7 @@
                     <constraint firstItem="lnm-D3-GSg" firstAttribute="top" secondItem="kaf-EG-HUj" secondAttribute="top" id="xgL-QH-32e"/>
                 </constraints>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="avatarImageView" destination="lnm-D3-GSg" id="QfM-QG-Fts"/>
                 <outlet property="contentLabel" destination="cks-QO-2ZC" id="Hv3-Uy-a1B"/>
