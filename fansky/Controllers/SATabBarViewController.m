@@ -25,6 +25,13 @@
     [[SANotificationManager sharedManager] addObserver:self forKeyPath:@"messageCount" options:(NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew) context:nil];
 }
 
+- (void)dealloc
+{
+    [[SANotificationManager sharedManager] removeObserver:self forKeyPath:@"timeLineCount"];
+    [[SANotificationManager sharedManager] removeObserver:self forKeyPath:@"mentionCount"];
+    [[SANotificationManager sharedManager] removeObserver:self forKeyPath:@"messageCount"];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
