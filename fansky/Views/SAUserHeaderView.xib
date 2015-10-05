@@ -14,6 +14,7 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tKW-4T-klq">
                     <rect key="frame" x="10" y="17" width="80" height="80"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="Yhq-7z-4oj"/>
                         <constraint firstAttribute="height" constant="80" id="eAO-Lx-DWY"/>
@@ -27,6 +28,7 @@
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="载入中..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knh-Eh-eIb">
                     <rect key="frame" x="10" y="107" width="78" height="24"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="mAE-0p-AJL"/>
                     </constraints>
@@ -41,6 +43,7 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCq-wB-nbf">
                     <rect key="frame" x="510" y="17" width="80" height="30"/>
+                    <animations/>
                     <color key="backgroundColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="80" id="bqD-ZL-3GL"/>
@@ -60,8 +63,9 @@
                         <action selector="followButtonTouchUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="VKJ-Y4-QyD"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tdy-SX-wTB">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tdy-SX-wTB">
                     <rect key="frame" x="560" y="17" width="30" height="30"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Tdy-SX-wTB" secondAttribute="height" id="faD-ig-wMi"/>
                     </constraints>
@@ -72,13 +76,15 @@
                 </button>
                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconLock" translatesAutoresizingMaskIntoConstraints="NO" id="oBX-MO-GVE">
                     <rect key="frame" x="93" y="109" width="18" height="18"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="FdL-JG-XzJ"/>
                         <constraint firstAttribute="width" constant="18" id="Jua-VV-dGZ"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="载入中..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jo-yX-kz8">
-                    <rect key="frame" x="10" y="131" width="55" height="17"/>
+                    <rect key="frame" x="10" y="131" width="54.5" height="17"/>
+                    <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="IBg-wZ-rbP"/>
                         <constraint firstAttribute="width" constant="100" id="OeX-t6-HXc"/>
@@ -95,7 +101,8 @@
                     </variation>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlN-K8-wkC">
-                    <rect key="frame" x="61" y="156" width="55" height="30"/>
+                    <rect key="frame" x="61" y="156" width="55" height="29"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="0 关注我">
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -106,6 +113,7 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLT-zW-NIB">
                     <rect key="frame" x="10" y="156" width="41" height="29"/>
+                    <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="0 关注">
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -115,6 +123,7 @@
                     </connections>
                 </button>
             </subviews>
+            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="knh-Eh-eIb" firstAttribute="top" secondItem="tKW-4T-klq" secondAttribute="bottom" constant="10" id="9jU-CZ-0OA"/>
