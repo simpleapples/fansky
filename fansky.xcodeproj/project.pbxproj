@@ -115,6 +115,8 @@
 		5A7E1F221BA9CDA4000E7E62 /* SAPhotoTimeLineCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPhotoTimeLineCell.m; sourceTree = "<group>"; };
 		5A86A68A1BBBFD3B00C562E2 /* SANotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SANotificationManager.h; sourceTree = "<group>"; };
 		5A86A68B1BBBFD3B00C562E2 /* SANotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SANotificationManager.m; sourceTree = "<group>"; };
+		5A93F01D1BC24AA000C44023 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/SAMain.storyboard"; sourceTree = "<group>"; };
+		5A93F01E1BC24AA000C44023 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.xib"; sourceTree = "<group>"; };
 		5A9AD6AE1BAA6CD50058916A /* SAMessageDisplayUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessageDisplayUtils.h; sourceTree = "<group>"; };
 		5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageDisplayUtils.m; sourceTree = "<group>"; };
 		5AD70EEA1B316A79009C5B84 /* fansky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fansky.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,9 +125,7 @@
 		5AD70EF11B316A79009C5B84 /* SAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SAAppDelegate.h; sourceTree = "<group>"; };
 		5AD70EF21B316A79009C5B84 /* SAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SAAppDelegate.m; sourceTree = "<group>"; };
 		5AD70EF51B316A79009C5B84 /* fansky.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = fansky.xcdatamodel; sourceTree = "<group>"; };
-		5AD70EFB1B316A79009C5B84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/SAMain.storyboard; sourceTree = "<group>"; };
 		5AD70EFD1B316A79009C5B84 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		5AD70F001B316A79009C5B84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		5AD70F061B316A79009C5B84 /* fanskyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = fanskyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD70F0B1B316A79009C5B84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AD70F0C1B316A79009C5B84 /* fanskyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fanskyTests.m; sourceTree = "<group>"; };
@@ -497,8 +497,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
-				Base,
+				"zh-Hans",
 			);
 			mainGroup = 5AD70EE11B316A79009C5B84;
 			productRefGroup = 5AD70EEB1B316A79009C5B84 /* Products */;
@@ -661,7 +660,7 @@
 		5AD70EFA1B316A79009C5B84 /* SAMain.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				5AD70EFB1B316A79009C5B84 /* Base */,
+				5A93F01D1BC24AA000C44023 /* zh-Hans */,
 			);
 			name = SAMain.storyboard;
 			sourceTree = "<group>";
@@ -669,7 +668,7 @@
 		5AD70EFF1B316A79009C5B84 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				5AD70F001B316A79009C5B84 /* Base */,
+				5A93F01E1BC24AA000C44023 /* zh-Hans */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
