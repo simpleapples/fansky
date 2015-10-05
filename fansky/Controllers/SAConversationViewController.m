@@ -54,6 +54,9 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
 
 - (void)updateDataWithRefresh:(BOOL)refresh
 {
+    if (refresh) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
     [[SAAPIService sharedSingleton] conversationListWithCount:CONVERSATION_LIST_COUNT success:^(id data) {
         [[SADataManager sharedManager] insertConversationWithObjects:data];
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
