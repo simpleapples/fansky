@@ -172,6 +172,8 @@
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
     self.uploadImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    
+    [self.cameraButton setImage:[UIImage imageNamed:@"IconCameraCheck"] forState:UIControlStateNormal];
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

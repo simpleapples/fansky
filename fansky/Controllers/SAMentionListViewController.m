@@ -67,8 +67,6 @@ static NSUInteger TIME_LINE_COUNT = 40;
     NSString *maxID;
     if (!refresh) {
         maxID = self.maxID;
-    } else {
-        [self.refreshControl beginRefreshing];
     }
     NSString *userID = [SADataManager sharedManager].currentUser.userID;
     void (^success)(id data) = ^(id data) {

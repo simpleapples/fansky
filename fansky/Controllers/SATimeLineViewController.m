@@ -73,8 +73,6 @@ static NSUInteger TIME_LINE_COUNT = 40;
     NSString *maxID;
     if (!refresh) {
         maxID = self.maxID;
-    } else {
-        [self.refreshControl beginRefreshing];
     }
     NSString *userID = self.userID;
     SAStatusTypes type = SAStatusTypeUserStatus;
