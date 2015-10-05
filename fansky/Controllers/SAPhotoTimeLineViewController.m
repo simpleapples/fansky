@@ -63,8 +63,8 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
     NSString *maxID;
     if (!refresh) {
         maxID = self.maxID;
-    } else {
-        [self.collectionView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    } else if (self.photoTimeLineList.count) {
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
     }
     void (^success)(id data) = ^(id data) {
         [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:data type:SAStatusTypeUserStatus];

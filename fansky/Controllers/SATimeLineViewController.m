@@ -73,7 +73,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
     NSString *maxID;
     if (!refresh) {
         maxID = self.maxID;
-    } else {
+    } else if (self.timeLineList.count) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
     NSString *userID = self.userID;
