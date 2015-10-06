@@ -91,6 +91,7 @@ static NSString *const ENTITY_NAME = @"SAUser";
     NSNumber *following = [userObject objectForKey:@"following"];
     NSNumber *friendsCount = [userObject objectForKey:@"friends_count"];
     NSNumber *followersCount = [userObject objectForKey:@"followers_count"];
+    NSNumber *statusCount = [userObject objectForKey:@"statuses_count"];
     NSNumber *protected = [userObject objectForKey:@"protected"];
 
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
@@ -109,6 +110,7 @@ static NSString *const ENTITY_NAME = @"SAUser";
             existUser.following = following;
             existUser.friendsCount = friendsCount;
             existUser.followersCount = followersCount;
+            existUser.statusCount = statusCount;
             existUser.protected = protected;
             resultUser = existUser;
         } else {
@@ -121,6 +123,7 @@ static NSString *const ENTITY_NAME = @"SAUser";
                 user.following = following;
                 user.friendsCount = friendsCount;
                 user.followersCount = followersCount;
+                user.statusCount = statusCount;
                 user.protected = protected;
                 resultUser = user;
             }];

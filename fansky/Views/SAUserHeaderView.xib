@@ -104,7 +104,7 @@
                     <rect key="frame" x="61" y="156" width="55" height="29"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <state key="normal" title="0 关注我">
+                    <state key="normal" title="0 关注者">
                         <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -122,17 +122,26 @@
                         <action selector="friendsCountButtonTouchUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="Acd-VN-06v"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 消息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1d6-aV-tdw">
+                    <rect key="frame" x="126" y="156" width="40.5" height="29"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="knh-Eh-eIb" firstAttribute="top" secondItem="tKW-4T-klq" secondAttribute="bottom" constant="10" id="9jU-CZ-0OA"/>
                 <constraint firstItem="tKW-4T-klq" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-40" id="F5I-el-YkJ"/>
+                <constraint firstItem="1d6-aV-tdw" firstAttribute="leading" secondItem="xlN-K8-wkC" secondAttribute="trailing" constant="10" id="GEc-IA-ikR"/>
                 <constraint firstItem="xLT-zW-NIB" firstAttribute="top" secondItem="8jo-yX-kz8" secondAttribute="bottom" constant="8" id="GuE-Za-7mU"/>
                 <constraint firstItem="xlN-K8-wkC" firstAttribute="leading" secondItem="xLT-zW-NIB" secondAttribute="trailing" constant="10" id="GxC-jL-1lz"/>
                 <constraint firstItem="8jo-yX-kz8" firstAttribute="leading" secondItem="knh-Eh-eIb" secondAttribute="leading" id="Mf5-Bd-56N"/>
                 <constraint firstItem="oBX-MO-GVE" firstAttribute="leading" secondItem="knh-Eh-eIb" secondAttribute="trailing" constant="5" id="O5u-SA-KGj"/>
                 <constraint firstItem="xLT-zW-NIB" firstAttribute="leading" secondItem="8jo-yX-kz8" secondAttribute="leading" id="PLy-tV-OW8"/>
+                <constraint firstItem="1d6-aV-tdw" firstAttribute="top" secondItem="xlN-K8-wkC" secondAttribute="top" id="RhO-hd-BLe"/>
                 <constraint firstItem="Tdy-SX-wTB" firstAttribute="top" secondItem="dCq-wB-nbf" secondAttribute="top" id="SVS-N1-lIH"/>
                 <constraint firstItem="Tdy-SX-wTB" firstAttribute="top" secondItem="dCq-wB-nbf" secondAttribute="top" id="Stw-xP-8gu"/>
                 <constraint firstItem="xlN-K8-wkC" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Z0r-6Z-eIY"/>
@@ -147,6 +156,7 @@
                 <constraint firstItem="Tdy-SX-wTB" firstAttribute="bottom" secondItem="dCq-wB-nbf" secondAttribute="bottom" id="tdX-m8-Mxb"/>
                 <constraint firstItem="xlN-K8-wkC" firstAttribute="top" secondItem="xLT-zW-NIB" secondAttribute="top" id="ti5-RG-mpI"/>
                 <constraint firstItem="dCq-wB-nbf" firstAttribute="top" secondItem="tKW-4T-klq" secondAttribute="top" id="uSo-OK-mmO"/>
+                <constraint firstItem="1d6-aV-tdw" firstAttribute="bottom" secondItem="xlN-K8-wkC" secondAttribute="bottom" id="ui9-AY-yNN"/>
                 <constraint firstItem="xlN-K8-wkC" firstAttribute="bottom" secondItem="xLT-zW-NIB" secondAttribute="bottom" id="vDk-RK-9az"/>
                 <constraint firstItem="dCq-wB-nbf" firstAttribute="trailing" secondItem="knh-Eh-eIb" secondAttribute="trailing" id="vrP-7B-AcV"/>
                 <constraint firstItem="oBX-MO-GVE" firstAttribute="bottom" secondItem="knh-Eh-eIb" secondAttribute="bottom" constant="-4" id="xUl-cN-MYb"/>
@@ -171,6 +181,7 @@
                 <outlet property="lockImageView" destination="oBX-MO-GVE" id="Wfb-cB-3Tc"/>
                 <outlet property="nameLabel" destination="knh-Eh-eIb" id="Srz-b8-5qv"/>
                 <outlet property="settingButton" destination="Tdy-SX-wTB" id="ENZ-dQ-fm9"/>
+                <outlet property="statusCountLabel" destination="1d6-aV-tdw" id="tIf-ht-GJa"/>
                 <outlet property="userIDLabel" destination="8jo-yX-kz8" id="JT4-Bh-EUW"/>
             </connections>
             <point key="canvasLocation" x="319" y="23"/>

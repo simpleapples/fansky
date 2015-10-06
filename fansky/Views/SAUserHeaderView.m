@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *followersCountButton;
 @property (weak, nonatomic) IBOutlet UIButton *friendsCountButton;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
+@property (weak, nonatomic) IBOutlet UILabel *statusCountLabel;
 @property (weak, nonatomic) IBOutlet UIButton *settingButton;
 @property (weak, nonatomic) IBOutlet UIImageView *lockImageView;
 
@@ -73,13 +74,18 @@
     [followersString setAttributes:normalDictionay range:NSMakeRange(followersCountString.length, 3)];
     [self.followersCountButton setAttributedTitle:followersString forState:UIControlStateNormal];
     
+    NSString *statusCountString = [NSString stringWithFormat:@"%@", self.user.statusCount];
+    NSMutableAttributedString *statusString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@消息", statusCountString] attributes:boldDictionay];
+    [statusString setAttributes:normalDictionay range:NSMakeRange(statusCountString.length, 2)];
+    self.statusCountLabel.attributedText = statusString;
+    
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.user.profileImageURL]];
     if (self.isMineInfo) {
         self.followButton.hidden = YES;
-//        self.settingButton.hidden = NO;
+        self.settingButton.hidden = NO;
     } else {
         self.followButton.hidden = NO;
-//        self.settingButton.hidden = YES;
+        self.settingButton.hidden = YES;
     }
     if ([self.user.protected isEqualToNumber:@(YES)]) {
         self.lockImageView.hidden = NO;

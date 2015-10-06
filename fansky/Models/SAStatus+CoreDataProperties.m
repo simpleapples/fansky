@@ -2,7 +2,7 @@
 //  SAStatus+CoreDataProperties.m
 //  fansky
 //
-//  Created by Zzy on 9/20/15.
+//  Created by Zzy on 10/6/15.
 //  Copyright © 2015 Zzy. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,11 +14,11 @@
 @implementation SAStatus (CoreDataProperties)
 
 @dynamic createdAt;
+@dynamic repostStatusID;
 @dynamic source;
 @dynamic statusID;
 @dynamic text;
 @dynamic type;
-@dynamic repostStatusID;
 @dynamic localUser;
 @dynamic photo;
 @dynamic user;
