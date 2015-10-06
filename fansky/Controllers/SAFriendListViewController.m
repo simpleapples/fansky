@@ -7,92 +7,152 @@
 //
 
 #import "SAFriendListViewController.h"
+#import "SAMessageDisplayUtils.h"
+#import "SAAPIService.h"
+#import "SAFriend.h"
+#import "SAFriendCell.h"
+#import "SAUserViewController.h"
 
 @interface SAFriendListViewController ()
+
+@property (strong, nonatomic) NSArray *friendList;
+@property (nonatomic) NSUInteger page;
+@property (copy, nonatomic) NSString *selectedUserID;
+@property (nonatomic, getter = isCellRegistered) BOOL cellRegistered;
 
 @end
 
 @implementation SAFriendListViewController
 
-- (void)viewDidLoad {
+static NSUInteger FRIEND_LIST_COUNT = 30;
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    [self updateInterface];
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [self refreshData];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [SAMessageDisplayUtils dismiss];
+}
+
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+- (void)updateInterface
+{
+    if (self.type == SAFriendListTypeFollow) {
+        self.title = @"关注者";
+    } else if (self.type == SAFriendListTypeFriend) {
+        self.title = @"关注";
+    }
+    [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
+    self.clearsSelectionOnViewWillAppear = YES;
+    self.tableView.tableFooterView = [UIView new];
+    self.tableView.rowHeight = 60;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+- (void)refreshData
+{
+    [self updateDataWithRefresh:YES];
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+- (void)updateDataWithRefresh:(BOOL)refresh
+{
+    if (!self.friendList) {
+        self.friendList = [[NSArray alloc] init];
+    }
+    if (!refresh) {
+        self.page++;
+    } else {
+        [self.refreshControl beginRefreshing];
+        self.page = 1;
+    }
     
-    // Configure the cell...
-    
+    void (^success)(id data) = ^(id data) {
+        NSMutableArray *tempFriendList = [[NSMutableArray alloc] init];
+        NSArray *originalList = (NSArray *)data;
+        [originalList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            SAFriend *friend = [[SAFriend alloc] initWithObject:obj];
+            [tempFriendList addObject:friend];
+        }];
+        if (self.page > 1) {
+            NSMutableArray *existList = [self.friendList mutableCopy];
+            [existList addObjectsFromArray:tempFriendList];
+            self.friendList = [existList copy];
+        } else {
+            self.friendList = tempFriendList;
+        }
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+        [SAMessageDisplayUtils dismiss];
+    };
+    void (^failure)(NSString *error) = ^(NSString *error) {
+        [SAMessageDisplayUtils showErrorWithMessage:error];
+        [self.refreshControl endRefreshing];
+    };
+
+    if (self.type == SAFriendListTypeFollow) {
+        [[SAAPIService sharedSingleton] userFollowersWithUserID:self.userID count:FRIEND_LIST_COUNT page:self.page success:success failure:failure];
+    } else if (self.type == SAFriendListTypeFriend) {
+        [[SAAPIService sharedSingleton] userFriendsWithUserID:self.userID count:FRIEND_LIST_COUNT page:self.page success:success failure:failure];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[SAUserViewController class]]) {
+        SAUserViewController *userViewController = (SAUserViewController *)segue.destinationViewController;
+        userViewController.userID = self.selectedUserID;
+    }
+}
+
+#pragma mark - UITableViewDelegate
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.friendList.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *const cellName = @"SAFriendCell";
+    SAFriend *friend = [self.friendList objectAtIndex:indexPath.row];
+    SAFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
+    if (cell) {
+        [cell configWithFriend:friend];
+//        cell.delegate = self;
+    }
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SAFriend *friend = [self.friendList objectAtIndex:indexPath.row];
+    self.selectedUserID = friend.friendID;
+    [self performSegueWithIdentifier:@"FriendListToUserSegue" sender:nil];
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SAFriendCell *friendCell = (SAFriendCell *)cell;
+    [friendCell loadImage];
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (fabs(scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y) < scrollView.contentSize.height * 0.3) {
+        [self updateDataWithRefresh:NO];
+    }
 }
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -17,6 +17,7 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EH6-m5-hgu">
                         <rect key="frame" x="10" y="10" width="44" height="44"/>
+                        <animations/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="height" constant="44" id="7wA-MS-AuP"/>
@@ -31,6 +32,7 @@
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dRH-S7-m6F">
                         <rect key="frame" x="64" y="72" width="526" height="263"/>
+                        <animations/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="dRH-S7-m6F" secondAttribute="height" multiplier="2:1" id="Eqi-r5-nMf"/>
@@ -47,6 +49,7 @@
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8m-jJ-Ibh">
                         <rect key="frame" x="10" y="10" width="44" height="44"/>
+                        <animations/>
                         <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
@@ -56,6 +59,7 @@
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cD2-Vt-87e">
                         <rect key="frame" x="64" y="10" width="426" height="20"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="VsT-Ib-6sg"/>
                         </constraints>
@@ -65,6 +69,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Of-QF-XIm">
                         <rect key="frame" x="490" y="10" width="100" height="20"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="5bn-b7-ZxS"/>
                             <constraint firstAttribute="width" constant="100" id="dmp-NZ-dZz"/>
@@ -80,6 +85,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ta-BO-lFm" customClass="TTTAttributedLabel">
                         <rect key="frame" x="64" y="40" width="526" height="22"/>
+                        <animations/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -94,11 +100,13 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijl-FY-P4u">
                         <rect key="frame" x="64" y="72" width="526" height="263"/>
+                        <animations/>
                         <connections>
                             <action selector="contentImageViewTouchUp:" destination="6FZ-IE-DTy" eventType="touchUpInside" id="V3F-Aa-VLi"/>
                         </connections>
                     </button>
                 </subviews>
+                <animations/>
                 <constraints>
                     <constraint firstItem="cD2-Vt-87e" firstAttribute="top" secondItem="EH6-m5-hgu" secondAttribute="top" id="1rB-RG-LcC"/>
                     <constraint firstItem="ijl-FY-P4u" firstAttribute="top" secondItem="dRH-S7-m6F" secondAttribute="top" id="3Gw-se-TKQ"/>
@@ -126,6 +134,7 @@
                     <constraint firstItem="7Of-QF-XIm" firstAttribute="trailing" secondItem="4Ta-BO-lFm" secondAttribute="trailing" id="wYQ-8r-9Ht"/>
                 </constraints>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="avatarImageView" destination="EH6-m5-hgu" id="s0W-dh-32K"/>
                 <outlet property="contentImageView" destination="dRH-S7-m6F" id="6vQ-LD-z9C"/>

@@ -65,6 +65,7 @@
 		5AF5B1CD1BA1813A00C7A18A /* SASplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1CC1BA1813A00C7A18A /* SASplashViewController.m */; };
 		5AF5B1D01BA1816600C7A18A /* SADataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1CF1BA1816600C7A18A /* SADataManager.m */; };
 		5AF5B1D31BA181CD00C7A18A /* SADataManager+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1D21BA181CD00C7A18A /* SADataManager+User.m */; };
+		5AFF6FE21BC42BF400769995 /* SAFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFF6FE11BC42BF400769995 /* SAFriend.m */; settings = {ASSET_TAGS = (); }; };
 		A5780EF56B5B4E2B090419E4 /* Pods_fansky.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E43255F77409845B17D05D0 /* Pods_fansky.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -191,6 +192,8 @@
 		5AF5B1CF1BA1816600C7A18A /* SADataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SADataManager.m; sourceTree = "<group>"; };
 		5AF5B1D11BA181CD00C7A18A /* SADataManager+User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SADataManager+User.h"; sourceTree = "<group>"; };
 		5AF5B1D21BA181CD00C7A18A /* SADataManager+User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SADataManager+User.m"; sourceTree = "<group>"; };
+		5AFF6FE01BC42BF400769995 /* SAFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFriend.h; sourceTree = "<group>"; };
+		5AFF6FE11BC42BF400769995 /* SAFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFriend.m; sourceTree = "<group>"; };
 		BD18F73F4E7C0D5101B87468 /* Pods-fansky.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fansky.release.xcconfig"; path = "Pods/Target Support Files/Pods-fansky/Pods-fansky.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -263,6 +266,8 @@
 				5A1811B71BABF617004B6C54 /* SAStatus+CoreDataProperties.m */,
 				5A1811B81BABF617004B6C54 /* SAStatus.h */,
 				5A1811B91BABF617004B6C54 /* SAStatus.m */,
+				5AFF6FE01BC42BF400769995 /* SAFriend.h */,
+				5AFF6FE11BC42BF400769995 /* SAFriend.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -640,6 +645,7 @@
 				5AD70EF61B316A79009C5B84 /* fansky.xcdatamodeld in Sources */,
 				5A5C212B1BB52BA400C1277F /* SAFriendCell.m in Sources */,
 				5AE98AAB1BAECDAA00B7F105 /* SADataManager+Message.m in Sources */,
+				5AFF6FE21BC42BF400769995 /* SAFriend.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

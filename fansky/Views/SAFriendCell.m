@@ -7,17 +7,17 @@
 //
 
 #import "SAFriendCell.h"
-#import "SAUser+CoreDataProperties.h"
+#import "SAFriend.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SAFriendCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *userIDLabel;
+@property (weak, nonatomic) IBOutlet UILabel *friendIDLabel;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 
-@property (strong, nonatomic) SAUser *user;
+@property (strong, nonatomic) SAFriend *friend;
 
 @end
 
@@ -37,25 +37,25 @@
 - (void)prepareForReuse
 {
     self.nameLabel.text = nil;
-    self.userIDLabel.text = nil;
+    self.friendIDLabel.text = nil;
     [self.avatarImageView setImage:nil];
 }
 
-- (void)configWithUser:(SAUser *)user
+- (void)configWithFriend:(SAFriend *)friend
 {
-    self.user = user;
+    self.friend = friend;
     [self updateInterface];
 }
 
 - (void)updateInterface
 {
-    self.nameLabel.text = self.user.name;
-    self.userIDLabel.text = [NSString stringWithFormat:@"@%@", self.user.userID];
+    self.nameLabel.text = self.friend.name;
+    self.friendIDLabel.text = [NSString stringWithFormat:@"@%@", self.friend.friendID];
 }
 
 - (void)loadImage
 {
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.user.profileImageURL]];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.friend.profileImageURL]];
 }
 
 #pragma mark - EventHandler

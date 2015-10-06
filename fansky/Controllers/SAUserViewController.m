@@ -13,6 +13,7 @@
 #import "SAUser+CoreDataProperties.h"
 #import "SAPhotoTimeLineViewController.h"
 #import "SAAPIService.h"
+#import "SAFriendListViewController.h"
 #import <ARSegmentPager/ARSegmentControllerDelegate.h>
 #import <ARSegmentPager/ARSegmentView.h>
 
@@ -78,6 +79,21 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[SAFriendListViewController class]]) {
+        NSString *userID = self.userID;
+        if (!userID) {
+            SAUser *currentUser = [SADataManager sharedManager].currentUser;
+            userID = currentUser.userID;
+        }
+        NSNumber *senderValue = (NSNumber *)sender;
+        SAFriendListViewController *friendListViewController = (SAFriendListViewController *)segue.destinationViewController;
+        friendListViewController.userID = userID;
+        friendListViewController.type = senderValue.integerValue;
+    }
+}
+
 #pragma mark - SAUserHeaderViewDelegate
 
 - (void)userHeaderView:(SAUserHeaderView *)userHeaderView settingButtonTouchUp:(id)sender
@@ -87,12 +103,12 @@
 
 - (void)userHeaderView:(SAUserHeaderView *)userHeaderView friendsCountButtonTouchUp:(id)sender
 {
-    
+    [self performSegueWithIdentifier:@"UserToFriendListSegue" sender:@(SAFriendListTypeFriend)];
 }
 
 - (void)userHeaderView:(SAUserHeaderView *)userHeaderView followersCountButtonTouchUp:(id)sender
 {
-    
+    [self performSegueWithIdentifier:@"UserToFriendListSegue" sender:@(SAFriendListTypeFollow)];
 }
 
 - (void)userHeaderView:(SAUserHeaderView *)userHeaderView detailButtonTouchUp:(id)sender

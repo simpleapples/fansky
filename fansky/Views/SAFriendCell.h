@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class SAUser;
+@class SAFriend;
 
 @interface SAFriendCell : UITableViewCell
 
-- (void)configWithUser:(SAUser *)user;
+- (void)configWithFriend:(SAFriend *)friend;
 - (void)loadImage;
 
 @end
