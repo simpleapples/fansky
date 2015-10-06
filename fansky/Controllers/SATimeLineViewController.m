@@ -105,6 +105,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
     if (!self.userID) {
         [[SAAPIService sharedSingleton] timeLineWithUserID:userID sinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
     } else {
+        [SAMessageDisplayUtils showProgressWithMessage:@"正在刷新"];
         [[SAAPIService sharedSingleton] userTimeLineWithUserID:userID sinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
     }
 }
