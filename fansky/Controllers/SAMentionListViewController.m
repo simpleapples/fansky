@@ -47,6 +47,12 @@ static NSUInteger TIME_LINE_COUNT = 40;
     [self refreshData];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [SAMessageDisplayUtils dismiss];
+}
+
 - (void)getLocalData
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;

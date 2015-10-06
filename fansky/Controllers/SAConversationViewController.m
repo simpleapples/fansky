@@ -40,6 +40,12 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
     [self refreshData];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [SAMessageDisplayUtils dismiss];
+}
+
 - (void)getLocalData
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;

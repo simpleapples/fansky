@@ -39,6 +39,12 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
     [self refreshData];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [SAMessageDisplayUtils dismiss];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
