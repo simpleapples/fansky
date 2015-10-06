@@ -8,6 +8,12 @@
 
 #import "SAConstants.h"
 
+#ifdef DEBUG
+BOOL SA_DEBUG = DEBUG;
+#else
+BOOL SA_DEBUG = NO;
+#endif
+
 NSString *const SA_APP_DOMAIN = @"com.zangzhiya.fansky";
 
 NSString *const SA_API_BASE_HOST = @"fanfou.com";

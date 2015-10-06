@@ -96,6 +96,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
         }
         [self.tableView reloadData];
         [self.refreshControl endRefreshing];
+        [SAMessageDisplayUtils dismiss];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];

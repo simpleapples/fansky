@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+FOUNDATION_EXPORT BOOL SA_DEBUG;
+
 FOUNDATION_EXPORT NSString *const SA_APP_DOMAIN;
 
 FOUNDATION_EXPORT NSString *const SA_API_BASE_HOST;

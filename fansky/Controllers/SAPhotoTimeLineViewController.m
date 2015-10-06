@@ -15,13 +15,13 @@
 #import "SADataManager+User.h"
 #import "SAUser+CoreDataProperties.h"
 #import "SAMessageDisplayUtils.h"
-#import <URBMediaFocusViewController/URBMediaFocusViewController.h>
+#import "NSString+Utils.h"
+#import <MWPhotoBrowser/MWPhotoBrowser.h>
 
-@interface SAPhotoTimeLineViewController () <SAPhotoTimeLineCellDelegate>
+@interface SAPhotoTimeLineViewController () <SAPhotoTimeLineCellDelegate, MWPhotoBrowserDelegate>
 
 @property (strong, nonatomic) NSArray *photoTimeLineList;
 @property (copy, nonatomic) NSString *maxID;
-@property (strong, nonatomic) URBMediaFocusViewController *imageViewController;
 
 @end
 
@@ -78,6 +78,7 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
             self.maxID = lastStatus.statusID;
         }
         [self.collectionView reloadData];
+        [SAMessageDisplayUtils dismiss];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
@@ -142,12 +143,30 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
 
 - (void)photoTimeLineCell:(SAPhotoTimeLineCell *)photoTimeLineCell imageViewTouchUp:(id)sender
 {
-    if (!self.imageViewController){
-        self.imageViewController = [[URBMediaFocusViewController alloc] init];
-        self.imageViewController.shouldDismissOnImageTap = YES;
+    MWPhotoBrowser *photoBrowserController = [[MWPhotoBrowser alloc] initWithDelegate:self];
+    photoBrowserController.displayActionButton = YES;
+    photoBrowserController.displayNavArrows = YES;
+    [photoBrowserController setCurrentPhotoIndex:[self.collectionView indexPathForCell:photoTimeLineCell].item];
+    
+    [self.navigationController showViewController:photoBrowserController sender:nil];
+}
+
+#pragma mark - MWPhotoBrowserDelegate
+
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser
+{
+    return self.photoTimeLineList.count;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index
+{
+    if (index < self.photoTimeLineList.count) {
+        SAStatus *status = [self.photoTimeLineList objectAtIndex:index];
+        MWPhoto *photo = [[MWPhoto alloc] initWithURL:[NSURL URLWithString:status.photo.largeURL]];
+        photo.caption = [status.text flattenHTML];
+        return photo;
     }
-    NSURL *imageURL = [NSURL URLWithString:photoTimeLineCell.status.photo.largeURL];
-    [self.imageViewController showImageFromURL:imageURL fromView:self.view];
+    return nil;
 }
 
 @end

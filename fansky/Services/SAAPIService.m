@@ -10,7 +10,6 @@
 #import "SAConstants.h"
 #import "SAUser+CoreDataProperties.h"
 #import "SADataManager+User.h"
-#import <SSKeychain/SSKeychain.h>
 #import <TDOAuth/TDOAuth.h>
 
 @interface SAAPIService ()

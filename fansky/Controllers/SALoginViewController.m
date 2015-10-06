@@ -12,7 +12,6 @@
 #import "SADataManager+User.h"
 #import "SAUser+CoreDataProperties.h"
 #import "SAMessageDisplayUtils.h"
-#import <SSKeychain/SSKeychain.h>
 
 @interface SALoginViewController () <UITextFieldDelegate>
 
