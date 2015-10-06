@@ -153,7 +153,7 @@
 
 - (void)userTimeLineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *error))failure
 {
-    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userID, @"id", @(count), @"count", nil];
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userID, @"id", @(count), @"count", @"html", @"format", nil];
     if (sinceID) {
         [mutableDictionary setObject:sinceID forKey:@"since_id"];
     }
@@ -165,7 +165,7 @@
 
 - (void)sendStatus:(NSString *)status replyToStatusID:(NSString *)replyToStatusID repostStatusID:(NSString *)repostStatusID image:(NSData *)image success:(void (^)(id))success failure:(void (^)(NSString *error))failure
 {
-    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:status, @"status", @"lite", @"mode", nil];
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:status, @"status", @"lite", @"mode", @"html", @"format", nil];
     if (replyToStatusID) {
         [mutableDictionary setObject:replyToStatusID forKey:@"in_reply_to_status_id"];
     }
@@ -214,7 +214,7 @@
 
 - (void)userPhotoTimeLineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *error))failure
 {
-    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userID, @"id", @(count), @"count", @"lite", @"mode",  nil];
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:userID, @"id", @(count), @"count", @"lite", @"mode", @"html", @"format", nil];
     if (sinceID) {
         [mutableDictionary setObject:sinceID forKey:@"since_id"];
     }
@@ -231,7 +231,7 @@
 
 - (void)mentionStatusWithSinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *))failure
 {
-    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@(count), @"count", @"lite", @"mode", nil];
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@(count), @"count", @"lite", @"mode", @"html", @"format", nil];
     if (sinceID) {
         [mutableDictionary setObject:sinceID forKey:@"since_id"];
     }

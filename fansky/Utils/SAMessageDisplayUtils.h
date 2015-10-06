@@ -10,7 +10,9 @@
 
 @interface SAMessageDisplayUtils : NSObject
 
++ (void)showInfoWithMessage:(NSString *)message;
 + (void)showProgressWithMessage:(NSString *)message;
++ (void)showShimmeringWithMessage:(NSString *)message;
 + (void)showSuccessWithMessage:(NSString *)message;
 + (void)showErrorWithMessage:(NSString *)message;
 + (void)dismiss;

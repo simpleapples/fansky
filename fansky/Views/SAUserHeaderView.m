@@ -59,8 +59,20 @@
 {
     self.nameLabel.text = self.user.name;
     self.userIDLabel.text = [NSString stringWithFormat:@"@%@", self.user.userID];
-    [self.friendsCountButton setTitle:[NSString stringWithFormat:@"%@ 关注", self.user.friendsCount] forState:UIControlStateNormal];
-    [self.followersCountButton setTitle:[NSString stringWithFormat:@"%@ 关注我", self.user.followersCount] forState:UIControlStateNormal];
+
+    NSDictionary *boldDictionay = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:14], NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    NSDictionary *normalDictionay = @{NSFontAttributeName: [UIFont systemFontOfSize:12], NSForegroundColorAttributeName: [UIColor lightGrayColor]};
+    
+    NSString *friendsCountString = [NSString stringWithFormat:@"%@", self.user.friendsCount];
+    NSMutableAttributedString *friendsString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@关注", friendsCountString] attributes:boldDictionay];
+    [friendsString setAttributes:normalDictionay range:NSMakeRange(friendsCountString.length, 2)];
+    [self.friendsCountButton setAttributedTitle:friendsString forState:UIControlStateNormal];
+    
+    NSString *followersCountString = [NSString stringWithFormat:@"%@", self.user.followersCount];
+    NSMutableAttributedString *followersString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@关注者", followersCountString] attributes:boldDictionay];
+    [followersString setAttributes:normalDictionay range:NSMakeRange(followersCountString.length, 3)];
+    [self.followersCountButton setAttributedTitle:followersString forState:UIControlStateNormal];
+    
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.user.profileImageURL]];
     if (self.isMineInfo) {
         self.followButton.hidden = YES;
@@ -89,7 +101,7 @@
             self.user.following = @(YES);
             [self updateInterface];
         } failure:^(NSString *error) {
-            [SAMessageDisplayUtils showErrorWithMessage:error];
+            [SAMessageDisplayUtils showInfoWithMessage:error];
         }];
     } else {
         [[SAAPIService sharedSingleton] unfollowUserWithID:self.user.userID success:^(id data) {

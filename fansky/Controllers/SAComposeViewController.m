@@ -206,7 +206,7 @@
 - (IBAction)sendButtonTouchUp:(id)sender
 {
     if (!self.contentTextView.text.length) {
-        [SAMessageDisplayUtils showErrorWithMessage:@"说点什么吧"];
+        [SAMessageDisplayUtils showInfoWithMessage:@"说点什么吧"];
         return;
     } else if (self.contentTextView.text.length > 140) {
         [self.view endEditing:YES];

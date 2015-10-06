@@ -116,6 +116,15 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
     [photoTimeLineCell loadImage];
 }
 
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (fabs(scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y) < scrollView.contentSize.height * 0.3) {
+        [self updateDataWithRefresh:NO];
+    }
+}
+
 #pragma mark - ARSegmentControllerDelegate
 
 - (NSString *)segmentTitle
@@ -134,6 +143,7 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
 {
     if (!self.imageViewController){
         self.imageViewController = [[URBMediaFocusViewController alloc] init];
+        self.imageViewController.shouldDismissOnImageTap = YES;
     }
     NSURL *imageURL = [NSURL URLWithString:photoTimeLineCell.status.photo.largeURL];
     [self.imageViewController showImageFromURL:imageURL fromView:self.view];

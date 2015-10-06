@@ -19,5 +19,6 @@
 - (NSArray *)currentMentionTimeLineWithUserID:(NSString *)userID limit:(NSUInteger)limit;
 - (NSArray *)currentPhotoTimeLineWithUserID:(NSString *)userID limit:(NSUInteger)limit;
 - (SAStatus *)statusWithID:(NSString *)statusID;
+- (void)deleteStatusWithID:(NSString *)statusID;
 
 @end

@@ -141,6 +141,7 @@
 {
     if (!self.imageViewController){
         self.imageViewController = [[URBMediaFocusViewController alloc] init];
+        self.imageViewController.shouldDismissOnImageTap = YES;
     }
     NSURL *imageURL = [NSURL URLWithString:self.status.photo.largeURL];
     [self.imageViewController showImageFromURL:imageURL fromView:self.view];
@@ -159,6 +160,7 @@
 - (IBAction)trashBarButtonTouchUp:(id)sender
 {
     [[SAAPIService sharedSingleton] deleteStatusWithID:self.statusID success:^(id data) {
+        [[SADataManager sharedManager] deleteStatusWithID:self.statusID];
         [SAMessageDisplayUtils showSuccessWithMessage:@"删除成功"];
         [self.navigationController popViewControllerAnimated:YES];
     } failure:^(NSString *error) {

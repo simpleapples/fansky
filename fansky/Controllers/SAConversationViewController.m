@@ -131,7 +131,7 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if (fabs(scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y) < 1.f) {
+    if (fabs(scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y) < scrollView.contentSize.height * 0.3) {
         [self updateDataWithRefresh:NO];
     }
 }

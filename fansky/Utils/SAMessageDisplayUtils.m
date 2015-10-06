@@ -11,10 +11,24 @@
 
 @implementation SAMessageDisplayUtils
 
++ (void)showInfoWithMessage:(NSString *)message
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [WSProgressHUD showImage:nil status:message];
+    });
+}
+
 + (void)showProgressWithMessage:(NSString *)message
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         [WSProgressHUD showWithStatus:message];
+    });
+}
+
++ (void)showShimmeringWithMessage:(NSString *)message
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [WSProgressHUD showShimmeringString:message];
     });
 }
 

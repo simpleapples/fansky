@@ -194,4 +194,13 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     return resultStatus;
 }
 
+- (void)deleteStatusWithID:(NSString *)statusID
+{
+    SAStatus *status = [self statusWithID:statusID];
+    NSError *error;
+    if ([status validateForDelete:&error]) {
+        [self.managedObjectContext deleteObject:status];
+    }
+}
+
 @end
