@@ -84,7 +84,9 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
         [SAMessageDisplayUtils showErrorWithMessage:error];
     };
     
-    [SAMessageDisplayUtils showProgressWithMessage:@"正在刷新"];
+    if (refresh) {
+        [SAMessageDisplayUtils showProgressWithMessage:@"正在刷新"];
+    }
     [[SAAPIService sharedSingleton] userPhotoTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:PHOTO_TIME_LINE_COUNT success:success failure:failure];
 }
 
