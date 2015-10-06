@@ -21,8 +21,9 @@
 #import "TTTAttributedLabel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <URBMediaFocusViewController/URBMediaFocusViewController.h>
+#import <MobileCoreServices/UTCoreTypes.h>
 
-@interface SAStatusViewController () <TTTAttributedLabelDelegate>
+@interface SAStatusViewController () <TTTAttributedLabelDelegate, UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -51,10 +52,12 @@
 - (void)updateInterface
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
+    UIBarButtonItem *moreBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"IconMore"] style:UIBarButtonItemStyleDone target:self action:@selector(moreButtonTouchUp:)];
     if ([self.status.user.userID isEqualToString:currentUser.userID]) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"IconTrash"] style:UIBarButtonItemStyleDone target:self action:@selector(trashBarButtonTouchUp:)];
+        UIBarButtonItem *trashBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"IconTrash"] style:UIBarButtonItemStyleDone target:self action:@selector(trashBarButtonTouchUp:)];
+        self.navigationItem.rightBarButtonItems = @[trashBarButtonItem, moreBarButtonItem];
     } else {
-        self.navigationItem.rightBarButtonItem = nil;
+        self.navigationItem.rightBarButtonItem = moreBarButtonItem;
     }
     
     self.usernameLabel.text = self.status.user.name;
@@ -117,6 +120,18 @@
     }
 }
 
+#pragma mark - UIActionSheet
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == 1 && buttonIndex == 0) {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        NSString *pasteString = [self.status.text flattenHTML];
+        pasteboard.string = pasteString;
+        [SAMessageDisplayUtils showInfoWithMessage:@"已复制"];
+    }
+}
+
 #pragma mark - TTTAttributedLabelDelegate
 
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
@@ -166,6 +181,13 @@
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
     }];
+}
+
+- (IBAction)moreButtonTouchUp:(id)sender
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate: self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"复制消息", nil];
+    actionSheet.tag = 1;
+    [actionSheet showInView:self.view];
 }
 
 @end
