@@ -10,8 +10,26 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P7b-0k-ccV">
+                    <rect key="frame" x="0.0" y="20" width="480" height="44"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="aJh-qh-JZN"/>
+                    </constraints>
+                    <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <items>
+                        <navigationItem id="Jaj-7z-5JV"/>
+                    </items>
+                </navigationBar>
+            </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="P7b-0k-ccV" secondAttribute="trailing" id="DsY-28-I3q"/>
+                <constraint firstItem="P7b-0k-ccV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="G80-KB-0v5"/>
+                <constraint firstItem="P7b-0k-ccV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="z91-5a-e00"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="548" y="455"/>
