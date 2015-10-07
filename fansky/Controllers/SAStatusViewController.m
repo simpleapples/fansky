@@ -51,15 +51,6 @@
 
 - (void)updateInterface
 {
-    SAUser *currentUser = [SADataManager sharedManager].currentUser;
-    UIBarButtonItem *moreBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"IconMore"] style:UIBarButtonItemStyleDone target:self action:@selector(moreButtonTouchUp:)];
-    if ([self.status.user.userID isEqualToString:currentUser.userID]) {
-        UIBarButtonItem *trashBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"IconTrash"] style:UIBarButtonItemStyleDone target:self action:@selector(trashBarButtonTouchUp:)];
-        self.navigationItem.rightBarButtonItems = @[trashBarButtonItem, moreBarButtonItem];
-    } else {
-        self.navigationItem.rightBarButtonItem = moreBarButtonItem;
-    }
-    
     self.usernameLabel.text = self.status.user.name;
     self.contentLabel.text = self.status.text;
     self.timeLabel.text = [NSString stringWithFormat:@"%@ ∙ 通过%@", [self.status.createdAt defaultDateString], [self.status.source flattenHTML]];
@@ -124,11 +115,28 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    if (actionSheet.tag == 1 && buttonIndex == 0) {
-        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-        NSString *pasteString = [self.status.text flattenHTML];
-        pasteboard.string = pasteString;
-        [SAMessageDisplayUtils showInfoWithMessage:@"已复制"];
+    if (actionSheet.tag == 1) {
+        if (buttonIndex == 0) {
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            NSString *pasteString = [self.status.text flattenHTML];
+            pasteboard.string = pasteString;
+            [SAMessageDisplayUtils showInfoWithMessage:@"已复制"];
+        }
+    } else if (actionSheet.tag == 2) {
+        if (buttonIndex == 0) {
+            [[SAAPIService sharedSingleton] deleteStatusWithID:self.statusID success:^(id data) {
+                [[SADataManager sharedManager] deleteStatusWithID:self.statusID];
+                [SAMessageDisplayUtils showSuccessWithMessage:@"删除成功"];
+                [self.navigationController popViewControllerAnimated:YES];
+            } failure:^(NSString *error) {
+                [SAMessageDisplayUtils showErrorWithMessage:error];
+            }];
+        } else if (buttonIndex == 1) {
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            NSString *pasteString = [self.status.text flattenHTML];
+            pasteboard.string = pasteString;
+            [SAMessageDisplayUtils showInfoWithMessage:@"已复制"];
+        }
     }
 }
 
@@ -172,21 +180,17 @@
     [self performSegueWithIdentifier:@"StatusToComposeNavigationSegue" sender:sender];
 }
 
-- (IBAction)trashBarButtonTouchUp:(id)sender
-{
-    [[SAAPIService sharedSingleton] deleteStatusWithID:self.statusID success:^(id data) {
-        [[SADataManager sharedManager] deleteStatusWithID:self.statusID];
-        [SAMessageDisplayUtils showSuccessWithMessage:@"删除成功"];
-        [self.navigationController popViewControllerAnimated:YES];
-    } failure:^(NSString *error) {
-        [SAMessageDisplayUtils showErrorWithMessage:error];
-    }];
-}
-
 - (IBAction)moreButtonTouchUp:(id)sender
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate: self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"复制消息", nil];
-    actionSheet.tag = 1;
+    SAUser *currentUser = [SADataManager sharedManager].currentUser;
+    UIActionSheet *actionSheet;
+    if ([self.status.user.userID isEqualToString:currentUser.userID]) {
+        actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate: self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除消息" otherButtonTitles:@"复制消息", nil];
+        actionSheet.tag = 2;
+    } else {
+        actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate: self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"复制消息", nil];
+        actionSheet.tag = 1;
+    }
     [actionSheet showInView:self.view];
 }
 
