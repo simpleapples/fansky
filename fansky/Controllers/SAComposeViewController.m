@@ -84,7 +84,7 @@
 
 - (void)send
 {
-    NSData *imageData = UIImageJPEGRepresentation(self.uploadImage, 0.8);
+    NSData *imageData = UIImageJPEGRepresentation(self.uploadImage, 0.5);
     [SAMessageDisplayUtils showProgressWithMessage:@"正在发送"];
     [[SAAPIService sharedSingleton] sendStatus:self.contentTextView.text replyToStatusID:self.replyToStatusID repostStatusID:self.repostStatusID image:imageData success:^(id data) {
         [SAMessageDisplayUtils showSuccessWithMessage:@"发送完成"];
@@ -148,7 +148,7 @@
         [self.view endEditing:YES];
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
         imagePickerController.delegate = self;
-        imagePickerController.allowsEditing = YES;
+        imagePickerController.allowsEditing = NO;
         imagePickerController.sourceType = type;
         [self presentViewController:imagePickerController animated:YES completion:nil];
     } else if (actionSheet.tag == 2) {
@@ -171,8 +171,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
-    self.uploadImage = [info objectForKey:UIImagePickerControllerEditedImage];
-    
+    self.uploadImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     [self.cameraButton setImage:[UIImage imageNamed:@"IconCameraCheck"] forState:UIControlStateNormal];
 }
 
