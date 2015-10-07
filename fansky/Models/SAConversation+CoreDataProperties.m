@@ -2,7 +2,7 @@
 //  SAConversation+CoreDataProperties.m
 //  fansky
 //
-//  Created by Zzy on 9/20/15.
+//  Created by Zzy on 10/7/15.
 //  Copyright © 2015 Zzy. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -13,10 +13,10 @@
 
 @implementation SAConversation (CoreDataProperties)
 
-@dynamic otherUserID;
 @dynamic count;
 @dynamic newConversation;
-@dynamic message;
+@dynamic otherUserID;
 @dynamic localUser;
+@dynamic message;
 
 @end

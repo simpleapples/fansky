@@ -8,14 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		5A01639B1BA96A470065F1F1 /* TTTAttributedLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A01639A1BA96A470065F1F1 /* TTTAttributedLabel.framework */; };
+		5A0F7B071BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF41BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		5A0F7B081BC4E50500926FD4 /* SAPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF61BC4E50500926FD4 /* SAPhoto.m */; settings = {ASSET_TAGS = (); }; };
+		5A0F7B091BC4E50500926FD4 /* SAUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF81BC4E50500926FD4 /* SAUser+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		5A0F7B0A1BC4E50500926FD4 /* SAUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AFA1BC4E50500926FD4 /* SAUser.m */; settings = {ASSET_TAGS = (); }; };
+		5A0F7B0B1BC4E50500926FD4 /* SAStatus+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AFC1BC4E50500926FD4 /* SAStatus+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		5A0F7B0C1BC4E50500926FD4 /* SAStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AFE1BC4E50500926FD4 /* SAStatus.m */; settings = {ASSET_TAGS = (); }; };
+		5A0F7B0D1BC4E50500926FD4 /* SAConversation+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B001BC4E50500926FD4 /* SAConversation+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		5A0F7B0E1BC4E50500926FD4 /* SAConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B021BC4E50500926FD4 /* SAConversation.m */; settings = {ASSET_TAGS = (); }; };
+		5A0F7B0F1BC4E50500926FD4 /* SAMessage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B041BC4E50500926FD4 /* SAMessage+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		5A0F7B101BC4E50500926FD4 /* SAMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B061BC4E50500926FD4 /* SAMessage.m */; settings = {ASSET_TAGS = (); }; };
 		5A1811AD1BABED3D004B6C54 /* SAMentionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811AC1BABED3D004B6C54 /* SAMentionListViewController.m */; settings = {ASSET_TAGS = (); }; };
 		5A1811AF1BABF3AC004B6C54 /* SATimeLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1811AE1BABF3AC004B6C54 /* SATimeLineCell.xib */; settings = {ASSET_TAGS = (); }; };
-		5A1811BA1BABF617004B6C54 /* SAStatus+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811B71BABF617004B6C54 /* SAStatus+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		5A1811BB1BABF617004B6C54 /* SAStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811B91BABF617004B6C54 /* SAStatus.m */; settings = {ASSET_TAGS = (); }; };
-		5A1811C41BABF681004B6C54 /* SAUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811BD1BABF681004B6C54 /* SAUser+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		5A1811C51BABF681004B6C54 /* SAUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811BF1BABF681004B6C54 /* SAUser.m */; settings = {ASSET_TAGS = (); }; };
-		5A1811C61BABF681004B6C54 /* SAPhoto+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811C11BABF681004B6C54 /* SAPhoto+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		5A1811C71BABF681004B6C54 /* SAPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811C31BABF681004B6C54 /* SAPhoto.m */; settings = {ASSET_TAGS = (); }; };
 		5A1811CB1BAC1C40004B6C54 /* SATimeLinePhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811C91BAC1C40004B6C54 /* SATimeLinePhotoCell.m */; settings = {ASSET_TAGS = (); }; };
 		5A1811CC1BAC1C40004B6C54 /* SATimeLinePhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1811CA1BAC1C40004B6C54 /* SATimeLinePhotoCell.xib */; settings = {ASSET_TAGS = (); }; };
 		5A2365BD1B395FD200E1E73C /* SATimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2365BC1B395FD200E1E73C /* SATimeLineCell.m */; };
@@ -42,13 +46,9 @@
 		5AE5E99C1BBD02AA00DC4748 /* SATabBarViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE5E99B1BBD02AA00DC4748 /* SATabBarViewControllerDelegate.m */; settings = {ASSET_TAGS = (); }; };
 		5AE98AA81BAEB0A900B7F105 /* SASettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AA71BAEB0A900B7F105 /* SASettingViewController.m */; settings = {ASSET_TAGS = (); }; };
 		5AE98AAB1BAECDAA00B7F105 /* SADataManager+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AAA1BAECDAA00B7F105 /* SADataManager+Message.m */; settings = {ASSET_TAGS = (); }; };
-		5AE98AB01BAECE7E00B7F105 /* SAMessage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AAD1BAECE7E00B7F105 /* SAMessage+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		5AE98AB11BAECE7E00B7F105 /* SAMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AAF1BAECE7E00B7F105 /* SAMessage.m */; settings = {ASSET_TAGS = (); }; };
 		5AE98AB41BAED16300B7F105 /* SAConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AB31BAED16300B7F105 /* SAConversationViewController.m */; settings = {ASSET_TAGS = (); }; };
 		5AE98AB71BAED1B400B7F105 /* SAMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AB61BAED1B400B7F105 /* SAMessageCell.m */; settings = {ASSET_TAGS = (); }; };
 		5AE98ABA1BAEDF0000B7F105 /* SAMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AB91BAEDF0000B7F105 /* SAMessageViewController.m */; settings = {ASSET_TAGS = (); }; };
-		5AE98ABF1BAEE3F000B7F105 /* SAConversation+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98ABC1BAEE3F000B7F105 /* SAConversation+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		5AE98AC01BAEE3F000B7F105 /* SAConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98ABE1BAEE3F000B7F105 /* SAConversation.m */; settings = {ASSET_TAGS = (); }; };
 		5AE98AC31BAEE43300B7F105 /* SADataManager+Conversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AC21BAEE43300B7F105 /* SADataManager+Conversation.m */; settings = {ASSET_TAGS = (); }; };
 		5AE98AC61BAEE90800B7F105 /* SAConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AC51BAEE90800B7F105 /* SAConversationCell.m */; settings = {ASSET_TAGS = (); }; };
 		5AED4B291BA672D100EDBF47 /* SADataManager+Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B281BA672D100EDBF47 /* SADataManager+Photo.m */; };
@@ -83,21 +83,29 @@
 		3E43255F77409845B17D05D0 /* Pods_fansky.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fansky.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA0B1D52B50FFEAB4E792B5 /* Pods-fansky.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fansky.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fansky/Pods-fansky.debug.xcconfig"; sourceTree = "<group>"; };
 		5A01639A1BA96A470065F1F1 /* TTTAttributedLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TTTAttributedLabel.framework; path = "Pods/../build/Debug-iphoneos/TTTAttributedLabel.framework"; sourceTree = "<group>"; };
+		5A0F7AF31BC4E50500926FD4 /* SAPhoto+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SAPhoto+CoreDataProperties.h"; sourceTree = "<group>"; };
+		5A0F7AF41BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAPhoto+CoreDataProperties.m"; sourceTree = "<group>"; };
+		5A0F7AF51BC4E50500926FD4 /* SAPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPhoto.h; sourceTree = "<group>"; };
+		5A0F7AF61BC4E50500926FD4 /* SAPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPhoto.m; sourceTree = "<group>"; };
+		5A0F7AF71BC4E50500926FD4 /* SAUser+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SAUser+CoreDataProperties.h"; sourceTree = "<group>"; };
+		5A0F7AF81BC4E50500926FD4 /* SAUser+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAUser+CoreDataProperties.m"; sourceTree = "<group>"; };
+		5A0F7AF91BC4E50500926FD4 /* SAUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAUser.h; sourceTree = "<group>"; };
+		5A0F7AFA1BC4E50500926FD4 /* SAUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUser.m; sourceTree = "<group>"; };
+		5A0F7AFB1BC4E50500926FD4 /* SAStatus+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SAStatus+CoreDataProperties.h"; sourceTree = "<group>"; };
+		5A0F7AFC1BC4E50500926FD4 /* SAStatus+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAStatus+CoreDataProperties.m"; sourceTree = "<group>"; };
+		5A0F7AFD1BC4E50500926FD4 /* SAStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAStatus.h; sourceTree = "<group>"; };
+		5A0F7AFE1BC4E50500926FD4 /* SAStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAStatus.m; sourceTree = "<group>"; };
+		5A0F7AFF1BC4E50500926FD4 /* SAConversation+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SAConversation+CoreDataProperties.h"; sourceTree = "<group>"; };
+		5A0F7B001BC4E50500926FD4 /* SAConversation+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAConversation+CoreDataProperties.m"; sourceTree = "<group>"; };
+		5A0F7B011BC4E50500926FD4 /* SAConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAConversation.h; sourceTree = "<group>"; };
+		5A0F7B021BC4E50500926FD4 /* SAConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAConversation.m; sourceTree = "<group>"; };
+		5A0F7B031BC4E50500926FD4 /* SAMessage+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SAMessage+CoreDataProperties.h"; sourceTree = "<group>"; };
+		5A0F7B041BC4E50500926FD4 /* SAMessage+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAMessage+CoreDataProperties.m"; sourceTree = "<group>"; };
+		5A0F7B051BC4E50500926FD4 /* SAMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessage.h; sourceTree = "<group>"; };
+		5A0F7B061BC4E50500926FD4 /* SAMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessage.m; sourceTree = "<group>"; };
 		5A1811AB1BABED3D004B6C54 /* SAMentionListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMentionListViewController.h; sourceTree = "<group>"; };
 		5A1811AC1BABED3D004B6C54 /* SAMentionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMentionListViewController.m; sourceTree = "<group>"; };
 		5A1811AE1BABF3AC004B6C54 /* SATimeLineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SATimeLineCell.xib; sourceTree = "<group>"; };
-		5A1811B61BABF617004B6C54 /* SAStatus+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SAStatus+CoreDataProperties.h"; sourceTree = "<group>"; };
-		5A1811B71BABF617004B6C54 /* SAStatus+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAStatus+CoreDataProperties.m"; sourceTree = "<group>"; };
-		5A1811B81BABF617004B6C54 /* SAStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAStatus.h; sourceTree = "<group>"; };
-		5A1811B91BABF617004B6C54 /* SAStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAStatus.m; sourceTree = "<group>"; };
-		5A1811BC1BABF681004B6C54 /* SAUser+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SAUser+CoreDataProperties.h"; sourceTree = "<group>"; };
-		5A1811BD1BABF681004B6C54 /* SAUser+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAUser+CoreDataProperties.m"; sourceTree = "<group>"; };
-		5A1811BE1BABF681004B6C54 /* SAUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAUser.h; sourceTree = "<group>"; };
-		5A1811BF1BABF681004B6C54 /* SAUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUser.m; sourceTree = "<group>"; };
-		5A1811C01BABF681004B6C54 /* SAPhoto+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SAPhoto+CoreDataProperties.h"; sourceTree = "<group>"; };
-		5A1811C11BABF681004B6C54 /* SAPhoto+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAPhoto+CoreDataProperties.m"; sourceTree = "<group>"; };
-		5A1811C21BABF681004B6C54 /* SAPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPhoto.h; sourceTree = "<group>"; };
-		5A1811C31BABF681004B6C54 /* SAPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPhoto.m; sourceTree = "<group>"; };
 		5A1811C81BAC1C40004B6C54 /* SATimeLinePhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SATimeLinePhotoCell.h; sourceTree = "<group>"; };
 		5A1811C91BAC1C40004B6C54 /* SATimeLinePhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SATimeLinePhotoCell.m; sourceTree = "<group>"; };
 		5A1811CA1BAC1C40004B6C54 /* SATimeLinePhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SATimeLinePhotoCell.xib; sourceTree = "<group>"; };
@@ -147,20 +155,12 @@
 		5AE98AA71BAEB0A900B7F105 /* SASettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASettingViewController.m; sourceTree = "<group>"; };
 		5AE98AA91BAECDAA00B7F105 /* SADataManager+Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SADataManager+Message.h"; sourceTree = "<group>"; };
 		5AE98AAA1BAECDAA00B7F105 /* SADataManager+Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SADataManager+Message.m"; sourceTree = "<group>"; };
-		5AE98AAC1BAECE7E00B7F105 /* SAMessage+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SAMessage+CoreDataProperties.h"; sourceTree = "<group>"; };
-		5AE98AAD1BAECE7E00B7F105 /* SAMessage+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAMessage+CoreDataProperties.m"; sourceTree = "<group>"; };
-		5AE98AAE1BAECE7E00B7F105 /* SAMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessage.h; sourceTree = "<group>"; };
-		5AE98AAF1BAECE7E00B7F105 /* SAMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessage.m; sourceTree = "<group>"; };
 		5AE98AB21BAED16300B7F105 /* SAConversationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAConversationViewController.h; sourceTree = "<group>"; };
 		5AE98AB31BAED16300B7F105 /* SAConversationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAConversationViewController.m; sourceTree = "<group>"; };
 		5AE98AB51BAED1B400B7F105 /* SAMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessageCell.h; sourceTree = "<group>"; };
 		5AE98AB61BAED1B400B7F105 /* SAMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageCell.m; sourceTree = "<group>"; };
 		5AE98AB81BAEDF0000B7F105 /* SAMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessageViewController.h; sourceTree = "<group>"; };
 		5AE98AB91BAEDF0000B7F105 /* SAMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageViewController.m; sourceTree = "<group>"; };
-		5AE98ABB1BAEE3F000B7F105 /* SAConversation+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SAConversation+CoreDataProperties.h"; sourceTree = "<group>"; };
-		5AE98ABC1BAEE3F000B7F105 /* SAConversation+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAConversation+CoreDataProperties.m"; sourceTree = "<group>"; };
-		5AE98ABD1BAEE3F000B7F105 /* SAConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAConversation.h; sourceTree = "<group>"; };
-		5AE98ABE1BAEE3F000B7F105 /* SAConversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAConversation.m; sourceTree = "<group>"; };
 		5AE98AC11BAEE43300B7F105 /* SADataManager+Conversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SADataManager+Conversation.h"; sourceTree = "<group>"; };
 		5AE98AC21BAEE43300B7F105 /* SADataManager+Conversation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SADataManager+Conversation.m"; sourceTree = "<group>"; };
 		5AE98AC41BAEE90800B7F105 /* SAConversationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAConversationCell.h; sourceTree = "<group>"; };
@@ -246,26 +246,26 @@
 		5A2365BE1B39619100E1E73C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				5AE98ABB1BAEE3F000B7F105 /* SAConversation+CoreDataProperties.h */,
-				5AE98ABC1BAEE3F000B7F105 /* SAConversation+CoreDataProperties.m */,
-				5AE98ABD1BAEE3F000B7F105 /* SAConversation.h */,
-				5AE98ABE1BAEE3F000B7F105 /* SAConversation.m */,
-				5AE98AAC1BAECE7E00B7F105 /* SAMessage+CoreDataProperties.h */,
-				5AE98AAD1BAECE7E00B7F105 /* SAMessage+CoreDataProperties.m */,
-				5AE98AAE1BAECE7E00B7F105 /* SAMessage.h */,
-				5AE98AAF1BAECE7E00B7F105 /* SAMessage.m */,
-				5A1811BC1BABF681004B6C54 /* SAUser+CoreDataProperties.h */,
-				5A1811BD1BABF681004B6C54 /* SAUser+CoreDataProperties.m */,
-				5A1811BE1BABF681004B6C54 /* SAUser.h */,
-				5A1811BF1BABF681004B6C54 /* SAUser.m */,
-				5A1811C01BABF681004B6C54 /* SAPhoto+CoreDataProperties.h */,
-				5A1811C11BABF681004B6C54 /* SAPhoto+CoreDataProperties.m */,
-				5A1811C21BABF681004B6C54 /* SAPhoto.h */,
-				5A1811C31BABF681004B6C54 /* SAPhoto.m */,
-				5A1811B61BABF617004B6C54 /* SAStatus+CoreDataProperties.h */,
-				5A1811B71BABF617004B6C54 /* SAStatus+CoreDataProperties.m */,
-				5A1811B81BABF617004B6C54 /* SAStatus.h */,
-				5A1811B91BABF617004B6C54 /* SAStatus.m */,
+				5A0F7AF31BC4E50500926FD4 /* SAPhoto+CoreDataProperties.h */,
+				5A0F7AF41BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m */,
+				5A0F7AF51BC4E50500926FD4 /* SAPhoto.h */,
+				5A0F7AF61BC4E50500926FD4 /* SAPhoto.m */,
+				5A0F7AF71BC4E50500926FD4 /* SAUser+CoreDataProperties.h */,
+				5A0F7AF81BC4E50500926FD4 /* SAUser+CoreDataProperties.m */,
+				5A0F7AF91BC4E50500926FD4 /* SAUser.h */,
+				5A0F7AFA1BC4E50500926FD4 /* SAUser.m */,
+				5A0F7AFB1BC4E50500926FD4 /* SAStatus+CoreDataProperties.h */,
+				5A0F7AFC1BC4E50500926FD4 /* SAStatus+CoreDataProperties.m */,
+				5A0F7AFD1BC4E50500926FD4 /* SAStatus.h */,
+				5A0F7AFE1BC4E50500926FD4 /* SAStatus.m */,
+				5A0F7AFF1BC4E50500926FD4 /* SAConversation+CoreDataProperties.h */,
+				5A0F7B001BC4E50500926FD4 /* SAConversation+CoreDataProperties.m */,
+				5A0F7B011BC4E50500926FD4 /* SAConversation.h */,
+				5A0F7B021BC4E50500926FD4 /* SAConversation.m */,
+				5A0F7B031BC4E50500926FD4 /* SAMessage+CoreDataProperties.h */,
+				5A0F7B041BC4E50500926FD4 /* SAMessage+CoreDataProperties.m */,
+				5A0F7B051BC4E50500926FD4 /* SAMessage.h */,
+				5A0F7B061BC4E50500926FD4 /* SAMessage.m */,
 				5AFF6FE01BC42BF400769995 /* SAFriend.h */,
 				5AFF6FE11BC42BF400769995 /* SAFriend.m */,
 			);
@@ -598,18 +598,18 @@
 			files = (
 				5AE98AC61BAEE90800B7F105 /* SAConversationCell.m in Sources */,
 				5AD70EF31B316A79009C5B84 /* SAAppDelegate.m in Sources */,
-				5A1811C71BABF681004B6C54 /* SAPhoto.m in Sources */,
+				5A0F7B0F1BC4E50500926FD4 /* SAMessage+CoreDataProperties.m in Sources */,
 				5AE5E99C1BBD02AA00DC4748 /* SATabBarViewControllerDelegate.m in Sources */,
 				5AED4B391BA7CFE100EDBF47 /* SAStatusViewController.m in Sources */,
+				5A0F7B0B1BC4E50500926FD4 /* SAStatus+CoreDataProperties.m in Sources */,
 				5A9AD6B01BAA6CD50058916A /* SAMessageDisplayUtils.m in Sources */,
 				5A7E1F201BA9CD67000E7E62 /* SAPhotoTimeLineViewController.m in Sources */,
+				5A0F7B0A1BC4E50500926FD4 /* SAUser.m in Sources */,
 				5AED4B711BA8521B00EDBF47 /* SAUserHeaderView.m in Sources */,
-				5AE98AB11BAECE7E00B7F105 /* SAMessage.m in Sources */,
 				5AE98AA81BAEB0A900B7F105 /* SASettingViewController.m in Sources */,
-				5A1811C51BABF681004B6C54 /* SAUser.m in Sources */,
 				5AF5B1CD1BA1813A00C7A18A /* SASplashViewController.m in Sources */,
 				5A1811CB1BAC1C40004B6C54 /* SATimeLinePhotoCell.m in Sources */,
-				5AE98AB01BAECE7E00B7F105 /* SAMessage+CoreDataProperties.m in Sources */,
+				5A0F7B081BC4E50500926FD4 /* SAPhoto.m in Sources */,
 				5AF5B1CA1BA17F7B00C7A18A /* SALoginViewController.m in Sources */,
 				5AED4B331BA6E48B00EDBF47 /* SAComposeViewController.m in Sources */,
 				5ADA99E01BB2676B0068C0FF /* SAPushWithoutAnimation.m in Sources */,
@@ -621,26 +621,26 @@
 				5AE98AB41BAED16300B7F105 /* SAConversationViewController.m in Sources */,
 				5AD70F201B31716A009C5B84 /* SAConstants.m in Sources */,
 				5AF5B1D31BA181CD00C7A18A /* SADataManager+User.m in Sources */,
-				5A1811C61BABF681004B6C54 /* SAPhoto+CoreDataProperties.m in Sources */,
 				5AE98ABA1BAEDF0000B7F105 /* SAMessageViewController.m in Sources */,
 				5AED4B6E1BA8429300EDBF47 /* SAUserViewController.m in Sources */,
+				5A0F7B0E1BC4E50500926FD4 /* SAConversation.m in Sources */,
+				5A0F7B0D1BC4E50500926FD4 /* SAConversation+CoreDataProperties.m in Sources */,
 				5A2365C41B39723900E1E73C /* SAAPIService.m in Sources */,
 				5A5C21281BB51B1100C1277F /* SAFriendListViewController.m in Sources */,
 				5AED4B361BA6E52B00EDBF47 /* SATabBarViewController.m in Sources */,
-				5A1811C41BABF681004B6C54 /* SAUser+CoreDataProperties.m in Sources */,
+				5A0F7B091BC4E50500926FD4 /* SAUser+CoreDataProperties.m in Sources */,
 				5AE98AB71BAED1B400B7F105 /* SAMessageCell.m in Sources */,
-				5A1811BA1BABF617004B6C54 /* SAStatus+CoreDataProperties.m in Sources */,
+				5A0F7B071BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m in Sources */,
 				5A2365BD1B395FD200E1E73C /* SATimeLineCell.m in Sources */,
+				5A0F7B0C1BC4E50500926FD4 /* SAStatus.m in Sources */,
 				5AD70F191B316B05009C5B84 /* SATimeLineViewController.m in Sources */,
 				5AD70EF01B316A79009C5B84 /* main.m in Sources */,
 				5AED4B291BA672D100EDBF47 /* SADataManager+Photo.m in Sources */,
 				5A7E1F231BA9CDA4000E7E62 /* SAPhotoTimeLineCell.m in Sources */,
-				5A1811BB1BABF617004B6C54 /* SAStatus.m in Sources */,
 				5AF5B1C71BA17EF500C7A18A /* SAUserListViewController.m in Sources */,
 				5A86A68C1BBBFD3B00C562E2 /* SANotificationManager.m in Sources */,
-				5AE98AC01BAEE3F000B7F105 /* SAConversation.m in Sources */,
+				5A0F7B101BC4E50500926FD4 /* SAMessage.m in Sources */,
 				5AE38ADE1BA2E70F0022A35A /* SAUserCell.m in Sources */,
-				5AE98ABF1BAEE3F000B7F105 /* SAConversation+CoreDataProperties.m in Sources */,
 				5AF5B1D01BA1816600C7A18A /* SADataManager.m in Sources */,
 				5AD70EF61B316A79009C5B84 /* fansky.xcdatamodeld in Sources */,
 				5A5C212B1BB52BA400C1277F /* SAFriendCell.m in Sources */,
@@ -781,10 +781,7 @@
 				INFOPLIST_FILE = fansky/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/fansky/Libs/UMeng",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -804,10 +801,7 @@
 				INFOPLIST_FILE = fansky/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/fansky/Libs/UMeng",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
