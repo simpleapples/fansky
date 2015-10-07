@@ -71,6 +71,7 @@
         [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:range];
         [attributedString removeAttribute:NSFontAttributeName range:range];
         [attributedString addAttribute:NSFontAttributeName value:newFont range:range];
+        [attributedString addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlineStyleNone) range:range];
     }];
     [attributedString endEditing];
     self.contentLabel.text = [attributedString copy];
