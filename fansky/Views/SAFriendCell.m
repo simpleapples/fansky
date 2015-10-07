@@ -8,6 +8,8 @@
 
 #import "SAFriendCell.h"
 #import "SAFriend.h"
+#import "SAAPIService.h"
+#import "SAMessageDisplayUtils.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SAFriendCell ()
@@ -18,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 
 @property (strong, nonatomic) SAFriend *friend;
+@property (nonatomic) SAFriendCellType type;
 
 @end
 
@@ -41,9 +44,10 @@
     [self.avatarImageView setImage:nil];
 }
 
-- (void)configWithFriend:(SAFriend *)friend
+- (void)configWithFriend:(SAFriend *)friend type:(SAFriendCellType)type
 {
     self.friend = friend;
+    self.type = type;
     [self updateInterface];
 }
 
@@ -51,6 +55,16 @@
 {
     self.nameLabel.text = self.friend.name;
     self.friendIDLabel.text = [NSString stringWithFormat:@"@%@", self.friend.friendID];
+    if (self.type != SAFriendCellTypeRequest) {
+        self.followButton.hidden = NO;
+        if ([self.friend.following isEqualToNumber:@(YES)]) {
+            [self.followButton setTitle:@"取消关注" forState:UIControlStateNormal];
+        } else {
+            [self.followButton setTitle:@"+关注" forState:UIControlStateNormal];
+        }
+    } else {
+        self.followButton.hidden = YES;
+    }
 }
 
 - (void)loadImage
@@ -62,6 +76,23 @@
 
 - (IBAction)followButtonTouchUp:(id)sender
 {
+    if ([self.friend.following isEqualToNumber:@(NO)]) {
+        [[SAAPIService sharedSingleton] followUserWithID:self.friend.friendID success:^(id data) {
+            self.friend.following = @(YES);
+            [SAMessageDisplayUtils showSuccessWithMessage:@"关注成功"];
+            [self updateInterface];
+        } failure:^(NSString *error) {
+            [SAMessageDisplayUtils showInfoWithMessage:error];
+        }];
+    } else {
+        [[SAAPIService sharedSingleton] unfollowUserWithID:self.friend.friendID success:^(id data) {
+            self.friend.following = @(NO);
+            [SAMessageDisplayUtils showSuccessWithMessage:@"取消关注成功"];
+            [self updateInterface];
+        } failure:^(NSString *error) {
+            [SAMessageDisplayUtils showErrorWithMessage:error];
+        }];
+    }
 }
 
 @end

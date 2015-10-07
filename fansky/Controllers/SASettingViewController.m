@@ -8,6 +8,9 @@
 
 #import "SASettingViewController.h"
 #import "SAUserViewController.h"
+#import "SAFriendListViewController.h"
+#import "SADataManager+User.h"
+#import "SAUser+CoreDataProperties.h"
 #import <VTAcknowledgementsViewController/VTAcknowledgementsViewController.h>
 
 @interface SASettingViewController ()
@@ -37,12 +40,26 @@
     self.versionLabel.text = versionString;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[SAFriendListViewController class]]) {
+        SAUser *currentUser = [SADataManager sharedManager].currentUser;
+        SAFriendListViewController *friendListViewController = (SAFriendListViewController *)segue.destinationViewController;
+        friendListViewController.type = SAFriendListTypeRequest;
+        friendListViewController.userID = currentUser.userID;
+    }
+}
+
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UINavigationController *navigationController = (UINavigationController *)self.navigationController.presentingViewController;
-    if (indexPath.section == 1) {
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            [self performSegueWithIdentifier:@"SettingToFriendListSegue" sender:nil];
+        }
+    } else if (indexPath.section == 1) {
         if (indexPath.row == 0) {
             [self dismissViewControllerAnimated:YES completion:^{
                 SAUserViewController *userViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAUserViewController"];

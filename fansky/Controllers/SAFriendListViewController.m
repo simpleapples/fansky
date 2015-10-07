@@ -13,7 +13,7 @@
 #import "SAFriendCell.h"
 #import "SAUserViewController.h"
 
-@interface SAFriendListViewController ()
+@interface SAFriendListViewController () <UIActionSheetDelegate>
 
 @property (strong, nonatomic) NSArray *friendList;
 @property (nonatomic) NSUInteger page;
@@ -52,6 +52,8 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
         self.title = @"关注者";
     } else if (self.type == SAFriendListTypeFriend) {
         self.title = @"关注";
+    } else if (self.type == SAFriendListTypeRequest) {
+        self.title = @"关注请求";
     }
     [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
     self.clearsSelectionOnViewWillAppear = YES;
@@ -103,6 +105,8 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
         [[SAAPIService sharedSingleton] userFollowersWithUserID:self.userID count:FRIEND_LIST_COUNT page:self.page success:success failure:failure];
     } else if (self.type == SAFriendListTypeFriend) {
         [[SAAPIService sharedSingleton] userFriendsWithUserID:self.userID count:FRIEND_LIST_COUNT page:self.page success:success failure:failure];
+    } else if (self.type == SAFriendListTypeRequest) {
+        [[SAAPIService sharedSingleton] userFriendshipRequestWithCount:FRIEND_LIST_COUNT page:self.page success:success failure:failure];
     }
 }
 
@@ -127,8 +131,19 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
     SAFriend *friend = [self.friendList objectAtIndex:indexPath.row];
     SAFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
     if (cell) {
-        [cell configWithFriend:friend];
-//        cell.delegate = self;
+        SAFriendCellType cellType;
+        switch (self.type) {
+            case SAFriendListTypeFollow:
+                cellType = SAFriendCellTypeFollow;
+                break;
+            case SAFriendListTypeFriend:
+                cellType = SAFriendCellTypeFriend;
+                break;
+            case SAFriendListTypeRequest:
+                cellType = SAFriendCellTypeRequest;
+                break;
+        }
+        [cell configWithFriend:friend type:cellType];
     }
     return cell;
 }
@@ -137,7 +152,19 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
 {
     SAFriend *friend = [self.friendList objectAtIndex:indexPath.row];
     self.selectedUserID = friend.friendID;
-    [self performSegueWithIdentifier:@"FriendListToUserSegue" sender:nil];
+    if (self.type != SAFriendListTypeRequest) {
+        [self performSegueWithIdentifier:@"FriendListToUserSegue" sender:nil];
+    } else {
+        UIActionSheet *actionSheet;
+        if ([friend.following isEqualToNumber:@(YES)]) {
+            actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"忽略请求" otherButtonTitles:@"接受请求", nil];
+            actionSheet.tag = 1;
+        } else {
+            actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"忽略请求" otherButtonTitles:@"接受请求", @"接受请求并关注", nil];
+            actionSheet.tag = 2;
+        }
+        [actionSheet showInView:self.view];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -152,6 +179,37 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
 {
     if (fabs(scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y) < scrollView.contentSize.height * 0.3) {
         [self updateDataWithRefresh:NO];
+    }
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == 1 || actionSheet.tag == 2) {
+        if (buttonIndex == 0) {
+            [[SAAPIService sharedSingleton] userFriendshipDenyWithUserID:self.selectedUserID success:^(id data) {
+                [SAMessageDisplayUtils showInfoWithMessage:@"已忽略"];
+            } failure:^(NSString *error) {
+                [SAMessageDisplayUtils showInfoWithMessage:error];
+            }];
+        } else if (buttonIndex == 1) {
+            [[SAAPIService sharedSingleton] userFriendshipAcceptWithUserID:self.selectedUserID success:^(id data) {
+                [SAMessageDisplayUtils showInfoWithMessage:@"已接受"];
+            } failure:^(NSString *error) {
+                [SAMessageDisplayUtils showInfoWithMessage:error];
+            }];
+        } else if (buttonIndex == 2) {
+            [[SAAPIService sharedSingleton] userFriendshipAcceptWithUserID:self.selectedUserID success:^(id data) {
+                [[SAAPIService sharedSingleton] followUserWithID:self.selectedUserID success:^(id data) {
+                    [SAMessageDisplayUtils showInfoWithMessage:@"已关注"];
+                } failure:^(NSString *error) {
+                    [SAMessageDisplayUtils showInfoWithMessage:error];
+                }];
+            } failure:^(NSString *error) {
+                [SAMessageDisplayUtils showInfoWithMessage:error];
+            }];
+        }
     }
 }
 

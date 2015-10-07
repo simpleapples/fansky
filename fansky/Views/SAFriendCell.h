@@ -8,11 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, SAFriendCellType)
+{
+    SAFriendCellTypeFollow,
+    SAFriendCellTypeFriend,
+    SAFriendCellTypeRequest
+};
+
 @class SAFriend;
 
 @interface SAFriendCell : UITableViewCell
 
-- (void)configWithFriend:(SAFriend *)friend;
+- (void)configWithFriend:(SAFriend *)friend type:(SAFriendCellType)type;
 - (void)loadImage;
 
 @end

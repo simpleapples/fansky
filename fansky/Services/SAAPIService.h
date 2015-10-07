@@ -32,6 +32,12 @@
 
 - (void)userFollowersWithUserID:(NSString *)userID count:(NSUInteger)count page:(NSUInteger)page success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
 
+- (void)userFriendshipRequestWithCount:(NSUInteger)count page:(NSUInteger)page success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
+
+- (void)userFriendshipAcceptWithUserID:(NSString *)userID success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
+
+- (void)userFriendshipDenyWithUserID:(NSString *)userID success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
+
 #pragma mark - Status
 
 - (void)timeLineWithUserID:(NSString *)userID sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;

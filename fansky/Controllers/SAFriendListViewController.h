@@ -11,7 +11,8 @@
 typedef NS_ENUM(NSUInteger, SAFriendListType)
 {
     SAFriendListTypeFollow,
-    SAFriendListTypeFriend
+    SAFriendListTypeFriend,
+    SAFriendListTypeRequest
 };
 
 @interface SAFriendListViewController : UITableViewController

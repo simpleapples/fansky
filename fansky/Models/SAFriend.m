@@ -30,6 +30,7 @@
         self.friendID = (NSString *)[object objectForKey:@"id"];
         self.name = (NSString *)[object objectForKey:@"name"];
         self.profileImageURL = (NSString *)[object objectForKey:@"profile_image_url"];
+        self.following = (NSNumber *)[object objectForKey:@"following"];
     }
     return self;
 }

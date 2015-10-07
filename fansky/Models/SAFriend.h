@@ -13,6 +13,7 @@
 @property (copy, nonatomic, readonly) NSString *friendID;
 @property (copy, nonatomic, readonly) NSString *name;
 @property (copy, nonatomic, readonly) NSString *profileImageURL;
+@property (strong, nonatomic) NSNumber *following;
 
 - (instancetype)initWithObject:(id)object;
 

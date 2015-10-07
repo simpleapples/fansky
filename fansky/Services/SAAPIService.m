@@ -128,12 +128,28 @@
 
 - (void)userFriendsWithUserID:(NSString *)userID count:(NSUInteger)count page:(NSUInteger)page success:(void (^)(id))success failure:(void (^)(NSString *))failure
 {
-    [self requestAPIWithPath:SA_API_USER_FRIEND_PATH method:@"GET" parametersDictionary:@{@"id": userID, @"count": @(count), @"page": @(page), @"mode": @"lite"} success:success failure:failure];
+    [self requestAPIWithPath:SA_API_USER_FRIEND_PATH method:@"GET" parametersDictionary:@{@"id": userID, @"count": @(count), @"page": @(page), @"mode": @"lite", @"format": @"html"} success:success failure:failure];
 }
 
 - (void)userFollowersWithUserID:(NSString *)userID count:(NSUInteger)count page:(NSUInteger)page success:(void (^)(id))success failure:(void (^)(NSString *))failure
 {
-    [self requestAPIWithPath:SA_API_USER_FOLLOWER_PATH method:@"GET" parametersDictionary:@{@"id": userID, @"count": @(count), @"page": @(page), @"mode": @"lite"} success:success failure:failure];
+    [self requestAPIWithPath:SA_API_USER_FOLLOWER_PATH method:@"GET" parametersDictionary:@{@"id": userID, @"count": @(count), @"page": @(page), @"mode": @"lite", @"format": @"html"} success:success failure:failure];
+}
+
+- (void)userFriendshipRequestWithCount:(NSUInteger)count page:(NSUInteger)page success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    [self requestAPIWithPath:SA_API_FRIENDSHIP_REQUEST_PATH method:@"GET" parametersDictionary:@{@"count": @(count), @"page": @(page), @"mode": @"lite", @"format": @"html"} success:success failure:failure];
+}
+
+- (void)userFriendshipAcceptWithUserID:(NSString *)userID success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    [self requestAPIWithPath:SA_API_FRIENDSHIP_ACCEPT_PATH method:@"POST" parametersDictionary:@{@"id": userID, @"mode": @"lite", @"format": @"html"} success:success failure:failure];
+
+}
+
+- (void)userFriendshipDenyWithUserID:(NSString *)userID success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    [self requestAPIWithPath:SA_API_FRIENDSHIP_DENY_PATH method:@"POST" parametersDictionary:@{@"id": userID, @"mode": @"lite", @"format": @"html"} success:success failure:failure];
 }
 
 #pragma mark - Status

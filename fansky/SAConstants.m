@@ -41,6 +41,9 @@ NSString *const SA_API_FOLLOW_USER_PATH = @"/friendships/create.json";
 NSString *const SA_API_UNFOLLOW_USER_PATH = @"/friendships/destroy.json";
 NSString *const SA_API_USER_FRIEND_PATH = @"/users/friends.json";
 NSString *const SA_API_USER_FOLLOWER_PATH = @"/users/followers.json";
+NSString *const SA_API_FRIENDSHIP_REQUEST_PATH = @"/friendships/requests.json";
+NSString *const SA_API_FRIENDSHIP_DENY_PATH = @"/friendships/deny.json";
+NSString *const SA_API_FRIENDSHIP_ACCEPT_PATH = @"/friendships/accept.json";
 
 NSString *const SA_API_CONVERSATION_LIST_PATH = @"/direct_messages/conversation_list.json";
 NSString *const SA_API_CONVERSATION_PATH = @"/direct_messages/conversation.json";
