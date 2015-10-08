@@ -96,6 +96,9 @@ static NSUInteger TIME_LINE_COUNT = 40;
         [self.refreshControl endRefreshing];
     };
 
+    if (refresh) {
+        [self.refreshControl beginRefreshing];
+    }
     [[SAAPIService sharedSingleton] mentionStatusWithSinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
 }
 

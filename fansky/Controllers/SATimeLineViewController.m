@@ -109,7 +109,10 @@ static NSUInteger TIME_LINE_COUNT = 40;
         [self.refreshControl endRefreshing];
     };
     
-    if (!self.userID) {
+    if (type == SAStatusTypeTimeLine) {
+        if (refresh) {
+            [self.refreshControl beginRefreshing];
+        }
         [[SAAPIService sharedSingleton] timeLineWithUserID:userID sinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
     } else {
         [SAMessageDisplayUtils showProgressWithMessage:@"正在刷新"];

@@ -84,7 +84,10 @@
 
 - (void)send
 {
-    NSData *imageData = UIImageJPEGRepresentation(self.uploadImage, 0.5);
+    NSData *imageData;
+    if (self.uploadImage) {
+        imageData = UIImageJPEGRepresentation(self.uploadImage, 0.5);
+    }
     [SAMessageDisplayUtils showProgressWithMessage:@"正在发送"];
     [[SAAPIService sharedSingleton] sendStatus:self.contentTextView.text replyToStatusID:self.replyToStatusID repostStatusID:self.repostStatusID image:imageData success:^(id data) {
         [SAMessageDisplayUtils showSuccessWithMessage:@"发送完成"];
