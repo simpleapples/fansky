@@ -91,8 +91,6 @@
     [SAMessageDisplayUtils showProgressWithMessage:@"正在发送"];
     [[SAAPIService sharedSingleton] sendStatus:self.contentTextView.text replyToStatusID:self.replyToStatusID repostStatusID:self.repostStatusID image:imageData success:^(id data) {
         [SAMessageDisplayUtils showSuccessWithMessage:@"发送完成"];
-        SAUser *currentUser = [SADataManager sharedManager].currentUser;
-        [[SADataManager sharedManager] insertOrUpdateStatusWithObject:data localUser:currentUser type:(SAStatusTypeTimeLine & SAStatusTypeUserStatus)];
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
