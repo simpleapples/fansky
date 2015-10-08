@@ -30,12 +30,12 @@
         self.userID = currentUser.userID;
     }
     
-    [self updateInterface];
+    [self updateController];
     
     [super viewDidLoad];
 }
 
-- (void)updateInterface
+- (void)updateController
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     SAUser *user = [[SADataManager sharedManager] userWithID:self.userID];
@@ -49,11 +49,18 @@
         [[SAAPIService sharedSingleton] userWithID:self.userID success:^(id data) {
             SAUser *user = [[SADataManager sharedManager] insertOrUpdateUserWithExtendObject:data];
             self.title = user.name;
-        } failure:^(NSString *error) {
-            
-        }];
+            self.userID = user.userID;
+            [self updateInterface];
+            ARSegmentView *segmentView = [self valueForKey:@"segmentView"];
+            [super performSelector:@selector(segmentControlDidChangedValue:) withObject:segmentView.segmentControl];
+        } failure:nil];
     }
     
+    [self updateInterface];
+}
+
+- (void)updateInterface
+{
     ARSegmentView *segmentView = [self valueForKey:@"segmentView"];
     segmentView.segmentControl.tintColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
     
