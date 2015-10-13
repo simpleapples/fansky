@@ -35,7 +35,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
             [fetchResult enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 SAStatus *existStatus = (SAStatus *)obj;
                 id statusObject = [statusIDDictionary objectForKey:existStatus.statusID];
-                [self updateStatusWithObject:statusObject status:existStatus type:type];
+                [self updateStatusWithObject:statusObject status:existStatus type:type localUser:currentUser];
                 [statusIDDictionary removeObjectForKey:existStatus.statusID];
             }];
         }
@@ -60,7 +60,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
         if (!error && fetchResult && fetchResult.count) {
             SAStatus *existStatus = [fetchResult firstObject];
-            resultStatus = [self updateStatusWithObject:object status:existStatus type:type];
+            resultStatus = [self updateStatusWithObject:object status:existStatus type:type localUser:localUser];
         } else {
             resultStatus = [self insertStatusWithObject:object localUser:localUser type:type];
         }
@@ -172,9 +172,12 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     return resultStatus;
 }
 
-- (SAStatus *)updateStatusWithObject:(id)object status:(SAStatus *)status type:(SAStatusTypes)type
+- (SAStatus *)updateStatusWithObject:(id)object status:(SAStatus *)status type:(SAStatusTypes)type localUser:(SAUser *)localUser
 {
     status.type = @(type | status.type.integerValue);
+    if (![status.localUsers containsObject:localUser]) {
+        [status addLocalUsersObject:localUser];
+    }
     return status;
 }
 

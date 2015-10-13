@@ -117,7 +117,6 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
     SAConversation *conversation = [self.conversationList objectAtIndex:indexPath.row];
     SAConversationCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
     [cell configWithMessage:conversation];
-//    cell.delegate = self;
     return cell;
 }
 
