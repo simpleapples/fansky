@@ -69,7 +69,7 @@ static NSString *const ENTITY_NAME = @"SAConversation";
     NSArray *sortArray = [[NSArray alloc] initWithObjects: otherUserIDSortDescriptor, nil];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@", userID];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUsers.userID CONTAINS %@", userID];
     fetchRequest.sortDescriptors = sortArray;
     fetchRequest.returnsObjectsAsFaults = NO;
     fetchRequest.fetchBatchSize = 6;

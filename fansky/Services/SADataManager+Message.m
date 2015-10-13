@@ -100,7 +100,7 @@ static NSString *const ENTITY_NAME = @"SAMessage";
     NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@ AND (sender.userID = %@ OR recipient.userID = %@)", localUserID, userID, userID];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUsers.userID CONTAINS %@ AND (sender.userID = %@ OR recipient.userID = %@)", localUserID, userID, userID];
     fetchRequest.sortDescriptors = sortArray;
     fetchRequest.returnsObjectsAsFaults = NO;
     fetchRequest.fetchBatchSize = 6;

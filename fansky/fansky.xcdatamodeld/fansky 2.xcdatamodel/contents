@@ -30,7 +30,7 @@
         <attribute name="statusID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="localUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAUser" inverseName="mineStatuses" inverseEntity="SAUser" syncable="YES"/>
+        <relationship name="localUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SAUser" inverseName="mineStatuses" inverseEntity="SAUser" syncable="YES"/>
         <relationship name="photo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAPhoto" inverseName="status" inverseEntity="SAPhoto" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAUser" inverseName="statuses" inverseEntity="SAUser" syncable="YES"/>
     </entity>
@@ -50,7 +50,7 @@
         <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="mineConversations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SAConversation" inverseName="localUser" inverseEntity="SAConversation" syncable="YES"/>
         <relationship name="mineMessages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SAMessage" inverseName="localUser" inverseEntity="SAMessage" syncable="YES"/>
-        <relationship name="mineStatuses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SAStatus" inverseName="localUser" inverseEntity="SAStatus" syncable="YES"/>
+        <relationship name="mineStatuses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SAStatus" inverseName="localUsers" inverseEntity="SAStatus" syncable="YES"/>
         <relationship name="recvivedMessages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SAMessage" inverseName="recipient" inverseEntity="SAMessage" syncable="YES"/>
         <relationship name="sentMessages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SAMessage" inverseName="sender" inverseEntity="SAMessage" syncable="YES"/>
         <relationship name="statuses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SAStatus" inverseName="user" inverseEntity="SAStatus" syncable="YES"/>

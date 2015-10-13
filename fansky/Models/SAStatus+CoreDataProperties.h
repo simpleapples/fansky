@@ -2,7 +2,7 @@
 //  SAStatus+CoreDataProperties.h
 //  fansky
 //
-//  Created by Zzy on 10/7/15.
+//  Created by Zzy on 10/13/15.
 //  Copyright © 2015 Zzy. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -21,9 +21,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *statusID;
 @property (nullable, nonatomic, retain) NSString *text;
 @property (nullable, nonatomic, retain) NSNumber *type;
-@property (nullable, nonatomic, retain) SAUser *localUser;
+@property (nullable, nonatomic, retain) NSSet<SAUser *> *localUsers;
 @property (nullable, nonatomic, retain) SAPhoto *photo;
 @property (nullable, nonatomic, retain) SAUser *user;
+
+@end
+
+@interface SAStatus (CoreDataGeneratedAccessors)
+
+- (void)addLocalUsersObject:(SAUser *)value;
+- (void)removeLocalUsersObject:(SAUser *)value;
+- (void)addLocalUsers:(NSSet<SAUser *> *)values;
+- (void)removeLocalUsers:(NSSet<SAUser *> *)values;
 
 @end
 

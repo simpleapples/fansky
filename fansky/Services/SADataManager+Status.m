@@ -75,7 +75,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
     if (type == SAStatusTypeTimeLine) {
-        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@ AND (type | %d) = type", userID, type];
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUsers.userID CONTAINS %@ AND (type | %d) = type", userID, type];
     } else {
         fetchRequest.predicate = [NSPredicate predicateWithFormat:@"user.userID = %@ AND (type | %d) = type", userID, type];
     }
@@ -101,7 +101,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@ AND (type | %d) = type", userID, SAStatusTypeMentionStatus];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUsers.userID CONTAINS %@ AND (type | %d) = type", userID, SAStatusTypeMentionStatus];
     fetchRequest.sortDescriptors = sortArray;
     fetchRequest.returnsObjectsAsFaults = NO;
     fetchRequest.fetchBatchSize = 6;
@@ -163,7 +163,9 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         status.user = user;
         status.repostStatusID = repostStatusID;
         status.createdAt = createdAt;
-        status.localUser = localUser;
+        if (![status.localUsers containsObject:localUser]) {
+            [status addLocalUsersObject:localUser];
+        }
         status.type = @(type | status.type.integerValue);
         resultStatus = status;
     }];
