@@ -70,12 +70,14 @@ static NSString *const ENTITY_NAME = @"SAMessage";
 {
     NSString *messageID = [object objectForKey:@"id"];
     NSString *text = [object objectForKey:@"text"];
+    NSString *senderID = [object objectForKey:@"sender_id"];
+    NSString *recipientID = [object objectForKey:@"recipient_id"];
     NSString *createdAtString = [object objectForKey:@"created_at"];
     NSDate *createdAt = [createdAtString dateWithDefaultFormat];
     
     SAUser *sender = [[SADataManager sharedManager] insertOrUpdateUserWithObject:[object objectForKey:@"sender"] local:NO active:NO token:nil secret:nil];
     SAUser *recipient = [[SADataManager sharedManager] insertOrUpdateUserWithObject:[object objectForKey:@"recipient"] local:NO active:NO token:nil secret:nil];
-    
+        
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
     fetchRequest.fetchLimit = 1;
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"messageID = %@", messageID];
@@ -86,6 +88,8 @@ static NSString *const ENTITY_NAME = @"SAMessage";
         message.messageID = messageID;
         message.text = text;
         message.createdAt = createdAt;
+        message.senderID = senderID;
+        message.recipientID = recipientID;
         message.sender = sender;
         message.recipient = recipient;
         message.localUser = localUser;

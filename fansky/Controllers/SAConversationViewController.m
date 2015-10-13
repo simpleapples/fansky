@@ -17,6 +17,8 @@
 #import "SAMessageViewController.h"
 #import "SAConversation+CoreDataProperties.h"
 
+#import "SAMessage+CoreDataProperties.h"
+
 @interface SAConversationViewController ()
 
 @property (strong, nonatomic) NSArray *conversationList;
@@ -123,7 +125,13 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SAConversation *conversation = [self.conversationList objectAtIndex:indexPath.row];
-    self.selectedUserID = conversation.otherUserID;
+    NSString *otherUserID;
+    if ([conversation.otherUserID isEqualToString:conversation.message.senderID]) {
+        otherUserID = conversation.message.sender.userID;
+    } else {
+        otherUserID = conversation.message.recipient.userID;
+    }
+    self.selectedUserID = otherUserID;
     [self performSegueWithIdentifier:@"ConversationToMessageSegue" sender:nil];
 }
 

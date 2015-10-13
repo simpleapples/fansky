@@ -93,8 +93,10 @@
         self.lockImageView.hidden = YES;
     }
     if ([self.user.following isEqualToNumber:@(NO)]) {
+        self.followButton.titleLabel.text = @"+关注";
         [self.followButton setTitle:@"+关注" forState:UIControlStateNormal];
     } else {
+        self.followButton.titleLabel.text = @"取消关注";
         [self.followButton setTitle:@"取消关注" forState:UIControlStateNormal];
     }
 }

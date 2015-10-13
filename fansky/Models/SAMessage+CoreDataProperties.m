@@ -2,7 +2,7 @@
 //  SAMessage+CoreDataProperties.m
 //  fansky
 //
-//  Created by Zzy on 10/7/15.
+//  Created by Zzy on 10/13/15.
 //  Copyright © 2015 Zzy. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -16,9 +16,11 @@
 @dynamic createdAt;
 @dynamic messageID;
 @dynamic text;
+@dynamic senderID;
+@dynamic recipientID;
+@dynamic conversation;
 @dynamic localUser;
 @dynamic recipient;
 @dynamic sender;
-@dynamic conversation;
 
 @end

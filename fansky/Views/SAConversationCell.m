@@ -10,6 +10,7 @@
 #import "SADataManager+User.h"
 #import "SAUser+CoreDataProperties.h"
 #import "SAConversation+CoreDataProperties.h"
+#import "SAMessage+CoreDataProperties.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SAConversationCell ()
@@ -37,12 +38,16 @@
 - (void)configWithMessage:(SAConversation *)conversation
 {
     self.conversation = conversation;
+    if ([self.conversation.otherUserID isEqualToString:self.conversation.message.senderID]) {
+        self.otherUser = self.conversation.message.sender;
+    } else {
+        self.otherUser = self.conversation.message.recipient;
+    }
     [self updateInterface];
 }
 
 - (void)updateInterface
 {
-    self.otherUser = [[SADataManager sharedManager] userWithID:self.conversation.otherUserID];
     self.nameLabel.text = self.otherUser.name;
     self.userIDLabel.text = [NSString stringWithFormat:@"@%@", self.otherUser.userID];
 }
