@@ -67,7 +67,7 @@
     [attributedString beginEditing];
     [attributedString enumerateAttribute:NSFontAttributeName inRange:NSMakeRange(0, attributedString.length) options:0 usingBlock:^(id value, NSRange range, BOOL *stop) {
         NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        [paragraphStyle setLineSpacing:8];
+        [paragraphStyle setLineSpacing:12];
         [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:range];
         [attributedString removeAttribute:NSFontAttributeName range:range];
         [attributedString addAttribute:NSFontAttributeName value:newFont range:range];

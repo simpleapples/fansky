@@ -174,6 +174,7 @@ static NSString *const ENTITY_NAME = @"SAUser";
 {
     SAUser *user = [self userWithID:userID];
     user.local = @(NO);
+    user.active = @(NO);
 }
 
 @end

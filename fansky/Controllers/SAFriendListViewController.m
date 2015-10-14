@@ -58,7 +58,7 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
     [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
     self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.tableFooterView = [UIView new];
-    self.tableView.rowHeight = 60;
+    self.tableView.rowHeight = 70;
 }
 
 - (void)refreshData

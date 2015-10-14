@@ -64,7 +64,7 @@
     ARSegmentView *segmentView = [self valueForKey:@"segmentView"];
     segmentView.segmentControl.tintColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
     
-    self.headerHeight = 195;
+    self.headerHeight = 200;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SAMain" bundle:[NSBundle mainBundle]];
     SATimeLineViewController *timeLineViewController = [storyboard instantiateViewControllerWithIdentifier:@"SATimeLineViewController"];
     timeLineViewController.userID = self.userID;

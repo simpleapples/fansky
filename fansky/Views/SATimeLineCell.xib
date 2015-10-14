@@ -7,15 +7,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SATimeLineCell" rowHeight="74" id="ied-Va-MeJ" customClass="SATimeLineCell">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="74"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SATimeLineCell" rowHeight="100" id="ied-Va-MeJ" customClass="SATimeLineCell">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="100"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ied-Va-MeJ" id="DyM-OM-Yqb">
-                <rect key="frame" x="0.0" y="0.0" width="600" height="73"/>
+                <rect key="frame" x="0.0" y="0.0" width="600" height="99"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lnm-D3-GSg">
-                        <rect key="frame" x="10" y="10" width="44" height="44"/>
+                        <rect key="frame" x="16" y="16" width="44" height="44"/>
                         <animations/>
                         <gestureRecognizers/>
                         <constraints>
@@ -30,7 +30,7 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kaf-EG-HUj">
-                        <rect key="frame" x="10" y="10" width="44" height="44"/>
+                        <rect key="frame" x="16" y="16" width="44" height="44"/>
                         <animations/>
                         <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -40,7 +40,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sel-Vi-zsx">
-                        <rect key="frame" x="64" y="10" width="426" height="20"/>
+                        <rect key="frame" x="70" y="16" width="414" height="20"/>
                         <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="ipl-le-Zzq"/>
@@ -50,7 +50,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SjV-c1-VTy">
-                        <rect key="frame" x="490" y="10" width="100" height="20"/>
+                        <rect key="frame" x="484" y="16" width="100" height="20"/>
                         <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="FLG-Yz-8p3"/>
@@ -65,8 +65,8 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cks-QO-2ZC" customClass="TTTAttributedLabel">
-                        <rect key="frame" x="64" y="40" width="526" height="24"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cks-QO-2ZC" customClass="TTTAttributedLabel">
+                        <rect key="frame" x="70" y="46" width="514" height="37"/>
                         <animations/>
                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -85,22 +85,33 @@
                 <constraints>
                     <constraint firstItem="Sel-Vi-zsx" firstAttribute="top" secondItem="lnm-D3-GSg" secondAttribute="top" id="01f-Xp-lcK"/>
                     <constraint firstItem="Sel-Vi-zsx" firstAttribute="leading" secondItem="cks-QO-2ZC" secondAttribute="leading" id="5eR-2y-3lC"/>
-                    <constraint firstAttribute="trailing" secondItem="SjV-c1-VTy" secondAttribute="trailing" constant="10" id="87F-wr-QVW"/>
+                    <constraint firstAttribute="trailing" secondItem="SjV-c1-VTy" secondAttribute="trailing" constant="16" id="87F-wr-QVW"/>
                     <constraint firstItem="SjV-c1-VTy" firstAttribute="top" secondItem="DyM-OM-Yqb" secondAttribute="top" constant="10" id="BD4-rf-5qj"/>
                     <constraint firstItem="SjV-c1-VTy" firstAttribute="trailing" secondItem="cks-QO-2ZC" secondAttribute="trailing" id="Ia3-4X-MfQ"/>
                     <constraint firstItem="SjV-c1-VTy" firstAttribute="leading" secondItem="Sel-Vi-zsx" secondAttribute="trailing" id="J0I-yg-eJB"/>
                     <constraint firstItem="lnm-D3-GSg" firstAttribute="leading" secondItem="kaf-EG-HUj" secondAttribute="leading" id="J3z-2m-cpE"/>
+                    <constraint firstItem="SjV-c1-VTy" firstAttribute="top" secondItem="Sel-Vi-zsx" secondAttribute="top" id="K5C-v9-qgF"/>
                     <constraint firstItem="lnm-D3-GSg" firstAttribute="bottom" secondItem="kaf-EG-HUj" secondAttribute="bottom" id="KIs-tU-LDG"/>
                     <constraint firstItem="cks-QO-2ZC" firstAttribute="top" secondItem="Sel-Vi-zsx" secondAttribute="bottom" constant="10" id="MjI-ca-7in"/>
-                    <constraint firstAttribute="bottom" secondItem="cks-QO-2ZC" secondAttribute="bottom" constant="10" id="NR0-9X-YZx"/>
-                    <constraint firstItem="lnm-D3-GSg" firstAttribute="top" secondItem="DyM-OM-Yqb" secondAttribute="top" constant="10" id="OdT-g9-PrO"/>
+                    <constraint firstAttribute="bottom" secondItem="cks-QO-2ZC" secondAttribute="bottom" constant="16" id="NR0-9X-YZx"/>
+                    <constraint firstItem="lnm-D3-GSg" firstAttribute="top" secondItem="DyM-OM-Yqb" secondAttribute="top" constant="16" id="OdT-g9-PrO"/>
                     <constraint firstItem="Sel-Vi-zsx" firstAttribute="leading" secondItem="lnm-D3-GSg" secondAttribute="trailing" constant="10" id="WQU-ic-6Mv"/>
+                    <constraint firstAttribute="bottom" secondItem="cks-QO-2ZC" secondAttribute="bottom" constant="16" id="aG6-3S-hll"/>
                     <constraint firstItem="Sel-Vi-zsx" firstAttribute="top" secondItem="DyM-OM-Yqb" secondAttribute="top" constant="10" id="c5i-9x-58B"/>
-                    <constraint firstItem="lnm-D3-GSg" firstAttribute="leading" secondItem="DyM-OM-Yqb" secondAttribute="leading" constant="10" id="gex-Bb-MZg"/>
+                    <constraint firstItem="lnm-D3-GSg" firstAttribute="leading" secondItem="DyM-OM-Yqb" secondAttribute="leading" constant="16" id="gex-Bb-MZg"/>
+                    <constraint firstItem="SjV-c1-VTy" firstAttribute="trailing" secondItem="cks-QO-2ZC" secondAttribute="trailing" id="sNN-wi-MlH"/>
                     <constraint firstItem="Sel-Vi-zsx" firstAttribute="bottom" secondItem="SjV-c1-VTy" secondAttribute="bottom" id="uyy-Pa-hZk"/>
                     <constraint firstItem="lnm-D3-GSg" firstAttribute="trailing" secondItem="kaf-EG-HUj" secondAttribute="trailing" id="wYT-bO-l2A"/>
                     <constraint firstItem="lnm-D3-GSg" firstAttribute="top" secondItem="kaf-EG-HUj" secondAttribute="top" id="xgL-QH-32e"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="c5i-9x-58B"/>
+                        <exclude reference="NR0-9X-YZx"/>
+                        <exclude reference="BD4-rf-5qj"/>
+                        <exclude reference="Ia3-4X-MfQ"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <animations/>
             <connections>
@@ -109,7 +120,7 @@
                 <outlet property="timeLabel" destination="SjV-c1-VTy" id="yAF-gn-XXM"/>
                 <outlet property="usernameLabel" destination="Sel-Vi-zsx" id="njf-TA-4aD"/>
             </connections>
-            <point key="canvasLocation" x="211" y="142"/>
+            <point key="canvasLocation" x="211" y="155"/>
         </tableViewCell>
     </objects>
 </document>

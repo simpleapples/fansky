@@ -85,8 +85,7 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
     [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
     self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.tableFooterView = [UIView new];
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 140;
+    self.tableView.rowHeight = 70;
 }
 
 - (void)didReceiveMemoryWarning
@@ -107,11 +106,6 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.conversationList.count;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 60;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
