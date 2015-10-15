@@ -65,7 +65,7 @@
 - (void)updateInterface
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:currentUser.profileImageURL]];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:currentUser.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
     
     if (self.replyToStatusID) {
         self.cameraButton.hidden = YES;

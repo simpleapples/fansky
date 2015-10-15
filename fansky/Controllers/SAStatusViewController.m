@@ -54,7 +54,7 @@
     self.usernameLabel.text = self.status.user.name;
     self.contentLabel.text = self.status.text;
     self.timeLabel.text = [NSString stringWithFormat:@"%@ ∙ 通过%@", [self.status.createdAt defaultDateString], [self.status.source flattenHTML]];
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL]];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
     self.contentImageView.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:1].CGColor;
     
     NSDictionary *linkAttributesDict = @{NSForegroundColorAttributeName: [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1], NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)};
@@ -80,7 +80,7 @@
     
     if (self.status.photo.thumbURL) {
         self.contentImageView.hidden = NO;
-        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL]];
+        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL] placeholderImage:nil options:SDWebImageRefreshCached];
         self.timeLabelTopToImageViewMarginConstraint.priority = UILayoutPriorityRequired;
     } else {
         self.contentImageView.hidden = YES;

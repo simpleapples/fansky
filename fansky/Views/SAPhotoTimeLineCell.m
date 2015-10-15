@@ -33,7 +33,7 @@
 
 - (void)loadImage
 {
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.imageURL] placeholderImage:nil options:(SDWebImageRetryFailed|SDWebImageLowPriority)];
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL] placeholderImage:nil options:SDWebImageRefreshCached];
 }
 
 - (IBAction)imageViewTouchUp:(id)sender

@@ -76,9 +76,9 @@
 
 - (void)loadAllImages
 {
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL]];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
     if (self.status.photo.thumbURL) {
-        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.thumbURL]];
+        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL] placeholderImage:nil options:SDWebImageRefreshCached];
     }
 }
 

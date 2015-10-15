@@ -22,7 +22,7 @@
 
 - (void)configWithUser:(SAUser *)user
 {
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:user.profileImageURL]];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:user.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
     self.nameLabel.text = user.name;
     self.IDLabel.text = user.userID;
 }

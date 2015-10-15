@@ -69,7 +69,7 @@
 
 - (void)loadImage
 {
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.friend.profileImageURL]];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.friend.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
 }
 
 #pragma mark - EventHandler
