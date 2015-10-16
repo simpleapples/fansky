@@ -61,8 +61,8 @@
     self.nameLabel.text = self.user.name;
     self.userIDLabel.text = [NSString stringWithFormat:@"@%@", self.user.userID];
 
-    NSDictionary *boldDictionay = @{NSFontAttributeName: [UIFont boldSystemFontOfSize:14], NSForegroundColorAttributeName: [UIColor darkGrayColor]};
-    NSDictionary *normalDictionay = @{NSFontAttributeName: [UIFont systemFontOfSize:12], NSForegroundColorAttributeName: [UIColor lightGrayColor]};
+    NSDictionary *boldDictionay = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:14], NSForegroundColorAttributeName: [UIColor darkGrayColor]};
+    NSDictionary *normalDictionay = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:12], NSForegroundColorAttributeName: [UIColor lightGrayColor]};
     
     NSString *friendsCountString = [NSString stringWithFormat:@"%@", self.user.friendsCount];
     NSMutableAttributedString *friendsString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@关注", friendsCountString] attributes:boldDictionay];
