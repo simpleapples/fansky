@@ -17,15 +17,13 @@
 
 @implementation SAAppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [MobClick startWithAppkey:@"560676ece0f55a154f0002d5" reportPolicy:BATCH channelId:@"AppStore"];
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
     
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor blackColor], NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:17]}];
-    
+    [self updateAppearance];
     return YES;
 }
 
@@ -51,6 +49,13 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     [[SADataManager sharedManager] saveContext];
+}
+
+- (void)updateAppearance
+{
+    NSDictionary *textAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:17]};
+    [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
+    [[UIBarButtonItem appearance] setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
 }
 
 @end
