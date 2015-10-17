@@ -28,7 +28,7 @@
 - (void)prepareForReuse
 {
     [super prepareForReuse];
-    
+        
     self.usernameLabel.text = nil;
     self.timeLabel.text = nil;
     self.contentLabel.text = nil;
