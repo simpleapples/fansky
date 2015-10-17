@@ -12,5 +12,6 @@
 
 - (NSString *)friendlyDateString;
 - (NSString *)defaultDateString;
+- (NSString *)dateStringWithFormat:(NSString *)format;
 
 @end

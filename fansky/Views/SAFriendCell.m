@@ -58,8 +58,10 @@
     if (self.type != SAFriendCellTypeRequest) {
         self.followButton.hidden = NO;
         if ([self.friend.following isEqualToNumber:@(YES)]) {
+            self.followButton.titleLabel.text = @"取消关注";
             [self.followButton setTitle:@"取消关注" forState:UIControlStateNormal];
         } else {
+            self.followButton.titleLabel.text = @"+关注";
             [self.followButton setTitle:@"+关注" forState:UIControlStateNormal];
         }
     } else {

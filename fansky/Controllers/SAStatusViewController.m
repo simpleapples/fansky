@@ -53,7 +53,7 @@
 {
     self.usernameLabel.text = self.status.user.name;
     self.contentLabel.text = self.status.text;
-    self.timeLabel.text = [NSString stringWithFormat:@"%@ ∙ 通过%@", [self.status.createdAt defaultDateString], [self.status.source flattenHTML]];
+    self.timeLabel.text = [NSString stringWithFormat:@"%@ ∙ 通过%@", [self.status.createdAt dateStringWithFormat:@"MM-dd HH:mm"], [self.status.source flattenHTML]];
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
     self.contentImageView.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:1].CGColor;
     

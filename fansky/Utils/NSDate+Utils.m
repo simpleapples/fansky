@@ -31,8 +31,13 @@
 
 - (NSString *)defaultDateString
 {
+    return [self dateStringWithFormat:@"yyyy-MM-dd HH:mm"];
+}
+
+- (NSString *)dateStringWithFormat:(NSString *)format
+{
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm";
+    dateFormatter.dateFormat = format;
     return [dateFormatter stringFromDate:self];
 }
 
