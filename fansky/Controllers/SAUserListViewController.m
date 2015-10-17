@@ -32,8 +32,8 @@ static NSString *const ENTITY_NAME = @"SAUser";
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     [super viewDidAppear:animated];
-
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     if (!currentUser) {
         [self performSegueWithIdentifier:@"UserListToAuthNavigationSegue" sender:nil];

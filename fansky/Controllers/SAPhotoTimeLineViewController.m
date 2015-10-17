@@ -39,6 +39,13 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
     [self refreshData];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    NSArray *selectedItems = [self.collectionView indexPathsForSelectedItems];
+    [self.collectionView deselectItemAtIndexPath:selectedItems.firstObject animated:YES];
+    [super viewWillAppear:animated];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];

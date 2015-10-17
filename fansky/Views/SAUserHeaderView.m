@@ -51,9 +51,7 @@
     [[SAAPIService sharedSingleton] userWithID:userID success:^(id data) {
         self.user = [[SADataManager sharedManager] insertOrUpdateUserWithExtendObject:data];
         [self updateInterface];
-    } failure:^(NSString *error) {
-        
-    }];
+    } failure:nil];
 }
 
 - (void)updateInterface

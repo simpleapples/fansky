@@ -27,18 +27,9 @@
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                 <integer key="value" value="3"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer. shouldRasterize" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kaf-EG-HUj">
-                        <rect key="frame" x="16" y="16" width="44" height="44"/>
-                        <animations/>
-                        <state key="normal">
-                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                        </state>
-                        <connections>
-                            <action selector="avatarImageViewTouchUp:" destination="ied-Va-MeJ" eventType="touchUpInside" id="W7g-wS-Kjr"/>
-                        </connections>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sel-Vi-zsx">
                         <rect key="frame" x="70" y="16" width="414" height="20"/>
                         <animations/>
@@ -80,6 +71,16 @@
                             <outlet property="delegate" destination="-1" id="haj-tX-did"/>
                         </connections>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kaf-EG-HUj">
+                        <rect key="frame" x="16" y="16" width="44" height="44"/>
+                        <animations/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="avatarImageViewTouchUp:" destination="ied-Va-MeJ" eventType="touchUpInside" id="W7g-wS-Kjr"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <animations/>
                 <constraints>

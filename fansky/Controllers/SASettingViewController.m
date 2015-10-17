@@ -71,7 +71,9 @@
         } else if (indexPath.row == 1) {
             NSString *path = [[NSBundle mainBundle] pathForResource:@"Pods-fansky-acknowledgements" ofType:@"plist"];
             VTAcknowledgementsViewController *acknowledgementViewController = [[VTAcknowledgementsViewController alloc] initWithAcknowledgementsPlistPath:path];
+            acknowledgementViewController.title = @"致谢";
             acknowledgementViewController.headerText = @"饭斯基使用了如下开源组件";
+            acknowledgementViewController.footerText = @"使用 CocoaPods 生成";
             [self.navigationController showViewController:acknowledgementViewController sender:nil];
         }
     }

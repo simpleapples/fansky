@@ -11,10 +11,6 @@
 #import "SANotificationManager.h"
 #import <MobClick.h>
 
-@interface SAAppDelegate ()
-
-@end
-
 @implementation SAAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
