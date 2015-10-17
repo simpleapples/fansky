@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
 @property (weak, nonatomic) IBOutlet UIButton *cameraButton;
 @property (weak, nonatomic) IBOutlet UILabel *remainLabel;
+@property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *functionViewBottomConstraint;
 
 @property (strong, nonatomic) UIImage *uploadImage;
@@ -64,6 +65,7 @@
 
 - (void)updateInterface
 {
+    [self.sendButton.layer setRasterizationScale:[UIScreen mainScreen].scale];
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:currentUser.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
     

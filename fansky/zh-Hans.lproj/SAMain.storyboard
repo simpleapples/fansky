@@ -877,7 +877,7 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <action selector="sendButtonTouchUp:" destination="AEP-as-v9Y" eventType="touchUpInside" id="0Pk-6R-Gfa"/>
+                                            <action selector="sendButtonTouchUp:" destination="AEP-as-v9Y" eventType="touchUpInside" id="Xlz-og-JO1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JAC-Fo-Ulm">
@@ -938,6 +938,7 @@
                         <outlet property="functionViewBottomConstraint" destination="Nqg-pE-kGU" id="dlQ-tu-WNC"/>
                         <outlet property="placeholderLabel" destination="Aqh-tS-ahx" id="4cd-Q5-z67"/>
                         <outlet property="remainLabel" destination="N8A-ds-hsO" id="Pnk-hV-739"/>
+                        <outlet property="sendButton" destination="xUo-RQ-PFq" id="rrK-2Z-VmS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2kJ-fM-wFM" userLabel="First Responder" sceneMemberID="firstResponder"/>

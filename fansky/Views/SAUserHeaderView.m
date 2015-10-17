@@ -56,6 +56,7 @@
 
 - (void)updateInterface
 {
+    [self.followButton.layer setRasterizationScale:[UIScreen mainScreen].scale];
     self.nameLabel.text = self.user.name;
     self.userIDLabel.text = [NSString stringWithFormat:@"@%@", self.user.userID];
 

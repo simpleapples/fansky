@@ -27,8 +27,8 @@
                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.shouldRasterize" value="YES"/>
                     </userDefinedRuntimeAttributes>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="载入中..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knh-Eh-eIb">
-                    <rect key="frame" x="16" y="110" width="77" height="24"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="载入中" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knh-Eh-eIb">
+                    <rect key="frame" x="16" y="110" width="60" height="24"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="mAE-0p-AJL"/>
@@ -54,15 +54,15 @@
                     </connections>
                 </button>
                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconLock" translatesAutoresizingMaskIntoConstraints="NO" id="oBX-MO-GVE">
-                    <rect key="frame" x="98" y="112" width="18" height="18"/>
+                    <rect key="frame" x="81" y="112" width="18" height="18"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="FdL-JG-XzJ"/>
                         <constraint firstAttribute="width" constant="18" id="Jua-VV-dGZ"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="载入中..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jo-yX-kz8">
-                    <rect key="frame" x="16" y="134" width="54" height="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="载入中" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jo-yX-kz8">
+                    <rect key="frame" x="16" y="134" width="42" height="17"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="IBg-wZ-rbP"/>
@@ -116,6 +116,7 @@
                         <constraint firstAttribute="width" constant="80" id="bqD-ZL-3GL"/>
                         <constraint firstAttribute="height" constant="30" id="u9p-fI-LaY"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <state key="normal" title="+关注">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

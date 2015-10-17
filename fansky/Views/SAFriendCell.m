@@ -53,6 +53,7 @@
 
 - (void)updateInterface
 {
+    [self.followButton.layer setRasterizationScale:[UIScreen mainScreen].scale];
     self.nameLabel.text = self.friend.name;
     self.friendIDLabel.text = [NSString stringWithFormat:@"@%@", self.friend.friendID];
     if (self.type != SAFriendCellTypeRequest) {

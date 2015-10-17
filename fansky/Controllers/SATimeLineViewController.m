@@ -18,6 +18,7 @@
 #import "SAUserViewController.h"
 #import "SAMessageDisplayUtils.h"
 #import "SATimeLinePhotoCell.h"
+#import "SAComposeViewController.h"
 #import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 
 @interface SATimeLineViewController () <SATimeLineCellDelegate, SATimeLinePhotoCellDelegate>
@@ -50,6 +51,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
 - (void)viewWillAppear:(BOOL)animated
 {
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+    [self.tableView setEditing:NO animated:NO];
     [super viewWillAppear:animated];
 }
 
@@ -200,7 +202,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
     }
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -250,6 +252,29 @@ static NSUInteger TIME_LINE_COUNT = 40;
         SATimeLinePhotoCell *timeLinePhotoCell = (SATimeLinePhotoCell *)cell;
         [timeLinePhotoCell loadAllImages];
     }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
+    UITableViewRowAction *repostAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"转发" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        SAComposeViewController *composeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
+        composeViewController.repostStatusID = status.statusID;
+        [self presentViewController:composeViewController animated:YES completion:nil];
+    }];
+    repostAction.backgroundColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
+    UITableViewRowAction *replyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"回复" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        SAComposeViewController *composeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
+        composeViewController.replyToStatusID = status.statusID;
+        [self presentViewController:composeViewController animated:YES completion:nil];
+    }];
+    replyAction.backgroundColor = [UIColor lightGrayColor];
+    return @[repostAction, replyAction];
 }
 
 #pragma mark - UIScrollViewDelegate
