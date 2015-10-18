@@ -30,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet TTTAttributedLabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
+@property (weak, nonatomic) IBOutlet UIButton *starButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelTopToLabelMarginConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelTopToImageViewMarginConstraint;
 @property (strong, nonatomic) URBMediaFocusViewController *imageViewController;
@@ -49,8 +50,25 @@
     [self updateInterface];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [SAMessageDisplayUtils dismiss];
+    [super viewWillDisappear:animated];
+}
+
+- (void)updateStarButton
+{
+    if ([self.status.favorited isEqualToNumber:@(YES)]) {
+        self.starButton.selected = YES;
+    } else {
+        self.starButton.selected = NO;
+    }
+}
+
 - (void)updateInterface
 {
+    [self updateStarButton];
+    
     self.usernameLabel.text = self.status.user.name;
     self.contentLabel.text = self.status.text;
     self.timeLabel.text = [NSString stringWithFormat:@"%@ ∙ 通过%@", [self.status.createdAt dateStringWithFormat:@"MM-dd HH:mm"], [self.status.source flattenHTML]];
@@ -179,6 +197,28 @@
 - (IBAction)repostButtonTouchUp:(id)sender
 {
     [self performSegueWithIdentifier:@"StatusToComposeNavigationSegue" sender:sender];
+}
+
+- (IBAction)starButtonTouchUp:(id)sender
+{
+    [SAMessageDisplayUtils showProgressWithMessage:@"请稍后"];
+    if ([self.status.favorited isEqualToNumber:@(YES)]) {
+        [[SAAPIService sharedSingleton] deleteFavoriteStatusWithID:self.statusID success:^(id data) {
+            self.status.favorited = @(NO);
+            [SAMessageDisplayUtils showInfoWithMessage:@"取消收藏成功"];
+            [self updateStarButton];
+        } failure:^(NSString *error) {
+            [SAMessageDisplayUtils showErrorWithMessage:error];
+        }];
+    } else {
+        [[SAAPIService sharedSingleton] createFavoriteStatusWithID:self.statusID success:^(id data) {
+            self.status.favorited = @(YES);
+            [SAMessageDisplayUtils showInfoWithMessage:@"收藏成功"];
+            [self updateStarButton];
+        } failure:^(NSString *error) {
+            [SAMessageDisplayUtils showErrorWithMessage:error];
+        }];
+    }
 }
 
 - (IBAction)moreButtonTouchUp:(id)sender

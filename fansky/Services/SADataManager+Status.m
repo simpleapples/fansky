@@ -146,6 +146,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     NSString *statusID = [object objectForKey:@"id"];
     NSString *source = [object objectForKey:@"source"];
     NSString *text = [object objectForKey:@"text"];
+    NSNumber *favorited = [object objectForKey:@"favorited"];
     NSString *repostStatusID = [object objectForKey:@"repost_status_id"];
     NSString *createdAtString = [object objectForKey:@"created_at"];
     NSDate *createdAt = [createdAtString dateWithDefaultFormat];
@@ -157,6 +158,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     status.statusID = statusID;
     status.source = source;
     status.text = text;
+    status.favorited = favorited;
     status.photo = photo;
     status.user = user;
     status.localUsers = localUsers;
@@ -171,6 +173,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     NSString *statusID = [object objectForKey:@"id"];
     NSString *source = [object objectForKey:@"source"];
     NSString *text = [object objectForKey:@"text"];
+    NSNumber *favorited = [object objectForKey:@"favorited"];
     NSString *createdAtString = [object objectForKey:@"created_at"];
     NSString *repostStatusID = [object objectForKey:@"repost_status_id"];
     NSDate *createdAt = [createdAtString dateWithDefaultFormat];
@@ -184,6 +187,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         status.statusID = statusID;
         status.source = source;
         status.text = text;
+        status.favorited = favorited;
         status.photo = photo;
         status.user = user;
         status.repostStatusID = repostStatusID;
@@ -199,6 +203,8 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 
 - (SAStatus *)updateStatusWithObject:(id)object status:(SAStatus *)status type:(SAStatusTypes)type localUser:(SAUser *)localUser
 {
+    NSNumber *favorited = [object objectForKey:@"favorited"];
+    status.favorited = favorited;
     status.type = @(type | status.type.integerValue);
     if (![status.localUsers containsObject:localUser]) {
         [status addLocalUsersObject:localUser];

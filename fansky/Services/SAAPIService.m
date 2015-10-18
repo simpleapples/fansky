@@ -82,7 +82,7 @@
 
 - (void)verifyCredentialsWithToken:(NSString *)token secret:(NSString *)secret success:(void (^)(id))success failure:(void (^)(NSString *))failure
 {
-    NSMutableURLRequest *URLRequest = [TDOAuth URLRequestForPath:SA_API_VERIFY_CREDENTIALS_PATH parameters:@{@"mode": @"lite"} host:SA_API_HOST consumerKey:SA_API_COMSUMER_KEY consumerSecret:SA_API_COMSUMER_SECRET accessToken:token tokenSecret:secret scheme:@"http" requestMethod:@"POST" dataEncoding:TDOAuthContentTypeUrlEncodedForm headerValues:nil signatureMethod:TDOAuthSignatureMethodHmacSha1];
+    NSMutableURLRequest *URLRequest = [[TDOAuth URLRequestForPath:SA_API_VERIFY_CREDENTIALS_PATH parameters:@{@"mode": @"lite"} host:SA_API_HOST consumerKey:SA_API_COMSUMER_KEY consumerSecret:SA_API_COMSUMER_SECRET accessToken:token tokenSecret:secret scheme:@"http" requestMethod:@"POST" dataEncoding:TDOAuthContentTypeUrlEncodedForm headerValues:nil signatureMethod:TDOAuthSignatureMethodHmacSha1] mutableCopy];
     URLRequest.timeoutInterval = 15;
     
     [NSURLConnection sendAsynchronousRequest:URLRequest queue:self.operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
@@ -261,6 +261,16 @@
 - (void)userFavoriteTimeLineWithUserID:(NSString *)userID count:(NSUInteger)count page:(NSUInteger)page success:(void (^)(id))success failure:(void (^)(NSString *))failure
 {
     [self requestAPIWithPath:SA_API_FAVORITE_STATUS_PATH method:@"GET" parametersDictionary:@{@"id": userID, @"count": @(count), @"page": @(page), @"mode": @"lite", @"format": @"html"} success:success failure:failure];
+}
+
+- (void)createFavoriteStatusWithID:(NSString *)statusID success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    [self requestAPIWithPath:SA_API_FAVORITE_STATUS_CREATE_PATH method:@"POST" parametersDictionary:@{@"id": statusID, @"mode": @"lite", @"format": @"html"} success:success failure:failure];
+}
+
+- (void)deleteFavoriteStatusWithID:(NSString *)statusID success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    [self requestAPIWithPath:SA_API_FAVORITE_STATUS_DELETE_PATH method:@"POST" parametersDictionary:@{@"id": statusID, @"mode": @"lite", @"format": @"html"} success:success failure:failure];
 }
 
 #pragma mark - Message

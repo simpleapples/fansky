@@ -36,6 +36,8 @@ NSString *const SA_API_USER_PHOTO_TIMELINE_PATH = @"/photos/user_timeline.json";
 NSString *const SA_API_DELETE_STATUS_PATH = @"/statuses/destroy.json";
 NSString *const SA_API_MENTION_STATUS_PATH = @"/statuses/mentions.json";
 NSString *const SA_API_FAVORITE_STATUS_PATH = @"/favorites/list.json";
+NSString *const SA_API_FAVORITE_STATUS_CREATE_PATH = @"/favorites/create/id.json";
+NSString *const SA_API_FAVORITE_STATUS_DELETE_PATH = @"/favorites/destroy/id.json";
 
 NSString *const SA_API_USER_SHOW_PATH = @"/users/show.json";
 NSString *const SA_API_FOLLOW_USER_PATH = @"/friendships/create.json";

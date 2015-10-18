@@ -132,6 +132,7 @@
 		5A93F01E1BC24AA000C44023 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.xib"; sourceTree = "<group>"; };
 		5A95558B1BD36D1200326E94 /* SAFavoriteTimeLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFavoriteTimeLineViewController.h; sourceTree = "<group>"; };
 		5A95558C1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFavoriteTimeLineViewController.m; sourceTree = "<group>"; };
+		5A95558E1BD384B400326E94 /* fansky 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "fansky 3.xcdatamodel"; sourceTree = "<group>"; };
 		5A9AD6AE1BAA6CD50058916A /* SAMessageDisplayUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessageDisplayUtils.h; sourceTree = "<group>"; };
 		5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageDisplayUtils.m; sourceTree = "<group>"; };
 		5AD70EEA1B316A79009C5B84 /* fansky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fansky.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -885,10 +886,11 @@
 		5AD70EF41B316A79009C5B84 /* fansky.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				5A95558E1BD384B400326E94 /* fansky 3.xcdatamodel */,
 				5A849E8E1BC3E62D000FDCB9 /* fansky 2.xcdatamodel */,
 				5AD70EF51B316A79009C5B84 /* fansky.xcdatamodel */,
 			);
-			currentVersion = 5A849E8E1BC3E62D000FDCB9 /* fansky 2.xcdatamodel */;
+			currentVersion = 5A95558E1BD384B400326E94 /* fansky 3.xcdatamodel */;
 			path = fansky.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

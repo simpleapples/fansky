@@ -30,8 +30,8 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.shouldRasterize" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sel-Vi-zsx">
-                        <rect key="frame" x="70" y="16" width="454" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Sel-Vi-zsx">
+                        <rect key="frame" x="70" y="16" width="464" height="20"/>
                         <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="ipl-le-Zzq"/>
@@ -41,11 +41,11 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SjV-c1-VTy">
-                        <rect key="frame" x="524" y="16" width="60" height="20"/>
+                        <rect key="frame" x="534" y="16" width="50" height="20"/>
                         <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="FLG-Yz-8p3"/>
-                            <constraint firstAttribute="width" constant="60" id="Y38-GY-kk3"/>
+                            <constraint firstAttribute="width" constant="50" id="Y38-GY-kk3"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

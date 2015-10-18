@@ -103,7 +103,7 @@
                         <viewControllerLayoutGuide type="bottom" id="xKK-jt-4X2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EQS-sZ-x8I">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -272,18 +272,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dH-hH-Sw5">
-                                <rect key="frame" x="378" y="502" width="44" height="44"/>
-                                <animations/>
-                                <state key="normal" image="IconRepost">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="repostButtonTouchUp:" destination="sUO-Mb-465" eventType="touchUpInside" id="yfn-OD-OwT"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNc-Nh-5O6">
-                                <rect key="frame" x="178" y="502" width="44" height="44"/>
+                                <rect key="frame" x="145" y="502" width="44" height="44"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="44" id="Tal-H0-7D0"/>
@@ -418,18 +408,41 @@
                                     <constraint firstItem="8N1-O0-jkg" firstAttribute="width" secondItem="LOd-Cg-zED" secondAttribute="width" id="ZdK-nu-5ms"/>
                                 </constraints>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n0l-UE-oSs">
+                                <rect key="frame" x="410" y="502" width="44" height="44"/>
+                                <animations/>
+                                <state key="normal" image="IconStar"/>
+                                <state key="selected" image="IconStarSelected"/>
+                                <connections>
+                                    <action selector="starButtonTouchUp:" destination="sUO-Mb-465" eventType="touchUpInside" id="z68-D3-3SN"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dH-hH-Sw5">
+                                <rect key="frame" x="278" y="502" width="44" height="44"/>
+                                <animations/>
+                                <state key="normal" image="IconRepost">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="repostButtonTouchUp:" destination="sUO-Mb-465" eventType="touchUpInside" id="yfn-OD-OwT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="5dH-hH-Sw5" secondAttribute="centerX" multiplier="0.75" id="1nU-24-mXN"/>
+                            <constraint firstItem="n0l-UE-oSs" firstAttribute="bottom" secondItem="5dH-hH-Sw5" secondAttribute="bottom" id="1YY-pW-RkA"/>
+                            <constraint firstAttribute="centerX" secondItem="5dH-hH-Sw5" secondAttribute="centerX" id="1nU-24-mXN"/>
                             <constraint firstItem="PNc-Nh-5O6" firstAttribute="top" secondItem="5dH-hH-Sw5" secondAttribute="top" id="CsM-7B-OsQ"/>
                             <constraint firstItem="PNc-Nh-5O6" firstAttribute="top" secondItem="LOd-Cg-zED" secondAttribute="bottom" constant="10" id="DC6-YS-Ju8"/>
+                            <constraint firstItem="n0l-UE-oSs" firstAttribute="top" secondItem="5dH-hH-Sw5" secondAttribute="top" id="FIi-ts-fgq"/>
                             <constraint firstItem="LOd-Cg-zED" firstAttribute="top" secondItem="2z4-y4-Vq0" secondAttribute="bottom" id="Gp1-FI-Tb8"/>
                             <constraint firstItem="bAI-f0-6uJ" firstAttribute="top" secondItem="PNc-Nh-5O6" secondAttribute="bottom" constant="10" id="I3p-H3-W9p"/>
                             <constraint firstItem="PNc-Nh-5O6" firstAttribute="bottom" secondItem="5dH-hH-Sw5" secondAttribute="bottom" id="NZe-be-vXz"/>
+                            <constraint firstItem="n0l-UE-oSs" firstAttribute="width" secondItem="5dH-hH-Sw5" secondAttribute="width" id="VHr-bR-NZd"/>
+                            <constraint firstItem="n0l-UE-oSs" firstAttribute="centerX" secondItem="ang-q8-Eg1" secondAttribute="centerX" multiplier="1.44" id="Vz9-rz-hoh"/>
                             <constraint firstAttribute="trailing" secondItem="LOd-Cg-zED" secondAttribute="trailing" id="Wtr-xQ-hif"/>
-                            <constraint firstAttribute="centerX" secondItem="PNc-Nh-5O6" secondAttribute="centerX" multiplier="1.5" id="ehe-N9-55u"/>
+                            <constraint firstAttribute="centerX" secondItem="PNc-Nh-5O6" secondAttribute="centerX" multiplier="1.8" id="ehe-N9-55u"/>
                             <constraint firstItem="LOd-Cg-zED" firstAttribute="leading" secondItem="ang-q8-Eg1" secondAttribute="leading" id="j3g-0q-U87"/>
                             <constraint firstItem="PNc-Nh-5O6" firstAttribute="width" secondItem="5dH-hH-Sw5" secondAttribute="width" id="lPD-0t-fxG"/>
                         </constraints>
@@ -447,6 +460,7 @@
                         <outlet property="avatarImageView" destination="B5I-2B-e8a" id="614-wb-EWx"/>
                         <outlet property="contentImageView" destination="XOq-QZ-UUe" id="suF-u5-Iwb"/>
                         <outlet property="contentLabel" destination="dmJ-s8-GGA" id="k5N-ll-MbY"/>
+                        <outlet property="starButton" destination="n0l-UE-oSs" id="DrI-KE-ZMv"/>
                         <outlet property="timeLabel" destination="5kd-aw-gbx" id="Qfs-hI-REC"/>
                         <outlet property="timeLabelTopToImageViewMarginConstraint" destination="Y3e-ja-yiu" id="0jz-O6-F8u"/>
                         <outlet property="timeLabelTopToLabelMarginConstraint" destination="scb-QW-cCm" id="x9i-0R-EEQ"/>
@@ -1283,14 +1297,16 @@
         <image name="IconPerson" width="22" height="22"/>
         <image name="IconReply" width="22" height="22"/>
         <image name="IconRepost" width="22" height="22"/>
+        <image name="IconStar" width="22" height="22"/>
+        <image name="IconStarSelected" width="22" height="22"/>
         <image name="IconStop" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XAJ-iX-ECA"/>
+        <segue reference="qBy-9g-ujA"/>
+        <segue reference="lZq-8d-hBO"/>
         <segue reference="zei-Dr-tIl"/>
         <segue reference="Btz-3b-6W7"/>
         <segue reference="8Zu-Ra-w2O"/>
-        <segue reference="qBy-9g-ujA"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>
