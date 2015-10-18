@@ -260,7 +260,7 @@
             </objects>
             <point key="canvasLocation" x="1280" y="-1480"/>
         </scene>
-        <!--状态-->
+        <!--Delegate-->
         <scene sceneID="oxY-WC-qhL">
             <objects>
                 <viewController storyboardIdentifier="SAStatusViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sUO-Mb-465" customClass="SAStatusViewController" sceneMemberID="viewController">
@@ -290,10 +290,10 @@
                                 <rect key="frame" x="0.0" y="20" width="600" height="472"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8N1-O0-jkg">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="378"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="382"/>
                                         <subviews>
                                             <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XOq-QZ-UUe">
-                                                <rect key="frame" x="70" y="74" width="514" height="257"/>
+                                                <rect key="frame" x="70" y="78" width="514" height="257"/>
                                                 <animations/>
                                                 <gestureRecognizers/>
                                                 <constraints>
@@ -332,20 +332,6 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dmJ-s8-GGA" customClass="TTTAttributedLabel">
-                                                <rect key="frame" x="70" y="46" width="514" height="18"/>
-                                                <animations/>
-                                                <attributedString key="attributedText">
-                                                    <fragment content="Label">
-                                                        <attributes>
-                                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <font key="NSFont" size="16" name="HelveticaNeue-Light"/>
-                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                        </attributes>
-                                                    </fragment>
-                                                </attributedString>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B5I-2B-e8a">
                                                 <rect key="frame" x="16" y="16" width="44" height="44"/>
                                                 <animations/>
@@ -365,32 +351,42 @@
                                                 </connections>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1970年1月1日 00:00 通过网页" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5kd-aw-gbx">
-                                                <rect key="frame" x="70" y="341" width="188" height="17"/>
+                                                <rect key="frame" x="70" y="345" width="188" height="17"/>
                                                 <animations/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dJE-J6-7lr" customClass="DTAttributedLabel">
+                                                <rect key="frame" x="70" y="46" width="514" height="22"/>
+                                                <animations/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="22" id="Ghq-ka-iO6"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="delegate" destination="sUO-Mb-465" id="PH7-e1-H3Q"/>
+                                                </connections>
+                                            </view>
                                         </subviews>
                                         <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="B5I-2B-e8a" firstAttribute="leading" secondItem="8N1-O0-jkg" secondAttribute="leading" constant="16" id="3ih-Ym-EaQ"/>
-                                            <constraint firstItem="XOq-QZ-UUe" firstAttribute="leading" secondItem="dmJ-s8-GGA" secondAttribute="leading" id="AG8-f5-eDa"/>
+                                            <constraint firstItem="dJE-J6-7lr" firstAttribute="trailing" secondItem="DAe-Np-dLq" secondAttribute="trailing" id="7D4-ci-0lu"/>
+                                            <constraint firstItem="dJE-J6-7lr" firstAttribute="top" secondItem="DAe-Np-dLq" secondAttribute="bottom" constant="10" id="9De-Rd-DJf"/>
                                             <constraint firstItem="DAe-Np-dLq" firstAttribute="top" secondItem="B5I-2B-e8a" secondAttribute="top" id="IaQ-17-JLq"/>
                                             <constraint firstAttribute="height" constant="382" id="JT9-kA-AEz"/>
-                                            <constraint firstItem="dmJ-s8-GGA" firstAttribute="top" secondItem="DAe-Np-dLq" secondAttribute="bottom" constant="10" id="MCc-4N-lZR"/>
                                             <constraint firstAttribute="bottom" secondItem="5kd-aw-gbx" secondAttribute="bottom" constant="20" id="NwT-5c-q6V"/>
-                                            <constraint firstItem="dmJ-s8-GGA" firstAttribute="leading" secondItem="DAe-Np-dLq" secondAttribute="leading" id="Uop-GF-Uhd"/>
-                                            <constraint firstItem="dmJ-s8-GGA" firstAttribute="trailing" secondItem="DAe-Np-dLq" secondAttribute="trailing" id="UpT-aE-UsU"/>
+                                            <constraint firstItem="dJE-J6-7lr" firstAttribute="leading" secondItem="DAe-Np-dLq" secondAttribute="leading" id="Tvn-K3-M5e"/>
                                             <constraint firstItem="5kd-aw-gbx" firstAttribute="top" secondItem="XOq-QZ-UUe" secondAttribute="bottom" priority="750" constant="10" id="Y3e-ja-yiu"/>
-                                            <constraint firstItem="XOq-QZ-UUe" firstAttribute="trailing" secondItem="dmJ-s8-GGA" secondAttribute="trailing" id="ZvP-cD-uHc"/>
                                             <constraint firstItem="DAe-Np-dLq" firstAttribute="leading" secondItem="B5I-2B-e8a" secondAttribute="trailing" constant="10" id="cd0-98-OGR"/>
                                             <constraint firstItem="5kd-aw-gbx" firstAttribute="leading" secondItem="XOq-QZ-UUe" secondAttribute="leading" id="fH2-pS-1km"/>
+                                            <constraint firstItem="XOq-QZ-UUe" firstAttribute="top" secondItem="dJE-J6-7lr" secondAttribute="bottom" constant="10" id="k3l-XA-KRU"/>
+                                            <constraint firstItem="5kd-aw-gbx" firstAttribute="top" secondItem="dJE-J6-7lr" secondAttribute="bottom" priority="250" constant="10" id="okL-l9-o1g"/>
                                             <constraint firstItem="B5I-2B-e8a" firstAttribute="top" secondItem="8N1-O0-jkg" secondAttribute="top" constant="16" id="rMO-B5-Ovx"/>
-                                            <constraint firstItem="5kd-aw-gbx" firstAttribute="top" secondItem="dmJ-s8-GGA" secondAttribute="bottom" priority="250" constant="10" id="scb-QW-cCm"/>
+                                            <constraint firstItem="XOq-QZ-UUe" firstAttribute="trailing" secondItem="DAe-Np-dLq" secondAttribute="trailing" id="vS6-Vj-L6Z"/>
                                             <constraint firstAttribute="trailing" secondItem="DAe-Np-dLq" secondAttribute="trailing" constant="16" id="voR-MN-c5E"/>
-                                            <constraint firstItem="XOq-QZ-UUe" firstAttribute="top" secondItem="dmJ-s8-GGA" secondAttribute="bottom" constant="10" id="wYo-YA-dTm"/>
+                                            <constraint firstItem="XOq-QZ-UUe" firstAttribute="leading" secondItem="DAe-Np-dLq" secondAttribute="leading" id="xcN-EC-wmH"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -459,11 +455,12 @@
                     <connections>
                         <outlet property="avatarImageView" destination="B5I-2B-e8a" id="614-wb-EWx"/>
                         <outlet property="contentImageView" destination="XOq-QZ-UUe" id="suF-u5-Iwb"/>
-                        <outlet property="contentLabel" destination="dmJ-s8-GGA" id="k5N-ll-MbY"/>
+                        <outlet property="contentLabel" destination="dJE-J6-7lr" id="3XM-2u-lj4"/>
+                        <outlet property="contentLabelHeightConstraint" destination="Ghq-ka-iO6" id="ubc-4f-NWZ"/>
                         <outlet property="starButton" destination="n0l-UE-oSs" id="DrI-KE-ZMv"/>
                         <outlet property="timeLabel" destination="5kd-aw-gbx" id="Qfs-hI-REC"/>
                         <outlet property="timeLabelTopToImageViewMarginConstraint" destination="Y3e-ja-yiu" id="0jz-O6-F8u"/>
-                        <outlet property="timeLabelTopToLabelMarginConstraint" destination="scb-QW-cCm" id="x9i-0R-EEQ"/>
+                        <outlet property="timeLabelTopToLabelMarginConstraint" destination="okL-l9-o1g" id="btl-vc-JHq"/>
                         <outlet property="usernameLabel" destination="DAe-Np-dLq" id="omP-ki-e5p"/>
                         <segue destination="oxA-mI-Ol2" kind="presentation" identifier="StatusToComposeNavigationSegue" id="Btz-3b-6W7"/>
                         <segue destination="cTU-GI-tki" kind="show" identifier="StatusToUserSegue" id="lZq-8d-hBO"/>

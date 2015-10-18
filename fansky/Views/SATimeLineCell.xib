@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -30,16 +31,6 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.shouldRasterize" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Sel-Vi-zsx">
-                        <rect key="frame" x="70" y="16" width="464" height="20"/>
-                        <animations/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="ipl-le-Zzq"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SjV-c1-VTy">
                         <rect key="frame" x="534" y="16" width="50" height="20"/>
                         <animations/>
@@ -56,21 +47,6 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cks-QO-2ZC" customClass="TTTAttributedLabel">
-                        <rect key="frame" x="70" y="46" width="514" height="37"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="highlightedShadowColor">
-                                <color key="value" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                        <connections>
-                            <outlet property="delegate" destination="-1" id="haj-tX-did"/>
-                        </connections>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kaf-EG-HUj">
                         <rect key="frame" x="16" y="16" width="44" height="44"/>
                         <animations/>
@@ -81,26 +57,50 @@
                             <action selector="avatarImageViewTouchUp:" destination="ied-Va-MeJ" eventType="touchUpInside" id="W7g-wS-Kjr"/>
                         </connections>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="Sel-Vi-zsx">
+                        <rect key="frame" x="70" y="16" width="464" height="20"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="ipl-le-Zzq"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nNt-j4-BCH" customClass="DTAttributedLabel">
+                        <rect key="frame" x="70" y="46" width="514" height="37"/>
+                        <animations/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="29" id="r3G-cK-hYX"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="r3G-cK-hYX"/>
+                            </mask>
+                        </variation>
+                        <connections>
+                            <outlet property="delegate" destination="-1" id="s3O-nC-0Ir"/>
+                        </connections>
+                    </view>
                 </subviews>
                 <animations/>
                 <constraints>
                     <constraint firstItem="Sel-Vi-zsx" firstAttribute="top" secondItem="lnm-D3-GSg" secondAttribute="top" id="01f-Xp-lcK"/>
-                    <constraint firstItem="Sel-Vi-zsx" firstAttribute="leading" secondItem="cks-QO-2ZC" secondAttribute="leading" id="5eR-2y-3lC"/>
+                    <constraint firstItem="nNt-j4-BCH" firstAttribute="trailing" secondItem="SjV-c1-VTy" secondAttribute="trailing" id="1eY-ct-Yq6"/>
+                    <constraint firstItem="nNt-j4-BCH" firstAttribute="leading" secondItem="Sel-Vi-zsx" secondAttribute="leading" id="55n-Za-0F2"/>
+                    <constraint firstAttribute="bottom" secondItem="nNt-j4-BCH" secondAttribute="bottom" constant="16" id="5JY-qI-f6x"/>
                     <constraint firstAttribute="trailing" secondItem="SjV-c1-VTy" secondAttribute="trailing" constant="16" id="87F-wr-QVW"/>
                     <constraint firstItem="SjV-c1-VTy" firstAttribute="top" secondItem="DyM-OM-Yqb" secondAttribute="top" constant="10" id="BD4-rf-5qj"/>
-                    <constraint firstItem="SjV-c1-VTy" firstAttribute="trailing" secondItem="cks-QO-2ZC" secondAttribute="trailing" id="Ia3-4X-MfQ"/>
                     <constraint firstItem="SjV-c1-VTy" firstAttribute="leading" secondItem="Sel-Vi-zsx" secondAttribute="trailing" id="J0I-yg-eJB"/>
                     <constraint firstItem="lnm-D3-GSg" firstAttribute="leading" secondItem="kaf-EG-HUj" secondAttribute="leading" id="J3z-2m-cpE"/>
                     <constraint firstItem="SjV-c1-VTy" firstAttribute="top" secondItem="Sel-Vi-zsx" secondAttribute="top" id="K5C-v9-qgF"/>
                     <constraint firstItem="lnm-D3-GSg" firstAttribute="bottom" secondItem="kaf-EG-HUj" secondAttribute="bottom" id="KIs-tU-LDG"/>
-                    <constraint firstItem="cks-QO-2ZC" firstAttribute="top" secondItem="Sel-Vi-zsx" secondAttribute="bottom" constant="10" id="MjI-ca-7in"/>
-                    <constraint firstAttribute="bottom" secondItem="cks-QO-2ZC" secondAttribute="bottom" constant="16" id="NR0-9X-YZx"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="nNt-j4-BCH" secondAttribute="bottom" constant="16" id="Lof-ro-175"/>
+                    <constraint firstItem="nNt-j4-BCH" firstAttribute="top" secondItem="Sel-Vi-zsx" secondAttribute="bottom" constant="10" id="O5a-lu-8tz"/>
                     <constraint firstItem="lnm-D3-GSg" firstAttribute="top" secondItem="DyM-OM-Yqb" secondAttribute="top" constant="16" id="OdT-g9-PrO"/>
                     <constraint firstItem="Sel-Vi-zsx" firstAttribute="leading" secondItem="lnm-D3-GSg" secondAttribute="trailing" constant="10" id="WQU-ic-6Mv"/>
-                    <constraint firstAttribute="bottom" secondItem="cks-QO-2ZC" secondAttribute="bottom" constant="16" id="aG6-3S-hll"/>
                     <constraint firstItem="Sel-Vi-zsx" firstAttribute="top" secondItem="DyM-OM-Yqb" secondAttribute="top" constant="10" id="c5i-9x-58B"/>
                     <constraint firstItem="lnm-D3-GSg" firstAttribute="leading" secondItem="DyM-OM-Yqb" secondAttribute="leading" constant="16" id="gex-Bb-MZg"/>
-                    <constraint firstItem="SjV-c1-VTy" firstAttribute="trailing" secondItem="cks-QO-2ZC" secondAttribute="trailing" id="sNN-wi-MlH"/>
                     <constraint firstItem="Sel-Vi-zsx" firstAttribute="bottom" secondItem="SjV-c1-VTy" secondAttribute="bottom" id="uyy-Pa-hZk"/>
                     <constraint firstItem="lnm-D3-GSg" firstAttribute="trailing" secondItem="kaf-EG-HUj" secondAttribute="trailing" id="wYT-bO-l2A"/>
                     <constraint firstItem="lnm-D3-GSg" firstAttribute="top" secondItem="kaf-EG-HUj" secondAttribute="top" id="xgL-QH-32e"/>
@@ -108,16 +108,15 @@
                 <variation key="default">
                     <mask key="constraints">
                         <exclude reference="c5i-9x-58B"/>
-                        <exclude reference="NR0-9X-YZx"/>
+                        <exclude reference="Lof-ro-175"/>
                         <exclude reference="BD4-rf-5qj"/>
-                        <exclude reference="Ia3-4X-MfQ"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <animations/>
             <connections>
                 <outlet property="avatarImageView" destination="lnm-D3-GSg" id="QfM-QG-Fts"/>
-                <outlet property="contentLabel" destination="cks-QO-2ZC" id="Hv3-Uy-a1B"/>
+                <outlet property="contentLabel" destination="nNt-j4-BCH" id="Z3J-aT-sTc"/>
                 <outlet property="timeLabel" destination="SjV-c1-VTy" id="yAF-gn-XXM"/>
                 <outlet property="usernameLabel" destination="Sel-Vi-zsx" id="njf-TA-4aD"/>
             </connections>

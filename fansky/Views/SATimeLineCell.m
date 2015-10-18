@@ -11,15 +11,15 @@
 #import "SAPhoto.h"
 #import "SAUser+CoreDataProperties.h"
 #import "NSDate+Utils.h"
-#import "TTTAttributedLabel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <DTCoreText/DTCoreText.h>
 
-@interface SATimeLineCell () <TTTAttributedLabelDelegate>
+@interface SATimeLineCell () <DTAttributedTextContentViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet TTTAttributedLabel *contentLabel;
+@property (weak, nonatomic) IBOutlet DTAttributedLabel *contentLabel;
 
 @end
 
@@ -31,7 +31,7 @@
         
     self.usernameLabel.text = nil;
     self.timeLabel.text = nil;
-    self.contentLabel.text = nil;
+    self.contentLabel.attributedString = nil;
     self.contentLabel.delegate = nil;
     [self.avatarImageView setImage:nil];
 }
@@ -45,30 +45,22 @@
 
 - (void)updateInterface
 {
-    self.usernameLabel.text = self.status.user.name;
+    UIColor *linkColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
     
-    NSDictionary *linkAttributesDict = @{NSForegroundColorAttributeName: [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1]};
-    self.contentLabel.linkAttributes = linkAttributesDict;
-    self.contentLabel.activeLinkAttributes = linkAttributesDict;
-    self.contentLabel.text = [[NSAttributedString alloc] initWithData:[self.status.text dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
-    
-    UIFont *newFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
-    NSMutableAttributedString* attributedString = [self.contentLabel.attributedText mutableCopy];
-    [attributedString beginEditing];
-    [attributedString enumerateAttribute:NSFontAttributeName inRange:NSMakeRange(0, attributedString.length) options:0 usingBlock:^(id value, NSRange range, BOOL *stop) {
-        NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        [paragraphStyle setLineSpacing:6];
-        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:range];
-        [attributedString removeAttribute:NSFontAttributeName range:range];
-        [attributedString addAttribute:NSFontAttributeName value:newFont range:range];
-        [attributedString addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlineStyleNone) range:range];
-    }];
-    [attributedString endEditing];
-    self.contentLabel.text = [attributedString copy];
-    self.contentLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink;
-    self.contentLabel.delegate = self;
+    NSDictionary *optionDictionary = @{DTDefaultFontName: @"HelveticaNeue-Light",
+                                       DTDefaultFontSize: @(16),
+                                       DTDefaultLinkColor: linkColor,
+                                       DTDefaultLinkHighlightColor: linkColor,
+                                       DTDefaultLinkDecoration: @(NO),
+                                       DTDefaultLineHeightMultiplier: @(1.8)};
+    NSAttributedString* attributedString = [[NSAttributedString alloc] initWithHTMLData:[self.status.text dataUsingEncoding:NSUnicodeStringEncoding] options:optionDictionary documentAttributes:nil];
     
     self.timeLabel.text = [self.status.createdAt friendlyDateString];
+    self.usernameLabel.text = self.status.user.name;
+    self.contentLabel.attributedString = attributedString;
+    self.contentLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    self.contentLabel.numberOfLines = 0;
+    self.contentLabel.delegate = self;
 }
 
 - (void)loadAllImages
@@ -76,12 +68,14 @@
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
 }
 
-- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
+#pragma mark - DTAttributedTextContentViewDelegate
+
+- (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForLink:(NSURL *)url identifier:(NSString *)identifier frame:(CGRect)frame
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(timeLineCell:contentURLTouchUp:)]) {
-        self.selectedURL = url;
-        [self.delegate timeLineCell:self contentURLTouchUp:nil];
-    }
+    DTLinkButton *linkButton = [[DTLinkButton alloc] initWithFrame:frame];
+    linkButton.URL = url;
+    [linkButton addTarget:self action:@selector(linkButtonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
+    return linkButton;
 }
 
 #pragma mark - EventHandler
@@ -90,6 +84,15 @@
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(timeLineCell:avatarImageViewTouchUp:)]) {
         [self.delegate timeLineCell:self avatarImageViewTouchUp:sender];
+    }
+}
+
+- (void)linkButtonTouchUp:(DTLinkButton *)sender
+{
+    NSURL *URL = sender.URL;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(timeLineCell:contentURLTouchUp:)]) {
+        self.selectedURL = URL;
+        [self.delegate timeLineCell:self contentURLTouchUp:nil];
     }
 }
 

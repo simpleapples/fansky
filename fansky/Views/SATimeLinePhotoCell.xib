@@ -69,21 +69,6 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ta-BO-lFm" customClass="TTTAttributedLabel">
-                        <rect key="frame" x="70" y="46" width="514" height="50"/>
-                        <animations/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="color" keyPath="highlightedShadowColor">
-                                <color key="value" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                        <connections>
-                            <outlet property="delegate" destination="-1" id="Q1r-I0-2Bx"/>
-                        </connections>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijl-FY-P4u">
                         <rect key="frame" x="70" y="106" width="514" height="257"/>
                         <animations/>
@@ -107,6 +92,10 @@
                             </mask>
                         </variation>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iv0-Vt-jde" customClass="DTAttributedLabel">
+                        <rect key="frame" x="70" y="46" width="514" height="50"/>
+                        <animations/>
+                    </view>
                 </subviews>
                 <animations/>
                 <constraints>
@@ -117,25 +106,25 @@
                     <constraint firstItem="ijl-FY-P4u" firstAttribute="leading" secondItem="dRH-S7-m6F" secondAttribute="leading" id="6Vl-hR-XeV"/>
                     <constraint firstAttribute="trailing" secondItem="7Of-QF-XIm" secondAttribute="trailing" constant="16" id="768-qv-6Dw"/>
                     <constraint firstItem="cD2-Vt-87e" firstAttribute="bottom" secondItem="7Of-QF-XIm" secondAttribute="bottom" id="8Wy-CJ-YeB"/>
-                    <constraint firstItem="4Ta-BO-lFm" firstAttribute="top" secondItem="cD2-Vt-87e" secondAttribute="bottom" constant="10" id="FZX-IM-Ioa"/>
+                    <constraint firstItem="Iv0-Vt-jde" firstAttribute="leading" secondItem="cD2-Vt-87e" secondAttribute="leading" id="9Ac-LL-E4e"/>
                     <constraint firstItem="cD2-Vt-87e" firstAttribute="top" secondItem="7hb-tO-ueK" secondAttribute="top" constant="10" id="GdN-X7-3rW"/>
+                    <constraint firstItem="Iv0-Vt-jde" firstAttribute="trailing" secondItem="7Of-QF-XIm" secondAttribute="trailing" id="GfB-dN-gI3"/>
                     <constraint firstItem="EH6-m5-hgu" firstAttribute="leading" secondItem="X8m-jJ-Ibh" secondAttribute="leading" id="I5c-dX-La0"/>
                     <constraint firstItem="ijl-FY-P4u" firstAttribute="bottom" secondItem="dRH-S7-m6F" secondAttribute="bottom" id="Mil-z5-sfC"/>
                     <constraint firstItem="7Of-QF-XIm" firstAttribute="top" secondItem="cD2-Vt-87e" secondAttribute="top" id="PVY-pY-QbR"/>
                     <constraint firstItem="EH6-m5-hgu" firstAttribute="trailing" secondItem="X8m-jJ-Ibh" secondAttribute="trailing" id="QhR-aR-fba"/>
                     <constraint firstItem="ijl-FY-P4u" firstAttribute="trailing" secondItem="dRH-S7-m6F" secondAttribute="trailing" id="Rz9-OZ-pM1"/>
                     <constraint firstItem="dRH-S7-m6F" firstAttribute="trailing" secondItem="7Of-QF-XIm" secondAttribute="trailing" id="S3R-vg-FEl"/>
-                    <constraint firstItem="cD2-Vt-87e" firstAttribute="leading" secondItem="4Ta-BO-lFm" secondAttribute="leading" id="UlF-ZE-e16"/>
                     <constraint firstItem="EH6-m5-hgu" firstAttribute="leading" secondItem="7hb-tO-ueK" secondAttribute="leading" constant="16" id="a3Z-2Y-KxE"/>
-                    <constraint firstItem="dRH-S7-m6F" firstAttribute="top" secondItem="4Ta-BO-lFm" secondAttribute="bottom" constant="10" id="c0Z-Rv-5Fp"/>
                     <constraint firstAttribute="bottom" secondItem="dRH-S7-m6F" secondAttribute="bottom" constant="16" id="h2I-BV-X4K"/>
                     <constraint firstItem="cD2-Vt-87e" firstAttribute="leading" secondItem="EH6-m5-hgu" secondAttribute="trailing" constant="10" id="jnu-ne-8Hc"/>
                     <constraint firstItem="7Of-QF-XIm" firstAttribute="top" secondItem="7hb-tO-ueK" secondAttribute="top" constant="10" id="kpQ-DK-cPC"/>
+                    <constraint firstItem="Iv0-Vt-jde" firstAttribute="top" secondItem="cD2-Vt-87e" secondAttribute="bottom" constant="10" id="o0T-Rp-mUf"/>
                     <constraint firstItem="EH6-m5-hgu" firstAttribute="top" secondItem="7hb-tO-ueK" secondAttribute="top" constant="16" id="sPz-fX-sGW"/>
                     <constraint firstAttribute="trailing" secondItem="7Of-QF-XIm" secondAttribute="trailing" constant="10" id="t1i-hm-P9V"/>
                     <constraint firstItem="EH6-m5-hgu" firstAttribute="bottom" secondItem="X8m-jJ-Ibh" secondAttribute="bottom" id="tyt-mH-R9A"/>
                     <constraint firstItem="7Of-QF-XIm" firstAttribute="leading" secondItem="cD2-Vt-87e" secondAttribute="trailing" id="uUh-gD-VTQ"/>
-                    <constraint firstItem="7Of-QF-XIm" firstAttribute="trailing" secondItem="4Ta-BO-lFm" secondAttribute="trailing" id="wYQ-8r-9Ht"/>
+                    <constraint firstItem="ijl-FY-P4u" firstAttribute="top" secondItem="Iv0-Vt-jde" secondAttribute="bottom" constant="10" id="wcd-AG-sR9"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
@@ -149,11 +138,11 @@
             <connections>
                 <outlet property="avatarImageView" destination="EH6-m5-hgu" id="s0W-dh-32K"/>
                 <outlet property="contentImageView" destination="dRH-S7-m6F" id="6vQ-LD-z9C"/>
-                <outlet property="contentLabel" destination="4Ta-BO-lFm" id="Hf9-K3-qyJ"/>
+                <outlet property="contentLabel" destination="Iv0-Vt-jde" id="mCe-cz-Kle"/>
                 <outlet property="timeLabel" destination="7Of-QF-XIm" id="d2x-VH-SG2"/>
                 <outlet property="usernameLabel" destination="cD2-Vt-87e" id="LPR-nn-iKk"/>
             </connections>
-            <point key="canvasLocation" x="312" y="388.5"/>
+            <point key="canvasLocation" x="312" y="388"/>
         </tableViewCell>
     </objects>
 </document>

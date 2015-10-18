@@ -18,6 +18,7 @@
 #import "SAStatus+CoreDataProperties.h"
 #import "SAUser+CoreDataProperties.h"
 #import "SAPhoto+CoreDataProperties.h"
+#import <DTCoreText/DTCoreText.h>
 #import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 
 @interface SAFavoriteTimeLineViewController () <SATimeLineCellDelegate, SATimeLinePhotoCellDelegate>
@@ -102,8 +103,6 @@ static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
 {
     self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.tableFooterView = [UIView new];
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 140;
 }
 
 - (void)didReceiveMemoryWarning
@@ -180,6 +179,32 @@ static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.favoriteTimeLineList.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SAStatus *status = [self.favoriteTimeLineList objectAtIndex:indexPath.row];
+    UIColor *linkColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
+    
+    NSDictionary *optionDictionary = @{DTDefaultFontName: @"HelveticaNeue-Light",
+                                       DTDefaultFontSize: @(16),
+                                       DTDefaultLinkColor: linkColor,
+                                       DTDefaultLinkHighlightColor: linkColor,
+                                       DTDefaultLinkDecoration: @(NO),
+                                       DTDefaultLineHeightMultiplier: @(1.8)};
+    NSAttributedString* attributedString = [[NSAttributedString alloc] initWithHTMLData:[status.text dataUsingEncoding:NSUnicodeStringEncoding] options:optionDictionary documentAttributes:nil];
+    
+    DTCoreTextLayouter *layouter = [[DTCoreTextLayouter alloc] initWithAttributedString:attributedString];
+    
+    CGFloat width = self.tableView.frame.size.width - 86;
+    CGRect maxRect = CGRectMake(0, 0, width, CGFLOAT_HEIGHT_UNKNOWN);
+    NSRange entireString = NSMakeRange(0, attributedString.length);
+    DTCoreTextLayoutFrame *layoutFrame = [layouter layoutFrameWithRect:maxRect range:entireString];
+    CGFloat offset = 62;
+    if (status.photo.imageURL) {
+        offset = width / 2 + 16 + 10 + 46;
+    }
+    return layoutFrame.frame.size.height + offset;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

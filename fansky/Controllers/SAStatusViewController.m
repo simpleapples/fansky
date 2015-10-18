@@ -18,21 +18,22 @@
 #import "SAMessageDisplayUtils.h"
 #import "NSDate+Utils.h"
 #import "NSString+Utils.h"
-#import "TTTAttributedLabel.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import <DTCoreText/DTCoreText.h>
 #import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 #import <MobileCoreServices/UTCoreTypes.h>
 
-@interface SAStatusViewController () <TTTAttributedLabelDelegate, UIActionSheetDelegate>
+@interface SAStatusViewController () <DTAttributedTextContentViewDelegate, UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (weak, nonatomic) IBOutlet TTTAttributedLabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet DTAttributedLabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
 @property (weak, nonatomic) IBOutlet UIButton *starButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelTopToLabelMarginConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelTopToImageViewMarginConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentLabelHeightConstraint;
 @property (strong, nonatomic) URBMediaFocusViewController *imageViewController;
 @property (strong, nonatomic) SAStatus *status;
 @property (copy, nonatomic) NSString *selectedUserID;
@@ -70,31 +71,31 @@
     [self updateStarButton];
     
     self.usernameLabel.text = self.status.user.name;
-    self.contentLabel.text = self.status.text;
     self.timeLabel.text = [NSString stringWithFormat:@"%@ ∙ 通过%@", [self.status.createdAt dateStringWithFormat:@"MM-dd HH:mm"], [self.status.source flattenHTML]];
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
     self.contentImageView.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:1].CGColor;
     
-    NSDictionary *linkAttributesDict = @{NSForegroundColorAttributeName: [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1], NSUnderlineStyleAttributeName: @(NSUnderlineStyleNone)};
-    self.contentLabel.linkAttributes = linkAttributesDict;
-    self.contentLabel.activeLinkAttributes = linkAttributesDict;
-    self.contentLabel.text = [[NSAttributedString alloc] initWithData:[self.status.text dataUsingEncoding:NSUnicodeStringEncoding] options:@{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType} documentAttributes:nil error:nil];
+    UIColor *linkColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
     
-    UIFont *newFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
-    NSMutableAttributedString* attributedString = [self.contentLabel.attributedText mutableCopy];
-    [attributedString beginEditing];
-    [attributedString enumerateAttribute:NSFontAttributeName inRange:NSMakeRange(0, attributedString.length) options:0 usingBlock:^(id value, NSRange range, BOOL *stop) {
-        NSMutableParagraphStyle * paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        [paragraphStyle setLineSpacing:6];
-        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:range];
-        [attributedString removeAttribute:NSFontAttributeName range:range];
-        [attributedString addAttribute:NSFontAttributeName value:newFont range:range];
-        [attributedString addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlineStyleNone) range:range];
-    }];
-    [attributedString endEditing];
-    self.contentLabel.text = [attributedString copy];
-    self.contentLabel.enabledTextCheckingTypes = NSTextCheckingTypeLink;
+    NSDictionary *optionDictionary = @{DTDefaultFontName: @"HelveticaNeue-Light",
+                                       DTDefaultFontSize: @(16),
+                                       DTDefaultLinkColor: linkColor,
+                                       DTDefaultLinkHighlightColor: linkColor,
+                                       DTDefaultLinkDecoration: @(NO),
+                                       DTDefaultLineHeightMultiplier: @(1.8)};
+    NSAttributedString* attributedString = [[NSAttributedString alloc] initWithHTMLData:[self.status.text dataUsingEncoding:NSUnicodeStringEncoding] options:optionDictionary documentAttributes:nil];
+    
+    self.contentLabel.attributedString = attributedString;
+    self.contentLabel.lineBreakMode = NSLineBreakByCharWrapping;
+    self.contentLabel.numberOfLines = 0;
     self.contentLabel.delegate = self;
+    DTCoreTextLayouter *layouter = [[DTCoreTextLayouter alloc] initWithAttributedString:attributedString];
+    
+    CGFloat width = self.view.frame.size.width - 86;
+    CGRect maxRect = CGRectMake(0, 0, width, CGFLOAT_HEIGHT_UNKNOWN);
+    NSRange entireString = NSMakeRange(0, attributedString.length);
+    DTCoreTextLayoutFrame *layoutFrame = [layouter layoutFrameWithRect:maxRect range:entireString];
+    self.contentLabelHeightConstraint.constant = layoutFrame.frame.size.height;
     
     if (self.status.photo.thumbURL) {
         self.contentImageView.hidden = NO;
@@ -130,6 +131,17 @@
     }
 }
 
+#pragma mark - DTAttributedTextContentViewDelegate
+
+- (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForLink:(NSURL *)url identifier:(NSString *)identifier frame:(CGRect)frame
+{
+    DTLinkButton *linkButton = [[DTLinkButton alloc] initWithFrame:frame];
+    linkButton.URL = url;
+    [linkButton addTarget:self action:@selector(linkButtonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
+    return linkButton;
+}
+
+
 #pragma mark - UIActionSheet
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
@@ -156,18 +168,6 @@
             pasteboard.string = pasteString;
             [SAMessageDisplayUtils showInfoWithMessage:@"已复制"];
         }
-    }
-}
-
-#pragma mark - TTTAttributedLabelDelegate
-
-- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
-{
-    if ([url.host isEqualToString:@"fanfou.com"]) {
-        self.selectedUserID = url.lastPathComponent;
-        [self performSegueWithIdentifier:@"StatusToUserSegue" sender:nil];
-    } else if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
-        [[UIApplication sharedApplication] openURL:url];
     }
 }
 
@@ -233,6 +233,17 @@
         actionSheet.tag = 1;
     }
     [actionSheet showInView:self.view];
+}
+
+- (void)linkButtonTouchUp:(DTLinkButton *)sender
+{
+    NSURL *URL = sender.URL;
+    if ([URL.host isEqualToString:@"fanfou.com"]) {
+        self.selectedUserID = URL.lastPathComponent;
+        [self performSegueWithIdentifier:@"StatusToUserSegue" sender:nil];
+    } else if ([URL.scheme isEqualToString:@"http"] || [URL.scheme isEqualToString:@"https"]) {
+        [[UIApplication sharedApplication] openURL:URL];
+    }
 }
 
 @end
