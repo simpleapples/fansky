@@ -52,6 +52,8 @@
 
 - (void)mentionStatusWithSinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
 
+- (void)userFavoriteTimeLineWithUserID:(NSString *)userID count:(NSUInteger)count page:(NSUInteger)page success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
+
 #pragma mark - Message
 
 - (void)conversationListWithCount:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;

@@ -14,6 +14,7 @@
 #import "SAPhotoTimeLineViewController.h"
 #import "SAAPIService.h"
 #import "SAFriendListViewController.h"
+#import "SAFavoriteTimeLineViewController.h"
 #import <ARSegmentPager/ARSegmentControllerDelegate.h>
 #import <ARSegmentPager/ARSegmentView.h>
 
@@ -68,9 +69,14 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SAMain" bundle:[NSBundle mainBundle]];
     SATimeLineViewController *timeLineViewController = [storyboard instantiateViewControllerWithIdentifier:@"SATimeLineViewController"];
     timeLineViewController.userID = self.userID;
+    
     SAPhotoTimeLineViewController *photoTimeLineViewController = [storyboard instantiateViewControllerWithIdentifier:@"SAPhotoTimeLineViewController"];
     photoTimeLineViewController.userID = self.userID;
-    [self setViewControllers:@[timeLineViewController, photoTimeLineViewController]];
+    
+    SAFavoriteTimeLineViewController *favoriteTimeLineViewController = [storyboard instantiateViewControllerWithIdentifier:@"SAFavoriteTimeLineViewController"];
+    favoriteTimeLineViewController.userID = self.userID;
+    
+    [self setViewControllers:@[timeLineViewController, photoTimeLineViewController, favoriteTimeLineViewController]];
 }
 
 - (UIView<ARSegmentPageControllerHeaderProtocol> *)customHeaderView

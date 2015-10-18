@@ -103,7 +103,7 @@
                         <viewControllerLayoutGuide type="bottom" id="xKK-jt-4X2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EQS-sZ-x8I">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -272,6 +272,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dH-hH-Sw5">
+                                <rect key="frame" x="378" y="502" width="44" height="44"/>
+                                <animations/>
+                                <state key="normal" image="IconRepost">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="repostButtonTouchUp:" destination="sUO-Mb-465" eventType="touchUpInside" id="yfn-OD-OwT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNc-Nh-5O6">
+                                <rect key="frame" x="178" y="502" width="44" height="44"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="Tal-H0-7D0"/>
+                                    <constraint firstAttribute="height" constant="44" id="oo4-x0-oml"/>
+                                </constraints>
+                                <state key="normal" image="IconReply">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="replyButtonTouchUp:" destination="sUO-Mb-465" eventType="touchUpInside" id="53Y-Bb-Nyw"/>
+                                </connections>
+                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LOd-Cg-zED">
                                 <rect key="frame" x="0.0" y="20" width="600" height="472"/>
                                 <subviews>
@@ -394,30 +418,6 @@
                                     <constraint firstItem="8N1-O0-jkg" firstAttribute="width" secondItem="LOd-Cg-zED" secondAttribute="width" id="ZdK-nu-5ms"/>
                                 </constraints>
                             </scrollView>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5dH-hH-Sw5">
-                                <rect key="frame" x="378" y="502" width="44" height="44"/>
-                                <animations/>
-                                <state key="normal" image="IconRepost">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="repostButtonTouchUp:" destination="sUO-Mb-465" eventType="touchUpInside" id="yfn-OD-OwT"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PNc-Nh-5O6">
-                                <rect key="frame" x="178" y="502" width="44" height="44"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="Tal-H0-7D0"/>
-                                    <constraint firstAttribute="height" constant="44" id="oo4-x0-oml"/>
-                                </constraints>
-                                <state key="normal" image="IconReply">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="replyButtonTouchUp:" destination="sUO-Mb-465" eventType="touchUpInside" id="53Y-Bb-Nyw"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -537,6 +537,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LfH-4Q-Zlc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2003" y="-724"/>
+        </scene>
+        <!--Favorite Time Line View Controller-->
+        <scene sceneID="tnU-xm-ApF">
+            <objects>
+                <tableViewController storyboardIdentifier="SAFavoriteTimeLineViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fXb-MH-dSg" customClass="SAFavoriteTimeLineViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="biG-1s-NPN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="cT3-Xp-tNy">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cT3-Xp-tNy" id="juV-7A-RoE">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fXb-MH-dSg" id="g0j-E0-fAb"/>
+                            <outlet property="delegate" destination="fXb-MH-dSg" id="QVv-5u-oNg"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <segue destination="cTU-GI-tki" kind="show" identifier="FavoriteTimeLineToUserSegue" id="XAJ-iX-ECA"/>
+                        <segue destination="sUO-Mb-465" kind="show" identifier="FavoriteTimeLineToStatusSegue" id="zei-Dr-tIl"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HJM-Uf-cnq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1999" y="-1480"/>
         </scene>
         <!--时间线-->
         <scene sceneID="b7E-qj-3fp">
@@ -1251,11 +1286,11 @@
         <image name="IconStop" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="XAJ-iX-ECA"/>
+        <segue reference="zei-Dr-tIl"/>
         <segue reference="Btz-3b-6W7"/>
-        <segue reference="0sX-T1-HFd"/>
-        <segue reference="qBy-9g-ujA"/>
-        <segue reference="lZq-8d-hBO"/>
         <segue reference="8Zu-Ra-w2O"/>
+        <segue reference="qBy-9g-ujA"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>

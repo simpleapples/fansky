@@ -150,6 +150,31 @@ static NSString *const ENTITY_NAME = @"SAUser";
     return resultUser;
 }
 
+- (SAUser *)userWithObject:(id)object
+{
+    NSString *userID = (NSString *)[object objectForKey:@"id"];
+    NSString *name = (NSString *)[object objectForKey:@"name"];
+    NSString *location = (NSString *)[object objectForKey:@"location"];
+    NSString *profileImageURL = (NSString *)[object objectForKey:@"profile_image_url"];
+    NSNumber *following = [object objectForKey:@"following"];
+    NSNumber *friendsCount = [object objectForKey:@"friends_count"];
+    NSNumber *followersCount = [object objectForKey:@"followers_count"];
+    NSNumber *statusCount = [object objectForKey:@"statuses_count"];
+    NSNumber *protected = [object objectForKey:@"protected"];
+    
+    SAUser *user = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
+    user.userID = userID;
+    user.name = name;
+    user.location = location;
+    user.profileImageURL = profileImageURL;
+    user.following = following;
+    user.friendsCount = friendsCount;
+    user.followersCount = followersCount;
+    user.statusCount = statusCount;
+    user.protected = protected;
+    return user;
+}
+
 - (void)setCurrentUserWithUserID:(NSString *)userID
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];

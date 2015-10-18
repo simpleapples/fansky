@@ -1,30 +1,29 @@
 //
-//  TimeLineViewController.m
+//  SAFavoriteTimeLineViewController.m
 //  fansky
 //
-//  Created by Zzy on 6/17/15.
-//  Copyright (c) 2015 Zzy. All rights reserved.
+//  Created by Zzy on 10/18/15.
+//  Copyright © 2015 Zzy. All rights reserved.
 //
 
-#import "SATimeLineViewController.h"
-#import "SADataManager+User.h"
-#import "SATimeLineCell.h"
-#import "SAUser+CoreDataProperties.h"
-#import "SAStatus+CoreDataProperties.h"
-#import "SAPhoto.h"
-#import "SAAPIService.h"
+#import "SAFavoriteTimeLineViewController.h"
+#import "SAMessageDisplayUtils.h"
 #import "SADataManager+Status.h"
+#import "SAAPIService.h"
 #import "SAStatusViewController.h"
 #import "SAUserViewController.h"
-#import "SAMessageDisplayUtils.h"
+#import "SATimeLineCell.h"
 #import "SATimeLinePhotoCell.h"
 #import "SAComposeViewController.h"
+#import "SAStatus+CoreDataProperties.h"
+#import "SAUser+CoreDataProperties.h"
+#import "SAPhoto+CoreDataProperties.h"
 #import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 
-@interface SATimeLineViewController () <SATimeLineCellDelegate, SATimeLinePhotoCellDelegate>
+@interface SAFavoriteTimeLineViewController () <SATimeLineCellDelegate, SATimeLinePhotoCellDelegate>
 
-@property (strong, nonatomic) NSArray *timeLineList;
-@property (copy, nonatomic) NSString *maxID;
+@property (strong, nonatomic) NSArray *favoriteTimeLineList;
+@property (nonatomic) NSUInteger page;
 @property (copy, nonatomic) NSString *selectedStatusID;
 @property (copy, nonatomic) NSString *selectedUserID;
 @property (nonatomic, getter = isCellRegistered) BOOL cellRegistered;
@@ -32,18 +31,16 @@
 
 @end
 
-@implementation SATimeLineViewController
+@implementation SAFavoriteTimeLineViewController
 
 static NSString *const ENTITY_NAME = @"SAStatus";
-static NSUInteger TIME_LINE_COUNT = 40;
+static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self updateInterface];
-    
-    [self getLocalData];
     
     [self refreshData];
 }
@@ -61,19 +58,6 @@ static NSUInteger TIME_LINE_COUNT = 40;
     [SAMessageDisplayUtils dismiss];
 }
 
-- (void)getLocalData
-{
-    NSString *userID = self.userID;
-    SAStatusTypes type = SAStatusTypeUserStatus;
-    if (!userID) {
-        SAUser *currentUser = [SADataManager sharedManager].currentUser;
-        userID = currentUser.userID;
-        type = SAStatusTypeTimeLine;
-    }
-    self.timeLineList = [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type limit:TIME_LINE_COUNT];
-    [self.tableView reloadData];
-}
-
 - (void)refreshData
 {
     [self updateDataWithRefresh:YES];
@@ -81,59 +65,41 @@ static NSUInteger TIME_LINE_COUNT = 40;
 
 - (void)updateDataWithRefresh:(BOOL)refresh
 {
-    if (!self.timeLineList) {
-        self.timeLineList = [[NSArray alloc] init];
+    if (!self.favoriteTimeLineList) {
+        self.favoriteTimeLineList = [[NSArray alloc] init];
     }
-    NSString *maxID;
     if (!refresh) {
-        maxID = self.maxID;
-    } else if (self.timeLineList.count) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    }
-    NSString *userID = self.userID;
-    SAStatusTypes type = SAStatusTypeUserStatus;
-    if (!userID) {
-        SAUser *currentUser = [SADataManager sharedManager].currentUser;
-        userID = currentUser.userID;
-        type = SAStatusTypeTimeLine;
+        self.page++;
+    } else {
+        self.page = 1;
     }
     void (^success)(id data) = ^(id data) {
-        [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:data type:type];
-        NSUInteger limit = TIME_LINE_COUNT;
-        if (!refresh) {
-            limit = self.timeLineList.count + TIME_LINE_COUNT;
-        }
-        self.timeLineList = [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type limit:limit];
-        if (self.timeLineList.count) {
-            SAStatus *lastStatus = [self.timeLineList lastObject];
-            self.maxID = lastStatus.statusID;
+        NSArray *originalList = (NSArray *)data;
+        __block NSMutableArray *tempFavoriteTimeLineList = [[NSMutableArray alloc] init];
+        [originalList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            SAStatus *status = [[SADataManager sharedManager] statusWithObject:obj localUsers:nil type:SAStatusTypeFavoriteStatus];
+            [tempFavoriteTimeLineList addObject:status];
+        }];
+        if (self.page > 1) {
+            NSMutableArray *existList = [self.favoriteTimeLineList mutableCopy];
+            [existList addObjectsFromArray:tempFavoriteTimeLineList];
+            self.favoriteTimeLineList = [existList copy];
+        } else {
+            self.favoriteTimeLineList = [tempFavoriteTimeLineList copy];
         }
         [self.tableView reloadData];
-        [self.refreshControl endRefreshing];
         [SAMessageDisplayUtils dismiss];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
-        [self.refreshControl endRefreshing];
     };
     
-    if (type == SAStatusTypeTimeLine) {
-        if (refresh) {
-            [self.refreshControl beginRefreshing];
-        }
-        [[SAAPIService sharedSingleton] timeLineWithUserID:userID sinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
-    } else {
-        [SAMessageDisplayUtils showProgressWithMessage:@"正在刷新"];
-        [[SAAPIService sharedSingleton] userTimeLineWithUserID:userID sinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
-    }
+    [SAMessageDisplayUtils showProgressWithMessage:@"正在刷新"];
+    [[SAAPIService sharedSingleton] userFavoriteTimeLineWithUserID:self.userID count:FAVORITE_TIME_LINE_COUNT page:self.page success:success failure:failure];
 }
 
 - (void)updateInterface
 {
-    self.refreshControl.enabled = !self.userID;
-    if (self.refreshControl.enabled) {
-        [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
-    }
     self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -161,7 +127,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell avatarImageViewTouchUp:(id)sender
 {
     self.selectedUserID = timeLineCell.status.user.userID;
-    [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
+    [self performSegueWithIdentifier:@"FavoriteTimeLineToUserSegue" sender:nil];
 }
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell contentURLTouchUp:(id)sender
@@ -169,7 +135,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
     NSURL *url = timeLineCell.selectedURL;
     if ([url.host isEqualToString:@"fanfou.com"]) {
         self.selectedUserID = url.lastPathComponent;
-        [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
+        [self performSegueWithIdentifier:@"FavoriteTimeLineToUserSegue" sender:nil];
     } else if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
         [[UIApplication sharedApplication] openURL:url];
     }
@@ -180,7 +146,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
 - (void)timeLinePhotoCell:(SATimeLinePhotoCell *)timeLineCell avatarImageViewTouchUp:(id)sender
 {
     self.selectedUserID = timeLineCell.status.user.userID;
-    [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
+    [self performSegueWithIdentifier:@"FavoriteTimeLineToUserSegue" sender:nil];
 }
 
 - (void)timeLinePhotoCell:(SATimeLinePhotoCell *)timeLineCell contentImageViewTouchUp:(id)sender
@@ -198,7 +164,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
     NSURL *url = timeLineCell.selectedURL;
     if ([url.host isEqualToString:@"fanfou.com"]) {
         self.selectedUserID = url.lastPathComponent;
-        [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
+        [self performSegueWithIdentifier:@"FavoriteTimeLineToUserSegue" sender:nil];
     } else if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
         [[UIApplication sharedApplication] openURL:url];
     }
@@ -213,7 +179,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.timeLineList.count;
+    return self.favoriteTimeLineList.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -225,7 +191,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
         [tableView registerNib:[UINib nibWithNibName:photoCellName bundle:nil] forCellReuseIdentifier:photoCellName];
         self.cellRegistered = YES;
     }
-    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
+    SAStatus *status = [self.favoriteTimeLineList objectAtIndex:indexPath.row];
     if (status.photo.imageURL) {
         SATimeLinePhotoCell *cell = [tableView dequeueReusableCellWithIdentifier:photoCellName forIndexPath:indexPath];
         [cell configWithStatus:status];
@@ -240,9 +206,9 @@ static NSUInteger TIME_LINE_COUNT = 40;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
+    SAStatus *status = [self.favoriteTimeLineList objectAtIndex:indexPath.row];
     self.selectedStatusID = status.statusID;
-    [self performSegueWithIdentifier:@"TimeLineToStatusSegue" sender:nil];
+    [self performSegueWithIdentifier:@"FavoriteTimeLineToStatusSegue" sender:nil];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -263,7 +229,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
+    SAStatus *status = [self.favoriteTimeLineList objectAtIndex:indexPath.row];
     UITableViewRowAction *repostAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"转发" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         SAComposeViewController *composeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
         composeViewController.repostStatusID = status.statusID;
@@ -292,7 +258,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
 
 - (NSString *)segmentTitle
 {
-    return @"时间线";
+    return @"收藏";
 }
 
 - (UIScrollView *)streachScrollView

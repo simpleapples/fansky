@@ -31,6 +31,7 @@
 		5A7E1F231BA9CDA4000E7E62 /* SAPhotoTimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7E1F221BA9CDA4000E7E62 /* SAPhotoTimeLineCell.m */; };
 		5A849E921BC3EC20000FDCB9 /* Pods-fansky-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A849E911BC3EC20000FDCB9 /* Pods-fansky-acknowledgements.plist */; settings = {ASSET_TAGS = (); }; };
 		5A86A68C1BBBFD3B00C562E2 /* SANotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A86A68B1BBBFD3B00C562E2 /* SANotificationManager.m */; settings = {ASSET_TAGS = (); }; };
+		5A95558D1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A95558C1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m */; settings = {ASSET_TAGS = (); }; };
 		5A9AD6B01BAA6CD50058916A /* SAMessageDisplayUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */; settings = {ASSET_TAGS = (); }; };
 		5AD70EF01B316A79009C5B84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EEF1B316A79009C5B84 /* main.m */; };
 		5AD70EF31B316A79009C5B84 /* SAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EF21B316A79009C5B84 /* SAAppDelegate.m */; };
@@ -129,6 +130,8 @@
 		5A86A68B1BBBFD3B00C562E2 /* SANotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SANotificationManager.m; sourceTree = "<group>"; };
 		5A93F01D1BC24AA000C44023 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/SAMain.storyboard"; sourceTree = "<group>"; };
 		5A93F01E1BC24AA000C44023 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.xib"; sourceTree = "<group>"; };
+		5A95558B1BD36D1200326E94 /* SAFavoriteTimeLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFavoriteTimeLineViewController.h; sourceTree = "<group>"; };
+		5A95558C1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFavoriteTimeLineViewController.m; sourceTree = "<group>"; };
 		5A9AD6AE1BAA6CD50058916A /* SAMessageDisplayUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessageDisplayUtils.h; sourceTree = "<group>"; };
 		5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageDisplayUtils.m; sourceTree = "<group>"; };
 		5AD70EEA1B316A79009C5B84 /* fansky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fansky.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -374,6 +377,8 @@
 				5A5C21271BB51B1100C1277F /* SAFriendListViewController.m */,
 				5AE5E99A1BBD02AA00DC4748 /* SATabBarViewControllerDelegate.h */,
 				5AE5E99B1BBD02AA00DC4748 /* SATabBarViewControllerDelegate.m */,
+				5A95558B1BD36D1200326E94 /* SAFavoriteTimeLineViewController.h */,
+				5A95558C1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -598,6 +603,7 @@
 			files = (
 				5AE98AC61BAEE90800B7F105 /* SAConversationCell.m in Sources */,
 				5AD70EF31B316A79009C5B84 /* SAAppDelegate.m in Sources */,
+				5A95558D1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m in Sources */,
 				5A0F7B0F1BC4E50500926FD4 /* SAMessage+CoreDataProperties.m in Sources */,
 				5AE5E99C1BBD02AA00DC4748 /* SATabBarViewControllerDelegate.m in Sources */,
 				5AED4B391BA7CFE100EDBF47 /* SAStatusViewController.m in Sources */,

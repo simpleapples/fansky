@@ -13,5 +13,6 @@
 @interface SADataManager (Photo)
 
 - (SAPhoto *)insertPhotoWithObject:(id)object;
+- (SAPhoto *)photoWithObject:(id)object;
 
 @end

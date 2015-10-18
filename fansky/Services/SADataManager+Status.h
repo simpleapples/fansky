@@ -18,6 +18,8 @@
 - (NSArray *)currentTimeLineWithUserID:(NSString *)userID type:(SAStatusTypes)type limit:(NSUInteger)limit;
 - (NSArray *)currentMentionTimeLineWithUserID:(NSString *)userID limit:(NSUInteger)limit;
 - (NSArray *)currentPhotoTimeLineWithUserID:(NSString *)userID limit:(NSUInteger)limit;
+- (SAStatus *)statusWithObject:(id)object localUsers:(NSSet<SAUser *> *)localUsers type:(SAStatusTypes)type;
+
 - (SAStatus *)statusWithID:(NSString *)statusID;
 - (void)deleteStatusWithID:(NSString *)statusID;
 

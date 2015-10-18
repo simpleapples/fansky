@@ -6,7 +6,7 @@
 //  Copyright © 2015 Zzy. All rights reserved.
 //
 
-#import "SATimeLineViewController.h"
+#import <UIKit/UIKit.h>
 
 @interface SAMentionListViewController : UITableViewController
 

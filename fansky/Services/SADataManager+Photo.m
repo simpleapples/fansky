@@ -32,4 +32,19 @@ static NSString *const ENTITY_NAME = @"SAPhoto";
     return resultPhoto;
 }
 
+- (SAPhoto *)photoWithObject:(id)object
+{
+    NSString *imageURL = [object objectForKey:@"imageurl"];
+    NSString *largeURL = [object objectForKey:@"largeurl"];
+    NSString *thumbURL = [object objectForKey:@"thumburl"];
+    NSString *photoURL = [object objectForKey:@"url"];
+    
+    SAPhoto *photo = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
+    photo.imageURL = imageURL;
+    photo.largeURL = largeURL;
+    photo.thumbURL = thumbURL;
+    photo.photoURL = photoURL;
+    return photo;
+}
+
 @end

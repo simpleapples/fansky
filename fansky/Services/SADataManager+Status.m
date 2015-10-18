@@ -141,6 +141,31 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     return resultArray;
 }
 
+- (SAStatus *)statusWithObject:(id)object localUsers:(NSSet<SAUser *> *)localUsers type:(SAStatusTypes)type
+{
+    NSString *statusID = [object objectForKey:@"id"];
+    NSString *source = [object objectForKey:@"source"];
+    NSString *text = [object objectForKey:@"text"];
+    NSString *repostStatusID = [object objectForKey:@"repost_status_id"];
+    NSString *createdAtString = [object objectForKey:@"created_at"];
+    NSDate *createdAt = [createdAtString dateWithDefaultFormat];
+    
+    SAPhoto *photo = [[SADataManager sharedManager] photoWithObject:[object objectForKey:@"photo"]];
+    SAUser *user = [[SADataManager sharedManager] userWithObject:[object objectForKey:@"user"]];
+    
+    SAStatus *status = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
+    status.statusID = statusID;
+    status.source = source;
+    status.text = text;
+    status.photo = photo;
+    status.user = user;
+    status.localUsers = localUsers;
+    status.repostStatusID = repostStatusID;
+    status.createdAt = createdAt;
+    status.type = @(type);
+    return status;
+}
+
 - (SAStatus *)insertStatusWithObject:(id)object localUser:(SAUser *)localUser type:(SAStatusTypes)type
 {
     NSString *statusID = [object objectForKey:@"id"];

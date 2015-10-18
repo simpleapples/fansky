@@ -15,7 +15,9 @@ typedef NS_OPTIONS(NSUInteger, SAStatusTypes)
     
     SAStatusTypeUserStatus = 1 << 1,
     
-    SAStatusTypeMentionStatus = 1 << 2
+    SAStatusTypeMentionStatus = 1 << 2,
+    
+    SAStatusTypeFavoriteStatus = 1 << 3
 };
 
 @class SAPhoto, SAUser;

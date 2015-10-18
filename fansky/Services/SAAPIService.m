@@ -258,6 +258,10 @@
     [self requestAPIWithPath:SA_API_MENTION_STATUS_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
 }
 
+- (void)userFavoriteTimeLineWithUserID:(NSString *)userID count:(NSUInteger)count page:(NSUInteger)page success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    [self requestAPIWithPath:SA_API_FAVORITE_STATUS_PATH method:@"GET" parametersDictionary:@{@"id": userID, @"count": @(count), @"page": @(page), @"mode": @"lite", @"format": @"html"} success:success failure:failure];
+}
 
 #pragma mark - Message
 
