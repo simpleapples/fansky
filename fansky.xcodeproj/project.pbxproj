@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A01639B1BA96A470065F1F1 /* TTTAttributedLabel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A01639A1BA96A470065F1F1 /* TTTAttributedLabel.framework */; };
 		5A0F7B071BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF41BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
 		5A0F7B081BC4E50500926FD4 /* SAPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF61BC4E50500926FD4 /* SAPhoto.m */; settings = {ASSET_TAGS = (); }; };
 		5A0F7B091BC4E50500926FD4 /* SAUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF81BC4E50500926FD4 /* SAUser+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
@@ -206,7 +205,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A01639B1BA96A470065F1F1 /* TTTAttributedLabel.framework in Frameworks */,
 				A5780EF56B5B4E2B090419E4 /* Pods_fansky.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
