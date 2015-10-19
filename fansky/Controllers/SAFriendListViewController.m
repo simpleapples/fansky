@@ -205,10 +205,10 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
             } failure:^(NSString *error) {
                 [SAMessageDisplayUtils showInfoWithMessage:error];
             }];
-        } else if (buttonIndex == 2) {
+        } else if (actionSheet.tag == 2 && buttonIndex == 2) {
             [[SAAPIService sharedSingleton] userFriendshipAcceptWithUserID:self.selectedUserID success:^(id data) {
                 [[SAAPIService sharedSingleton] followUserWithID:self.selectedUserID success:^(id data) {
-                    [SAMessageDisplayUtils showInfoWithMessage:@"已关注"];
+                    [SAMessageDisplayUtils showInfoWithMessage:@"已接受并关注"];
                 } failure:^(NSString *error) {
                     [SAMessageDisplayUtils showInfoWithMessage:error];
                 }];
