@@ -100,6 +100,8 @@
     }
 }
 
+#pragma mark - EventHandler
+
 - (IBAction)followButtonTouchUp:(id)sender
 {
     if ([self.user.following isEqualToNumber:@(NO)]) {

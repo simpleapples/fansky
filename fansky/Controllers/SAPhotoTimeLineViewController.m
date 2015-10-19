@@ -20,6 +20,8 @@
 
 @interface SAPhotoTimeLineViewController () <SAPhotoTimeLineCellDelegate, MWPhotoBrowserDelegate>
 
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
+
 @property (strong, nonatomic) NSArray *photoTimeLineList;
 @property (copy, nonatomic) NSString *maxID;
 
@@ -33,6 +35,8 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self updateInterface];
     
     [self getLocalData];
     
@@ -55,6 +59,17 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+- (void)updateInterface
+{
+    if (!self.refreshControl) {
+        self.refreshControl = [[UIRefreshControl alloc] init];
+        self.refreshControl.alpha = 0;
+    }
+    [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView addSubview:self.refreshControl];
+    self.collectionView.alwaysBounceVertical = YES;
 }
 
 - (void)getLocalData
@@ -92,9 +107,14 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
         }
         [self.collectionView reloadData];
         [SAMessageDisplayUtils dismiss];
+        [self.refreshControl endRefreshing];
+        // 解决刷新后不回弹问题
+        self.collectionView.contentOffset = CGPointMake(0, -244);
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
+        [self.refreshControl endRefreshing];
+        self.collectionView.contentInset = UIEdgeInsetsMake(244, 0, 0, 0);
     };
     
     if (refresh) {

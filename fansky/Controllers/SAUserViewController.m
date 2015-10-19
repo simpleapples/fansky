@@ -16,7 +16,6 @@
 #import "SAFriendListViewController.h"
 #import "SAFavoriteTimeLineViewController.h"
 #import "SAComposeViewController.h"
-#import <ARSegmentPager/ARSegmentControllerDelegate.h>
 #import <ARSegmentPager/ARSegmentView.h>
 
 @interface SAUserViewController () <SAUserHeaderViewDelegate>

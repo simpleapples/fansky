@@ -110,8 +110,8 @@ static NSUInteger TIME_LINE_COUNT = 40;
             self.maxID = lastStatus.statusID;
         }
         [self.tableView reloadData];
-        [self.refreshControl endRefreshing];
         [SAMessageDisplayUtils dismiss];
+        [self.refreshControl endRefreshing];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
@@ -131,10 +131,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
 
 - (void)updateInterface
 {
-    self.refreshControl.enabled = !self.userID;
-    if (self.refreshControl.enabled) {
-        [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
-    }
+    [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
     self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.tableFooterView = [UIView new];
 }

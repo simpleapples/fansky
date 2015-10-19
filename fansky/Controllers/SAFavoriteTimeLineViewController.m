@@ -90,17 +90,22 @@ static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
         }
         [self.tableView reloadData];
         [SAMessageDisplayUtils dismiss];
+        [self.refreshControl endRefreshing];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
+        [self.refreshControl endRefreshing];
     };
     
-    [SAMessageDisplayUtils showProgressWithMessage:@"正在刷新"];
+    if (refresh) {
+        [SAMessageDisplayUtils showProgressWithMessage:@"正在刷新"];
+    }
     [[SAAPIService sharedSingleton] userFavoriteTimeLineWithUserID:self.userID count:FAVORITE_TIME_LINE_COUNT page:self.page success:success failure:failure];
 }
 
 - (void)updateInterface
 {
+    [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
     self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.tableFooterView = [UIView new];
 }
