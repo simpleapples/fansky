@@ -45,8 +45,6 @@ static NSUInteger TIME_LINE_COUNT = 40;
     [self updateInterface];
     
     [self getLocalData];
-    
-    [self refreshData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -71,8 +69,12 @@ static NSUInteger TIME_LINE_COUNT = 40;
         userID = currentUser.userID;
         type = SAStatusTypeTimeLine;
     }
-    self.timeLineList = [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type limit:TIME_LINE_COUNT];
-    [self.tableView reloadData];
+    [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
+        self.timeLineList = result;
+        [self.tableView reloadData];
+        
+        [self refreshData];
+    }];
 }
 
 - (void)refreshData
@@ -104,14 +106,16 @@ static NSUInteger TIME_LINE_COUNT = 40;
         if (!refresh) {
             limit = self.timeLineList.count + TIME_LINE_COUNT;
         }
-        self.timeLineList = [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type limit:limit];
-        if (self.timeLineList.count) {
-            SAStatus *lastStatus = [self.timeLineList lastObject];
-            self.maxID = lastStatus.statusID;
-        }
-        [self.tableView reloadData];
-        [SAMessageDisplayUtils dismiss];
-        [self.refreshControl endRefreshing];
+        [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type limit:limit completeHandler:^(NSArray *result) {
+            self.timeLineList = result;
+            if (self.timeLineList.count) {
+                SAStatus *lastStatus = [self.timeLineList lastObject];
+                self.maxID = lastStatus.statusID;
+            }
+            [self.tableView reloadData];
+            [SAMessageDisplayUtils dismiss];
+            [self.refreshControl endRefreshing];
+        }];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
@@ -124,7 +128,9 @@ static NSUInteger TIME_LINE_COUNT = 40;
         }
         [[SAAPIService sharedSingleton] timeLineWithUserID:userID sinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
     } else {
-        [SAMessageDisplayUtils showProgressWithMessage:@"正在刷新"];
+        if (refresh) {
+            [SAMessageDisplayUtils showProgressWithMessage:@"正在刷新"];
+        }
         [[SAAPIService sharedSingleton] userTimeLineWithUserID:userID sinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
     }
 }

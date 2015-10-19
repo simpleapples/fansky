@@ -45,8 +45,6 @@ static NSUInteger TIME_LINE_COUNT = 40;
     [self updateInterface];
     
     [self getLocalData];
-    
-    [self refreshData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -65,8 +63,13 @@ static NSUInteger TIME_LINE_COUNT = 40;
 - (void)getLocalData
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
-    self.timeLineList = [[SADataManager sharedManager] currentMentionTimeLineWithUserID:currentUser.userID limit:TIME_LINE_COUNT];
-    [self.tableView reloadData];
+    [[SADataManager sharedManager] currentMentionTimeLineWithUserID:currentUser.userID limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
+        self.timeLineList = result;
+        [self.tableView reloadData];
+        
+        [self refreshData];
+    }];
+    
 }
 
 - (void)refreshData
@@ -92,13 +95,14 @@ static NSUInteger TIME_LINE_COUNT = 40;
         if (!refresh) {
             limit = self.timeLineList.count + TIME_LINE_COUNT;
         }
-        self.timeLineList = [[SADataManager sharedManager] currentMentionTimeLineWithUserID:userID limit:limit];
-        if (self.timeLineList.count) {
-            SAStatus *lastStatus = [self.timeLineList lastObject];
-            self.maxID = lastStatus.statusID;
-        }
-        [self.tableView reloadData];
-        [self.refreshControl endRefreshing];
+        [[SADataManager sharedManager] currentMentionTimeLineWithUserID:userID limit:limit completeHandler:^(NSArray *result) {
+            if (self.timeLineList.count) {
+                SAStatus *lastStatus = [self.timeLineList lastObject];
+                self.maxID = lastStatus.statusID;
+            }
+            [self.tableView reloadData];
+            [self.refreshControl endRefreshing];
+        }];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];

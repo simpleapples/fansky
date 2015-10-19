@@ -61,16 +61,17 @@ static NSUInteger FETCH_TIME_INTERVAL = 30;
 - (void)updateNotificationCount
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
-    NSArray *currentTimeLine = [[SADataManager sharedManager] currentTimeLineWithUserID:currentUser.userID type:SAStatusTypeTimeLine limit:1];
-    if (currentTimeLine.count) {
-        SAStatus *currentStatus = [currentTimeLine firstObject];
-        [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:currentStatus.statusID maxID:nil count:60 success:^(id data) {
-            NSArray *newTimeLine = (NSArray *)data;
-            if (newTimeLine.count) {
-                self.timeLineCount = newTimeLine.count;
-            }
-        } failure:nil];
-    }
+    [[SADataManager sharedManager] currentTimeLineWithUserID:currentUser.userID type:SAStatusTypeTimeLine limit:1 completeHandler:^(NSArray *result) {
+        if (result.count) {
+            SAStatus *currentStatus = [result firstObject];
+            [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:currentStatus.statusID maxID:nil count:60 success:^(id data) {
+                NSArray *newTimeLine = (NSArray *)data;
+                if (newTimeLine.count) {
+                    self.timeLineCount = newTimeLine.count;
+                }
+            } failure:nil];
+        }
+    }];
     
     [[SAAPIService sharedSingleton] accountNotificationWithSuccess:^(id data) {
         NSNumber *mentionCountValue = (NSNumber *)[data objectForKey:@"mentions"];

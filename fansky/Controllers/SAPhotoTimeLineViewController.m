@@ -39,8 +39,6 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
     [self updateInterface];
     
     [self getLocalData];
-    
-    [self refreshData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -74,8 +72,13 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
 
 - (void)getLocalData
 {
-    self.photoTimeLineList = [[SADataManager sharedManager] currentPhotoTimeLineWithUserID:self.userID limit:PHOTO_TIME_LINE_COUNT];
-    [self.collectionView reloadData];
+    [[SADataManager sharedManager] currentPhotoTimeLineWithUserID:self.userID limit:PHOTO_TIME_LINE_COUNT completeHandler:^(NSArray *result) {
+        self.photoTimeLineList = result;
+        [self.collectionView reloadData];
+        
+        [self refreshData];
+    }];
+    
 }
 
 - (void)refreshData
@@ -100,16 +103,20 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
         if (!refresh) {
             limit = self.photoTimeLineList.count + PHOTO_TIME_LINE_COUNT;
         }
-        self.photoTimeLineList = [[SADataManager sharedManager] currentPhotoTimeLineWithUserID:self.userID limit:limit];
-        if (self.photoTimeLineList.count) {
-            SAStatus *lastStatus = [self.photoTimeLineList lastObject];
-            self.maxID = lastStatus.statusID;
-        }
-        [self.collectionView reloadData];
-        [SAMessageDisplayUtils dismiss];
-        [self.refreshControl endRefreshing];
-        // 解决刷新后不回弹问题
-        self.collectionView.contentOffset = CGPointMake(0, -244);
+        [[SADataManager sharedManager] currentPhotoTimeLineWithUserID:self.userID limit:limit completeHandler:^(NSArray *result) {
+            self.photoTimeLineList = result;
+            if (self.photoTimeLineList.count) {
+                SAStatus *lastStatus = [self.photoTimeLineList lastObject];
+                self.maxID = lastStatus.statusID;
+            }
+            [self.collectionView reloadData];
+            [SAMessageDisplayUtils dismiss];
+            [self.refreshControl endRefreshing];
+            // 解决刷新后不回弹问题
+            if (refresh) {
+                self.collectionView.contentOffset = CGPointMake(0, -244);
+            }
+        }];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];

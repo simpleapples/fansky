@@ -68,7 +68,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     return resultStatus;
 }
 
-- (NSArray *)currentTimeLineWithUserID:(NSString *)userID type:(SAStatusTypes)type limit:(NSUInteger)limit
+- (void)currentTimeLineWithUserID:(NSString *)userID type:(SAStatusTypes)type limit:(NSUInteger)limit completeHandler:(void (^)(NSArray *))completeHandler
 {
     NSSortDescriptor *createdAtSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
     NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
@@ -84,18 +84,22 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     fetchRequest.fetchBatchSize = 6;
     fetchRequest.fetchLimit = limit;
     
-    __block NSError *error;
-    __block NSArray *resultArray = [[NSArray alloc] init];
-    [self.managedObjectContext performBlockAndWait:^{
+    [self.managedObjectContext performBlock:^{
+        NSError *error;
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (!error && fetchResult && fetchResult.count) {
-            resultArray = fetchResult;
+        if (completeHandler) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (!error && fetchResult && fetchResult.count) {
+                    completeHandler(fetchResult);
+                } else {
+                    completeHandler(nil);
+                }
+            });
         }
     }];
-    return resultArray;
 }
 
-- (NSArray *)currentMentionTimeLineWithUserID:(NSString *)userID limit:(NSUInteger)limit
+- (void)currentMentionTimeLineWithUserID:(NSString *)userID limit:(NSUInteger)limit completeHandler:(void (^)(NSArray *))completeHandler
 {
     NSSortDescriptor *createdAtSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
     NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
@@ -107,18 +111,22 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     fetchRequest.fetchBatchSize = 6;
     fetchRequest.fetchLimit = limit;
     
-    __block NSError *error;
-    __block NSArray *resultArray = [[NSArray alloc] init];
-    [self.managedObjectContext performBlockAndWait:^{
+    [self.managedObjectContext performBlock:^{
+        NSError *error;
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (!error && fetchResult && fetchResult.count) {
-            resultArray = fetchResult;
+        if (completeHandler) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (!error && fetchResult && fetchResult.count) {
+                    completeHandler(fetchResult);
+                } else {
+                    completeHandler(nil);
+                }
+            });
         }
     }];
-    return resultArray;
 }
 
-- (NSArray *)currentPhotoTimeLineWithUserID:(NSString *)userID limit:(NSUInteger)limit
+- (void)currentPhotoTimeLineWithUserID:(NSString *)userID limit:(NSUInteger)limit completeHandler:(void (^)(NSArray *))completeHandler
 {
     NSSortDescriptor *createdAtSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
     NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
@@ -130,15 +138,19 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     fetchRequest.fetchBatchSize = 6;
     fetchRequest.fetchLimit = limit;
     
-    __block NSError *error;
-    __block NSArray *resultArray = [[NSArray alloc] init];
-    [self.managedObjectContext performBlockAndWait:^{
+    [self.managedObjectContext performBlock:^{
+        NSError *error;
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (!error && fetchResult && fetchResult.count) {
-            resultArray = fetchResult;
+        if (completeHandler) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (!error && fetchResult && fetchResult.count) {
+                    completeHandler(fetchResult);
+                } else {
+                    completeHandler(nil);
+                }
+            });
         }
     }];
-    return resultArray;
 }
 
 - (SAStatus *)statusWithObject:(id)object localUsers:(NSSet<SAUser *> *)localUsers type:(SAStatusTypes)type
