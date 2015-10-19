@@ -69,13 +69,17 @@
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:currentUser.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
     
-    if (self.replyToStatusID) {
+    if (self.userID) {
+        self.cameraButton.hidden = NO;
+        self.placeholderLabel.hidden = YES;
+        SAUser *user = [[SADataManager sharedManager] userWithID:self.userID];
+        self.contentTextView.text = [NSString stringWithFormat:@"@%@ ", user.name];
+    } else if (self.replyToStatusID) {
         self.cameraButton.hidden = YES;
         self.placeholderLabel.hidden = YES;
         SAStatus *status = [[SADataManager sharedManager] statusWithID:self.replyToStatusID];
         self.contentTextView.text = [NSString stringWithFormat:@"@%@ ", status.user.name];
-    }
-    if (self.repostStatusID) {
+    } else if (self.repostStatusID) {
         self.cameraButton.hidden = YES;
         self.placeholderLabel.hidden = YES;
         SAStatus *status = [[SADataManager sharedManager] statusWithID:self.repostStatusID];

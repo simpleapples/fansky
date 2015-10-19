@@ -15,6 +15,7 @@
 #import "SAAPIService.h"
 #import "SAFriendListViewController.h"
 #import "SAFavoriteTimeLineViewController.h"
+#import "SAComposeViewController.h"
 #import <ARSegmentPager/ARSegmentControllerDelegate.h>
 #import <ARSegmentPager/ARSegmentView.h>
 
@@ -94,16 +95,22 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSString *userID = self.userID;
+    if (!userID) {
+        SAUser *currentUser = [SADataManager sharedManager].currentUser;
+        userID = currentUser.userID;
+    }
     if ([segue.destinationViewController isKindOfClass:[SAFriendListViewController class]]) {
-        NSString *userID = self.userID;
-        if (!userID) {
-            SAUser *currentUser = [SADataManager sharedManager].currentUser;
-            userID = currentUser.userID;
-        }
         NSNumber *senderValue = (NSNumber *)sender;
         SAFriendListViewController *friendListViewController = (SAFriendListViewController *)segue.destinationViewController;
         friendListViewController.userID = userID;
         friendListViewController.type = senderValue.integerValue;
+    } else if ([segue.destinationViewController isMemberOfClass:[UINavigationController class]]) {
+        UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
+        if ([navigationController.viewControllers.firstObject isKindOfClass:[SAComposeViewController class]]) {
+            SAComposeViewController *composeViewController = (SAComposeViewController *)navigationController.viewControllers.firstObject;
+            composeViewController.userID = userID;
+        }
     }
 }
 

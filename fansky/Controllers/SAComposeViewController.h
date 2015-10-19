@@ -10,6 +10,7 @@
 
 @interface SAComposeViewController : UIViewController
 
+@property (copy, nonatomic) NSString *userID;
 @property (copy, nonatomic) NSString *replyToStatusID;
 @property (copy, nonatomic) NSString *repostStatusID;
 
