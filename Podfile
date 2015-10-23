@@ -11,6 +11,7 @@ pod 'WSProgressHUD'
 pod 'MWPhotoBrowser'
 pod 'VTAcknowledgementsViewController'
 pod 'DTCoreText'
+pod 'VVBlurPresentation'
 
 end
 

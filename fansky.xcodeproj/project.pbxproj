@@ -7,31 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5A0F7B071BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF41BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		5A0F7B081BC4E50500926FD4 /* SAPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF61BC4E50500926FD4 /* SAPhoto.m */; settings = {ASSET_TAGS = (); }; };
-		5A0F7B091BC4E50500926FD4 /* SAUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF81BC4E50500926FD4 /* SAUser+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		5A0F7B0A1BC4E50500926FD4 /* SAUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AFA1BC4E50500926FD4 /* SAUser.m */; settings = {ASSET_TAGS = (); }; };
-		5A0F7B0B1BC4E50500926FD4 /* SAStatus+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AFC1BC4E50500926FD4 /* SAStatus+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		5A0F7B0C1BC4E50500926FD4 /* SAStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AFE1BC4E50500926FD4 /* SAStatus.m */; settings = {ASSET_TAGS = (); }; };
-		5A0F7B0D1BC4E50500926FD4 /* SAConversation+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B001BC4E50500926FD4 /* SAConversation+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		5A0F7B0E1BC4E50500926FD4 /* SAConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B021BC4E50500926FD4 /* SAConversation.m */; settings = {ASSET_TAGS = (); }; };
-		5A0F7B0F1BC4E50500926FD4 /* SAMessage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B041BC4E50500926FD4 /* SAMessage+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		5A0F7B101BC4E50500926FD4 /* SAMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B061BC4E50500926FD4 /* SAMessage.m */; settings = {ASSET_TAGS = (); }; };
-		5A1811AD1BABED3D004B6C54 /* SAMentionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811AC1BABED3D004B6C54 /* SAMentionListViewController.m */; settings = {ASSET_TAGS = (); }; };
-		5A1811AF1BABF3AC004B6C54 /* SATimeLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1811AE1BABF3AC004B6C54 /* SATimeLineCell.xib */; settings = {ASSET_TAGS = (); }; };
-		5A1811CB1BAC1C40004B6C54 /* SATimeLinePhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811C91BAC1C40004B6C54 /* SATimeLinePhotoCell.m */; settings = {ASSET_TAGS = (); }; };
-		5A1811CC1BAC1C40004B6C54 /* SATimeLinePhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1811CA1BAC1C40004B6C54 /* SATimeLinePhotoCell.xib */; settings = {ASSET_TAGS = (); }; };
+		5A0F7B071BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF41BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m */; };
+		5A0F7B081BC4E50500926FD4 /* SAPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF61BC4E50500926FD4 /* SAPhoto.m */; };
+		5A0F7B091BC4E50500926FD4 /* SAUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF81BC4E50500926FD4 /* SAUser+CoreDataProperties.m */; };
+		5A0F7B0A1BC4E50500926FD4 /* SAUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AFA1BC4E50500926FD4 /* SAUser.m */; };
+		5A0F7B0B1BC4E50500926FD4 /* SAStatus+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AFC1BC4E50500926FD4 /* SAStatus+CoreDataProperties.m */; };
+		5A0F7B0C1BC4E50500926FD4 /* SAStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AFE1BC4E50500926FD4 /* SAStatus.m */; };
+		5A0F7B0D1BC4E50500926FD4 /* SAConversation+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B001BC4E50500926FD4 /* SAConversation+CoreDataProperties.m */; };
+		5A0F7B0E1BC4E50500926FD4 /* SAConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B021BC4E50500926FD4 /* SAConversation.m */; };
+		5A0F7B0F1BC4E50500926FD4 /* SAMessage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B041BC4E50500926FD4 /* SAMessage+CoreDataProperties.m */; };
+		5A0F7B101BC4E50500926FD4 /* SAMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B061BC4E50500926FD4 /* SAMessage.m */; };
+		5A1811AD1BABED3D004B6C54 /* SAMentionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811AC1BABED3D004B6C54 /* SAMentionListViewController.m */; };
+		5A1811AF1BABF3AC004B6C54 /* SATimeLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1811AE1BABF3AC004B6C54 /* SATimeLineCell.xib */; };
+		5A1811CB1BAC1C40004B6C54 /* SATimeLinePhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811C91BAC1C40004B6C54 /* SATimeLinePhotoCell.m */; };
+		5A1811CC1BAC1C40004B6C54 /* SATimeLinePhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1811CA1BAC1C40004B6C54 /* SATimeLinePhotoCell.xib */; };
 		5A2365BD1B395FD200E1E73C /* SATimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2365BC1B395FD200E1E73C /* SATimeLineCell.m */; };
 		5A2365C41B39723900E1E73C /* SAAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2365C31B39723900E1E73C /* SAAPIService.m */; };
 		5A3E6C581BA441D100C589BE /* SADataManager+Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3E6C571BA441D100C589BE /* SADataManager+Status.m */; };
-		5A5C21281BB51B1100C1277F /* SAFriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5C21271BB51B1100C1277F /* SAFriendListViewController.m */; settings = {ASSET_TAGS = (); }; };
-		5A5C212B1BB52BA400C1277F /* SAFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5C212A1BB52BA400C1277F /* SAFriendCell.m */; settings = {ASSET_TAGS = (); }; };
+		5A5C21281BB51B1100C1277F /* SAFriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5C21271BB51B1100C1277F /* SAFriendListViewController.m */; };
+		5A5C212B1BB52BA400C1277F /* SAFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5C212A1BB52BA400C1277F /* SAFriendCell.m */; };
 		5A7E1F201BA9CD67000E7E62 /* SAPhotoTimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7E1F1F1BA9CD67000E7E62 /* SAPhotoTimeLineViewController.m */; };
 		5A7E1F231BA9CDA4000E7E62 /* SAPhotoTimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7E1F221BA9CDA4000E7E62 /* SAPhotoTimeLineCell.m */; };
-		5A849E921BC3EC20000FDCB9 /* Pods-fansky-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A849E911BC3EC20000FDCB9 /* Pods-fansky-acknowledgements.plist */; settings = {ASSET_TAGS = (); }; };
-		5A86A68C1BBBFD3B00C562E2 /* SANotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A86A68B1BBBFD3B00C562E2 /* SANotificationManager.m */; settings = {ASSET_TAGS = (); }; };
-		5A95558D1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A95558C1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m */; settings = {ASSET_TAGS = (); }; };
-		5A9AD6B01BAA6CD50058916A /* SAMessageDisplayUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */; settings = {ASSET_TAGS = (); }; };
+		5A849E921BC3EC20000FDCB9 /* Pods-fansky-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A849E911BC3EC20000FDCB9 /* Pods-fansky-acknowledgements.plist */; };
+		5A86A68C1BBBFD3B00C562E2 /* SANotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A86A68B1BBBFD3B00C562E2 /* SANotificationManager.m */; };
+		5A95558D1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A95558C1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m */; };
+		5A9AD6B01BAA6CD50058916A /* SAMessageDisplayUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */; };
+		5AAB875C1BDA4B19003C9A51 /* SAUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB875B1BDA4B19003C9A51 /* SAUserInfoViewController.m */; };
 		5AD70EF01B316A79009C5B84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EEF1B316A79009C5B84 /* main.m */; };
 		5AD70EF31B316A79009C5B84 /* SAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EF21B316A79009C5B84 /* SAAppDelegate.m */; };
 		5AD70EF61B316A79009C5B84 /* fansky.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EF41B316A79009C5B84 /* fansky.xcdatamodeld */; };
@@ -41,16 +42,16 @@
 		5AD70F0D1B316A79009C5B84 /* fanskyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70F0C1B316A79009C5B84 /* fanskyTests.m */; };
 		5AD70F191B316B05009C5B84 /* SATimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70F181B316B05009C5B84 /* SATimeLineViewController.m */; };
 		5AD70F201B31716A009C5B84 /* SAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70F1F1B31716A009C5B84 /* SAConstants.m */; };
-		5ADA99E01BB2676B0068C0FF /* SAPushWithoutAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA99DF1BB2676B0068C0FF /* SAPushWithoutAnimation.m */; settings = {ASSET_TAGS = (); }; };
+		5ADA99E01BB2676B0068C0FF /* SAPushWithoutAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA99DF1BB2676B0068C0FF /* SAPushWithoutAnimation.m */; };
 		5AE38ADE1BA2E70F0022A35A /* SAUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE38ADD1BA2E70F0022A35A /* SAUserCell.m */; };
-		5AE5E99C1BBD02AA00DC4748 /* SATabBarViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE5E99B1BBD02AA00DC4748 /* SATabBarViewControllerDelegate.m */; settings = {ASSET_TAGS = (); }; };
-		5AE98AA81BAEB0A900B7F105 /* SASettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AA71BAEB0A900B7F105 /* SASettingViewController.m */; settings = {ASSET_TAGS = (); }; };
-		5AE98AAB1BAECDAA00B7F105 /* SADataManager+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AAA1BAECDAA00B7F105 /* SADataManager+Message.m */; settings = {ASSET_TAGS = (); }; };
-		5AE98AB41BAED16300B7F105 /* SAConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AB31BAED16300B7F105 /* SAConversationViewController.m */; settings = {ASSET_TAGS = (); }; };
-		5AE98AB71BAED1B400B7F105 /* SAMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AB61BAED1B400B7F105 /* SAMessageCell.m */; settings = {ASSET_TAGS = (); }; };
-		5AE98ABA1BAEDF0000B7F105 /* SAMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AB91BAEDF0000B7F105 /* SAMessageViewController.m */; settings = {ASSET_TAGS = (); }; };
-		5AE98AC31BAEE43300B7F105 /* SADataManager+Conversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AC21BAEE43300B7F105 /* SADataManager+Conversation.m */; settings = {ASSET_TAGS = (); }; };
-		5AE98AC61BAEE90800B7F105 /* SAConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AC51BAEE90800B7F105 /* SAConversationCell.m */; settings = {ASSET_TAGS = (); }; };
+		5AE5E99C1BBD02AA00DC4748 /* SATabBarViewControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE5E99B1BBD02AA00DC4748 /* SATabBarViewControllerDelegate.m */; };
+		5AE98AA81BAEB0A900B7F105 /* SASettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AA71BAEB0A900B7F105 /* SASettingViewController.m */; };
+		5AE98AAB1BAECDAA00B7F105 /* SADataManager+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AAA1BAECDAA00B7F105 /* SADataManager+Message.m */; };
+		5AE98AB41BAED16300B7F105 /* SAConversationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AB31BAED16300B7F105 /* SAConversationViewController.m */; };
+		5AE98AB71BAED1B400B7F105 /* SAMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AB61BAED1B400B7F105 /* SAMessageCell.m */; };
+		5AE98ABA1BAEDF0000B7F105 /* SAMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AB91BAEDF0000B7F105 /* SAMessageViewController.m */; };
+		5AE98AC31BAEE43300B7F105 /* SADataManager+Conversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AC21BAEE43300B7F105 /* SADataManager+Conversation.m */; };
+		5AE98AC61BAEE90800B7F105 /* SAConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AC51BAEE90800B7F105 /* SAConversationCell.m */; };
 		5AED4B291BA672D100EDBF47 /* SADataManager+Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B281BA672D100EDBF47 /* SADataManager+Photo.m */; };
 		5AED4B2D1BA6C16300EDBF47 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B2C1BA6C16300EDBF47 /* NSString+Utils.m */; };
 		5AED4B301BA6D41D00EDBF47 /* NSDate+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B2F1BA6D41D00EDBF47 /* NSDate+Utils.m */; };
@@ -65,7 +66,7 @@
 		5AF5B1CD1BA1813A00C7A18A /* SASplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1CC1BA1813A00C7A18A /* SASplashViewController.m */; };
 		5AF5B1D01BA1816600C7A18A /* SADataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1CF1BA1816600C7A18A /* SADataManager.m */; };
 		5AF5B1D31BA181CD00C7A18A /* SADataManager+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1D21BA181CD00C7A18A /* SADataManager+User.m */; };
-		5AFF6FE21BC42BF400769995 /* SAFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFF6FE11BC42BF400769995 /* SAFriend.m */; settings = {ASSET_TAGS = (); }; };
+		5AFF6FE21BC42BF400769995 /* SAFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFF6FE11BC42BF400769995 /* SAFriend.m */; };
 		A5780EF56B5B4E2B090419E4 /* Pods_fansky.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E43255F77409845B17D05D0 /* Pods_fansky.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -134,6 +135,8 @@
 		5A95558E1BD384B400326E94 /* fansky 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "fansky 3.xcdatamodel"; sourceTree = "<group>"; };
 		5A9AD6AE1BAA6CD50058916A /* SAMessageDisplayUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessageDisplayUtils.h; sourceTree = "<group>"; };
 		5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageDisplayUtils.m; sourceTree = "<group>"; };
+		5AAB875A1BDA4B19003C9A51 /* SAUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAUserInfoViewController.h; sourceTree = "<group>"; };
+		5AAB875B1BDA4B19003C9A51 /* SAUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUserInfoViewController.m; sourceTree = "<group>"; };
 		5AD70EEA1B316A79009C5B84 /* fansky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fansky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD70EEE1B316A79009C5B84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AD70EEF1B316A79009C5B84 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -378,6 +381,8 @@
 				5AE5E99B1BBD02AA00DC4748 /* SATabBarViewControllerDelegate.m */,
 				5A95558B1BD36D1200326E94 /* SAFavoriteTimeLineViewController.h */,
 				5A95558C1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m */,
+				5AAB875A1BDA4B19003C9A51 /* SAUserInfoViewController.h */,
+				5AAB875B1BDA4B19003C9A51 /* SAUserInfoViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -623,6 +628,7 @@
 				5A3E6C581BA441D100C589BE /* SADataManager+Status.m in Sources */,
 				5AE98AC31BAEE43300B7F105 /* SADataManager+Conversation.m in Sources */,
 				5AED4B2D1BA6C16300EDBF47 /* NSString+Utils.m in Sources */,
+				5AAB875C1BDA4B19003C9A51 /* SAUserInfoViewController.m in Sources */,
 				5AE98AB41BAED16300B7F105 /* SAConversationViewController.m in Sources */,
 				5AD70F201B31716A009C5B84 /* SAConstants.m in Sources */,
 				5AF5B1D31BA181CD00C7A18A /* SADataManager+User.m in Sources */,
