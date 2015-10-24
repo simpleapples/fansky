@@ -54,6 +54,13 @@
 
 - (void)initPasscodeViewController
 {
+    [LTHPasscodeViewController useKeychain:NO];
+    [LTHPasscodeViewController sharedUser].allowUnlockWithTouchID = NO;
+    [LTHPasscodeViewController sharedUser].hidesCancelButton = NO;
+    [LTHPasscodeViewController sharedUser].turnOffPasscodeString = @"关闭密码";
+    [LTHPasscodeViewController sharedUser].enablePasscodeString = @"设置密码";
+    [LTHPasscodeViewController sharedUser].reenterPasscodeString = @"再次输入密码";
+    [LTHPasscodeViewController sharedUser].enterPasscodeString = @"输入密码";
 }
 
 - (void)showPasscodeViewController
