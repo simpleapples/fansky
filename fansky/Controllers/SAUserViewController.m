@@ -16,6 +16,7 @@
 #import "SAFriendListViewController.h"
 #import "SAFavoriteTimeLineViewController.h"
 #import "SAComposeViewController.h"
+#import "SAUserInfoViewController.h"
 #import <ARSegmentPager/ARSegmentView.h>
 
 @interface SAUserViewController () <SAUserHeaderViewDelegate>
@@ -104,6 +105,9 @@
         SAFriendListViewController *friendListViewController = (SAFriendListViewController *)segue.destinationViewController;
         friendListViewController.userID = userID;
         friendListViewController.type = senderValue.integerValue;
+    } else if ([segue.destinationViewController isKindOfClass:[SAUserInfoViewController class]]) {
+        SAUserInfoViewController *userInfoViewController = (SAUserInfoViewController *)segue.destinationViewController;
+        userInfoViewController.userID = userID;
     } else if ([segue.destinationViewController isMemberOfClass:[UINavigationController class]]) {
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         if ([navigationController.viewControllers.firstObject isKindOfClass:[SAComposeViewController class]]) {
@@ -130,9 +134,9 @@
     [self performSegueWithIdentifier:@"UserToFriendListSegue" sender:@(SAFriendListTypeFollow)];
 }
 
-- (void)userHeaderView:(SAUserHeaderView *)userHeaderView detailButtonTouchUp:(id)sender
+- (void)userHeaderView:(SAUserHeaderView *)userHeaderView userInfoButtonTouchUp:(id)sender
 {
-    
+    [self performSegueWithIdentifier:@"UserToUserInfoSegue" sender:nil];
 }
 
 @end

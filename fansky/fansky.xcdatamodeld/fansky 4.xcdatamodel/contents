@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Automatic">
+    <entity name="SAConversation" representedClassName="SAConversation" syncable="YES">
+        <attribute name="count" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="newConversation" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="otherUserID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="localUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAUser" inverseName="mineConversations" inverseEntity="SAUser" syncable="YES"/>
+        <relationship name="message" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAMessage" inverseName="conversation" inverseEntity="SAMessage" syncable="YES"/>
+    </entity>
+    <entity name="SAMessage" representedClassName="SAMessage" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="messageID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recipientID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="senderID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="conversation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAConversation" inverseName="message" inverseEntity="SAConversation" syncable="YES"/>
+        <relationship name="localUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAUser" inverseName="mineMessages" inverseEntity="SAUser" syncable="YES"/>
+        <relationship name="recipient" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAUser" inverseName="recvivedMessages" inverseEntity="SAUser" syncable="YES"/>
+        <relationship name="sender" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAUser" inverseName="sentMessages" inverseEntity="SAUser" syncable="YES"/>
+    </entity>
+    <entity name="SAPhoto" representedClassName="SAPhoto" syncable="YES">
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="largeURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photoURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thumbURL" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="status" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAStatus" inverseName="photo" inverseEntity="SAStatus" syncable="YES"/>
+    </entity>
+    <entity name="SAStatus" representedClassName="SAStatus" syncable="YES">
+        <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="favorited" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="repostStatusID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="statusID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="localUsers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SAUser" inverseName="mineStatuses" inverseEntity="SAUser" syncable="YES"/>
+        <relationship name="photo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAPhoto" inverseName="status" inverseEntity="SAPhoto" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAUser" inverseName="statuses" inverseEntity="SAUser" syncable="YES"/>
+    </entity>
+    <entity name="SAUser" representedClassName="SAUser" syncable="YES">
+        <attribute name="active" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="followersCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="following" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="friendsCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="local" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="location" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="profileImageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="protected" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="statusCount" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tokenSecret" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="mineConversations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SAConversation" inverseName="localUser" inverseEntity="SAConversation" syncable="YES"/>
+        <relationship name="mineMessages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SAMessage" inverseName="localUser" inverseEntity="SAMessage" syncable="YES"/>
+        <relationship name="mineStatuses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SAStatus" inverseName="localUsers" inverseEntity="SAStatus" syncable="YES"/>
+        <relationship name="recvivedMessages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SAMessage" inverseName="recipient" inverseEntity="SAMessage" syncable="YES"/>
+        <relationship name="sentMessages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SAMessage" inverseName="sender" inverseEntity="SAMessage" syncable="YES"/>
+        <relationship name="statuses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SAStatus" inverseName="user" inverseEntity="SAStatus" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="SAConversation" positionX="-45" positionY="99" width="128" height="120"/>
+        <element name="SAMessage" positionX="-45" positionY="90" width="128" height="180"/>
+        <element name="SAPhoto" positionX="-36" positionY="81" width="128" height="120"/>
+        <element name="SAStatus" positionX="-63" positionY="45" width="128" height="195"/>
+        <element name="SAUser" positionX="-63" positionY="-18" width="128" height="345"/>
+    </elements>
+</model>

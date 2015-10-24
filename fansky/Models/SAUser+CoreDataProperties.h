@@ -2,7 +2,7 @@
 //  SAUser+CoreDataProperties.h
 //  fansky
 //
-//  Created by Zzy on 10/13/15.
+//  Created by Zzy on 10/24/15.
 //  Copyright © 2015 Zzy. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *token;
 @property (nullable, nonatomic, retain) NSString *tokenSecret;
 @property (nullable, nonatomic, retain) NSString *userID;
+@property (nullable, nonatomic, retain) NSString *desc;
 @property (nullable, nonatomic, retain) NSSet<SAConversation *> *mineConversations;
 @property (nullable, nonatomic, retain) NSSet<SAMessage *> *mineMessages;
 @property (nullable, nonatomic, retain) NSSet<SAStatus *> *mineStatuses;

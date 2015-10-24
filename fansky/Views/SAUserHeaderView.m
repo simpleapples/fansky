@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *statusCountLabel;
 @property (weak, nonatomic) IBOutlet UIButton *settingButton;
 @property (weak, nonatomic) IBOutlet UIImageView *lockImageView;
+@property (weak, nonatomic) IBOutlet UIButton *userInfoButton;
 
 @property (strong, nonatomic) SAUser *user;
 @property (nonatomic, getter = isMineInfo) BOOL mineInfo;
@@ -56,6 +57,11 @@
 
 - (void)updateInterface
 {
+    if (self.user.desc.length) {
+        self.userInfoButton.hidden = NO;
+    } else {
+        self.userInfoButton.hidden = YES;
+    }
     [self.followButton.layer setRasterizationScale:[UIScreen mainScreen].scale];
     self.nameLabel.text = self.user.name;
     self.userIDLabel.text = [NSString stringWithFormat:@"@%@", self.user.userID];
@@ -148,10 +154,10 @@
     }
 }
 
-- (IBAction)detailButtonTouchUp:(id)sender
+- (IBAction)userInfoButtonTouchUp:(id)sender
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(userHeaderView:detailButtonTouchUp:)]) {
-        [self.delegate userHeaderView:self detailButtonTouchUp:sender];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(userHeaderView:userInfoButtonTouchUp:)]) {
+        [self.delegate userHeaderView:self userInfoButtonTouchUp:sender];
     }
 }
 
