@@ -105,6 +105,7 @@
 		5A0F7B041BC4E50500926FD4 /* SAMessage+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAMessage+CoreDataProperties.m"; sourceTree = "<group>"; };
 		5A0F7B051BC4E50500926FD4 /* SAMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessage.h; sourceTree = "<group>"; };
 		5A0F7B061BC4E50500926FD4 /* SAMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessage.m; sourceTree = "<group>"; };
+		5A113F051BDBAB800065E18D /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		5A1811AB1BABED3D004B6C54 /* SAMentionListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMentionListViewController.h; sourceTree = "<group>"; };
 		5A1811AC1BABED3D004B6C54 /* SAMentionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMentionListViewController.m; sourceTree = "<group>"; };
 		5A1811AE1BABF3AC004B6C54 /* SATimeLineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SATimeLineCell.xib; sourceTree = "<group>"; };
@@ -437,6 +438,7 @@
 		7A012AD8EBD5286DCA3A07D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5A113F051BDBAB800065E18D /* LocalAuthentication.framework */,
 				5A01639A1BA96A470065F1F1 /* TTTAttributedLabel.framework */,
 				3E43255F77409845B17D05D0 /* Pods_fansky.framework */,
 			);
