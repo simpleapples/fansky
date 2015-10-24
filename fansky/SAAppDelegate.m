@@ -21,22 +21,8 @@
     [MobClick setAppVersion:version];
     
     [self updateAppearance];
-    
-    [LTHPasscodeViewController useKeychain:NO];
-    [LTHPasscodeViewController sharedUser].allowUnlockWithTouchID = NO;
-    [LTHPasscodeViewController sharedUser].hidesCancelButton = NO;
-    [LTHPasscodeViewController sharedUser].turnOffPasscodeString = @"关闭密码";
-    [LTHPasscodeViewController sharedUser].enablePasscodeString = @"设置密码";
-    [LTHPasscodeViewController sharedUser].reenterPasscodeString = @"再次输入密码";
-    [LTHPasscodeViewController sharedUser].enterPasscodeString = @"输入密码";
-    
-    if ([LTHPasscodeViewController doesPasscodeExist]) {
-        if ([LTHPasscodeViewController didPasscodeTimerEnd]) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[LTHPasscodeViewController sharedUser] showLockScreenWithAnimation:YES withLogout:NO andLogoutTitle:nil];
-            });
-        }
-    }
+    [self initPasscodeViewController];
+    [self showPasscodeViewController];
     
     return YES;
 }
@@ -44,12 +30,7 @@
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     [[SANotificationManager sharedManager] stopFetchNotificationCount];
-    
-    if ([LTHPasscodeViewController doesPasscodeExist]) {
-        if ([LTHPasscodeViewController didPasscodeTimerEnd]) {
-            [[LTHPasscodeViewController sharedUser] showLockScreenWithAnimation:YES withLogout:NO andLogoutTitle:nil];
-        }
-    }
+    [self showPasscodeViewController];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -69,6 +50,21 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     [[SADataManager sharedManager] saveContext];
+}
+
+- (void)initPasscodeViewController
+{
+}
+
+- (void)showPasscodeViewController
+{
+    if ([LTHPasscodeViewController doesPasscodeExist]) {
+        if ([LTHPasscodeViewController didPasscodeTimerEnd]) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[LTHPasscodeViewController sharedUser] showLockScreenWithAnimation:YES withLogout:NO andLogoutTitle:nil];
+            });
+        }
+    }
 }
 
 - (void)updateAppearance
