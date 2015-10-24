@@ -118,7 +118,11 @@ static NSUInteger TIME_LINE_COUNT = 40;
         }];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
-        [SAMessageDisplayUtils showErrorWithMessage:error];
+        if (type == SAStatusTypeTimeLine) {
+            [SAMessageDisplayUtils showErrorWithMessage:error];
+        } else {
+            [SAMessageDisplayUtils showInfoWithMessage:error];
+        }
         [self.refreshControl endRefreshing];
     };
     

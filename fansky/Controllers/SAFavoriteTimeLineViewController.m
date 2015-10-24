@@ -93,7 +93,7 @@ static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
         [self.refreshControl endRefreshing];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
-        [SAMessageDisplayUtils showErrorWithMessage:error];
+        [SAMessageDisplayUtils showInfoWithMessage:error];
         [self.refreshControl endRefreshing];
     };
     

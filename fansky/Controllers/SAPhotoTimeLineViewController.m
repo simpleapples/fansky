@@ -119,7 +119,7 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
         }];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
-        [SAMessageDisplayUtils showErrorWithMessage:error];
+        [SAMessageDisplayUtils showInfoWithMessage:error];
         [self.refreshControl endRefreshing];
         self.collectionView.contentInset = UIEdgeInsetsMake(244, 0, 0, 0);
     };
