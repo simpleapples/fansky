@@ -23,6 +23,7 @@
 		5A1811CC1BAC1C40004B6C54 /* SATimeLinePhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1811CA1BAC1C40004B6C54 /* SATimeLinePhotoCell.xib */; };
 		5A2365BD1B395FD200E1E73C /* SATimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2365BC1B395FD200E1E73C /* SATimeLineCell.m */; };
 		5A2365C41B39723900E1E73C /* SAAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2365C31B39723900E1E73C /* SAAPIService.m */; };
+		5A2B63F51BDBA140007F670C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5AD70EEE1B316A79009C5B84 /* Info.plist */; };
 		5A3E6C581BA441D100C589BE /* SADataManager+Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3E6C571BA441D100C589BE /* SADataManager+Status.m */; };
 		5A5C21281BB51B1100C1277F /* SAFriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5C21271BB51B1100C1277F /* SAFriendListViewController.m */; };
 		5A5C212B1BB52BA400C1277F /* SAFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5C212A1BB52BA400C1277F /* SAFriendCell.m */; };
@@ -534,6 +535,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A2B63F51BDBA140007F670C /* Info.plist in Resources */,
 				5AED4B731BA8522C00EDBF47 /* SAUserHeaderView.xib in Resources */,
 				5A1811CC1BAC1C40004B6C54 /* SATimeLinePhotoCell.xib in Resources */,
 				5AD70EFC1B316A79009C5B84 /* SAMain.storyboard in Resources */,

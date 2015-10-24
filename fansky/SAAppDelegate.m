@@ -10,6 +10,7 @@
 #import "SADataManager.h"
 #import "SANotificationManager.h"
 #import <MobClick.h>
+#import <LTHPasscodeViewController/LTHPasscodeViewController.h>
 
 @implementation SAAppDelegate
 
@@ -18,6 +19,8 @@
     [MobClick startWithAppkey:@"560676ece0f55a154f0002d5" reportPolicy:BATCH channelId:@"AppStore"];
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
+    
+    [LTHPasscodeViewController useKeychain:NO];
     
     [self updateAppearance];
     return YES;
@@ -40,6 +43,12 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [[SANotificationManager sharedManager] startFetchNotificationCount];
+    
+    if ([LTHPasscodeViewController doesPasscodeExist]) {
+        if ([LTHPasscodeViewController didPasscodeTimerEnd]) {
+            [[LTHPasscodeViewController sharedUser] showLockScreenWithAnimation:YES withLogout:NO andLogoutTitle:nil];
+        }
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

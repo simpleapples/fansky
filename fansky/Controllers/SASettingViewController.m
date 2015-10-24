@@ -11,10 +11,12 @@
 #import "SAFriendListViewController.h"
 #import "SADataManager+User.h"
 #import "SAUser+CoreDataProperties.h"
+#import <LTHPasscodeViewController/LTHPasscodeViewController.h>
 #import <VTAcknowledgementsViewController/VTAcknowledgementsViewController.h>
 
-@interface SASettingViewController ()
+@interface SASettingViewController () <LTHPasscodeViewControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UISwitch *passcodeSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 
 @end
@@ -24,6 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [LTHPasscodeViewController sharedUser].delegate = self;
     
     [self updateInterface];
 }
@@ -39,8 +43,15 @@
     [super didReceiveMemoryWarning];
 }
 
+- (void)updatePasscodeSwitch
+{
+    self.passcodeSwitch.on = [LTHPasscodeViewController doesPasscodeExist];
+}
+
 - (void)updateInterface
 {
+    [self updatePasscodeSwitch];
+
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
     NSString *versionString = [NSString stringWithFormat:@"%@ (%@)", [info objectForKey:@"CFBundleShortVersionString"], [info objectForKey:@"CFBundleVersion"]];
     self.versionLabel.text = versionString;
@@ -65,7 +76,7 @@
         if (indexPath.row == 0) {
             [self performSegueWithIdentifier:@"SettingToFriendListSegue" sender:nil];
         }
-    } else if (indexPath.section == 1) {
+    } else if (indexPath.section == 2) {
         if (indexPath.row == 0) {
             [self dismissViewControllerAnimated:YES completion:^{
                 SAUserViewController *userViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAUserViewController"];
@@ -85,11 +96,27 @@
     }
 }
 
+#pragma mark - LTHPasscodeViewControllerDelegate
+
+- (void)passcodeViewControllerWillClose
+{
+    [self updatePasscodeSwitch];
+}
+
 #pragma mark - EventHandler
 
 - (IBAction)closeButtonTouchUp:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)passcodeSwitchValueChanged:(id)sender
+{
+    if (![LTHPasscodeViewController doesPasscodeExist]) {
+        [[LTHPasscodeViewController sharedUser] showForEnablingPasscodeInViewController:self asModal:YES];
+    } else {
+        [[LTHPasscodeViewController sharedUser] showForDisablingPasscodeInViewController:self asModal:YES];
+    }
 }
 
 @end

@@ -190,9 +190,9 @@
                     <exclude reference="pSt-i0-dqr"/>
                     <exclude reference="aRp-7L-P0R"/>
                     <exclude reference="Z0r-6Z-eIY"/>
-                    <exclude reference="3Yu-f3-q4x"/>
                     <exclude reference="vrP-7B-AcV"/>
                     <exclude reference="Stw-xP-8gu"/>
+                    <exclude reference="3Yu-f3-q4x"/>
                 </mask>
             </variation>
             <connections>

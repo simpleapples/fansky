@@ -12,6 +12,7 @@ pod 'MWPhotoBrowser'
 pod 'VTAcknowledgementsViewController'
 pod 'DTCoreText'
 pod 'VVBlurPresentation'
+pod 'LTHPasscodeViewController'
 
 end
 
