@@ -28,7 +28,7 @@
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="载入中" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="knh-Eh-eIb">
-                    <rect key="frame" x="16" y="110" width="60" height="23.5"/>
+                    <rect key="frame" x="16" y="110" width="60" height="24"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="mAE-0p-AJL"/>
@@ -54,7 +54,7 @@
                     </connections>
                 </button>
                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconLock" translatesAutoresizingMaskIntoConstraints="NO" id="oBX-MO-GVE">
-                    <rect key="frame" x="81" y="111" width="18" height="18"/>
+                    <rect key="frame" x="81" y="112" width="18" height="18"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="18" id="FdL-JG-XzJ"/>
@@ -62,7 +62,7 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="载入中" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8jo-yX-kz8">
-                    <rect key="frame" x="16" y="133" width="42" height="17"/>
+                    <rect key="frame" x="16" y="134" width="42" height="17"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="100" id="IBg-wZ-rbP"/>
@@ -80,7 +80,7 @@
                     </variation>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xlN-K8-wkC">
-                    <rect key="frame" x="66" y="158" width="54" height="29"/>
+                    <rect key="frame" x="66" y="159" width="54" height="29"/>
                     <animations/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                     <state key="normal" title="0 关注者">
@@ -91,7 +91,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xLT-zW-NIB">
-                    <rect key="frame" x="16" y="158" width="40" height="29"/>
+                    <rect key="frame" x="16" y="159" width="40" height="29"/>
                     <animations/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                     <state key="normal" title="0 关注">
@@ -101,8 +101,8 @@
                         <action selector="friendsCountButtonTouchUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="Acd-VN-06v"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0 消息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1d6-aV-tdw">
-                    <rect key="frame" x="130" y="157" width="40" height="30"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 消息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1d6-aV-tdw">
+                    <rect key="frame" x="130" y="159" width="40" height="29"/>
                     <animations/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -132,8 +132,8 @@
                         <action selector="followButtonTouchUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="VKJ-Y4-QyD"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nH7-kH-ED6">
-                    <rect key="frame" x="534" y="157.5" width="50" height="30"/>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nH7-kH-ED6">
+                    <rect key="frame" x="534" y="159" width="50" height="29"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="TSt-Ym-wGD"/>
