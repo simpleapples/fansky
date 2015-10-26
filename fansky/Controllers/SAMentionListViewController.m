@@ -66,7 +66,6 @@ static NSUInteger TIME_LINE_COUNT = 40;
     [[SADataManager sharedManager] currentMentionTimeLineWithUserID:currentUser.userID limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
         self.timeLineList = result;
         [self.tableView reloadData];
-        
         [self refreshData];
     }];
     
@@ -96,6 +95,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
             limit = self.timeLineList.count + TIME_LINE_COUNT;
         }
         [[SADataManager sharedManager] currentMentionTimeLineWithUserID:userID limit:limit completeHandler:^(NSArray *result) {
+            self.timeLineList = result;
             if (self.timeLineList.count) {
                 SAStatus *lastStatus = [self.timeLineList lastObject];
                 self.maxID = lastStatus.statusID;

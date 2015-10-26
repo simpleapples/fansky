@@ -17,6 +17,7 @@
 		5A0F7B0E1BC4E50500926FD4 /* SAConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B021BC4E50500926FD4 /* SAConversation.m */; };
 		5A0F7B0F1BC4E50500926FD4 /* SAMessage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B041BC4E50500926FD4 /* SAMessage+CoreDataProperties.m */; };
 		5A0F7B101BC4E50500926FD4 /* SAMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B061BC4E50500926FD4 /* SAMessage.m */; };
+		5A159D9B1BDDD5D0007DFE6A /* SAMine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A159D991BDDD5D0007DFE6A /* SAMine.storyboard */; };
 		5A1811AD1BABED3D004B6C54 /* SAMentionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811AC1BABED3D004B6C54 /* SAMentionListViewController.m */; };
 		5A1811AF1BABF3AC004B6C54 /* SATimeLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A1811AE1BABF3AC004B6C54 /* SATimeLineCell.xib */; };
 		5A1811CB1BAC1C40004B6C54 /* SATimeLinePhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811C91BAC1C40004B6C54 /* SATimeLinePhotoCell.m */; };
@@ -106,6 +107,7 @@
 		5A0F7B051BC4E50500926FD4 /* SAMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessage.h; sourceTree = "<group>"; };
 		5A0F7B061BC4E50500926FD4 /* SAMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessage.m; sourceTree = "<group>"; };
 		5A113F051BDBAB800065E18D /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		5A159D9A1BDDD5D0007DFE6A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/SAMine.storyboard"; sourceTree = "<group>"; };
 		5A1811AB1BABED3D004B6C54 /* SAMentionListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMentionListViewController.h; sourceTree = "<group>"; };
 		5A1811AC1BABED3D004B6C54 /* SAMentionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMentionListViewController.m; sourceTree = "<group>"; };
 		5A1811AE1BABF3AC004B6C54 /* SATimeLineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SATimeLineCell.xib; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				5AD70EF11B316A79009C5B84 /* SAAppDelegate.h */,
 				5AD70EF21B316A79009C5B84 /* SAAppDelegate.m */,
 				5AD70EFA1B316A79009C5B84 /* SAMain.storyboard */,
+				5A159D991BDDD5D0007DFE6A /* SAMine.storyboard */,
 				5AD70EFD1B316A79009C5B84 /* Images.xcassets */,
 				5AD70EFF1B316A79009C5B84 /* LaunchScreen.xib */,
 				5AD70EF41B316A79009C5B84 /* fansky.xcdatamodeld */,
@@ -506,6 +509,7 @@
 				TargetAttributes = {
 					5AD70EE91B316A79009C5B84 = {
 						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = LMJACF6T63;
 					};
 					5AD70F051B316A79009C5B84 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -543,6 +547,7 @@
 				5AD70F011B316A79009C5B84 /* LaunchScreen.xib in Resources */,
 				5AD70EFE1B316A79009C5B84 /* Images.xcassets in Resources */,
 				5A1811AF1BABF3AC004B6C54 /* SATimeLineCell.xib in Resources */,
+				5A159D9B1BDDD5D0007DFE6A /* SAMine.storyboard in Resources */,
 				5A849E921BC3EC20000FDCB9 /* Pods-fansky-acknowledgements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -683,6 +688,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		5A159D991BDDD5D0007DFE6A /* SAMine.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5A159D9A1BDDD5D0007DFE6A /* zh-Hans */,
+			);
+			name = SAMine.storyboard;
+			sourceTree = "<group>";
+		};
 		5AD70EFA1B316A79009C5B84 /* SAMain.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -795,7 +808,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = fansky/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -816,7 +829,7 @@
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = fansky/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
