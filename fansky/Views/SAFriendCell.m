@@ -31,13 +31,6 @@
 
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    UIColor *followButtonBackgroundColor = self.followButton.backgroundColor;
-    [super setSelected:selected animated:animated];
-    self.followButton.backgroundColor = followButtonBackgroundColor;
-}
-
 - (void)prepareForReuse
 {
     self.nameLabel.text = nil;

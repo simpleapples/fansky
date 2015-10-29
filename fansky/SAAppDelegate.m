@@ -79,6 +79,7 @@
     NSDictionary *textAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:17]};
     [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
     [[UIBarButtonItem appearance] setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
+    [UITableView appearance].separatorInset = UIEdgeInsetsZero;
 }
 
 @end
