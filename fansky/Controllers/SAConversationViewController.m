@@ -107,7 +107,7 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
     }
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
