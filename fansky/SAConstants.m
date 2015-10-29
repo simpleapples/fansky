@@ -51,3 +51,5 @@ NSString *const SA_API_FRIENDSHIP_ACCEPT_PATH = @"/friendships/accept.json";
 NSString *const SA_API_CONVERSATION_LIST_PATH = @"/direct_messages/conversation_list.json";
 NSString *const SA_API_CONVERSATION_PATH = @"/direct_messages/conversation.json";
 NSString *const SA_API_SEND_NEW_MESSAGE_PATH = @"/direct_messages/new.json";
+
+NSString *const SA_API_SEARCH_PUBLIC_TIMELINE_PATH = @"/search/public_timeline.json";

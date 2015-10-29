@@ -7,14 +7,26 @@
 //
 
 #import "SASearchViewController.h"
+#import "SAMessageDisplayUtils.h"
+#import "SAStatus+CoreDataProperties.h"
+#import "SADataManager+Status.h"
+#import "SAUser+CoreDataProperties.h"
+#import "SADataManager+User.h"
+#import "SAAPIService.h"
+#import "SATimeLineCell.h"
 
 @interface SASearchViewController () <UISearchResultsUpdating>
 
 @property (strong, nonatomic) UISearchController *searchController;
+@property (copy, nonatomic) NSString *maxID;
+@property (copy, nonatomic) NSString *keyword;
 
 @end
 
 @implementation SASearchViewController
+
+static NSString *const ENTITY_NAME = @"SAStatus";
+static NSUInteger TIME_LINE_COUNT = 40;
 
 - (void)viewDidLoad
 {
@@ -23,90 +35,106 @@
     [self updateInterface];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.view endEditing:YES];
+    [self.searchController setActive:NO];
+    [super viewWillDisappear:animated];
+}
+
 - (void)updateInterface
 {
-    UISearchController *searchController = [[UISearchController alloc] initWithSearchResultsController:self];
+    UISearchController *searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
     searchController.searchResultsUpdater = self;
+    searchController.dimsBackgroundDuringPresentation = NO;
+    searchController.hidesNavigationBarDuringPresentation = NO;
     self.searchController = searchController;
     self.tableView.tableHeaderView = self.searchController.searchBar;
 }
 
-- (void)didReceiveMemoryWarning
+- (void)getLocalData
 {
-    [super didReceiveMemoryWarning];
+    
+}
+
+- (void)updateDataWithRefresh:(BOOL)refresh
+{
+    if (!self.timeLineList) {
+        self.timeLineList = [[NSArray alloc] init];
+    }
+    NSString *maxID;
+    if (!refresh) {
+        maxID = self.maxID;
+    } else if (self.timeLineList.count) {
+//        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    }
+
+    void (^success)(id data) = ^(id data) {
+        NSArray *originalList = (NSArray *)data;
+        __block NSMutableArray *tempTimeLineList = [[NSMutableArray alloc] init];
+        [originalList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            SAStatus *status = [[SADataManager sharedManager] statusWithObject:obj localUsers:nil type:SAStatusTypeFavoriteStatus];
+            [tempTimeLineList addObject:status];
+        }];
+        if (self.maxID) {
+            NSMutableArray *existList = [self.timeLineList mutableCopy];
+            [existList addObjectsFromArray:tempTimeLineList];
+            self.timeLineList = [existList copy];
+        } else {
+            self.timeLineList = [tempTimeLineList copy];
+        }
+        if (self.timeLineList.count) {
+            SAStatus *lastStatus = [self.timeLineList lastObject];
+            self.maxID = lastStatus.statusID;
+        }
+        [self.tableView reloadData];
+        [SAMessageDisplayUtils dismiss];
+        [self.refreshControl endRefreshing];
+    };
+    void (^failure)(NSString *error) = ^(NSString *error) {
+        [SAMessageDisplayUtils showErrorWithMessage:error];
+    };
+    
+    if (refresh) {
+        [SAMessageDisplayUtils showProgressWithMessage:@"正在刷新"];
+    }
+    [[SAAPIService sharedSingleton] searchPublicTimeLineWithKeyword:self.keyword sinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
 }
 
 #pragma mark - UISearchResultsUpdating
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-    
+    self.keyword = searchController.searchBar.text;
+    [self refreshData];
+}
+
+#pragma mark - SATimeLineCellDelegate
+
+- (void)timeLineCell:(SATimeLineCell *)timeLineCell avatarImageViewTouchUp:(id)sender
+{
+    self.selectedUserID = timeLineCell.status.user.userID;
+    [self performSegueWithIdentifier:@"SearchToUserSegue" sender:sender];
+}
+
+- (void)timeLineCell:(SATimeLineCell *)timeLineCell contentURLTouchUp:(id)sender
+{
+    NSURL *url = timeLineCell.selectedURL;
+    if ([url.host isEqualToString:@"fanfou.com"]) {
+        self.selectedUserID = url.lastPathComponent;
+        [self performSegueWithIdentifier:@"SearchToUserSegue" sender:sender];
+    } else if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
+        [[UIApplication sharedApplication] openURL:url];
+    }
 }
 
 #pragma mark - UITableViewDelegate
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
+    self.selectedStatusID = status.statusID;
+    [self performSegueWithIdentifier:@"SearchToStatusSegue" sender:nil];
 }
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
-}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

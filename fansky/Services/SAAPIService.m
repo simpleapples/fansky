@@ -301,6 +301,20 @@
     [self requestAPIWithPath:SA_API_SEND_NEW_MESSAGE_PATH method:@"POST" parametersDictionary:mutableDictionary success:success failure:failure];
 }
 
+#pragma mark - Search
+
+- (void)searchPublicTimeLineWithKeyword:(NSString *)keyword sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:keyword, @"q", @(count), @"count", @"lite", @"mode", @"html", @"format", nil];
+    if (sinceID) {
+        [mutableDictionary setObject:sinceID forKey:@"since_id"];
+    }
+    if (maxID) {
+        [mutableDictionary setObject:maxID forKey:@"max_id"];
+    }
+    [self requestAPIWithPath:SA_API_SEARCH_PUBLIC_TIMELINE_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
+}
+
 #pragma mark - Base
 
 - (void)requestAPIWithPath:(NSString *)path method:(NSString *)method parametersDictionary:(NSDictionary *)parametersDictionary success:(void(^)(id responseObject))success failure:(void(^)(NSString *error))failure

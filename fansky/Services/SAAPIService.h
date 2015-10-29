@@ -66,4 +66,8 @@
 
 - (void)sendMessageWithUserID:(NSString *)userID text:(NSString *)text replyToMessageID:(NSString *)replyToMessageID success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
 
+#pragma mark - Search
+
+- (void)searchPublicTimeLineWithKeyword:(NSString *)keyword sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
+
 @end

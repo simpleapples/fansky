@@ -14,21 +14,12 @@
 #import "SAMessageDisplayUtils.h"
 #import "SAStatus+CoreDataProperties.h"
 #import "SAAPIService.h"
-#import "SAPhoto.h"
 #import "SAUserViewController.h"
 #import "SATimeLineCell.h"
-#import "SAComposeViewController.h"
-#import <DTCoreText/DTCoreText.h>
-#import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 
-@interface SAMentionListViewController () <SATimeLineCellDelegate>
+@interface SAMentionListViewController ()
 
-@property (strong, nonatomic) NSArray *timeLineList;
 @property (copy, nonatomic) NSString *maxID;
-@property (copy, nonatomic) NSString *selectedStatusID;
-@property (copy, nonatomic) NSString *selectedUserID;
-@property (nonatomic, getter = isCellRegistered) BOOL cellRegistered;
-@property (strong, nonatomic) URBMediaFocusViewController *imageViewController;
 
 @end
 
@@ -36,28 +27,6 @@
 
 static NSString *const ENTITY_NAME = @"SAStatus";
 static NSUInteger TIME_LINE_COUNT = 40;
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    
-    [self updateInterface];
-    
-    [self getLocalData];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
-    [self.tableView setEditing:NO animated:NO];
-    [super viewWillAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [SAMessageDisplayUtils dismiss];
-}
 
 - (void)getLocalData
 {
@@ -67,12 +36,6 @@ static NSUInteger TIME_LINE_COUNT = 40;
         [self.tableView reloadData];
         [self refreshData];
     }];
-    
-}
-
-- (void)refreshData
-{
-    [self updateDataWithRefresh:YES];
 }
 
 - (void)updateDataWithRefresh:(BOOL)refresh
@@ -114,45 +77,12 @@ static NSUInteger TIME_LINE_COUNT = 40;
     [[SAAPIService sharedSingleton] mentionStatusWithSinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
 }
 
-- (void)updateInterface
-{
-    [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
-    self.clearsSelectionOnViewWillAppear = YES;
-    self.tableView.tableFooterView = [UIView new];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.destinationViewController isKindOfClass:[SAStatusViewController class]]) {
-        SAStatusViewController *statusViewController = (SAStatusViewController *)segue.destinationViewController;
-        statusViewController.statusID = self.selectedStatusID;
-    } else if ([segue.destinationViewController isKindOfClass:[SAUserViewController class]]) {
-        SAUserViewController *userViewController = (SAUserViewController *)segue.destinationViewController;
-        userViewController.userID = self.selectedUserID;
-    }
-}
-
 #pragma mark - SATimeLineCellDelegate
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell avatarImageViewTouchUp:(id)sender
 {
     self.selectedUserID = timeLineCell.status.user.userID;
     [self performSegueWithIdentifier:@"MentionListToUserSegue" sender:nil];
-}
-
-- (void)timeLineCell:(SATimeLineCell *)timeLineCell contentImageViewTouchUp:(id)sender
-{
-    if (!self.imageViewController){
-        self.imageViewController = [[URBMediaFocusViewController alloc] init];
-        self.imageViewController.shouldDismissOnImageTap = YES;
-    }
-    NSURL *imageURL = [NSURL URLWithString:timeLineCell.status.photo.largeURL];
-    [self.imageViewController showImageFromURL:imageURL fromView:self.view];
 }
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell contentURLTouchUp:(id)sender
@@ -166,97 +96,13 @@ static NSUInteger TIME_LINE_COUNT = 40;
     }
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.timeLineList.count;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
-    UIColor *linkColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
-    
-    NSDictionary *optionDictionary = @{DTDefaultFontName: @"HelveticaNeue-Light",
-                                       DTDefaultFontSize: @(16),
-                                       DTDefaultLinkColor: linkColor,
-                                       DTDefaultLinkHighlightColor: linkColor,
-                                       DTDefaultLinkDecoration: @(NO),
-                                       DTDefaultLineHeightMultiplier: @(1.8)};
-    NSAttributedString* attributedString = [[NSAttributedString alloc] initWithHTMLData:[status.text dataUsingEncoding:NSUnicodeStringEncoding] options:optionDictionary documentAttributes:nil];
-    
-    DTCoreTextLayouter *layouter = [[DTCoreTextLayouter alloc] initWithAttributedString:attributedString];
-    
-    CGFloat width = self.tableView.frame.size.width - 86;
-    CGRect maxRect = CGRectMake(0, 0, width, CGFLOAT_HEIGHT_UNKNOWN);
-    NSRange entireString = NSMakeRange(0, attributedString.length);
-    DTCoreTextLayoutFrame *layoutFrame = [layouter layoutFrameWithRect:maxRect range:entireString];
-    CGFloat offset = 62;
-    if (status.photo.imageURL) {
-        offset = width / 2 + 16 + 10 + 46;
-    }
-    return layoutFrame.frame.size.height + offset;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *const cellName = @"SATimeLineCell";
-    if (!self.isCellRegistered) {
-        [tableView registerNib:[UINib nibWithNibName:cellName bundle:nil] forCellReuseIdentifier:cellName];
-        self.cellRegistered = YES;
-    }
-    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
-    SATimeLineCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
-    [cell configWithStatus:status];
-    cell.delegate = self;
-    return cell;
-}
+#pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
     self.selectedStatusID = status.statusID;
     [self performSegueWithIdentifier:@"MentionListToStatusSegue" sender:nil];
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([cell isKindOfClass:[SATimeLineCell class]]) {
-        SATimeLineCell *timeLinePhotoCell = (SATimeLineCell *)cell;
-        [timeLinePhotoCell loadAllImages];
-    }
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
-
-- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
-    UITableViewRowAction *repostAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"转发" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        SAComposeViewController *composeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
-        composeViewController.repostStatusID = status.statusID;
-        [self presentViewController:composeViewController animated:YES completion:nil];
-    }];
-    repostAction.backgroundColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
-    UITableViewRowAction *replyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"回复" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        SAComposeViewController *composeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
-        composeViewController.replyToStatusID = status.statusID;
-        [self presentViewController:composeViewController animated:YES completion:nil];
-    }];
-    replyAction.backgroundColor = [UIColor lightGrayColor];
-    return @[repostAction, replyAction];
-}
-
-#pragma mark - UIScrollViewDelegate
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    if (fabs(scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y) < scrollView.contentSize.height * 0.3) {
-        [self updateDataWithRefresh:NO];
-    }
 }
 
 @end

@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SATimeLineViewController.h"
 
-@interface SAMentionListViewController : UITableViewController
-
-- (void)refreshData;
+@interface SAMentionListViewController : SATimeLineViewController
 
 @end

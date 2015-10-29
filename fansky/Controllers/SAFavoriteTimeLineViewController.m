@@ -13,21 +13,12 @@
 #import "SAStatusViewController.h"
 #import "SAUserViewController.h"
 #import "SATimeLineCell.h"
-#import "SAComposeViewController.h"
 #import "SAStatus+CoreDataProperties.h"
 #import "SAUser+CoreDataProperties.h"
-#import "SAPhoto+CoreDataProperties.h"
-#import <DTCoreText/DTCoreText.h>
-#import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 
-@interface SAFavoriteTimeLineViewController () <SATimeLineCellDelegate>
+@interface SAFavoriteTimeLineViewController ()
 
-@property (strong, nonatomic) NSArray *favoriteTimeLineList;
 @property (nonatomic) NSUInteger page;
-@property (copy, nonatomic) NSString *selectedStatusID;
-@property (copy, nonatomic) NSString *selectedUserID;
-@property (nonatomic, getter = isCellRegistered) BOOL cellRegistered;
-@property (strong, nonatomic) URBMediaFocusViewController *imageViewController;
 
 @end
 
@@ -36,37 +27,15 @@
 static NSString *const ENTITY_NAME = @"SAStatus";
 static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
 
-- (void)viewDidLoad
+- (void)getLocalData
 {
-    [super viewDidLoad];
-    
-    [self updateInterface];
-    
     [self refreshData];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
-    [self.tableView setEditing:NO animated:NO];
-    [super viewWillAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [SAMessageDisplayUtils dismiss];
-}
-
-- (void)refreshData
-{
-    [self updateDataWithRefresh:YES];
 }
 
 - (void)updateDataWithRefresh:(BOOL)refresh
 {
-    if (!self.favoriteTimeLineList) {
-        self.favoriteTimeLineList = [[NSArray alloc] init];
+    if (!self.timeLineList) {
+        self.timeLineList = [[NSArray alloc] init];
     }
     if (!refresh) {
         self.page++;
@@ -75,17 +44,17 @@ static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
     }
     void (^success)(id data) = ^(id data) {
         NSArray *originalList = (NSArray *)data;
-        __block NSMutableArray *tempFavoriteTimeLineList = [[NSMutableArray alloc] init];
+        __block NSMutableArray *tempTimeLineList = [[NSMutableArray alloc] init];
         [originalList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             SAStatus *status = [[SADataManager sharedManager] statusWithObject:obj localUsers:nil type:SAStatusTypeFavoriteStatus];
-            [tempFavoriteTimeLineList addObject:status];
+            [tempTimeLineList addObject:status];
         }];
         if (self.page > 1) {
-            NSMutableArray *existList = [self.favoriteTimeLineList mutableCopy];
-            [existList addObjectsFromArray:tempFavoriteTimeLineList];
-            self.favoriteTimeLineList = [existList copy];
+            NSMutableArray *existList = [self.timeLineList mutableCopy];
+            [existList addObjectsFromArray:tempTimeLineList];
+            self.timeLineList = [existList copy];
         } else {
-            self.favoriteTimeLineList = [tempFavoriteTimeLineList copy];
+            self.timeLineList = [tempTimeLineList copy];
         }
         [self.tableView reloadData];
         [SAMessageDisplayUtils dismiss];
@@ -102,45 +71,12 @@ static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
     [[SAAPIService sharedSingleton] userFavoriteTimeLineWithUserID:self.userID count:FAVORITE_TIME_LINE_COUNT page:self.page success:success failure:failure];
 }
 
-- (void)updateInterface
-{
-    [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
-    self.clearsSelectionOnViewWillAppear = YES;
-    self.tableView.tableFooterView = [UIView new];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.destinationViewController isKindOfClass:[SAStatusViewController class]]) {
-        SAStatusViewController *statusViewController = (SAStatusViewController *)segue.destinationViewController;
-        statusViewController.statusID = self.selectedStatusID;
-    } else if ([segue.destinationViewController isKindOfClass:[SAUserViewController class]]) {
-        SAUserViewController *userViewController = (SAUserViewController *)segue.destinationViewController;
-        userViewController.userID = self.selectedUserID;
-    }
-}
-
 #pragma mark - SATimeLineCellDelegate
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell avatarImageViewTouchUp:(id)sender
 {
     self.selectedUserID = timeLineCell.status.user.userID;
     [self performSegueWithIdentifier:@"FavoriteTimeLineToUserSegue" sender:nil];
-}
-
-- (void)timeLineCell:(SATimeLineCell *)timeLineCell contentImageViewTouchUp:(id)sender
-{
-    if (!self.imageViewController){
-        self.imageViewController = [[URBMediaFocusViewController alloc] init];
-        self.imageViewController.shouldDismissOnImageTap = YES;
-    }
-    NSURL *imageURL = [NSURL URLWithString:timeLineCell.status.photo.largeURL];
-    [self.imageViewController showImageFromURL:imageURL fromView:self.view];
 }
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell contentURLTouchUp:(id)sender
@@ -156,101 +92,11 @@ static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
 
 #pragma mark - UITableViewDelegate
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.favoriteTimeLineList.count;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    SAStatus *status = [self.favoriteTimeLineList objectAtIndex:indexPath.row];
-    UIColor *linkColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
-    
-    NSDictionary *optionDictionary = @{DTDefaultFontName: @"HelveticaNeue-Light",
-                                       DTDefaultFontSize: @(16),
-                                       DTDefaultLinkColor: linkColor,
-                                       DTDefaultLinkHighlightColor: linkColor,
-                                       DTDefaultLinkDecoration: @(NO),
-                                       DTDefaultLineHeightMultiplier: @(1.8)};
-    NSAttributedString* attributedString = [[NSAttributedString alloc] initWithHTMLData:[status.text dataUsingEncoding:NSUnicodeStringEncoding] options:optionDictionary documentAttributes:nil];
-    
-    DTCoreTextLayouter *layouter = [[DTCoreTextLayouter alloc] initWithAttributedString:attributedString];
-    
-    CGFloat width = self.tableView.frame.size.width - 86;
-    CGRect maxRect = CGRectMake(0, 0, width, CGFLOAT_HEIGHT_UNKNOWN);
-    NSRange entireString = NSMakeRange(0, attributedString.length);
-    DTCoreTextLayoutFrame *layoutFrame = [layouter layoutFrameWithRect:maxRect range:entireString];
-    CGFloat offset = 62;
-    if (status.photo.imageURL) {
-        offset = width / 2 + 16 + 10 + 46;
-    }
-    return layoutFrame.frame.size.height + offset;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *const cellName = @"SATimeLineCell";
-    if (!self.isCellRegistered) {
-        [tableView registerNib:[UINib nibWithNibName:cellName bundle:nil] forCellReuseIdentifier:cellName];
-        self.cellRegistered = YES;
-    }
-    SAStatus *status = [self.favoriteTimeLineList objectAtIndex:indexPath.row];
-    SATimeLineCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
-    [cell configWithStatus:status];
-    cell.delegate = self;
-    return cell;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SAStatus *status = [self.favoriteTimeLineList objectAtIndex:indexPath.row];
+    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
     self.selectedStatusID = status.statusID;
     [self performSegueWithIdentifier:@"FavoriteTimeLineToStatusSegue" sender:nil];
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([cell isKindOfClass:[SATimeLineCell class]]) {
-        SATimeLineCell *timeLinePhotoCell = (SATimeLineCell *)cell;
-        [timeLinePhotoCell loadAllImages];
-    }
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
-
-- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    SAStatus *status = [self.favoriteTimeLineList objectAtIndex:indexPath.row];
-    UITableViewRowAction *repostAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"转发" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        SAComposeViewController *composeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
-        composeViewController.repostStatusID = status.statusID;
-        [self presentViewController:composeViewController animated:YES completion:nil];
-    }];
-    repostAction.backgroundColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
-    UITableViewRowAction *replyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"回复" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        SAComposeViewController *composeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
-        composeViewController.replyToStatusID = status.statusID;
-        [self presentViewController:composeViewController animated:YES completion:nil];
-    }];
-    replyAction.backgroundColor = [UIColor lightGrayColor];
-    return @[repostAction, replyAction];
-}
-
-#pragma mark - UIScrollViewDelegate
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    if (fabs(scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y) < scrollView.contentSize.height * 0.3) {
-        [self updateDataWithRefresh:NO];
-    }
 }
 
 #pragma mark - ARSegmentControllerDelegate
@@ -258,11 +104,6 @@ static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
 - (NSString *)segmentTitle
 {
     return @"收藏";
-}
-
-- (UIScrollView *)streachScrollView
-{
-    return self.tableView;
 }
 
 @end

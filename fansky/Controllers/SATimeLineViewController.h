@@ -11,8 +11,13 @@
 
 @interface SATimeLineViewController : UITableViewController <ARSegmentControllerDelegate>
 
+@property (strong, nonatomic) NSArray *timeLineList;
 @property (copy, nonatomic) NSString *userID;
+@property (copy, nonatomic) NSString *selectedStatusID;
+@property (copy, nonatomic) NSString *selectedUserID;
 
 - (void)refreshData;
+- (void)getLocalData;
+- (void)updateDataWithRefresh:(BOOL)refresh;
 
 @end

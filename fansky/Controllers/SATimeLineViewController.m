@@ -23,10 +23,7 @@
 
 @interface SATimeLineViewController () <SATimeLineCellDelegate>
 
-@property (strong, nonatomic) NSArray *timeLineList;
 @property (copy, nonatomic) NSString *maxID;
-@property (copy, nonatomic) NSString *selectedStatusID;
-@property (copy, nonatomic) NSString *selectedUserID;
 @property (nonatomic, getter = isCellRegistered) BOOL cellRegistered;
 @property (strong, nonatomic) URBMediaFocusViewController *imageViewController;
 
@@ -71,7 +68,6 @@ static NSUInteger TIME_LINE_COUNT = 40;
     [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
         self.timeLineList = result;
         [self.tableView reloadData];
-        
         [self refreshData];
     }];
 }

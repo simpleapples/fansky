@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ARSegmentPager/ARSegmentControllerDelegate.h>
+#import "SATimeLineViewController.h"
 
-@interface SAFavoriteTimeLineViewController : UITableViewController <ARSegmentControllerDelegate>
-
-@property (copy, nonatomic) NSString *userID;
+@interface SAFavoriteTimeLineViewController : SATimeLineViewController
 
 @end
