@@ -8,7 +8,6 @@
 
 #import "SATimeLineViewController.h"
 #import "SADataManager+User.h"
-#import "SATimeLineCell.h"
 #import "SAUser+CoreDataProperties.h"
 #import "SAStatus+CoreDataProperties.h"
 #import "SAPhoto.h"
@@ -17,12 +16,12 @@
 #import "SAStatusViewController.h"
 #import "SAUserViewController.h"
 #import "SAMessageDisplayUtils.h"
-#import "SATimeLinePhotoCell.h"
+#import "SATimeLineCell.h"
 #import "SAComposeViewController.h"
 #import <DTCoreText/DTCoreText.h>
 #import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 
-@interface SATimeLineViewController () <SATimeLineCellDelegate, SATimeLinePhotoCellDelegate>
+@interface SATimeLineViewController () <SATimeLineCellDelegate>
 
 @property (strong, nonatomic) NSArray *timeLineList;
 @property (copy, nonatomic) NSString *maxID;
@@ -170,26 +169,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
     [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
 }
 
-- (void)timeLineCell:(SATimeLineCell *)timeLineCell contentURLTouchUp:(id)sender
-{
-    NSURL *url = timeLineCell.selectedURL;
-    if ([url.host isEqualToString:@"fanfou.com"]) {
-        self.selectedUserID = url.lastPathComponent;
-        [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
-    } else if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
-        [[UIApplication sharedApplication] openURL:url];
-    }
-}
-
-#pragma mark - SATimeLinePhotoCellDelegate
-
-- (void)timeLinePhotoCell:(SATimeLinePhotoCell *)timeLineCell avatarImageViewTouchUp:(id)sender
-{
-    self.selectedUserID = timeLineCell.status.user.userID;
-    [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
-}
-
-- (void)timeLinePhotoCell:(SATimeLinePhotoCell *)timeLineCell contentImageViewTouchUp:(id)sender
+- (void)timeLineCell:(SATimeLineCell *)timeLineCell contentImageViewTouchUp:(id)sender
 {
     if (!self.imageViewController){
         self.imageViewController = [[URBMediaFocusViewController alloc] init];
@@ -199,7 +179,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
     [self.imageViewController showImageFromURL:imageURL fromView:self.view];
 }
 
-- (void)timeLinePhotoCell:(SATimeLinePhotoCell *)timeLineCell contentURLTouchUp:(id)sender
+- (void)timeLineCell:(SATimeLineCell *)timeLineCell contentURLTouchUp:(id)sender
 {
     NSURL *url = timeLineCell.selectedURL;
     if ([url.host isEqualToString:@"fanfou.com"]) {
@@ -251,19 +231,11 @@ static NSUInteger TIME_LINE_COUNT = 40;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *const cellName = @"SATimeLineCell";
-    static NSString *const photoCellName = @"SATimeLinePhotoCell";
     if (!self.isCellRegistered) {
         [tableView registerNib:[UINib nibWithNibName:cellName bundle:nil] forCellReuseIdentifier:cellName];
-        [tableView registerNib:[UINib nibWithNibName:photoCellName bundle:nil] forCellReuseIdentifier:photoCellName];
         self.cellRegistered = YES;
     }
     SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
-    if (status.photo.imageURL) {
-        SATimeLinePhotoCell *cell = [tableView dequeueReusableCellWithIdentifier:photoCellName forIndexPath:indexPath];
-        [cell configWithStatus:status];
-        cell.delegate = self;
-        return cell;
-    }
     SATimeLineCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
     [cell configWithStatus:status];
     cell.delegate = self;
@@ -280,10 +252,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([cell isKindOfClass:[SATimeLineCell class]]) {
-        SATimeLineCell *timeLineCell = (SATimeLineCell *)cell;
-        [timeLineCell loadAllImages];
-    } else if ([cell isKindOfClass:[SATimeLinePhotoCell class]]) {
-        SATimeLinePhotoCell *timeLinePhotoCell = (SATimeLinePhotoCell *)cell;
+        SATimeLineCell *timeLinePhotoCell = (SATimeLineCell *)cell;
         [timeLinePhotoCell loadAllImages];
     }
 }

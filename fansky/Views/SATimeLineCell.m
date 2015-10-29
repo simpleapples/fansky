@@ -2,8 +2,8 @@
 //  SATimeLineCell.m
 //  fansky
 //
-//  Created by Zzy on 6/23/15.
-//  Copyright (c) 2015 Zzy. All rights reserved.
+//  Created by Zzy on 9/18/15.
+//  Copyright © 2015 Zzy. All rights reserved.
 //
 
 #import "SATimeLineCell.h"
@@ -19,7 +19,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
 @property (weak, nonatomic) IBOutlet DTAttributedLabel *contentLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeightConstraint;
 
 @end
 
@@ -28,12 +30,13 @@
 - (void)prepareForReuse
 {
     [super prepareForReuse];
-        
+    
     self.usernameLabel.text = nil;
     self.timeLabel.text = nil;
     self.contentLabel.attributedString = nil;
     self.contentLabel.delegate = nil;
     [self.avatarImageView setImage:nil];
+    [self.contentImageView setImage:nil];
 }
 
 - (void)configWithStatus:(SAStatus *)status
@@ -46,7 +49,6 @@
 - (void)updateInterface
 {
     UIColor *linkColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
-    
     NSDictionary *optionDictionary = @{DTDefaultFontName: @"HelveticaNeue-Light",
                                        DTDefaultFontSize: @(16),
                                        DTDefaultLinkColor: linkColor,
@@ -57,6 +59,7 @@
     
     self.timeLabel.text = [self.status.createdAt friendlyDateString];
     self.usernameLabel.text = self.status.user.name;
+    self.contentImageView.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:1].CGColor;
     self.contentLabel.attributedString = attributedString;
     self.contentLabel.lineBreakMode = NSLineBreakByCharWrapping;
     self.contentLabel.numberOfLines = 0;
@@ -66,6 +69,15 @@
 - (void)loadAllImages
 {
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
+    if (self.status.photo.largeURL) {
+        self.contentHeightConstraint.constant = self.frame.size.height - 72 - (self.frame.size.width - 86) / 2;
+        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL] placeholderImage:nil options:SDWebImageRefreshCached];
+        self.contentImageView.hidden = NO;
+    } else {
+        self.contentHeightConstraint.constant = self.frame.size.height - 62;
+        self.contentImageView.hidden = YES;
+    }
+    [self setNeedsLayout];
 }
 
 #pragma mark - DTAttributedTextContentViewDelegate
@@ -84,6 +96,13 @@
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(timeLineCell:avatarImageViewTouchUp:)]) {
         [self.delegate timeLineCell:self avatarImageViewTouchUp:sender];
+    }
+}
+
+- (IBAction)contentImageViewTouchUp:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(timeLineCell:contentImageViewTouchUp:)]) {
+        [self.delegate timeLineCell:self contentImageViewTouchUp:sender];
     }
 }
 
