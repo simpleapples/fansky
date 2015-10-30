@@ -44,6 +44,8 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     [statusIDDictionary enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         [self insertStatusWithObject:obj localUser:currentUser type:type];
     }];
+    
+    [self saveContext];
 }
 
 - (SAStatus *)insertOrUpdateStatusWithObject:(id)object localUser:(SAUser *)localUser type:(SAStatusTypes)type
@@ -68,7 +70,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     return resultStatus;
 }
 
-- (void)currentTimeLineWithUserID:(NSString *)userID type:(SAStatusTypes)type limit:(NSUInteger)limit completeHandler:(void (^)(NSArray *))completeHandler
+- (void)currentTimeLineWithUserID:(NSString *)userID type:(SAStatusTypes)type offset:(NSUInteger)offset limit:(NSUInteger)limit completeHandler:(void (^)(NSArray *))completeHandler
 {
     NSSortDescriptor *createdAtSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
     NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
@@ -82,6 +84,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     fetchRequest.sortDescriptors = sortArray;
     fetchRequest.returnsObjectsAsFaults = NO;
     fetchRequest.fetchBatchSize = 6;
+    fetchRequest.fetchOffset = offset;
     fetchRequest.fetchLimit = limit;
     
     [self.managedObjectContext performBlock:^{
@@ -99,7 +102,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     }];
 }
 
-- (void)currentMentionTimeLineWithUserID:(NSString *)userID limit:(NSUInteger)limit completeHandler:(void (^)(NSArray *))completeHandler
+- (void)currentMentionTimeLineWithUserID:(NSString *)userID offset:(NSUInteger)offset limit:(NSUInteger)limit completeHandler:(void (^)(NSArray *))completeHandler
 {
     NSSortDescriptor *createdAtSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
     NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
@@ -109,6 +112,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     fetchRequest.sortDescriptors = sortArray;
     fetchRequest.returnsObjectsAsFaults = NO;
     fetchRequest.fetchBatchSize = 6;
+    fetchRequest.fetchOffset = offset;
     fetchRequest.fetchLimit = limit;
     
     [self.managedObjectContext performBlock:^{

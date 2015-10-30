@@ -62,7 +62,7 @@ static NSUInteger FETCH_TIME_INTERVAL = 30;
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     if (currentUser) {
-        [[SADataManager sharedManager] currentTimeLineWithUserID:currentUser.userID type:SAStatusTypeTimeLine limit:1 completeHandler:^(NSArray *result) {
+        [[SADataManager sharedManager] currentTimeLineWithUserID:currentUser.userID type:SAStatusTypeTimeLine offset:0 limit:1 completeHandler:^(NSArray *result) {
             if (result.count) {
                 SAStatus *currentStatus = [result firstObject];
                 [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:currentStatus.statusID maxID:nil count:60 success:^(id data) {

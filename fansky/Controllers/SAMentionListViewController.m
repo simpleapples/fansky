@@ -31,7 +31,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
 - (void)getLocalData
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
-    [[SADataManager sharedManager] currentMentionTimeLineWithUserID:currentUser.userID limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
+    [[SADataManager sharedManager] currentMentionTimeLineWithUserID:currentUser.userID offset:0 limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
         self.timeLineList = result;
         [self.tableView reloadData];
         [self refreshData];
@@ -52,12 +52,18 @@ static NSUInteger TIME_LINE_COUNT = 40;
     NSString *userID = [SADataManager sharedManager].currentUser.userID;
     void (^success)(id data) = ^(id data) {
         [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:data type:SAStatusTypeMentionStatus];
-        NSUInteger limit = TIME_LINE_COUNT;
-        if (!refresh) {
-            limit = self.timeLineList.count + TIME_LINE_COUNT;
+        NSUInteger offset = self.timeLineList.count;
+        if (refresh) {
+            offset = 0;
         }
-        [[SADataManager sharedManager] currentMentionTimeLineWithUserID:userID limit:limit completeHandler:^(NSArray *result) {
-            self.timeLineList = result;
+        [[SADataManager sharedManager] currentMentionTimeLineWithUserID:userID offset:offset limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
+            if (refresh) {
+                self.timeLineList = result;
+            } else {
+                NSMutableArray *existList = [self.timeLineList mutableCopy];
+                [existList addObjectsFromArray:result];
+                self.timeLineList = [existList copy];
+            }
             if (self.timeLineList.count) {
                 SAStatus *lastStatus = [self.timeLineList lastObject];
                 self.maxID = lastStatus.statusID;

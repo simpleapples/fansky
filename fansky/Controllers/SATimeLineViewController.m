@@ -65,7 +65,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
         userID = currentUser.userID;
         type = SAStatusTypeTimeLine;
     }
-    [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
+    [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type offset:0 limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
         self.timeLineList = result;
         [self.tableView reloadData];
         [self refreshData];
@@ -97,12 +97,18 @@ static NSUInteger TIME_LINE_COUNT = 40;
     }
     void (^success)(id data) = ^(id data) {
         [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:data type:type];
-        NSUInteger limit = TIME_LINE_COUNT;
-        if (!refresh) {
-            limit = self.timeLineList.count + TIME_LINE_COUNT;
+        NSUInteger offset = self.timeLineList.count;
+        if (refresh) {
+            offset = 0;
         }
-        [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type limit:limit completeHandler:^(NSArray *result) {
-            self.timeLineList = result;
+        [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type offset:offset limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
+            if (refresh) {
+                self.timeLineList = result;
+            } else {
+                NSMutableArray *existList = [self.timeLineList mutableCopy];
+                [existList addObjectsFromArray:result];
+                self.timeLineList = [existList copy];
+            }
             if (self.timeLineList.count) {
                 SAStatus *lastStatus = [self.timeLineList lastObject];
                 self.maxID = lastStatus.statusID;
