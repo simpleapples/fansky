@@ -28,7 +28,7 @@
 
 - (void)awakeFromNib
 {
-
+    self.followButton.layer.borderColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1].CGColor;
 }
 
 - (void)prepareForReuse

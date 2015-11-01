@@ -65,7 +65,9 @@
 
 - (void)updateInterface
 {
+    self.sendButton.layer.borderColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1].CGColor;
     [self.sendButton.layer setRasterizationScale:[UIScreen mainScreen].scale];
+    
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:currentUser.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
     

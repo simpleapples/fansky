@@ -14,12 +14,26 @@
 #import "SADataManager+User.h"
 #import "SAAPIService.h"
 #import "SATimeLineCell.h"
+#import "SAStatusViewController.h"
+#import "SAUserViewController.h"
+#import "SAPhoto+CoreDataProperties.h"
+#import "SAComposeViewController.h"
+#import <DTCoreText/DTCoreText.h>
+#import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 
-@interface SASearchViewController () <UISearchResultsUpdating>
+@interface SASearchViewController () <SATimeLineCellDelegate, UITextFieldDelegate>
 
-@property (strong, nonatomic) UISearchController *searchController;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITextField *searchTextField;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
+@property (strong, nonatomic) NSArray *timeLineList;
 @property (copy, nonatomic) NSString *maxID;
 @property (copy, nonatomic) NSString *keyword;
+@property (copy, nonatomic) NSString *selectedStatusID;
+@property (copy, nonatomic) NSString *selectedUserID;
+@property (nonatomic, getter = isCellRegistered) BOOL cellRegistered;
+@property (strong, nonatomic) URBMediaFocusViewController *imageViewController;
 
 @end
 
@@ -35,26 +49,25 @@ static NSUInteger TIME_LINE_COUNT = 40;
     [self updateInterface];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
+    [self.tableView setEditing:NO animated:NO];
+    [self.searchTextField becomeFirstResponder];
+    [super viewWillAppear:animated];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self.view endEditing:YES];
-    [self.searchController setActive:NO];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     [super viewWillDisappear:animated];
+    [SAMessageDisplayUtils dismiss];
 }
 
-- (void)updateInterface
+- (void)refreshData
 {
-    UISearchController *searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    searchController.searchResultsUpdater = self;
-    searchController.dimsBackgroundDuringPresentation = NO;
-    searchController.hidesNavigationBarDuringPresentation = NO;
-    self.searchController = searchController;
-    self.tableView.tableHeaderView = self.searchController.searchBar;
-}
-
-- (void)getLocalData
-{
-    
+    [self updateDataWithRefresh:YES];
 }
 
 - (void)updateDataWithRefresh:(BOOL)refresh
@@ -66,9 +79,8 @@ static NSUInteger TIME_LINE_COUNT = 40;
     if (!refresh) {
         maxID = self.maxID;
     } else if (self.timeLineList.count) {
-//        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
-
     void (^success)(id data) = ^(id data) {
         NSArray *originalList = (NSArray *)data;
         __block NSMutableArray *tempTimeLineList = [[NSMutableArray alloc] init];
@@ -76,7 +88,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
             SAStatus *status = [[SADataManager sharedManager] statusWithObject:obj localUsers:nil type:SAStatusTypeFavoriteStatus];
             [tempTimeLineList addObject:status];
         }];
-        if (self.maxID) {
+        if (!refresh) {
             NSMutableArray *existList = [self.timeLineList mutableCopy];
             [existList addObjectsFromArray:tempTimeLineList];
             self.timeLineList = [existList copy];
@@ -88,25 +100,50 @@ static NSUInteger TIME_LINE_COUNT = 40;
             self.maxID = lastStatus.statusID;
         }
         [self.tableView reloadData];
-        [SAMessageDisplayUtils dismiss];
-        [self.refreshControl endRefreshing];
+        self.activityIndicator.hidden = YES;
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
+        self.activityIndicator.hidden = YES;
     };
     
-    if (refresh) {
-        [SAMessageDisplayUtils showProgressWithMessage:@"正在刷新"];
-    }
+    self.activityIndicator.hidden = NO;
     [[SAAPIService sharedSingleton] searchPublicTimeLineWithKeyword:self.keyword sinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
 }
 
-#pragma mark - UISearchResultsUpdating
-
-- (void)updateSearchResultsForSearchController:(UISearchController *)searchController
+- (void)updateInterface
 {
-    self.keyword = searchController.searchBar.text;
-    [self refreshData];
+    self.tableView.tableFooterView = [UIView new];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[SAStatusViewController class]]) {
+        SAStatusViewController *statusViewController = (SAStatusViewController *)segue.destinationViewController;
+        statusViewController.statusID = self.selectedStatusID;
+    } else if ([segue.destinationViewController isKindOfClass:[SAUserViewController class]]) {
+        SAUserViewController *userViewController = (SAUserViewController *)segue.destinationViewController;
+        userViewController.userID = self.selectedUserID;
+    }
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField.text.length) {
+        self.keyword = textField.text;
+        [self.view endEditing:YES];
+        [self refreshData];
+        return YES;
+    }
+    [SAMessageDisplayUtils showInfoWithMessage:@"请输入要搜索的内容"];
+    return NO;
 }
 
 #pragma mark - SATimeLineCellDelegate
@@ -114,7 +151,17 @@ static NSUInteger TIME_LINE_COUNT = 40;
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell avatarImageViewTouchUp:(id)sender
 {
     self.selectedUserID = timeLineCell.status.user.userID;
-    [self performSegueWithIdentifier:@"SearchToUserSegue" sender:sender];
+    [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
+}
+
+- (void)timeLineCell:(SATimeLineCell *)timeLineCell contentImageViewTouchUp:(id)sender
+{
+    if (!self.imageViewController){
+        self.imageViewController = [[URBMediaFocusViewController alloc] init];
+        self.imageViewController.shouldDismissOnImageTap = YES;
+    }
+    NSURL *imageURL = [NSURL URLWithString:timeLineCell.status.photo.largeURL];
+    [self.imageViewController showImageFromURL:imageURL fromView:self.view];
 }
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell contentURLTouchUp:(id)sender
@@ -122,7 +169,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
     NSURL *url = timeLineCell.selectedURL;
     if ([url.host isEqualToString:@"fanfou.com"]) {
         self.selectedUserID = url.lastPathComponent;
-        [self performSegueWithIdentifier:@"SearchToUserSegue" sender:sender];
+        [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
     } else if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
         [[UIApplication sharedApplication] openURL:url];
     }
@@ -130,11 +177,113 @@ static NSUInteger TIME_LINE_COUNT = 40;
 
 #pragma mark - UITableViewDelegate
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.timeLineList.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
+    UIColor *linkColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
+    
+    NSDictionary *optionDictionary = @{DTDefaultFontName: @"HelveticaNeue-Light",
+                                       DTDefaultFontSize: @(16),
+                                       DTDefaultLinkColor: linkColor,
+                                       DTDefaultLinkHighlightColor: linkColor,
+                                       DTDefaultLinkDecoration: @(NO),
+                                       DTDefaultLineHeightMultiplier: @(1.8)};
+    NSAttributedString* attributedString = [[NSAttributedString alloc] initWithHTMLData:[status.text dataUsingEncoding:NSUnicodeStringEncoding] options:optionDictionary documentAttributes:nil];
+    
+    DTCoreTextLayouter *layouter = [[DTCoreTextLayouter alloc] initWithAttributedString:attributedString];
+    
+    CGFloat width = self.tableView.frame.size.width - 86;
+    CGRect maxRect = CGRectMake(0, 0, width, CGFLOAT_HEIGHT_UNKNOWN);
+    NSRange entireString = NSMakeRange(0, attributedString.length);
+    DTCoreTextLayoutFrame *layoutFrame = [layouter layoutFrameWithRect:maxRect range:entireString];
+    CGFloat offset = 62;
+    if (status.photo.imageURL) {
+        offset = width / 2 + 16 + 10 + 46;
+    }
+    return layoutFrame.frame.size.height + offset;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *const cellName = @"SATimeLineCell";
+    if (!self.isCellRegistered) {
+        [tableView registerNib:[UINib nibWithNibName:cellName bundle:nil] forCellReuseIdentifier:cellName];
+        self.cellRegistered = YES;
+    }
+    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
+    SATimeLineCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
+    [cell configWithStatus:status];
+    cell.delegate = self;
+    return cell;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
     self.selectedStatusID = status.statusID;
-    [self performSegueWithIdentifier:@"SearchToStatusSegue" sender:nil];
+    [self performSegueWithIdentifier:@"TimeLineToStatusSegue" sender:nil];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell isKindOfClass:[SATimeLineCell class]]) {
+        SATimeLineCell *timeLinePhotoCell = (SATimeLineCell *)cell;
+        [timeLinePhotoCell loadAllImages];
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
+    UITableViewRowAction *repostAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"转发" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        SAComposeViewController *composeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
+        composeViewController.repostStatusID = status.statusID;
+        [self presentViewController:composeViewController animated:YES completion:nil];
+    }];
+    repostAction.backgroundColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
+    UITableViewRowAction *replyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"回复" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        SAComposeViewController *composeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
+        composeViewController.replyToStatusID = status.statusID;
+        [self presentViewController:composeViewController animated:YES completion:nil];
+    }];
+    replyAction.backgroundColor = [UIColor lightGrayColor];
+    return @[repostAction, replyAction];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (fabs(scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y) < scrollView.contentSize.height * 0.3) {
+        [self updateDataWithRefresh:NO];
+    }
+}
+
+#pragma mark - ARSegmentControllerDelegate
+
+- (NSString *)segmentTitle
+{
+    return @"时间线";
+}
+
+- (UIScrollView *)streachScrollView
+{
+    return self.tableView;
 }
 
 @end
