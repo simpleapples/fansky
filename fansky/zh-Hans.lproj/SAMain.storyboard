@@ -103,7 +103,7 @@
                         <viewControllerLayoutGuide type="bottom" id="o0d-BO-j0y"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7bs-Vf-DSH">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -778,8 +778,8 @@
                         <outlet property="activityIndicator" destination="Nin-Ky-2gi" id="wOQ-5g-Dr5"/>
                         <outlet property="searchTextField" destination="vfn-t5-Nco" id="HNl-7d-Z7J"/>
                         <outlet property="tableView" destination="Tyy-o8-Y6U" id="wcm-Hl-3KM"/>
-                        <segue destination="Ufd-9g-YvT" kind="show" identifier="SearchToStatusSegue" id="IF3-IO-Jnc"/>
                         <segue destination="Q5T-Lf-5df" kind="show" identifier="SearchToUserSegue" id="JUY-4f-01A"/>
+                        <segue destination="sUO-Mb-465" kind="show" identifier="SearchToStatusSegue" id="Ciz-wU-ArU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OfT-8a-SF8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1039,9 +1039,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="qBy-9g-ujA"/>
         <segue reference="H7G-PZ-sGt"/>
-        <segue reference="cOW-5L-KIN"/>
         <segue reference="JUY-4f-01A"/>
-        <segue reference="IF3-IO-Jnc"/>
+        <segue reference="Ciz-wU-ArU"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>

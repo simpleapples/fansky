@@ -47,6 +47,8 @@ static NSUInteger TIME_LINE_COUNT = 40;
     [super viewDidLoad];
     
     [self updateInterface];
+    
+    [self.searchTextField becomeFirstResponder];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -54,7 +56,6 @@ static NSUInteger TIME_LINE_COUNT = 40;
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:animated];
     [self.tableView setEditing:NO animated:NO];
-    [self.searchTextField becomeFirstResponder];
     [super viewWillAppear:animated];
 }
 
