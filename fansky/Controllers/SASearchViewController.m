@@ -151,7 +151,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell avatarImageViewTouchUp:(id)sender
 {
     self.selectedUserID = timeLineCell.status.user.userID;
-    [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
+    [self performSegueWithIdentifier:@"SearchToUserSegue" sender:nil];
 }
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell contentImageViewTouchUp:(id)sender
@@ -169,7 +169,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
     NSURL *url = timeLineCell.selectedURL;
     if ([url.host isEqualToString:@"fanfou.com"]) {
         self.selectedUserID = url.lastPathComponent;
-        [self performSegueWithIdentifier:@"TimeLineToUserSegue" sender:nil];
+        [self performSegueWithIdentifier:@"SearchToUserSegue" sender:nil];
     } else if ([url.scheme isEqualToString:@"http"] || [url.scheme isEqualToString:@"https"]) {
         [[UIApplication sharedApplication] openURL:url];
     }
@@ -231,7 +231,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
 {
     SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
     self.selectedStatusID = status.statusID;
-    [self performSegueWithIdentifier:@"TimeLineToStatusSegue" sender:nil];
+    [self performSegueWithIdentifier:@"SearchToStatusSegue" sender:nil];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

@@ -103,7 +103,7 @@
                         <viewControllerLayoutGuide type="bottom" id="o0d-BO-j0y"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="7bs-Vf-DSH">
-                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -739,13 +739,13 @@
                                 </connections>
                             </tableView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入要搜索的内容" textAlignment="natural" minimumFontSize="17" background="BackgroundGrayLine" translatesAutoresizingMaskIntoConstraints="NO" id="vfn-t5-Nco">
-                                <rect key="frame" x="54" y="27" width="530" height="30"/>
+                                <rect key="frame" x="54" y="20" width="530" height="44"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="AVt-0i-N1R"/>
+                                    <constraint firstAttribute="height" constant="44" id="AVt-0i-N1R"/>
                                 </constraints>
                                 <color key="textColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                 <connections>
                                     <outlet property="delegate" destination="FJM-Or-fxE" id="dhA-QC-2Of"/>
@@ -768,7 +768,7 @@
                             <constraint firstItem="vfn-t5-Nco" firstAttribute="leading" secondItem="e17-us-tVz" secondAttribute="trailing" constant="10" id="R1w-kh-W4G"/>
                             <constraint firstItem="Tyy-o8-Y6U" firstAttribute="leading" secondItem="WtY-Qx-qD9" secondAttribute="leading" id="cuI-Tm-jlN"/>
                             <constraint firstItem="Nin-Ky-2gi" firstAttribute="top" secondItem="qUp-b7-8at" secondAttribute="bottom" constant="12" id="esy-xs-Y10"/>
-                            <constraint firstItem="vfn-t5-Nco" firstAttribute="top" secondItem="qUp-b7-8at" secondAttribute="bottom" constant="7" id="ms1-9i-SWr"/>
+                            <constraint firstItem="vfn-t5-Nco" firstAttribute="top" secondItem="qUp-b7-8at" secondAttribute="bottom" id="ms1-9i-SWr"/>
                             <constraint firstItem="m5H-1O-53p" firstAttribute="top" secondItem="Tyy-o8-Y6U" secondAttribute="bottom" id="o91-D9-yxt"/>
                             <constraint firstItem="e17-us-tVz" firstAttribute="leading" secondItem="WtY-Qx-qD9" secondAttribute="leading" id="sSi-ef-COx"/>
                         </constraints>
@@ -778,6 +778,8 @@
                         <outlet property="activityIndicator" destination="Nin-Ky-2gi" id="wOQ-5g-Dr5"/>
                         <outlet property="searchTextField" destination="vfn-t5-Nco" id="HNl-7d-Z7J"/>
                         <outlet property="tableView" destination="Tyy-o8-Y6U" id="wcm-Hl-3KM"/>
+                        <segue destination="Ufd-9g-YvT" kind="show" identifier="SearchToStatusSegue" id="IF3-IO-Jnc"/>
+                        <segue destination="Q5T-Lf-5df" kind="show" identifier="SearchToUserSegue" id="JUY-4f-01A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OfT-8a-SF8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1036,9 +1038,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="qBy-9g-ujA"/>
-        <segue reference="O39-fj-akt"/>
         <segue reference="H7G-PZ-sGt"/>
         <segue reference="cOW-5L-KIN"/>
+        <segue reference="JUY-4f-01A"/>
+        <segue reference="IF3-IO-Jnc"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>
