@@ -87,6 +87,7 @@
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
     
     [UIActivityIndicatorView appearance].color = [UIColor fanskyBlue];
+    [UIRefreshControl appearance].tintColor = [UIColor fanskyBlue];
 
     [UITableView appearance].separatorInset = UIEdgeInsetsZero;
 }
