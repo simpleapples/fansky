@@ -727,6 +727,9 @@
                                     <constraint firstAttribute="height" constant="44" id="XIS-iI-xwe"/>
                                 </constraints>
                                 <state key="normal" image="IconBackColor"/>
+                                <connections>
+                                    <action selector="backButtonTouchUp:" destination="FJM-Or-fxE" eventType="touchUpInside" id="rSh-Ot-t8x"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tyy-o8-Y6U">
                                 <rect key="frame" x="0.0" y="64" width="600" height="487"/>

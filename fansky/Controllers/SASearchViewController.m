@@ -275,16 +275,11 @@ static NSUInteger TIME_LINE_COUNT = 40;
     }
 }
 
-#pragma mark - ARSegmentControllerDelegate
+#pragma mark - EventHandler
 
-- (NSString *)segmentTitle
+- (IBAction)backButtonTouchUp:(id)sender
 {
-    return @"时间线";
-}
-
-- (UIScrollView *)streachScrollView
-{
-    return self.tableView;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
