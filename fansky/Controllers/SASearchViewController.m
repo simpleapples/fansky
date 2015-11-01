@@ -62,6 +62,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self.view endEditing:YES];
     [super viewWillDisappear:animated];
     [SAMessageDisplayUtils dismiss];
 }
