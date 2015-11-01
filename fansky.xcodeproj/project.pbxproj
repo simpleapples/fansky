@@ -34,6 +34,7 @@
 		5A95558D1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A95558C1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m */; };
 		5A9AD6B01BAA6CD50058916A /* SAMessageDisplayUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */; };
 		5AAB875C1BDA4B19003C9A51 /* SAUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB875B1BDA4B19003C9A51 /* SAUserInfoViewController.m */; };
+		5AAC809C1BE65BBD0083C7E5 /* UIColor+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAC809B1BE65BBD0083C7E5 /* UIColor+Utils.m */; };
 		5AD70EF01B316A79009C5B84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EEF1B316A79009C5B84 /* main.m */; };
 		5AD70EF31B316A79009C5B84 /* SAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EF21B316A79009C5B84 /* SAAppDelegate.m */; };
 		5AD70EF61B316A79009C5B84 /* fansky.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EF41B316A79009C5B84 /* fansky.xcdatamodeld */; };
@@ -140,6 +141,8 @@
 		5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageDisplayUtils.m; sourceTree = "<group>"; };
 		5AAB875A1BDA4B19003C9A51 /* SAUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAUserInfoViewController.h; sourceTree = "<group>"; };
 		5AAB875B1BDA4B19003C9A51 /* SAUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUserInfoViewController.m; sourceTree = "<group>"; };
+		5AAC809A1BE65BBD0083C7E5 /* UIColor+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Utils.h"; sourceTree = "<group>"; };
+		5AAC809B1BE65BBD0083C7E5 /* UIColor+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Utils.m"; sourceTree = "<group>"; };
 		5AD70EEA1B316A79009C5B84 /* fansky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fansky.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AD70EEE1B316A79009C5B84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AD70EEF1B316A79009C5B84 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -431,6 +434,8 @@
 				5AED4B2F1BA6D41D00EDBF47 /* NSDate+Utils.m */,
 				5A9AD6AE1BAA6CD50058916A /* SAMessageDisplayUtils.h */,
 				5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */,
+				5AAC809A1BE65BBD0083C7E5 /* UIColor+Utils.h */,
+				5AAC809B1BE65BBD0083C7E5 /* UIColor+Utils.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -633,6 +638,7 @@
 				5A1811AD1BABED3D004B6C54 /* SAMentionListViewController.m in Sources */,
 				5A3E6C581BA441D100C589BE /* SADataManager+Status.m in Sources */,
 				5AE98AC31BAEE43300B7F105 /* SADataManager+Conversation.m in Sources */,
+				5AAC809C1BE65BBD0083C7E5 /* UIColor+Utils.m in Sources */,
 				5AED4B2D1BA6C16300EDBF47 /* NSString+Utils.m in Sources */,
 				5AAB875C1BDA4B19003C9A51 /* SAUserInfoViewController.m in Sources */,
 				5AE98AB41BAED16300B7F105 /* SAConversationViewController.m in Sources */,

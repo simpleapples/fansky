@@ -14,6 +14,7 @@
 #import "SAAPIService.h"
 #import "SAMessageDisplayUtils.h"
 #import "SAMessage+CoreDataProperties.h"
+#import "UIColor+Utils.h"
 #import <JSQMessagesViewController/JSQMessage.h>
 #import <JSQMessagesViewController/UIColor+JSQMessages.h>
 #import <JSQMessagesViewController/JSQMessagesBubbleImageFactory.h>
@@ -62,7 +63,7 @@ static NSUInteger MESSAGE_LIST_COUNT = 40;
     self.title = self.user.name;
     
     JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
-    self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1]];
+    self.outgoingBubbleImageData = [bubbleFactory outgoingMessagesBubbleImageWithColor:[UIColor fanskyBlue]];
     self.incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
     
     self.inputToolbar.contentView.leftBarButtonItem = nil;

@@ -18,6 +18,7 @@
 #import "SAUserViewController.h"
 #import "SAPhoto+CoreDataProperties.h"
 #import "SAComposeViewController.h"
+#import "UIColor+Utils.h"
 #import <DTCoreText/DTCoreText.h>
 #import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 
@@ -192,14 +193,14 @@ static NSUInteger TIME_LINE_COUNT = 40;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
-    UIColor *linkColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
+    UIColor *linkColor = [UIColor fanskyBlue];
     
     NSDictionary *optionDictionary = @{DTDefaultFontName: @"HelveticaNeue-Light",
                                        DTDefaultFontSize: @(16),
                                        DTDefaultLinkColor: linkColor,
                                        DTDefaultLinkHighlightColor: linkColor,
                                        DTDefaultLinkDecoration: @(NO),
-                                       DTDefaultLineHeightMultiplier: @(1.8)};
+                                       DTDefaultLineHeightMultiplier: @(1.5)};
     NSAttributedString* attributedString = [[NSAttributedString alloc] initWithHTMLData:[status.text dataUsingEncoding:NSUnicodeStringEncoding] options:optionDictionary documentAttributes:nil];
     
     DTCoreTextLayouter *layouter = [[DTCoreTextLayouter alloc] initWithAttributedString:attributedString];
@@ -257,7 +258,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
         composeViewController.repostStatusID = status.statusID;
         [self presentViewController:composeViewController animated:YES completion:nil];
     }];
-    repostAction.backgroundColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
+    repostAction.backgroundColor = [UIColor fanskyBlue];
     UITableViewRowAction *replyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"回复" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         SAComposeViewController *composeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
         composeViewController.replyToStatusID = status.statusID;

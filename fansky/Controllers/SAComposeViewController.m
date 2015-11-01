@@ -14,6 +14,7 @@
 #import "SAAPIService.h"
 #import "SAMessageDisplayUtils.h"
 #import "NSString+Utils.h"
+#import "UIColor+Utils.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SAComposeViewController () <UITextViewDelegate, UIActionSheetDelegate>
@@ -65,7 +66,7 @@
 
 - (void)updateInterface
 {
-    self.sendButton.layer.borderColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1].CGColor;
+    self.sendButton.layer.borderColor = [UIColor fanskyBlue].CGColor;
     [self.sendButton.layer setRasterizationScale:[UIScreen mainScreen].scale];
     
     SAUser *currentUser = [SADataManager sharedManager].currentUser;

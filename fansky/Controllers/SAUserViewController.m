@@ -17,6 +17,7 @@
 #import "SAFavoriteTimeLineViewController.h"
 #import "SAComposeViewController.h"
 #import "SAUserInfoViewController.h"
+#import "UIColor+Utils.h"
 #import <ARSegmentPager/ARSegmentView.h>
 
 @interface SAUserViewController () <SAUserHeaderViewDelegate>
@@ -64,7 +65,7 @@
 - (void)updateInterface
 {
     ARSegmentView *segmentView = [self valueForKey:@"segmentView"];
-    segmentView.segmentControl.tintColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
+    segmentView.segmentControl.tintColor = [UIColor fanskyBlue];
     
     self.headerHeight = 200;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SAMain" bundle:[NSBundle mainBundle]];
