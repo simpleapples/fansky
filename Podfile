@@ -13,6 +13,7 @@ pod 'VTAcknowledgementsViewController'
 pod 'DTCoreText'
 pod 'VVBlurPresentation'
 pod 'LTHPasscodeViewController'
+pod 'LGRefreshView'
 
 end
 

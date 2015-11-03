@@ -58,11 +58,11 @@ static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
         }
         [self.tableView reloadData];
         [SAMessageDisplayUtils dismiss];
-        [self.refreshControl endRefreshing];
+        [self.refreshView endRefreshing];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
         [SAMessageDisplayUtils showInfoWithMessage:error];
-        [self.refreshControl endRefreshing];
+        [self.refreshView endRefreshing];
     };
     
     if (refresh) {

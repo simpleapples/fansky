@@ -22,7 +22,7 @@
 #import <DTCoreText/DTCoreText.h>
 #import <JTSImageViewController/JTSImageViewController.h>
 
-@interface SATimeLineViewController () <SATimeLineCellDelegate>
+@interface SATimeLineViewController () <SATimeLineCellDelegate, LGRefreshViewDelegate>
 
 @property (copy, nonatomic) NSString *maxID;
 @property (nonatomic, getter = isCellRegistered) BOOL cellRegistered;
@@ -115,7 +115,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
             }
             [self.tableView reloadData];
             [SAMessageDisplayUtils dismiss];
-            [self.refreshControl endRefreshing];
+            [self.refreshView endRefreshing];
         }];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
@@ -124,12 +124,12 @@ static NSUInteger TIME_LINE_COUNT = 40;
         } else {
             [SAMessageDisplayUtils showInfoWithMessage:error];
         }
-        [self.refreshControl endRefreshing];
+        [self.refreshView endRefreshing];
     };
     
     if (type == SAStatusTypeTimeLine) {
         if (refresh) {
-            [self.refreshControl beginRefreshing];
+            [self.refreshView triggerAnimated:YES];
         }
         [[SAAPIService sharedSingleton] timeLineWithUserID:userID sinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
     } else {
@@ -142,7 +142,10 @@ static NSUInteger TIME_LINE_COUNT = 40;
 
 - (void)updateInterface
 {
-    [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
+    if (!self.refreshView) {
+        self.refreshView = [[LGRefreshView alloc] initWithScrollView:self.tableView delegate:self];
+        self.refreshView.tintColor = [UIColor fanskyBlue];
+    }
     self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.tableFooterView = [UIView new];
 }
@@ -161,6 +164,13 @@ static NSUInteger TIME_LINE_COUNT = 40;
         SAUserViewController *userViewController = (SAUserViewController *)segue.destinationViewController;
         userViewController.userID = self.selectedUserID;
     }
+}
+
+#pragma mark - LGRefreshViewDelegate
+
+- (void)refreshViewRefreshing:(LGRefreshView *)refreshView
+{
+    [self refreshData];
 }
 
 #pragma mark - SATimeLineCellDelegate

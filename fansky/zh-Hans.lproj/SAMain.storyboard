@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="28" width="600" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="URt-GF-gHq" id="DPX-LP-ZFo">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="69"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="69.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="909-Vp-DJG">
@@ -471,10 +471,6 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" tag="1" title="时间线" image="IconHome" id="Yf8-Wi-yvB"/>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="2LC-AG-z64">
-                        <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
-                    </refreshControl>
                     <connections>
                         <segue destination="sUO-Mb-465" kind="show" identifier="TimeLineToStatusSegue" id="0sX-T1-HFd"/>
                         <segue destination="Q5T-Lf-5df" kind="show" identifier="TimeLineToUserSegue" id="cdn-0W-qmZ"/>
@@ -499,10 +495,6 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" tag="2" title="提到我的" image="IconBell" id="w8K-9O-r73"/>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="UEp-J3-Kxm">
-                        <autoresizingMask key="autoresizingMask"/>
-                        <animations/>
-                    </refreshControl>
                     <connections>
                         <segue destination="sUO-Mb-465" kind="show" identifier="MentionListToStatusSegue" id="cOW-5L-KIN"/>
                         <segue destination="Q5T-Lf-5df" kind="show" identifier="MentionListToUserSegue" id="jcy-NL-wMm"/>
@@ -569,7 +561,7 @@
                                 <rect key="frame" x="0.0" y="22" width="600" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xr0-f9-F4Y" id="1rI-pZ-iu8">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UIF-u9-hUf">

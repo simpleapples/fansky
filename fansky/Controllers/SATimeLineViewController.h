@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <ARSegmentPager/ARSegmentControllerDelegate.h>
+#import "LGRefreshView.h"
 
 @interface SATimeLineViewController : UITableViewController <ARSegmentControllerDelegate>
+
+@property (strong, nonatomic) LGRefreshView *refreshView;
 
 @property (strong, nonatomic) NSArray *timeLineList;
 @property (copy, nonatomic) NSString *userID;
