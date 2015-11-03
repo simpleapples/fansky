@@ -30,18 +30,6 @@
     }
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
-    [super viewWillDisappear:animated];
-}
-
 - (void)updateInterface
 {
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -50,6 +38,13 @@
     
     self.infoLabel.attributedText = [[NSAttributedString alloc] initWithString:self.user.desc attributes:attributes];
 }
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+#pragma mark - EventHandler
 
 - (IBAction)closeButtonTouchUp:(id)sender
 {
