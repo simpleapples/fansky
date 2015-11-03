@@ -21,6 +21,8 @@
 
 @interface SATimeLineCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
+
 @property (weak, nonatomic) id<SATimeLineCellDelegate> delegate;
 @property (weak, nonatomic) SAStatus *status;
 @property (strong, nonatomic) NSURL *selectedURL;

@@ -19,7 +19,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
 @property (weak, nonatomic) IBOutlet DTAttributedLabel *contentLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHeightConstraint;
 

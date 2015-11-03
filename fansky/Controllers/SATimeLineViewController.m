@@ -19,13 +19,12 @@
 #import "SATimeLineCell.h"
 #import "SAComposeViewController.h"
 #import <DTCoreText/DTCoreText.h>
-#import <URBMediaFocusViewController/URBMediaFocusViewController.h>
+#import <JTSImageViewController/JTSImageViewController.h>
 
 @interface SATimeLineViewController () <SATimeLineCellDelegate>
 
 @property (copy, nonatomic) NSString *maxID;
 @property (nonatomic, getter = isCellRegistered) BOOL cellRegistered;
-@property (strong, nonatomic) URBMediaFocusViewController *imageViewController;
 
 @end
 
@@ -173,12 +172,14 @@ static NSUInteger TIME_LINE_COUNT = 40;
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell contentImageViewTouchUp:(id)sender
 {
-    if (!self.imageViewController){
-        self.imageViewController = [[URBMediaFocusViewController alloc] init];
-        self.imageViewController.shouldDismissOnImageTap = YES;
-    }
-    NSURL *imageURL = [NSURL URLWithString:timeLineCell.status.photo.largeURL];
-    [self.imageViewController showImageFromURL:imageURL fromView:self.view];
+    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
+    imageInfo.imageURL = [NSURL URLWithString:timeLineCell.status.photo.largeURL];
+    imageInfo.referenceRect = timeLineCell.contentImageView.frame;
+    imageInfo.referenceView = timeLineCell.contentImageView.superview;
+    
+    JTSImageViewController *imageViewer = [[JTSImageViewController alloc] initWithImageInfo:imageInfo mode:JTSImageViewControllerMode_Image backgroundStyle:JTSImageViewControllerBackgroundOption_Scaled];
+    
+    [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
 }
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell contentURLTouchUp:(id)sender
