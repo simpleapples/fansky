@@ -21,8 +21,8 @@
 #import "UIColor+Utils.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <DTCoreText/DTCoreText.h>
-#import <URBMediaFocusViewController/URBMediaFocusViewController.h>
 #import <MobileCoreServices/UTCoreTypes.h>
+#import <JTSImageViewController/JTSImageViewController.h>
 
 @interface SAStatusViewController () <DTAttributedTextContentViewDelegate, UIActionSheetDelegate>
 
@@ -35,7 +35,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelTopToLabelMarginConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelTopToImageViewMarginConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentLabelHeightConstraint;
-@property (strong, nonatomic) URBMediaFocusViewController *imageViewController;
 @property (strong, nonatomic) SAStatus *status;
 @property (copy, nonatomic) NSString *selectedUserID;
 
@@ -182,12 +181,14 @@
 
 - (IBAction)contentImageViewTouchUp:(id)sender
 {
-    if (!self.imageViewController){
-        self.imageViewController = [[URBMediaFocusViewController alloc] init];
-        self.imageViewController.shouldDismissOnImageTap = YES;
-    }
-    NSURL *imageURL = [NSURL URLWithString:self.status.photo.largeURL];
-    [self.imageViewController showImageFromURL:imageURL fromView:self.view];
+    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
+    imageInfo.imageURL = [NSURL URLWithString:self.status.photo.largeURL];
+    imageInfo.referenceRect = self.contentImageView.frame;
+    imageInfo.referenceView = self.contentImageView.superview;
+    
+    JTSImageViewController *imageViewer = [[JTSImageViewController alloc] initWithImageInfo:imageInfo mode:JTSImageViewControllerMode_Image backgroundStyle:JTSImageViewControllerBackgroundOption_Scaled];
+    
+    [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
 }
 
 - (IBAction)replyButtonTouchUp:(id)sender
