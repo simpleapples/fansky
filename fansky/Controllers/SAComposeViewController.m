@@ -18,7 +18,7 @@
 #import "UIImage+Utils.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface SAComposeViewController () <UITextViewDelegate, UIActionSheetDelegate>
+@interface SAComposeViewController () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
@@ -107,6 +107,16 @@
     }];
 }
 
+- (void)presentImagePickerControllerWithType:(UIImagePickerControllerSourceType)type
+{
+    [self.view endEditing:YES];
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.delegate = self;
+    imagePickerController.allowsEditing = NO;
+    imagePickerController.sourceType = type;
+    [self presentViewController:imagePickerController animated:YES completion:nil];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -141,42 +151,6 @@
         self.functionViewBottomConstraint.constant = 0;
     } completion:nil];
 }
-
-#pragma mark - UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (actionSheet.tag == 1) {
-        UIImagePickerControllerSourceType type;
-        if (buttonIndex == 0 && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            type = UIImagePickerControllerSourceTypeCamera;
-        } else if (buttonIndex == 1 && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-            type = UIImagePickerControllerSourceTypePhotoLibrary;
-        } else {
-            [self.contentTextView becomeFirstResponder];
-            return;
-        }
-        [self.view endEditing:YES];
-        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-        imagePickerController.delegate = self;
-        imagePickerController.allowsEditing = NO;
-        imagePickerController.sourceType = type;
-        [self presentViewController:imagePickerController animated:YES completion:nil];
-    } else if (actionSheet.tag == 2) {
-        if (buttonIndex == 0) {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        } else {
-            [self.contentTextView becomeFirstResponder];
-        }
-    } else if (actionSheet.tag == 3) {
-        if (buttonIndex == 0) {
-            [self send];
-        } else {
-            [self.contentTextView becomeFirstResponder];
-        }
-    }
-}
-
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -209,9 +183,32 @@
 - (IBAction)cameraButtonTouchUp:(id)sender
 {
     [self.view endEditing:YES];
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍摄照片", @"从相册中选择", nil];
-    actionSheet.tag = 1;
-    [actionSheet showInView:self.view];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self.contentTextView becomeFirstResponder];
+    }];
+    UIAlertAction *takePhotoAction = [UIAlertAction actionWithTitle:@"拍摄照片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            UIImagePickerControllerSourceType type = UIImagePickerControllerSourceTypeCamera;
+            [self presentImagePickerControllerWithType:type];
+        } else {
+            [self.contentTextView becomeFirstResponder];
+            return;
+        }
+    }];
+    UIAlertAction *choosePhotoAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+            UIImagePickerControllerSourceType type = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentImagePickerControllerWithType:type];
+        } else {
+            [self.contentTextView becomeFirstResponder];
+            return;
+        }
+    }];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [alertController addAction:takePhotoAction];
+    [alertController addAction:choosePhotoAction];
+    [alertController addAction:cancelAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (IBAction)sendButtonTouchUp:(id)sender
@@ -221,9 +218,16 @@
         return;
     } else if (self.contentTextView.text.length > 140) {
         [self.view endEditing:YES];
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"超出140个字符部分将被丢弃" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"继续发送" otherButtonTitles:nil];
-        actionSheet.tag = 3;
-        [actionSheet showInView:self.view];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [self.contentTextView becomeFirstResponder];
+        }];
+        UIAlertAction *continueSendAction = [UIAlertAction actionWithTitle:@"继续发送" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [self send];
+        }];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"超出140个字符部分将被丢弃" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        [alertController addAction:continueSendAction];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
     } else {
         [self send];
     }
@@ -233,9 +237,16 @@
 {
     if (self.contentTextView.text.length) {
         [self.view endEditing:YES];
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"放弃更改" otherButtonTitles: nil];
-        actionSheet.tag = 2;
-        [actionSheet showInView:self.view];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [self.contentTextView becomeFirstResponder];
+        }];
+        UIAlertAction *abandonAction = [UIAlertAction actionWithTitle:@"放弃更改" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        [alertController addAction:abandonAction];
+        [alertController addAction:cancelAction];
+        [self presentViewController:alertController animated:YES completion:nil];
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }

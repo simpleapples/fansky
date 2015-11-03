@@ -24,7 +24,7 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <JTSImageViewController/JTSImageViewController.h>
 
-@interface SAStatusViewController () <DTAttributedTextContentViewDelegate, UIActionSheetDelegate>
+@interface SAStatusViewController () <DTAttributedTextContentViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -141,36 +141,6 @@
     return linkButton;
 }
 
-
-#pragma mark - UIActionSheet
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    if (actionSheet.tag == 1) {
-        if (buttonIndex == 0) {
-            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-            NSString *pasteString = [self.status.text flattenHTML];
-            pasteboard.string = pasteString;
-            [SAMessageDisplayUtils showInfoWithMessage:@"已复制"];
-        }
-    } else if (actionSheet.tag == 2) {
-        if (buttonIndex == 0) {
-            [[SAAPIService sharedSingleton] deleteStatusWithID:self.statusID success:^(id data) {
-                [[SADataManager sharedManager] deleteStatusWithID:self.statusID];
-                [SAMessageDisplayUtils showSuccessWithMessage:@"删除成功"];
-                [self.navigationController popViewControllerAnimated:YES];
-            } failure:^(NSString *error) {
-                [SAMessageDisplayUtils showErrorWithMessage:error];
-            }];
-        } else if (buttonIndex == 1) {
-            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-            NSString *pasteString = [self.status.text flattenHTML];
-            pasteboard.string = pasteString;
-            [SAMessageDisplayUtils showInfoWithMessage:@"已复制"];
-        }
-    }
-}
-
 #pragma mark - EventHandler
 
 - (IBAction)avatarImageViewTouchUp:(id)sender
@@ -226,15 +196,31 @@
 - (IBAction)moreButtonTouchUp:(id)sender
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
-    UIActionSheet *actionSheet;
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *copyAction = [UIAlertAction actionWithTitle:@"复制消息" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        NSString *pasteString = [self.status.text flattenHTML];
+        pasteboard.string = pasteString;
+        [SAMessageDisplayUtils showInfoWithMessage:@"已复制"];
+    }];
+    UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"删除消息" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [[SAAPIService sharedSingleton] deleteStatusWithID:self.statusID success:^(id data) {
+            [[SADataManager sharedManager] deleteStatusWithID:self.statusID];
+            [SAMessageDisplayUtils showSuccessWithMessage:@"删除成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+        } failure:^(NSString *error) {
+            [SAMessageDisplayUtils showErrorWithMessage:error];
+        }];
+    }];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     if ([self.status.user.userID isEqualToString:currentUser.userID]) {
-        actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate: self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除消息" otherButtonTitles:@"复制消息", nil];
-        actionSheet.tag = 2;
-    } else {
-        actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate: self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"复制消息", nil];
-        actionSheet.tag = 1;
+        [alertController addAction:deleteAction];
     }
-    [actionSheet showInView:self.view];
+    [alertController addAction:copyAction];
+    [alertController addAction:cancelAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)linkButtonTouchUp:(DTLinkButton *)sender

@@ -261,8 +261,8 @@
                                     <action selector="replyButtonTouchUp:" destination="sUO-Mb-465" eventType="touchUpInside" id="53Y-Bb-Nyw"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LOd-Cg-zED">
-                                <rect key="frame" x="0.0" y="20" width="600" height="472"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LOd-Cg-zED">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="428"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8N1-O0-jkg">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="382"/>
@@ -1033,9 +1033,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="qBy-9g-ujA"/>
-        <segue reference="H7G-PZ-sGt"/>
-        <segue reference="JUY-4f-01A"/>
         <segue reference="Ciz-wU-ArU"/>
+        <segue reference="Btz-3b-6W7"/>
+        <segue reference="uHq-Bf-vPn"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>
