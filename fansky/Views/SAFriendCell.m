@@ -10,6 +10,7 @@
 #import "SAFriend.h"
 #import "SAAPIService.h"
 #import "SAMessageDisplayUtils.h"
+#import "UIColor+Utils.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SAFriendCell ()
@@ -28,7 +29,7 @@
 
 - (void)awakeFromNib
 {
-
+    self.followButton.layer.borderColor = [UIColor fanskyBlue].CGColor;
 }
 
 - (void)prepareForReuse

@@ -7,8 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SATimeLineViewController.h"
 
-@interface SASearchViewController : SATimeLineViewController
+@interface SASearchViewController : UIViewController
 
 @end

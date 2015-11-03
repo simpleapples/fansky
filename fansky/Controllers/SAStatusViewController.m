@@ -18,6 +18,7 @@
 #import "SAMessageDisplayUtils.h"
 #import "NSDate+Utils.h"
 #import "NSString+Utils.h"
+#import "UIColor+Utils.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import <DTCoreText/DTCoreText.h>
 #import <URBMediaFocusViewController/URBMediaFocusViewController.h>
@@ -75,14 +76,14 @@
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
     self.contentImageView.layer.borderColor = [UIColor colorWithWhite:0.9 alpha:1].CGColor;
     
-    UIColor *linkColor = [UIColor colorWithRed:85 / 255.0 green:172 / 255.0 blue:238 / 255.0 alpha:1];
+    UIColor *linkColor = [UIColor fanskyBlue];
     
     NSDictionary *optionDictionary = @{DTDefaultFontName: @"HelveticaNeue-Light",
                                        DTDefaultFontSize: @(16),
                                        DTDefaultLinkColor: linkColor,
                                        DTDefaultLinkHighlightColor: linkColor,
                                        DTDefaultLinkDecoration: @(NO),
-                                       DTDefaultLineHeightMultiplier: @(1.8)};
+                                       DTDefaultLineHeightMultiplier: @(1.5)};
     NSAttributedString* attributedString = [[NSAttributedString alloc] initWithHTMLData:[self.status.text dataUsingEncoding:NSUnicodeStringEncoding] options:optionDictionary documentAttributes:nil];
     
     self.contentLabel.attributedString = attributedString;

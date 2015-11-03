@@ -11,6 +11,7 @@
 #import "SADataManager+User.h"
 #import "SAAPIService.h"
 #import "SAMessageDisplayUtils.h"
+#import "UIColor+Utils.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SAUserHeaderView ()
@@ -32,6 +33,11 @@
 @end
 
 @implementation SAUserHeaderView
+
+- (void)awakeFromNib
+{
+    self.followButton.layer.borderColor = [UIColor fanskyBlue].CGColor;
+}
 
 - (void)configWithUserID:(NSString *)userID
 {

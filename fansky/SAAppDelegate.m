@@ -9,6 +9,7 @@
 #import "SAAppDelegate.h"
 #import "SADataManager.h"
 #import "SANotificationManager.h"
+#import "UIColor+Utils.h"
 #import <MobClick.h>
 #import <LTHPasscodeViewController/LTHPasscodeViewController.h>
 
@@ -76,9 +77,18 @@
 
 - (void)updateAppearance
 {
+    UIImage *backButtonImage = [UIImage imageNamed:@"IconBackBlack"];
+    [UINavigationBar appearance].backIndicatorImage = backButtonImage;
+    [UINavigationBar appearance].backIndicatorTransitionMaskImage = backButtonImage;
     NSDictionary *textAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:17]};
     [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
+    
     [[UIBarButtonItem appearance] setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+    
+    [UIActivityIndicatorView appearance].color = [UIColor fanskyBlue];
+    [UIRefreshControl appearance].tintColor = [UIColor fanskyBlue];
+
     [UITableView appearance].separatorInset = UIEdgeInsetsZero;
 }
 

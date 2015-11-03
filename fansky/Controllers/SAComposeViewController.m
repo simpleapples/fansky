@@ -14,6 +14,8 @@
 #import "SAAPIService.h"
 #import "SAMessageDisplayUtils.h"
 #import "NSString+Utils.h"
+#import "UIColor+Utils.h"
+#import "UIImage+Utils.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SAComposeViewController () <UITextViewDelegate, UIActionSheetDelegate>
@@ -65,7 +67,9 @@
 
 - (void)updateInterface
 {
+    self.sendButton.layer.borderColor = [UIColor fanskyBlue].CGColor;
     [self.sendButton.layer setRasterizationScale:[UIScreen mainScreen].scale];
+    
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:currentUser.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
     
@@ -178,7 +182,8 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
-    self.uploadImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *tempImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    self.uploadImage = [tempImage fixOrientation];
     [self.cameraButton setImage:[UIImage imageNamed:@"IconCameraCheck"] forState:UIControlStateNormal];
 }
 
