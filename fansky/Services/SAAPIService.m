@@ -14,7 +14,7 @@
 
 @interface SAAPIService ()
 
-@property (strong, nonatomic) NSOperationQueue *operationQueue;
+@property (strong, nonatomic) NSURLSession *URLSession;
 
 @end
 
@@ -36,7 +36,10 @@
 {
     self = [super init];
     if (self) {
-        self.operationQueue = [[NSOperationQueue alloc] init];
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        configuration.timeoutIntervalForRequest = 10;
+        configuration.timeoutIntervalForResource = 10;
+        self.URLSession = [NSURLSession sessionWithConfiguration:configuration];
     }
     return self;
 }
@@ -46,10 +49,9 @@
 - (void)authorizeWithUsername:(NSString *)username password:(NSString *)password success:(void (^)(NSString *, NSString *))success failure:(void (^)(NSString *))failure
 {
     NSMutableURLRequest *URLRequest = [[TDOAuth URLRequestForPath:SA_API_ACCESS_TOKEN_PATH GETParameters:@{@"x_auth_username": username, @"x_auth_password": password,  @"x_auth_mode": @"client_auth"} host:SA_API_BASE_HOST consumerKey:SA_API_COMSUMER_KEY consumerSecret:SA_API_COMSUMER_SECRET accessToken:nil tokenSecret:nil] mutableCopy];
-    URLRequest.timeoutInterval = 15;
     
-    [NSURLConnection sendAsynchronousRequest:URLRequest queue:self.operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        if (!connectionError) {
+    [[self.URLSession dataTaskWithRequest:URLRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (!error) {
             NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             
             NSRange startRange = [responseString rangeOfString:@"oauth_token="];
@@ -77,16 +79,15 @@
                 });
             }
         }
-    }];
+    }] resume];
 }
 
 - (void)verifyCredentialsWithToken:(NSString *)token secret:(NSString *)secret success:(void (^)(id))success failure:(void (^)(NSString *))failure
 {
     NSMutableURLRequest *URLRequest = [[TDOAuth URLRequestForPath:SA_API_VERIFY_CREDENTIALS_PATH parameters:@{@"mode": @"lite"} host:SA_API_HOST consumerKey:SA_API_COMSUMER_KEY consumerSecret:SA_API_COMSUMER_SECRET accessToken:token tokenSecret:secret scheme:@"http" requestMethod:@"POST" dataEncoding:TDOAuthContentTypeUrlEncodedForm headerValues:nil signatureMethod:TDOAuthSignatureMethodHmacSha1] mutableCopy];
-    URLRequest.timeoutInterval = 15;
     
-    [NSURLConnection sendAsynchronousRequest:URLRequest queue:self.operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        if (!connectionError) {
+    [[self.URLSession dataTaskWithRequest:URLRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (!error) {
             id responseJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
             NSString *error = [responseJSON objectForKey:@"error"];
             if (responseJSON && !error && success) {
@@ -103,7 +104,7 @@
                 failure(@"获取身份信息失败");
             });
         }
-    }];
+    }] resume];
 }
 
 - (void)accountNotificationWithSuccess:(void (^)(id))success failure:(void (^)(NSString *))failure
@@ -202,8 +203,8 @@
         [mutableURLRequest setValue:contentType forHTTPHeaderField: @"Content-Type"];
         [mutableURLRequest setHTTPBody:httpBody];
         
-        [NSURLConnection sendAsynchronousRequest:mutableURLRequest queue:self.operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-            if (!connectionError) {
+        [[self.URLSession dataTaskWithRequest:mutableURLRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if (!error) {
                 id responseJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
                 NSString *error = nil;
                 if ([responseJSON respondsToSelector:@selector(objectForKey:)]) {
@@ -223,7 +224,7 @@
                     failure(@"网络故障");
                 });
             }
-        }];
+        }] resume];
     } else {
         [self requestAPIWithPath:SA_API_UPDATE_STATUS_PATH method:@"POST" parametersDictionary:mutableDictionary success:success failure:failure];
     }
@@ -322,10 +323,9 @@
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     
     NSMutableURLRequest *URLRequest = [[TDOAuth URLRequestForPath:path parameters:parametersDictionary host:SA_API_HOST consumerKey:SA_API_COMSUMER_KEY consumerSecret:SA_API_COMSUMER_SECRET accessToken:currentUser.token tokenSecret:currentUser.tokenSecret scheme:@"http" requestMethod:method dataEncoding:TDOAuthContentTypeUrlEncodedForm headerValues:nil signatureMethod:TDOAuthSignatureMethodHmacSha1] mutableCopy];
-    URLRequest.timeoutInterval = 10;
     
-    [NSURLConnection sendAsynchronousRequest:URLRequest queue:self.operationQueue completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-        if (!connectionError) {
+    [[self.URLSession dataTaskWithRequest:URLRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (!error) {
             id responseJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
             NSString *error = nil;
             if ([responseJSON respondsToSelector:@selector(objectForKey:)]) {
@@ -345,7 +345,7 @@
                 failure(@"网络故障");
             });
         }
-    }];
+    }] resume];
 }
 
 #pragma mark - PhotoUpload
