@@ -16,10 +16,13 @@
 #import "SAUser+CoreDataProperties.h"
 #import "SAMessageViewController.h"
 #import "SAConversation+CoreDataProperties.h"
-
 #import "SAMessage+CoreDataProperties.h"
+#import "UIColor+Utils.h"
+#import "LGRefreshView.h"
 
-@interface SAConversationViewController ()
+@interface SAConversationViewController () <LGRefreshViewDelegate>
+
+@property (strong, nonatomic) LGRefreshView *refreshView;
 
 @property (strong, nonatomic) NSArray *conversationList;
 @property (copy, nonatomic) NSString *selectedUserID;
@@ -69,7 +72,7 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
 - (void)updateDataWithRefresh:(BOOL)refresh
 {
     if (refresh) {
-        [self.refreshControl beginRefreshing];
+        [self.refreshView triggerAnimated:YES];
         if (self.conversationList.count) {
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         }
@@ -79,17 +82,19 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
         self.conversationList = [[SADataManager sharedManager] currentConversationListWithUserID:currentUser.userID limit:CONVERSATION_LIST_COUNT];
         [self.tableView reloadData];
-        [self.refreshControl endRefreshing];
+        [self.refreshView endRefreshing];
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
-        [self.refreshControl endRefreshing];
+        [self.refreshView endRefreshing];
     }];
 }
 
 - (void)updateInterface
 {
-    [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
-    self.clearsSelectionOnViewWillAppear = YES;
+    if (!self.refreshView) {
+        self.refreshView = [[LGRefreshView alloc] initWithScrollView:self.tableView delegate:self];
+        self.refreshView.tintColor = [UIColor fanskyBlue];
+    }    self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.tableFooterView = [UIView new];
     self.tableView.rowHeight = 70;
 }
@@ -105,6 +110,13 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
         SAMessageViewController *messageViewController = (SAMessageViewController *)segue.destinationViewController;
         messageViewController.userID = self.selectedUserID;
     }
+}
+
+#pragma mark - LGRefreshViewDelegate
+
+- (void)refreshViewRefreshing:(LGRefreshView *)refreshView
+{
+    [self refreshData];
 }
 
 #pragma mark - UITableViewDelegate
