@@ -97,7 +97,7 @@
     DTCoreTextLayoutFrame *layoutFrame = [layouter layoutFrameWithRect:maxRect range:entireString];
     self.contentLabelHeightConstraint.constant = layoutFrame.frame.size.height;
     
-    if (self.status.photo.thumbURL) {
+    if (self.status.photo.largeURL) {
         self.contentImageView.hidden = NO;
         [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL] placeholderImage:nil options:SDWebImageRefreshCached];
         self.timeLabelTopToImageViewMarginConstraint.priority = UILayoutPriorityRequired;
