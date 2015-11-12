@@ -51,8 +51,8 @@
     NSMutableURLRequest *URLRequest = [[TDOAuth URLRequestForPath:SA_API_ACCESS_TOKEN_PATH GETParameters:@{@"x_auth_username": username, @"x_auth_password": password,  @"x_auth_mode": @"client_auth"} host:SA_API_BASE_HOST consumerKey:SA_API_COMSUMER_KEY consumerSecret:SA_API_COMSUMER_SECRET accessToken:nil tokenSecret:nil] mutableCopy];
     
     [[self.URLSession dataTaskWithRequest:URLRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (!error) {
-            NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        if (!error && ![responseString containsString:@"<error>"]) {
             
             NSRange startRange = [responseString rangeOfString:@"oauth_token="];
             NSRange endRange = [responseString rangeOfString:@"&oauth_token_secret="];
