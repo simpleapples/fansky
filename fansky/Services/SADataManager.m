@@ -30,6 +30,20 @@
     return sharedManager;
 }
 
+- (NSUInteger)sizeOfAllPersistentStore
+{
+    NSArray *allStores = [self.persistentStoreCoordinator persistentStores];
+    NSUInteger totalBytes = 0;
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    for (NSPersistentStore *store in allStores) {
+        if (![store.URL isFileURL]) {
+            continue;
+        }
+        totalBytes += [fileManager attributesOfItemAtPath:store.URL.path error:nil].fileSize;
+    }
+    return totalBytes;
+}
+
 #pragma mark - Core Data stack
 
 - (NSURL *)applicationDocumentsDirectory

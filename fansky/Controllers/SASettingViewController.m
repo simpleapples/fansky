@@ -13,11 +13,13 @@
 #import "SAUser+CoreDataProperties.h"
 #import <LTHPasscodeViewController/LTHPasscodeViewController.h>
 #import <VTAcknowledgementsViewController/VTAcknowledgementsViewController.h>
+#import <SDWebImage/SDImageCache.h>
 
 @interface SASettingViewController () <LTHPasscodeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UISwitch *passcodeSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cacheSizeLabel;
 
 @end
 
@@ -55,6 +57,15 @@
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
     NSString *versionString = [NSString stringWithFormat:@"%@ (%@)", [info objectForKey:@"CFBundleShortVersionString"], [info objectForKey:@"CFBundleVersion"]];
     self.versionLabel.text = versionString;
+    
+    [self updateCacheSize];
+}
+
+- (void)updateCacheSize
+{
+    [[SDImageCache sharedImageCache] calculateSizeWithCompletionBlock:^(NSUInteger fileCount, NSUInteger totalSize) {
+        self.cacheSizeLabel.text = [NSByteCountFormatter stringFromByteCount:totalSize countStyle:NSByteCountFormatterCountStyleFile];
+    }];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -75,6 +86,13 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             [self performSegueWithIdentifier:@"SettingToFriendListSegue" sender:nil];
+        }
+    } else if (indexPath.section == 1) {
+        if (indexPath.row == 1) {
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+            [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
+                [self updateCacheSize];
+            }];
         }
     } else if (indexPath.section == 2) {
         if (indexPath.row == 0) {
