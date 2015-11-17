@@ -18,6 +18,7 @@
 #import "SAMessageDisplayUtils.h"
 #import "SATimeLineCell.h"
 #import "SAComposeViewController.h"
+#import "SACacheManager.h"
 #import "UIColor+Utils.h"
 #import <DTCoreText/DTCoreText.h>
 #import <JTSImageViewController/JTSImageViewController.h>
@@ -25,7 +26,6 @@
 @interface SATimeLineViewController () <SATimeLineCellDelegate, LGRefreshViewDelegate>
 
 @property (copy, nonatomic) NSString *maxID;
-@property (nonatomic, getter = isCellRegistered) BOOL cellRegistered;
 
 @end
 
@@ -33,6 +33,7 @@
 
 static NSString *const ENTITY_NAME = @"SAStatus";
 static NSUInteger TIME_LINE_COUNT = 40;
+static NSString *const cellName = @"SATimeLineCell";
 
 - (void)viewDidLoad
 {
@@ -146,6 +147,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
         self.refreshView = [[LGRefreshView alloc] initWithScrollView:self.tableView delegate:self];
         self.refreshView.tintColor = [UIColor fanskyBlue];
     }
+    [self.tableView registerNib:[UINib nibWithNibName:cellName bundle:nil] forCellReuseIdentifier:cellName];
     self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.tableFooterView = [UIView new];
 }
@@ -219,6 +221,12 @@ static NSUInteger TIME_LINE_COUNT = 40;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
+    
+    NSNumber *cachedHeight = [[SACacheManager sharedManager] cachedItemForKey:status.statusID];
+    if (cachedHeight) {
+        return cachedHeight.floatValue;
+    }
+    
     UIColor *linkColor = [UIColor fanskyBlue];
     
     NSDictionary *optionDictionary = @{DTDefaultFontName: @"HelveticaNeue-Light",
@@ -239,16 +247,13 @@ static NSUInteger TIME_LINE_COUNT = 40;
     if (status.photo.imageURL) {
         offset = width / 2 + 16 + 10 + 46;
     }
-    return layoutFrame.frame.size.height + offset;
+    CGFloat height = layoutFrame.frame.size.height + offset;
+    [[SACacheManager sharedManager] cacheItem:@(height) forKey:status.statusID];
+    return height;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *const cellName = @"SATimeLineCell";
-    if (!self.isCellRegistered) {
-        [tableView registerNib:[UINib nibWithNibName:cellName bundle:nil] forCellReuseIdentifier:cellName];
-        self.cellRegistered = YES;
-    }
     SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
     SATimeLineCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
     [cell configWithStatus:status];

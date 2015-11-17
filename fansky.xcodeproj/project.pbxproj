@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A0C753A1BF44D3A005D9AA2 /* SACacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0C75391BF44D3A005D9AA2 /* SACacheManager.m */; };
 		5A0F7B071BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF41BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m */; };
 		5A0F7B081BC4E50500926FD4 /* SAPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF61BC4E50500926FD4 /* SAPhoto.m */; };
 		5A0F7B091BC4E50500926FD4 /* SAUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF81BC4E50500926FD4 /* SAUser+CoreDataProperties.m */; };
@@ -86,6 +87,8 @@
 		3E43255F77409845B17D05D0 /* Pods_fansky.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fansky.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA0B1D52B50FFEAB4E792B5 /* Pods-fansky.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fansky.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fansky/Pods-fansky.debug.xcconfig"; sourceTree = "<group>"; };
 		5A01639A1BA96A470065F1F1 /* TTTAttributedLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TTTAttributedLabel.framework; path = "Pods/../build/Debug-iphoneos/TTTAttributedLabel.framework"; sourceTree = "<group>"; };
+		5A0C75381BF44D3A005D9AA2 /* SACacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SACacheManager.h; sourceTree = "<group>"; };
+		5A0C75391BF44D3A005D9AA2 /* SACacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SACacheManager.m; sourceTree = "<group>"; };
 		5A0F7AF31BC4E50500926FD4 /* SAPhoto+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SAPhoto+CoreDataProperties.h"; sourceTree = "<group>"; };
 		5A0F7AF41BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SAPhoto+CoreDataProperties.m"; sourceTree = "<group>"; };
 		5A0F7AF51BC4E50500926FD4 /* SAPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPhoto.h; sourceTree = "<group>"; };
@@ -414,6 +417,8 @@
 				5AE98AC21BAEE43300B7F105 /* SADataManager+Conversation.m */,
 				5A86A68A1BBBFD3B00C562E2 /* SANotificationManager.h */,
 				5A86A68B1BBBFD3B00C562E2 /* SANotificationManager.m */,
+				5A0C75381BF44D3A005D9AA2 /* SACacheManager.h */,
+				5A0C75391BF44D3A005D9AA2 /* SACacheManager.m */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -631,6 +636,7 @@
 				5A0F7B0A1BC4E50500926FD4 /* SAUser.m in Sources */,
 				5AED4B711BA8521B00EDBF47 /* SAUserHeaderView.m in Sources */,
 				5AE98AA81BAEB0A900B7F105 /* SASettingViewController.m in Sources */,
+				5A0C753A1BF44D3A005D9AA2 /* SACacheManager.m in Sources */,
 				5AF5B1CD1BA1813A00C7A18A /* SASplashViewController.m in Sources */,
 				5A1811CB1BAC1C40004B6C54 /* SATimeLineCell.m in Sources */,
 				5AB785F31BE6769D0034046B /* UIImage+Utils.m in Sources */,
