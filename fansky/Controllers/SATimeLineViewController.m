@@ -22,6 +22,7 @@
 #import "UIColor+Utils.h"
 #import <DTCoreText/DTCoreText.h>
 #import <JTSImageViewController/JTSImageViewController.h>
+#import <SDWebImage/SDImageCache.h>
 
 @interface SATimeLineViewController () <SATimeLineCellDelegate, LGRefreshViewDelegate>
 
@@ -185,8 +186,14 @@ static NSString *const cellName = @"SATimeLineCell";
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell contentImageViewTouchUp:(id)sender
 {
+    UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:timeLineCell.status.photo.largeURL];
+    
     JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
-    imageInfo.imageURL = [NSURL URLWithString:timeLineCell.status.photo.largeURL];
+    if (image) {
+        imageInfo.image = image;
+    } else {
+        imageInfo.imageURL = [NSURL URLWithString:timeLineCell.status.photo.largeURL];
+    }
     imageInfo.referenceRect = timeLineCell.contentImageView.frame;
     imageInfo.referenceView = timeLineCell.contentImageView.superview;
     
