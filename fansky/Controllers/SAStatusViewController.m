@@ -151,8 +151,14 @@
 
 - (IBAction)contentImageViewTouchUp:(id)sender
 {
+    UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:self.status.photo.largeURL];
+    
     JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
-    imageInfo.imageURL = [NSURL URLWithString:self.status.photo.largeURL];
+    if (image) {
+        imageInfo.image = image;
+    } else {
+        imageInfo.imageURL = [NSURL URLWithString:self.status.photo.largeURL];
+    }
     imageInfo.referenceRect = self.contentImageView.frame;
     imageInfo.referenceView = self.contentImageView.superview;
     

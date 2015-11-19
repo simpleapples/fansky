@@ -15,6 +15,7 @@
 
 + (SADataManager *)sharedManager;
 
+- (NSUInteger)sizeOfAllPersistentStore;
 - (void)saveContext;
 
 @end

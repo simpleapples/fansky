@@ -107,6 +107,15 @@
     }];
 }
 
+- (void)updateTextView:(UITextView *)textView
+{
+    if (textView.text.length) {
+        self.placeholderLabel.hidden = YES;
+    } else {
+        self.placeholderLabel.hidden = NO;
+    }
+}
+
 - (void)presentImagePickerControllerWithType:(UIImagePickerControllerSourceType)type
 {
     [self.view endEditing:YES];
@@ -159,6 +168,11 @@
     UIImage *tempImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     self.uploadImage = [tempImage fixOrientation];
     [self.cameraButton setImage:[UIImage imageNamed:@"IconCameraCheck"] forState:UIControlStateNormal];
+    if (!self.contentTextView.text.length) {
+        self.contentTextView.text = @"我上传了一张照片";
+        [self updateTextView:self.contentTextView];
+        [self updateRemainLabel];
+    }
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -170,11 +184,7 @@
 
 - (void)textViewDidChange:(UITextView *)textView
 {
-    if (textView.text.length) {
-        self.placeholderLabel.hidden = YES;
-    } else {
-        self.placeholderLabel.hidden = NO;
-    }
+    [self updateTextView:textView];
     [self updateRemainLabel];
 }
 
