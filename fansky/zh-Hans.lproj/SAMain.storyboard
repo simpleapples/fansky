@@ -186,28 +186,12 @@
                                     <outlet property="delegate" destination="B0a-pN-ujk" id="bcM-lY-0Xt"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="bottom" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ILN-M4-9LR">
-                                <rect key="frame" x="16" y="140" width="108" height="30"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="YNH-yf-nKU"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
-                                <state key="normal" title="没有账号？现在注册" backgroundImage="BackgroundGrayLine">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="registerButtonTouchUp:" destination="B0a-pN-ujk" eventType="touchUpInside" id="py9-fR-Hw6"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="aB7-7a-oA7" firstAttribute="leading" secondItem="o7r-GB-hXP" secondAttribute="leading" constant="16" id="2bj-Pc-VPE"/>
-                            <constraint firstItem="ILN-M4-9LR" firstAttribute="leading" secondItem="Mgi-Ld-OUj" secondAttribute="leading" id="5SH-G3-kFj"/>
                             <constraint firstItem="Mgi-Ld-OUj" firstAttribute="top" secondItem="aB7-7a-oA7" secondAttribute="bottom" constant="16" id="BFV-6P-5wD"/>
-                            <constraint firstItem="ILN-M4-9LR" firstAttribute="top" secondItem="Mgi-Ld-OUj" secondAttribute="bottom" constant="20" id="GVG-Vj-gPx"/>
                             <constraint firstItem="Mgi-Ld-OUj" firstAttribute="leading" secondItem="aB7-7a-oA7" secondAttribute="leading" id="Uin-oJ-04Y"/>
                             <constraint firstItem="aB7-7a-oA7" firstAttribute="top" secondItem="Dne-Nb-MN1" secondAttribute="bottom" constant="16" id="eiR-jD-GZx"/>
                             <constraint firstItem="Mgi-Ld-OUj" firstAttribute="trailing" secondItem="aB7-7a-oA7" secondAttribute="trailing" id="nVP-JM-5XS"/>
