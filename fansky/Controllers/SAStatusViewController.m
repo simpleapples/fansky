@@ -210,6 +210,9 @@
         pasteboard.string = pasteString;
         [SAMessageDisplayUtils showInfoWithMessage:@"已复制"];
     }];
+    UIAlertAction *reportAction = [UIAlertAction actionWithTitle:@"举报" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [SAMessageDisplayUtils showSuccessWithMessage:@"已举报"];
+    }];
     UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"删除消息" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         [[SAAPIService sharedSingleton] deleteStatusWithID:self.statusID success:^(id data) {
             [[SADataManager sharedManager] deleteStatusWithID:self.statusID];
@@ -225,6 +228,7 @@
         [alertController addAction:deleteAction];
     }
     [alertController addAction:copyAction];
+    [alertController addAction:reportAction];
     [alertController addAction:cancelAction];
     [self presentViewController:alertController animated:YES completion:nil];
 }
