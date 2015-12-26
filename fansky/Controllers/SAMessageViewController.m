@@ -15,6 +15,7 @@
 #import "SAMessageDisplayUtils.h"
 #import "SAMessage+CoreDataProperties.h"
 #import "UIColor+Utils.h"
+#import "NSDate+Utils.h"
 #import <JSQMessagesViewController/JSQMessage.h>
 #import <JSQMessagesViewController/UIColor+JSQMessages.h>
 #import <JSQMessagesViewController/JSQMessagesBubbleImageFactory.h>
@@ -155,6 +156,13 @@ static NSUInteger MESSAGE_LIST_COUNT = 40;
 - (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return nil;
+}
+
+- (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath
+{
+    SAMessage *message = [self.messageList objectAtIndex:indexPath.row];
+    NSString *dateString = [message.createdAt defaultDateString];
+    return [[NSAttributedString alloc] initWithString:dateString];
 }
 
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
