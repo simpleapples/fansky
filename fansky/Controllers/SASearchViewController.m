@@ -24,7 +24,7 @@
 #import <JTSImageViewController/JTSImageViewController.h>
 #import <SDWebImage/SDImageCache.h>
 
-@interface SASearchViewController () <SATimeLineCellDelegate, UITextFieldDelegate>
+@interface SASearchViewController () <SATimeLineCellDelegate, UITextFieldDelegate, JTSImageViewControllerInteractionsDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
@@ -137,6 +137,29 @@ static NSString *const cellName = @"SATimeLineCell";
     }
 }
 
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    if (error) {
+        [SAMessageDisplayUtils showErrorWithMessage:@"保存失败"];
+    } else {
+        [SAMessageDisplayUtils showSuccessWithMessage:@"已保存到相册"];
+    }
+}
+
+#pragma mark - JTSImageViewControllerInteractionsDelegate
+
+- (void)imageViewerDidLongPress:(JTSImageViewController *)imageViewer atRect:(CGRect)rect
+{
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *saveToAlbumAction = [UIAlertAction actionWithTitle:@"保存到相册" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIImageWriteToSavedPhotosAlbum(imageViewer.image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+    }];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    [alertController addAction:saveToAlbumAction];
+    [alertController addAction:cancelAction];
+    [imageViewer presentViewController:alertController animated:YES completion:nil];
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -172,8 +195,8 @@ static NSString *const cellName = @"SATimeLineCell";
     imageInfo.referenceRect = timeLineCell.contentImageView.frame;
     imageInfo.referenceView = timeLineCell.contentImageView.superview;
     
-    JTSImageViewController *imageViewer = [[JTSImageViewController alloc] initWithImageInfo:imageInfo mode:JTSImageViewControllerMode_Image backgroundStyle:JTSImageViewControllerBackgroundOption_Scaled];
-    
+    JTSImageViewController *imageViewer = [[JTSImageViewController alloc] initWithImageInfo:imageInfo mode:JTSImageViewControllerMode_Image backgroundStyle:(JTSImageViewControllerBackgroundOption_Scaled | JTSImageViewControllerBackgroundOption_Blurred)];
+    imageViewer.interactionsDelegate = self;
     [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
 }
 
