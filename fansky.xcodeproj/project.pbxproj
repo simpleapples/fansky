@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A0B505A1C2FC9DB00FE4C73 /* SAPhotoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B50591C2FC9DB00FE4C73 /* SAPhotoPreviewViewController.m */; };
 		5A0C753A1BF44D3A005D9AA2 /* SACacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0C75391BF44D3A005D9AA2 /* SACacheManager.m */; };
 		5A0F7B071BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF41BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m */; };
 		5A0F7B081BC4E50500926FD4 /* SAPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF61BC4E50500926FD4 /* SAPhoto.m */; };
@@ -32,6 +33,7 @@
 		5A849E921BC3EC20000FDCB9 /* Pods-fansky-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A849E911BC3EC20000FDCB9 /* Pods-fansky-acknowledgements.plist */; };
 		5A86A4741BFB693300229B26 /* SAFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A86A4731BFB693300229B26 /* SAFileUtils.m */; };
 		5A86A68C1BBBFD3B00C562E2 /* SANotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A86A68B1BBBFD3B00C562E2 /* SANotificationManager.m */; };
+		5A86C0CA1C2ECEB0008BB3FD /* SAOthers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A86C0CC1C2ECEB0008BB3FD /* SAOthers.storyboard */; };
 		5A95558D1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A95558C1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m */; };
 		5A9AD6B01BAA6CD50058916A /* SAMessageDisplayUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */; };
 		5AAB875C1BDA4B19003C9A51 /* SAUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB875B1BDA4B19003C9A51 /* SAUserInfoViewController.m */; };
@@ -88,6 +90,8 @@
 		3E43255F77409845B17D05D0 /* Pods_fansky.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fansky.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA0B1D52B50FFEAB4E792B5 /* Pods-fansky.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fansky.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fansky/Pods-fansky.debug.xcconfig"; sourceTree = "<group>"; };
 		5A01639A1BA96A470065F1F1 /* TTTAttributedLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TTTAttributedLabel.framework; path = "Pods/../build/Debug-iphoneos/TTTAttributedLabel.framework"; sourceTree = "<group>"; };
+		5A0B50581C2FC9DB00FE4C73 /* SAPhotoPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPhotoPreviewViewController.h; sourceTree = "<group>"; };
+		5A0B50591C2FC9DB00FE4C73 /* SAPhotoPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPhotoPreviewViewController.m; sourceTree = "<group>"; };
 		5A0C75381BF44D3A005D9AA2 /* SACacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SACacheManager.h; sourceTree = "<group>"; };
 		5A0C75391BF44D3A005D9AA2 /* SACacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SACacheManager.m; sourceTree = "<group>"; };
 		5A0F7AF31BC4E50500926FD4 /* SAPhoto+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SAPhoto+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -138,6 +142,7 @@
 		5A86A4731BFB693300229B26 /* SAFileUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFileUtils.m; sourceTree = "<group>"; };
 		5A86A68A1BBBFD3B00C562E2 /* SANotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SANotificationManager.h; sourceTree = "<group>"; };
 		5A86A68B1BBBFD3B00C562E2 /* SANotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SANotificationManager.m; sourceTree = "<group>"; };
+		5A86C0CB1C2ECEB0008BB3FD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/SAOthers.storyboard"; sourceTree = "<group>"; };
 		5A93F01D1BC24AA000C44023 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/SAMain.storyboard"; sourceTree = "<group>"; };
 		5A93F01E1BC24AA000C44023 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.xib"; sourceTree = "<group>"; };
 		5A95558B1BD36D1200326E94 /* SAFavoriteTimeLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFavoriteTimeLineViewController.h; sourceTree = "<group>"; };
@@ -322,6 +327,7 @@
 				5AD70EFA1B316A79009C5B84 /* SAMain.storyboard */,
 				5A159D991BDDD5D0007DFE6A /* SAMine.storyboard */,
 				5AD70EFD1B316A79009C5B84 /* Images.xcassets */,
+				5A86C0CC1C2ECEB0008BB3FD /* SAOthers.storyboard */,
 				5AD70EFF1B316A79009C5B84 /* LaunchScreen.xib */,
 				5AD70EF41B316A79009C5B84 /* fansky.xcdatamodeld */,
 				5AD70EED1B316A79009C5B84 /* Supporting Files */,
@@ -397,6 +403,8 @@
 				5AAB875B1BDA4B19003C9A51 /* SAUserInfoViewController.m */,
 				5A7848B61BDF802400E027C1 /* SASearchViewController.h */,
 				5A7848B71BDF802400E027C1 /* SASearchViewController.m */,
+				5A0B50581C2FC9DB00FE4C73 /* SAPhotoPreviewViewController.h */,
+				5A0B50591C2FC9DB00FE4C73 /* SAPhotoPreviewViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -559,6 +567,7 @@
 				5AED4B731BA8522C00EDBF47 /* SAUserHeaderView.xib in Resources */,
 				5A1811CC1BAC1C40004B6C54 /* SATimeLineCell.xib in Resources */,
 				5AD70EFC1B316A79009C5B84 /* SAMain.storyboard in Resources */,
+				5A86C0CA1C2ECEB0008BB3FD /* SAOthers.storyboard in Resources */,
 				5AD70F011B316A79009C5B84 /* LaunchScreen.xib in Resources */,
 				5AD70EFE1B316A79009C5B84 /* Images.xcassets in Resources */,
 				5A159D9B1BDDD5D0007DFE6A /* SAMine.storyboard in Resources */,
@@ -646,6 +655,7 @@
 				5A1811CB1BAC1C40004B6C54 /* SATimeLineCell.m in Sources */,
 				5AB785F31BE6769D0034046B /* UIImage+Utils.m in Sources */,
 				5A0F7B081BC4E50500926FD4 /* SAPhoto.m in Sources */,
+				5A0B505A1C2FC9DB00FE4C73 /* SAPhotoPreviewViewController.m in Sources */,
 				5AF5B1CA1BA17F7B00C7A18A /* SALoginViewController.m in Sources */,
 				5AED4B331BA6E48B00EDBF47 /* SAComposeViewController.m in Sources */,
 				5ADA99E01BB2676B0068C0FF /* SAPushWithoutAnimation.m in Sources */,
@@ -712,6 +722,14 @@
 				5A159D9A1BDDD5D0007DFE6A /* zh-Hans */,
 			);
 			name = SAMine.storyboard;
+			sourceTree = "<group>";
+		};
+		5A86C0CC1C2ECEB0008BB3FD /* SAOthers.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5A86C0CB1C2ECEB0008BB3FD /* zh-Hans */,
+			);
+			name = SAOthers.storyboard;
 			sourceTree = "<group>";
 		};
 		5AD70EFA1B316A79009C5B84 /* SAMain.storyboard */ = {

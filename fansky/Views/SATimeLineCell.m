@@ -80,6 +80,23 @@
     [self setNeedsLayout];
 }
 
+- (CGRect)sourceRectWithLocation:(CGPoint)location
+{
+    if (self.status.photo.largeURL) {
+        CGPoint imageOrigin = self.contentImageView.frame.origin;
+        CGSize imageSize = self.contentImageView.frame.size;
+        if (location.x >= imageOrigin.x && location.x <= imageOrigin.x + imageSize.width && location.y >= imageOrigin.y && location.y <= imageOrigin.y + imageSize.height) {
+            return self.contentImageView.frame;
+        }
+    }
+    return CGRectZero;
+}
+
+- (CGRect)contentImageViewRect
+{
+    return self.contentImageView.frame;
+}
+
 #pragma mark - DTAttributedTextContentViewDelegate
 
 - (UIView *)attributedTextContentView:(DTAttributedTextContentView *)attributedTextContentView viewForLink:(NSURL *)url identifier:(NSString *)identifier frame:(CGRect)frame

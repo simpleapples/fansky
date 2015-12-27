@@ -19,12 +19,13 @@
 #import "SAPhoto+CoreDataProperties.h"
 #import "SAComposeViewController.h"
 #import "SACacheManager.h"
+#import "SAPhotoPreviewViewController.h"
 #import "UIColor+Utils.h"
 #import <DTCoreText/DTCoreText.h>
 #import <JTSImageViewController/JTSImageViewController.h>
 #import <SDWebImage/SDImageCache.h>
 
-@interface SASearchViewController () <SATimeLineCellDelegate, UITextFieldDelegate, JTSImageViewControllerInteractionsDelegate>
+@interface SASearchViewController () <SATimeLineCellDelegate, UITextFieldDelegate, JTSImageViewControllerInteractionsDelegate, UIViewControllerPreviewingDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
@@ -119,6 +120,10 @@ static NSString *const cellName = @"SATimeLineCell";
 {
     [self.tableView registerNib:[UINib nibWithNibName:cellName bundle:nil] forCellReuseIdentifier:cellName];
     self.tableView.tableFooterView = [UIView new];
+    
+    if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+        [self registerForPreviewingWithDelegate:self sourceView:self.view];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -137,6 +142,26 @@ static NSString *const cellName = @"SATimeLineCell";
     }
 }
 
+- (void)showPhotoFromSourceCell:(SATimeLineCell *)timeLineCell photo:(SAPhoto *)photo
+{
+    UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:photo.largeURL];
+    
+    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
+    if (image) {
+        imageInfo.image = image;
+    } else {
+        imageInfo.imageURL = [NSURL URLWithString:photo.largeURL];
+    }
+    if (timeLineCell) {
+        imageInfo.referenceRect = timeLineCell.contentImageView.frame;
+        imageInfo.referenceView = timeLineCell.contentImageView.superview;
+    }
+    
+    JTSImageViewController *imageViewer = [[JTSImageViewController alloc] initWithImageInfo:imageInfo mode:JTSImageViewControllerMode_Image backgroundStyle:(JTSImageViewControllerBackgroundOption_Scaled | JTSImageViewControllerBackgroundOption_Blurred)];
+    imageViewer.interactionsDelegate = self;
+    [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
+}
+
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error) {
@@ -144,6 +169,35 @@ static NSString *const cellName = @"SATimeLineCell";
     } else {
         [SAMessageDisplayUtils showSuccessWithMessage:@"已保存到相册"];
     }
+}
+
+#pragma mark - UIViewControllerPreviewingDelegate
+
+- (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
+{
+    CGPoint tableViewLocation = [self.tableView convertPoint:location fromView:self.view];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:tableViewLocation];
+    SATimeLineCell *timeLineCell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    CGPoint targetPoint = [self.view convertPoint:location toView:timeLineCell];
+    CGRect sourceRect = [timeLineCell sourceRectWithLocation:targetPoint];
+    
+    if (!CGRectEqualToRect(sourceRect, CGRectZero)) {
+        previewingContext.sourceRect = [timeLineCell convertRect:sourceRect toView:self.view];
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SAOthers" bundle:[NSBundle mainBundle]];
+        SAPhotoPreviewViewController *photoPreviewViewController = [storyboard instantiateViewControllerWithIdentifier:@"SAPhotoPreviewViewController"];
+        photoPreviewViewController.statusID = timeLineCell.status.statusID;
+        return photoPreviewViewController;
+    }
+    return nil;
+}
+
+- (void)previewingContext:(id<UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
+{
+    SAPhotoPreviewViewController *photoPreviewViewController = (SAPhotoPreviewViewController *)viewControllerToCommit;
+    SAStatus *status = [[SADataManager sharedManager] statusWithID:photoPreviewViewController.statusID];
+    [self showPhotoFromSourceCell:nil photo:status.photo];
 }
 
 #pragma mark - JTSImageViewControllerInteractionsDelegate
@@ -184,20 +238,7 @@ static NSString *const cellName = @"SATimeLineCell";
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell contentImageViewTouchUp:(id)sender
 {
-    UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:timeLineCell.status.photo.largeURL];
-    
-    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
-    if (image) {
-        imageInfo.image = image;
-    } else {
-        imageInfo.imageURL = [NSURL URLWithString:timeLineCell.status.photo.largeURL];
-    }
-    imageInfo.referenceRect = timeLineCell.contentImageView.frame;
-    imageInfo.referenceView = timeLineCell.contentImageView.superview;
-    
-    JTSImageViewController *imageViewer = [[JTSImageViewController alloc] initWithImageInfo:imageInfo mode:JTSImageViewControllerMode_Image backgroundStyle:(JTSImageViewControllerBackgroundOption_Scaled | JTSImageViewControllerBackgroundOption_Blurred)];
-    imageViewer.interactionsDelegate = self;
-    [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
+    [self showPhotoFromSourceCell:timeLineCell photo:timeLineCell.status.photo];
 }
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell contentURLTouchUp:(id)sender

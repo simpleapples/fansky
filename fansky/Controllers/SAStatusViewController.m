@@ -228,10 +228,14 @@
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction *copyAction = [UIAlertAction actionWithTitle:@"复制消息" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-        NSString *pasteString = [self.status.text flattenHTML];
-        pasteboard.string = pasteString;
-        [SAMessageDisplayUtils showInfoWithMessage:@"已复制"];
+        if (self.status.text.length) {
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            NSString *pasteString = [self.status.text flattenHTML];
+            pasteboard.string = pasteString;
+            [SAMessageDisplayUtils showInfoWithMessage:@"已复制"];
+        } else {
+            [SAMessageDisplayUtils showInfoWithMessage:@"没有消息内容可以复制"];
+        }
     }];
     UIAlertAction *reportAction = [UIAlertAction actionWithTitle:@"举报" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [SAMessageDisplayUtils showSuccessWithMessage:@"已举报"];

@@ -29,5 +29,6 @@
 
 - (void)configWithStatus:(SAStatus *)status;
 - (void)loadAllImages;
+- (CGRect)sourceRectWithLocation:(CGPoint)location;
 
 @end

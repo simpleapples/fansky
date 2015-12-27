@@ -90,13 +90,12 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     [self.managedObjectContext performBlock:^{
         NSError *error;
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (!fetchResult) {
+            fetchResult = [[NSArray alloc] init];
+        }
         if (completeHandler) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (!error && fetchResult && fetchResult.count) {
-                    completeHandler(fetchResult);
-                } else {
-                    completeHandler(nil);
-                }
+                completeHandler(fetchResult);
             });
         }
     }];
@@ -118,13 +117,12 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     [self.managedObjectContext performBlock:^{
         NSError *error;
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (!fetchResult) {
+            fetchResult = [[NSArray alloc] init];
+        }
         if (completeHandler) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (!error && fetchResult && fetchResult.count) {
-                    completeHandler(fetchResult);
-                } else {
-                    completeHandler(nil);
-                }
+                completeHandler(fetchResult);
             });
         }
     }];
@@ -145,13 +143,12 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     [self.managedObjectContext performBlock:^{
         NSError *error;
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (!fetchResult) {
+            fetchResult = [[NSArray alloc] init];
+        }
         if (completeHandler) {
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (!error && fetchResult && fetchResult.count) {
-                    completeHandler(fetchResult);
-                } else {
-                    completeHandler(nil);
-                }
+                completeHandler(fetchResult);
             });
         }
     }];
