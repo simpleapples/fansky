@@ -16,6 +16,7 @@
 #import "SAComposeViewController.h"
 #import "SAAPIService.h"
 #import "SAMessageDisplayUtils.h"
+#import "SAPhotoPreviewViewController.h"
 #import "NSDate+Utils.h"
 #import "NSString+Utils.h"
 #import "UIColor+Utils.h"
@@ -24,7 +25,7 @@
 #import <MobileCoreServices/UTCoreTypes.h>
 #import <JTSImageViewController/JTSImageViewController.h>
 
-@interface SAStatusViewController () <DTAttributedTextContentViewDelegate, JTSImageViewControllerInteractionsDelegate>
+@interface SAStatusViewController () <DTAttributedTextContentViewDelegate, JTSImageViewControllerInteractionsDelegate, UIViewControllerPreviewingDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -105,6 +106,10 @@
         self.contentImageView.hidden = YES;
         self.timeLabelTopToLabelMarginConstraint.priority = UILayoutPriorityRequired;
     }
+    
+    if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+        [self registerForPreviewingWithDelegate:self sourceView:self.view];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -131,6 +136,24 @@
     }
 }
 
+- (void)showPhoto
+{
+    UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:self.status.photo.largeURL];
+    
+    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
+    if (image) {
+        imageInfo.image = image;
+    } else {
+        imageInfo.imageURL = [NSURL URLWithString:self.status.photo.largeURL];
+    }
+    imageInfo.referenceRect = self.contentImageView.frame;
+    imageInfo.referenceView = self.contentImageView.superview;
+    
+    JTSImageViewController *imageViewer = [[JTSImageViewController alloc] initWithImageInfo:imageInfo mode:JTSImageViewControllerMode_Image backgroundStyle:(JTSImageViewControllerBackgroundOption_Scaled | JTSImageViewControllerBackgroundOption_Blurred)];
+    imageViewer.interactionsDelegate = self;
+    [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
+}
+
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error) {
@@ -138,6 +161,35 @@
     } else {
         [SAMessageDisplayUtils showSuccessWithMessage:@"已保存到相册"];
     }
+}
+
+#pragma mark - UIViewControllerPreviewingDelegate
+
+- (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
+{
+    CGRect sourceRect = CGRectZero;
+    if (self.status.photo.largeURL) {
+        CGPoint imageOrigin = self.contentImageView.frame.origin;
+        CGSize imageSize = self.contentImageView.frame.size;
+        if (location.x >= imageOrigin.x && location.x <= imageOrigin.x + imageSize.width && location.y >= imageOrigin.y && location.y <= imageOrigin.y + imageSize.height) {
+            sourceRect = self.contentImageView.frame;
+        }
+    }
+    
+    if (!CGRectEqualToRect(sourceRect, CGRectZero)) {
+        previewingContext.sourceRect = sourceRect;
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SAOthers" bundle:[NSBundle mainBundle]];
+        SAPhotoPreviewViewController *photoPreviewViewController = [storyboard instantiateViewControllerWithIdentifier:@"SAPhotoPreviewViewController"];
+        photoPreviewViewController.statusID = self.status.statusID;
+        return photoPreviewViewController;
+    }
+    return nil;
+}
+
+- (void)previewingContext:(id<UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
+{
+    [self showPhoto];
 }
 
 #pragma mark - JTSImageViewControllerInteractionsDelegate
@@ -174,20 +226,7 @@
 
 - (IBAction)contentImageViewTouchUp:(id)sender
 {
-    UIImage *image = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:self.status.photo.largeURL];
     
-    JTSImageInfo *imageInfo = [[JTSImageInfo alloc] init];
-    if (image) {
-        imageInfo.image = image;
-    } else {
-        imageInfo.imageURL = [NSURL URLWithString:self.status.photo.largeURL];
-    }
-    imageInfo.referenceRect = self.contentImageView.frame;
-    imageInfo.referenceView = self.contentImageView.superview;
-    
-    JTSImageViewController *imageViewer = [[JTSImageViewController alloc] initWithImageInfo:imageInfo mode:JTSImageViewControllerMode_Image backgroundStyle:(JTSImageViewControllerBackgroundOption_Scaled | JTSImageViewControllerBackgroundOption_Blurred)];
-    imageViewer.interactionsDelegate = self;
-    [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
 }
 
 - (IBAction)replyButtonTouchUp:(id)sender
