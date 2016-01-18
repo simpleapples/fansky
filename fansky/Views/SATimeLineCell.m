@@ -48,6 +48,9 @@
 
 - (void)updateInterface
 {
+    self.avatarImageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    self.contentImageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    
     UIColor *linkColor = [UIColor fanskyBlue];
     NSDictionary *optionDictionary = @{DTDefaultFontName: @"HelveticaNeue-Light",
                                        DTDefaultFontSize: @(16),
@@ -71,7 +74,7 @@
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
     if (self.status.photo.largeURL) {
         self.contentHeightConstraint.constant = self.frame.size.height - 72 - (self.frame.size.width - 86) / 2;
-        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL] placeholderImage:nil options:SDWebImageRefreshCached];
+        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL] placeholderImage:[UIImage imageNamed:@"BackgroundImage"] options:SDWebImageRefreshCached];
         self.contentImageView.hidden = NO;
     } else {
         self.contentHeightConstraint.constant = self.frame.size.height - 62;

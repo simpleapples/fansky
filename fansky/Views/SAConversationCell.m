@@ -48,6 +48,8 @@
 
 - (void)updateInterface
 {
+    self.avatarImageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    
     self.nameLabel.text = self.otherUser.name;
     self.userIDLabel.text = [NSString stringWithFormat:@"@%@", self.otherUser.userID];
 }

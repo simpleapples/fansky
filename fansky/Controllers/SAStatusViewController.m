@@ -71,6 +71,9 @@
 {
     [self updateStarButton];
     
+    self.avatarImageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    self.contentImageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    
     self.usernameLabel.text = self.status.user.name;
     self.timeLabel.text = [NSString stringWithFormat:@"%@ ∙ 通过%@", [self.status.createdAt dateStringWithFormat:@"MM-dd HH:mm"], [self.status.source flattenHTML]];
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
@@ -100,7 +103,7 @@
     
     if (self.status.photo.largeURL) {
         self.contentImageView.hidden = NO;
-        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL] placeholderImage:nil options:SDWebImageRefreshCached];
+        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL] placeholderImage:[UIImage imageNamed:@"BackgroundImage"] options:SDWebImageRefreshCached];
         self.timeLabelTopToImageViewMarginConstraint.priority = UILayoutPriorityRequired;
     } else {
         self.contentImageView.hidden = YES;

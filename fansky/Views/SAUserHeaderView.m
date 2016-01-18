@@ -63,6 +63,8 @@
 
 - (void)updateInterface
 {
+    self.avatarImageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    
     if (self.user.desc.length) {
         self.userInfoButton.hidden = NO;
     } else {

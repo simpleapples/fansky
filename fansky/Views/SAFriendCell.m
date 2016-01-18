@@ -48,6 +48,8 @@
 
 - (void)updateInterface
 {
+    self.avatarImageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    
     [self.followButton.layer setRasterizationScale:[UIScreen mainScreen].scale];
     self.nameLabel.text = self.friend.name;
     self.friendIDLabel.text = [NSString stringWithFormat:@"@%@", self.friend.friendID];

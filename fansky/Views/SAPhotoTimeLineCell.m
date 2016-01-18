@@ -29,11 +29,18 @@
 - (void)configWithStatus:(SAStatus *)status
 {
     self.status = status;
+    
+    [self updateInterface];
+}
+
+- (void)updateInterface
+{
+    self.imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
 }
 
 - (void)loadImage
 {
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL] placeholderImage:nil options:SDWebImageRefreshCached];
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL] placeholderImage:[UIImage imageNamed:@"BackgroundImage"] options:SDWebImageRefreshCached];
 }
 
 - (IBAction)imageViewTouchUp:(id)sender
