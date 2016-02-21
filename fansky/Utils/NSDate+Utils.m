@@ -20,11 +20,11 @@
     NSInteger minutes = (NSInteger)(timeInterval - days * 3600 * 24 - hours * 3600) / 60;
 
     if (days >= 1) {
-        return [NSString stringWithFormat:@"%zd天", days];
+        return [NSString stringWithFormat:@"%zd天前", days];
     } else if (hours >= 1) {
-        return [NSString stringWithFormat:@"%zd小时", hours];
+        return [NSString stringWithFormat:@"%zd小时前", hours];
     } else if (minutes >= 1) {
-        return [NSString stringWithFormat:@"%zd分", minutes];
+        return [NSString stringWithFormat:@"%zd分前", minutes];
     }
     return [NSString stringWithFormat:@"刚才"];
 }

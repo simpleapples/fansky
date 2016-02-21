@@ -229,7 +229,7 @@
 
 - (IBAction)contentImageViewTouchUp:(id)sender
 {
-    
+    [self showPhoto];
 }
 
 - (IBAction)replyButtonTouchUp:(id)sender

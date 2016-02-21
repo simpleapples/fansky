@@ -11,12 +11,14 @@
 #import "SAFriendListViewController.h"
 #import "SADataManager+User.h"
 #import "SAUser+CoreDataProperties.h"
+#import "SANotificationManager.h"
 #import <LTHPasscodeViewController/LTHPasscodeViewController.h>
 #import <VTAcknowledgementsViewController/VTAcknowledgementsViewController.h>
 #import <SDWebImage/SDImageCache.h>
 
 @interface SASettingViewController () <LTHPasscodeViewControllerDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *friendRequestCountLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *passcodeSwitch;
 @property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cacheSizeLabel;
@@ -52,6 +54,8 @@
 
 - (void)updateInterface
 {
+    self.friendRequestCountLabel.text = [NSString stringWithFormat:@"%ld", [SANotificationManager sharedManager].friendRequestCount];
+    
     [self updatePasscodeSwitch];
 
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
