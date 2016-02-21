@@ -64,7 +64,9 @@ static NSString *const cellName = @"SATimeLineCell";
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    if (![self.presentedViewController isKindOfClass:[JTSImageViewController class]]) {
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
+    }
     [self.view endEditing:YES];
     [super viewWillDisappear:animated];
     [SAMessageDisplayUtils dismiss];
