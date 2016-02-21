@@ -121,6 +121,9 @@
 
 - (IBAction)contentImageViewTouchUp:(id)sender
 {
+    if (!self.status.photo.largeURL.length) {
+        return;
+    }
     if (self.delegate && [self.delegate respondsToSelector:@selector(timeLineCell:contentImageViewTouchUp:)]) {
         [self.delegate timeLineCell:self contentImageViewTouchUp:sender];
     }
