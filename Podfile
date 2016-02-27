@@ -14,6 +14,8 @@ pod 'DTCoreText'
 pod 'VVBlurPresentation'
 pod 'LTHPasscodeViewController'
 pod 'LGRefreshView'
+pod 'Fabric'
+pod 'Crashlytics'
 
 end
 
