@@ -68,6 +68,7 @@ static NSUInteger MESSAGE_LIST_COUNT = 40;
     self.incomingBubbleImageData = [bubbleFactory incomingMessagesBubbleImageWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
     
     self.inputToolbar.contentView.leftBarButtonItem = nil;
+    self.inputToolbar.contentView.textView.placeHolder = @"新消息 (140字以内)";
     self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
 }
@@ -173,6 +174,11 @@ static NSUInteger MESSAGE_LIST_COUNT = 40;
 
 - (void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date
 {
+    if (text.length > 140) {
+        [SAMessageDisplayUtils showErrorWithMessage:@"私信不能超过140字"];
+        return;
+    }
+    
     [JSQSystemSoundPlayer jsq_playMessageSentSound];
     
     SAMessage *lastMessage = self.messageList.lastObject;

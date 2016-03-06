@@ -77,6 +77,9 @@
                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="layer.shouldRasterize" value="YES"/>
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconGIF" translatesAutoresizingMaskIntoConstraints="NO" id="Mn0-5k-Gih">
+                                            <rect key="frame" x="160" y="180" width="40" height="20"/>
+                                        </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
@@ -85,6 +88,8 @@
                                     <constraint firstItem="ymI-lN-qDS" firstAttribute="leading" secondItem="Wwb-RC-ilG" secondAttribute="leading" id="Gsl-wg-hbD"/>
                                     <constraint firstAttribute="bottom" secondItem="Wwb-RC-ilG" secondAttribute="bottom" id="NhK-NH-JQQ"/>
                                     <constraint firstItem="ymI-lN-qDS" firstAttribute="trailing" secondItem="Wwb-RC-ilG" secondAttribute="trailing" id="Nr2-pA-9XD"/>
+                                    <constraint firstItem="Mn0-5k-Gih" firstAttribute="trailing" secondItem="Wwb-RC-ilG" secondAttribute="trailing" id="Vty-Vt-8NT"/>
+                                    <constraint firstItem="Mn0-5k-Gih" firstAttribute="bottom" secondItem="Wwb-RC-ilG" secondAttribute="bottom" id="fJY-3m-hrf"/>
                                     <constraint firstItem="Wwb-RC-ilG" firstAttribute="top" secondItem="1CD-z7-xDV" secondAttribute="top" id="i4H-4f-g43"/>
                                     <constraint firstItem="ymI-lN-qDS" firstAttribute="top" secondItem="Wwb-RC-ilG" secondAttribute="top" id="mo4-cf-Gm2"/>
                                     <constraint firstItem="ymI-lN-qDS" firstAttribute="bottom" secondItem="Wwb-RC-ilG" secondAttribute="bottom" id="qSQ-DN-aRR"/>
@@ -92,6 +97,7 @@
                                 </constraints>
                                 <size key="customSize" width="200" height="200"/>
                                 <connections>
+                                    <outlet property="iconGIFImageView" destination="Mn0-5k-Gih" id="hpx-AA-JJg"/>
                                     <outlet property="imageView" destination="Wwb-RC-ilG" id="Qf3-MI-V1N"/>
                                 </connections>
                             </collectionViewCell>
@@ -553,6 +559,7 @@
     <resources>
         <image name="IconClose" width="44" height="44"/>
         <image name="IconCompose" width="25" height="25"/>
+        <image name="IconGIF" width="40" height="20"/>
         <image name="IconPerson" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>

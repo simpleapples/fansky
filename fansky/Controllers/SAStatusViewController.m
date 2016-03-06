@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet DTAttributedLabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *iconGIFImageView;
 @property (weak, nonatomic) IBOutlet UIButton *starButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelTopToLabelMarginConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelTopToImageViewMarginConstraint;
@@ -103,7 +104,12 @@
     
     if (self.status.photo.largeURL) {
         self.contentImageView.hidden = NO;
-        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL] placeholderImage:[UIImage imageNamed:@"BackgroundImage"] options:SDWebImageRefreshCached];
+        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL] placeholderImage:[UIImage imageNamed:@"BackgroundImage"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if ([self.status.photo.largeURL hasSuffix:@".gif"]) {
+                self.iconGIFImageView.hidden = NO;
+                self.contentImageView.image = image.images.firstObject;
+            }
+        }];
         self.timeLabelTopToImageViewMarginConstraint.priority = UILayoutPriorityRequired;
     } else {
         self.contentImageView.hidden = YES;

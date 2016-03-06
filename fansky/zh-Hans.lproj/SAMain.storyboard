@@ -274,6 +274,9 @@
                                                     <outletCollection property="gestureRecognizers" destination="xsV-Gl-OJw" appends="YES" id="5OH-sN-Ogi"/>
                                                 </connections>
                                             </imageView>
+                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconGIF" translatesAutoresizingMaskIntoConstraints="NO" id="aUB-Nd-XMZ">
+                                                <rect key="frame" x="544" y="315" width="40" height="20"/>
+                                            </imageView>
                                             <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAe-Np-dLq">
                                                 <rect key="frame" x="70" y="16" width="514" height="20"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -325,6 +328,7 @@
                                             <constraint firstItem="B5I-2B-e8a" firstAttribute="leading" secondItem="8N1-O0-jkg" secondAttribute="leading" constant="16" id="3ih-Ym-EaQ"/>
                                             <constraint firstItem="dJE-J6-7lr" firstAttribute="trailing" secondItem="DAe-Np-dLq" secondAttribute="trailing" id="7D4-ci-0lu"/>
                                             <constraint firstItem="dJE-J6-7lr" firstAttribute="top" secondItem="DAe-Np-dLq" secondAttribute="bottom" constant="10" id="9De-Rd-DJf"/>
+                                            <constraint firstItem="aUB-Nd-XMZ" firstAttribute="trailing" secondItem="XOq-QZ-UUe" secondAttribute="trailing" id="Dvw-rY-Dad"/>
                                             <constraint firstItem="DAe-Np-dLq" firstAttribute="top" secondItem="B5I-2B-e8a" secondAttribute="top" id="IaQ-17-JLq"/>
                                             <constraint firstAttribute="height" constant="382" id="JT9-kA-AEz"/>
                                             <constraint firstAttribute="bottom" secondItem="5kd-aw-gbx" secondAttribute="bottom" constant="20" id="NwT-5c-q6V"/>
@@ -338,6 +342,7 @@
                                             <constraint firstItem="XOq-QZ-UUe" firstAttribute="trailing" secondItem="DAe-Np-dLq" secondAttribute="trailing" id="vS6-Vj-L6Z"/>
                                             <constraint firstAttribute="trailing" secondItem="DAe-Np-dLq" secondAttribute="trailing" constant="16" id="voR-MN-c5E"/>
                                             <constraint firstItem="XOq-QZ-UUe" firstAttribute="leading" secondItem="DAe-Np-dLq" secondAttribute="leading" id="xcN-EC-wmH"/>
+                                            <constraint firstItem="aUB-Nd-XMZ" firstAttribute="bottom" secondItem="XOq-QZ-UUe" secondAttribute="bottom" id="z3a-O3-TGb"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -407,6 +412,7 @@
                         <outlet property="contentImageView" destination="XOq-QZ-UUe" id="suF-u5-Iwb"/>
                         <outlet property="contentLabel" destination="dJE-J6-7lr" id="3XM-2u-lj4"/>
                         <outlet property="contentLabelHeightConstraint" destination="Ghq-ka-iO6" id="ubc-4f-NWZ"/>
+                        <outlet property="iconGIFImageView" destination="aUB-Nd-XMZ" id="9VZ-bb-isd"/>
                         <outlet property="starButton" destination="n0l-UE-oSs" id="DrI-KE-ZMv"/>
                         <outlet property="timeLabel" destination="5kd-aw-gbx" id="Qfs-hI-REC"/>
                         <outlet property="timeLabelTopToImageViewMarginConstraint" destination="Y3e-ja-yiu" id="0jz-O6-F8u"/>
@@ -978,6 +984,7 @@
         <image name="IconBell" width="25" height="25"/>
         <image name="IconCamera" width="25" height="25"/>
         <image name="IconCompose" width="25" height="25"/>
+        <image name="IconGIF" width="40" height="20"/>
         <image name="IconHome" width="25" height="25"/>
         <image name="IconMail" width="25" height="25"/>
         <image name="IconMore" width="25" height="25"/>

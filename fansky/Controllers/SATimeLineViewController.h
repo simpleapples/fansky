@@ -14,7 +14,7 @@
 
 @property (strong, nonatomic) LGRefreshView *refreshView;
 
-@property (strong, nonatomic) NSArray *timeLineList;
+@property (strong, nonatomic) NSMutableArray *timeLineList;
 @property (copy, nonatomic) NSString *userID;
 @property (copy, nonatomic) NSString *selectedStatusID;
 @property (copy, nonatomic) NSString *selectedUserID;

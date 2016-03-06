@@ -14,6 +14,7 @@
 @interface SAPhotoTimeLineCell ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIImageView *iconGIFImageView;
 
 @end
 
@@ -24,6 +25,7 @@
     [super prepareForReuse];
     
     [self.imageView setImage:nil];
+    self.iconGIFImageView.hidden = YES;
 }
 
 - (void)configWithStatus:(SAStatus *)status
@@ -40,7 +42,12 @@
 
 - (void)loadImage
 {
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL] placeholderImage:[UIImage imageNamed:@"BackgroundImage"] options:SDWebImageRefreshCached];
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL] placeholderImage:[UIImage imageNamed:@"BackgroundImage"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if ([self.status.photo.largeURL hasSuffix:@".gif"]) {
+            self.iconGIFImageView.hidden = NO;
+            self.imageView.image = image.images.firstObject;
+        }
+    }];
 }
 
 - (IBAction)imageViewTouchUp:(id)sender

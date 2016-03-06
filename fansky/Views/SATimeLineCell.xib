@@ -48,6 +48,19 @@
                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.shouldRasterize" value="YES"/>
                         </userDefinedRuntimeAttributes>
                     </imageView>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconGIF" translatesAutoresizingMaskIntoConstraints="NO" id="esy-gE-F74">
+                        <rect key="frame" x="544" y="343" width="40" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="F4g-PU-GLi"/>
+                            <constraint firstAttribute="height" constant="15" id="l54-b5-8rb"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="F4g-PU-GLi"/>
+                                <exclude reference="l54-b5-8rb"/>
+                            </mask>
+                        </variation>
+                    </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8m-jJ-Ibh">
                         <rect key="frame" x="16" y="16" width="44" height="44"/>
                         <state key="normal">
@@ -58,7 +71,7 @@
                         </connections>
                     </button>
                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="cD2-Vt-87e">
-                        <rect key="frame" x="70" y="16" width="464" height="20"/>
+                        <rect key="frame" x="70" y="16" width="454" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="VsT-Ib-6sg"/>
@@ -73,11 +86,11 @@
                             <action selector="contentImageViewTouchUp:" destination="6FZ-IE-DTy" eventType="touchUpInside" id="V3F-Aa-VLi"/>
                         </connections>
                     </button>
-                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Of-QF-XIm">
-                        <rect key="frame" x="534" y="16" width="50" height="20"/>
+                    <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="7Of-QF-XIm">
+                        <rect key="frame" x="524" y="16" width="60" height="20"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="5bn-b7-ZxS"/>
+                            <constraint firstAttribute="width" constant="60" id="5bn-b7-ZxS"/>
                             <constraint firstAttribute="width" constant="100" id="dmp-NZ-dZz"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
@@ -104,8 +117,10 @@
                     <constraint firstItem="EH6-m5-hgu" firstAttribute="top" secondItem="X8m-jJ-Ibh" secondAttribute="top" id="3kx-fK-2Pn"/>
                     <constraint firstItem="ijl-FY-P4u" firstAttribute="leading" secondItem="dRH-S7-m6F" secondAttribute="leading" id="6Vl-hR-XeV"/>
                     <constraint firstAttribute="trailing" secondItem="7Of-QF-XIm" secondAttribute="trailing" constant="16" id="768-qv-6Dw"/>
+                    <constraint firstItem="esy-gE-F74" firstAttribute="bottom" secondItem="dRH-S7-m6F" secondAttribute="bottom" id="8DO-NC-6tC"/>
                     <constraint firstItem="cD2-Vt-87e" firstAttribute="bottom" secondItem="7Of-QF-XIm" secondAttribute="bottom" id="8Wy-CJ-YeB"/>
                     <constraint firstItem="Iv0-Vt-jde" firstAttribute="leading" secondItem="cD2-Vt-87e" secondAttribute="leading" id="9Ac-LL-E4e"/>
+                    <constraint firstItem="esy-gE-F74" firstAttribute="trailing" secondItem="dRH-S7-m6F" secondAttribute="trailing" id="Ahf-8e-VNM"/>
                     <constraint firstItem="cD2-Vt-87e" firstAttribute="top" secondItem="7hb-tO-ueK" secondAttribute="top" constant="10" id="GdN-X7-3rW"/>
                     <constraint firstItem="Iv0-Vt-jde" firstAttribute="trailing" secondItem="7Of-QF-XIm" secondAttribute="trailing" id="GfB-dN-gI3"/>
                     <constraint firstItem="EH6-m5-hgu" firstAttribute="leading" secondItem="X8m-jJ-Ibh" secondAttribute="leading" id="I5c-dX-La0"/>
@@ -138,10 +153,14 @@
                 <outlet property="contentHeightConstraint" destination="DPD-dI-CRk" id="8LE-tA-b3F"/>
                 <outlet property="contentImageView" destination="dRH-S7-m6F" id="6vQ-LD-z9C"/>
                 <outlet property="contentLabel" destination="Iv0-Vt-jde" id="mCe-cz-Kle"/>
+                <outlet property="iconGIFImageView" destination="esy-gE-F74" id="qfS-L2-4o4"/>
                 <outlet property="timeLabel" destination="7Of-QF-XIm" id="d2x-VH-SG2"/>
                 <outlet property="usernameLabel" destination="cD2-Vt-87e" id="LPR-nn-iKk"/>
             </connections>
             <point key="canvasLocation" x="312" y="388"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="IconGIF" width="40" height="20"/>
+    </resources>
 </document>

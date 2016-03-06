@@ -18,6 +18,7 @@
 @interface SATimeLineCell () <DTAttributedTextContentViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *iconGIFImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet DTAttributedLabel *contentLabel;
@@ -37,6 +38,7 @@
     self.contentLabel.delegate = nil;
     [self.avatarImageView setImage:nil];
     [self.contentImageView setImage:nil];
+    self.iconGIFImageView.hidden = YES;
 }
 
 - (void)configWithStatus:(SAStatus *)status
@@ -74,7 +76,12 @@
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.status.user.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
     if (self.status.photo.largeURL) {
         self.contentHeightConstraint.constant = self.frame.size.height - 72 - (self.frame.size.width - 86) / 2;
-        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL] placeholderImage:[UIImage imageNamed:@"BackgroundImage"] options:SDWebImageRefreshCached];
+        [self.contentImageView sd_setImageWithURL:[NSURL URLWithString:self.status.photo.largeURL] placeholderImage:[UIImage imageNamed:@"BackgroundImage"] options:SDWebImageRefreshCached completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if ([self.status.photo.largeURL hasSuffix:@".gif"]) {
+                self.iconGIFImageView.hidden = NO;
+                self.contentImageView.image = image.images.firstObject;
+            }
+        }];
         self.contentImageView.hidden = NO;
     } else {
         self.contentHeightConstraint.constant = self.frame.size.height - 62;

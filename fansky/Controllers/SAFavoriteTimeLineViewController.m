@@ -35,7 +35,7 @@ static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
 - (void)updateDataWithRefresh:(BOOL)refresh
 {
     if (!self.timeLineList) {
-        self.timeLineList = [[NSArray alloc] init];
+        self.timeLineList = [[NSMutableArray alloc] init];
     }
     if (!refresh) {
         self.page++;
@@ -50,11 +50,9 @@ static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
             [tempTimeLineList addObject:status];
         }];
         if (self.page > 1) {
-            NSMutableArray *existList = [self.timeLineList mutableCopy];
-            [existList addObjectsFromArray:tempTimeLineList];
-            self.timeLineList = [existList copy];
+            [self.timeLineList addObjectsFromArray:tempTimeLineList];
         } else {
-            self.timeLineList = [tempTimeLineList copy];
+            self.timeLineList = tempTimeLineList;
         }
         [self.tableView reloadData];
         [SAMessageDisplayUtils dismiss];
