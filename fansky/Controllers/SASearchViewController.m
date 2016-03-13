@@ -238,7 +238,9 @@ static NSString *const cellName = @"SATimeLineCell";
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell contentImageViewTouchUp:(id)sender
 {
-    [self showPhotoFromSourceCell:timeLineCell photo:timeLineCell.status.photo];
+    if (!self.tableView.isEditing) {
+        [self showPhotoFromSourceCell:timeLineCell photo:timeLineCell.status.photo];
+    }
 }
 
 - (void)timeLineCell:(SATimeLineCell *)timeLineCell contentURLTouchUp:(id)sender
