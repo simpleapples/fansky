@@ -34,9 +34,6 @@ static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
 
 - (void)updateDataWithRefresh:(BOOL)refresh
 {
-    if (!self.timeLineList) {
-        self.timeLineList = [[NSMutableArray alloc] init];
-    }
     if (!refresh) {
         self.page++;
     } else {

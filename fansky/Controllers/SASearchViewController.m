@@ -79,9 +79,6 @@ static NSString *const cellName = @"SATimeLineCell";
 
 - (void)updateDataWithRefresh:(BOOL)refresh
 {
-    if (!self.timeLineList) {
-        self.timeLineList = [[NSMutableArray alloc] init];
-    }
     NSString *maxID;
     if (!refresh) {
         maxID = self.maxID;
@@ -95,11 +92,10 @@ static NSString *const cellName = @"SATimeLineCell";
             SAStatus *status = [[SADataManager sharedManager] statusWithObject:obj localUsers:nil type:SAStatusTypeFavoriteStatus];
             [tempTimeLineList addObject:status];
         }];
-        if (!refresh) {
-            [self.timeLineList addObjectsFromArray:tempTimeLineList];
-        } else {
-            self.timeLineList = tempTimeLineList;
+        if (refresh) {
+            [self.timeLineList removeAllObjects];
         }
+        [self.timeLineList addObjectsFromArray:tempTimeLineList];
         if (self.timeLineList.count) {
             SAStatus *lastStatus = [self.timeLineList lastObject];
             self.maxID = lastStatus.statusID;
@@ -169,6 +165,14 @@ static NSString *const cellName = @"SATimeLineCell";
     } else {
         [SAMessageDisplayUtils showSuccessWithMessage:@"已保存到相册"];
     }
+}
+
+- (NSMutableArray *)timeLineList
+{
+    if (!_timeLineList) {
+        _timeLineList = [[NSMutableArray alloc] init];
+    }
+    return _timeLineList;
 }
 
 #pragma mark - UIViewControllerPreviewingDelegate

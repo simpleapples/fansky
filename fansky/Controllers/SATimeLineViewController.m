@@ -69,7 +69,8 @@ static NSString *const cellName = @"SATimeLineCell";
         type = SAStatusTypeTimeLine;
     }
     [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type offset:0 limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
-        self.timeLineList = [result mutableCopy];
+        [self.timeLineList removeAllObjects];
+        [self.timeLineList addObjectsFromArray:result];
         [self.tableView reloadData];
         [self refreshData];
     }];
@@ -82,9 +83,6 @@ static NSString *const cellName = @"SATimeLineCell";
 
 - (void)updateDataWithRefresh:(BOOL)refresh
 {
-    if (!self.timeLineList) {
-        self.timeLineList = [[NSMutableArray alloc] init];
-    }
     NSString *maxID;
     if (!refresh) {
         maxID = self.maxID;
@@ -106,10 +104,9 @@ static NSString *const cellName = @"SATimeLineCell";
         }
         [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type offset:offset limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
             if (refresh) {
-                self.timeLineList = [result mutableCopy];
-            } else {
-                [self.timeLineList addObjectsFromArray:result];
+                [self.timeLineList removeAllObjects];
             }
+            [self.timeLineList addObjectsFromArray:result];
             if (self.timeLineList.count) {
                 SAStatus *lastStatus = [self.timeLineList lastObject];
                 self.maxID = lastStatus.statusID;
@@ -199,6 +196,14 @@ static NSString *const cellName = @"SATimeLineCell";
     JTSImageViewController *imageViewer = [[JTSImageViewController alloc] initWithImageInfo:imageInfo mode:JTSImageViewControllerMode_Image backgroundStyle:(JTSImageViewControllerBackgroundOption_Scaled | JTSImageViewControllerBackgroundOption_Blurred)];
     imageViewer.interactionsDelegate = self;
     [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
+}
+
+- (NSMutableArray *)timeLineList
+{
+    if (!_timeLineList) {
+        _timeLineList = [[NSMutableArray alloc] init];
+    }
+    return _timeLineList;
 }
 
 #pragma mark - UIViewControllerPreviewingDelegate

@@ -74,9 +74,6 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
 
 - (void)updateDataWithRefresh:(BOOL)refresh
 {
-    if (!self.friendList) {
-        self.friendList = [[NSMutableArray alloc] init];
-    }
     if (!refresh) {
         self.page++;
     } else {
@@ -91,11 +88,10 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
             SAFriend *friend = [[SAFriend alloc] initWithObject:obj];
             [tempFriendList addObject:friend];
         }];
-        if (self.page > 1) {
-            [self.friendList addObjectsFromArray:tempFriendList];
-        } else {
-            self.friendList = tempFriendList;
+        if (self.page <= 1) {
+            [self.friendList removeAllObjects];
         }
+        [self.friendList addObjectsFromArray:tempFriendList];
         [self.tableView reloadData];
         [self.refreshControl endRefreshing];
         [SAMessageDisplayUtils dismiss];
@@ -120,6 +116,14 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
         SAUserViewController *userViewController = (SAUserViewController *)segue.destinationViewController;
         userViewController.userID = self.selectedUserID;
     }
+}
+
+- (NSMutableArray *)friendList
+{
+    if (!_friendList) {
+        _friendList = [[NSMutableArray alloc] init];
+    }
+    return _friendList;
 }
 
 #pragma mark - UITableViewDelegate
