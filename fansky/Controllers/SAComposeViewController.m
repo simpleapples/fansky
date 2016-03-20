@@ -71,7 +71,7 @@
     [self.sendButton.layer setRasterizationScale:[UIScreen mainScreen].scale];
     
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:currentUser.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:currentUser.profileImageURL] placeholderImage:[UIImage imageNamed:@"BackgroundAvatar"] options:SDWebImageRefreshCached];
     
     if (self.userID) {
         self.cameraButton.hidden = NO;

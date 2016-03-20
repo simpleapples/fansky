@@ -56,7 +56,7 @@
 
 - (void)loadImage
 {
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.otherUser.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.otherUser.profileImageURL] placeholderImage:[UIImage imageNamed:@"BackgroundAvatar"] options:SDWebImageRefreshCached];
 }
 
 @end

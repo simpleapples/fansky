@@ -92,7 +92,7 @@
     [statusString setAttributes:normalDictionay range:NSMakeRange(statusCountString.length, 2)];
     self.statusCountLabel.attributedText = statusString;
     
-    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.user.profileImageURL] placeholderImage:nil options:SDWebImageRefreshCached];
+    [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.user.profileImageURL] placeholderImage:[UIImage imageNamed:@"BackgroundAvatar"] options:SDWebImageRefreshCached];
     if (self.isMineInfo) {
         self.followButton.hidden = YES;
         self.settingButton.hidden = NO;
