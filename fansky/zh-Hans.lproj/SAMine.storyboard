@@ -355,6 +355,27 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="iVd-B4-2Zs">
+                            <rect key="frame" x="0.0" y="389" width="600" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="饭斯基 1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwL-yb-HU3">
+                                    <rect key="frame" x="16" y="5" width="568" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="clv-31-nYX"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="RwL-yb-HU3" firstAttribute="leading" secondItem="iVd-B4-2Zs" secondAttribute="leading" constant="16" id="Od8-SV-kwd"/>
+                                <constraint firstAttribute="trailing" secondItem="RwL-yb-HU3" secondAttribute="trailing" constant="16" id="QiE-gh-snb"/>
+                                <constraint firstItem="RwL-yb-HU3" firstAttribute="centerY" secondItem="iVd-B4-2Zs" secondAttribute="centerY" id="cqB-fd-T4Z"/>
+                            </constraints>
+                        </view>
                         <sections>
                             <tableViewSection id="UYV-6M-s0S">
                                 <cells>
@@ -442,22 +463,22 @@
                             </tableViewSection>
                             <tableViewSection id="Avy-Ik-hHo">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="FbH-7B-J5h" detailTextLabel="fsw-b6-f7v" style="IBUITableViewCellStyleValue1" id="VEE-XU-Smq">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="FbH-7B-J5h" detailTextLabel="fsw-b6-f7v" style="IBUITableViewCellStyleValue1" id="VEE-XU-Smq">
                                         <rect key="frame" x="0.0" y="239" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VEE-XU-Smq" id="ljo-Ud-yH4">
-                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="反馈问题" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FbH-7B-J5h">
-                                                    <rect key="frame" x="15" y="12" width="64" height="19"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="吐槽 饭斯基" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FbH-7B-J5h">
+                                                    <rect key="frame" x="15" y="12" width="85" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="@饭斯基App" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fsw-b6-f7v">
-                                                    <rect key="frame" x="475" y="12" width="90" height="19"/>
+                                                    <rect key="frame" x="495" y="12" width="90" height="19"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                                                     <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
@@ -466,15 +487,15 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="2zw-SC-VUC" style="IBUITableViewCellStyleDefault" id="Fgg-gy-x6t">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="2zw-SC-VUC" style="IBUITableViewCellStyleDefault" id="Fgg-gy-x6t">
                                         <rect key="frame" x="0.0" y="283" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fgg-gy-x6t" id="XIQ-NZ-a9Q">
-                                            <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="开源组件" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2zw-SC-VUC">
-                                                    <rect key="frame" x="15" y="0.0" width="550" height="43"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="赞美 饭斯基" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2zw-SC-VUC">
+                                                    <rect key="frame" x="15" y="0.0" width="570" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -483,25 +504,18 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="KML-4d-By0" detailTextLabel="BJj-Jv-pl6" style="IBUITableViewCellStyleValue1" id="MoS-ny-eWj">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="KML-4d-By0" style="IBUITableViewCellStyleDefault" id="MoS-ny-eWj">
                                         <rect key="frame" x="0.0" y="327" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MoS-ny-eWj" id="XmO-l5-Y4u">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="版本" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KML-4d-By0">
-                                                    <rect key="frame" x="15" y="12" width="32" height="19"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="致谢" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KML-4d-By0">
+                                                    <rect key="frame" x="15" y="0.0" width="570" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="1.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BJj-Jv-pl6">
-                                                    <rect key="frame" x="562" y="12" width="23" height="19"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
-                                                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -531,7 +545,7 @@
                         <outlet property="cacheSizeLabel" destination="oZA-S7-f4p" id="i6z-k9-Fet"/>
                         <outlet property="friendRequestCountLabel" destination="3Z6-HF-ySw" id="Ig0-7K-Zrr"/>
                         <outlet property="passcodeSwitch" destination="wqa-n3-vry" id="RQE-MR-RTS"/>
-                        <outlet property="versionLabel" destination="BJj-Jv-pl6" id="New-a9-BoC"/>
+                        <outlet property="versionLabel" destination="RwL-yb-HU3" id="w4P-Cz-0gp"/>
                         <segue destination="AX1-RB-XMm" kind="show" identifier="SettingToFriendListSegue" id="8Zu-Ra-w2O"/>
                     </connections>
                 </tableViewController>

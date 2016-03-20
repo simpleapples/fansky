@@ -59,7 +59,7 @@
     [self updatePasscodeSwitch];
 
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
-    NSString *versionString = [NSString stringWithFormat:@"%@ (%@)", [info objectForKey:@"CFBundleShortVersionString"], [info objectForKey:@"CFBundleVersion"]];
+    NSString *versionString = [NSString stringWithFormat:@"你正在使用饭斯基 %@ (%@)", [info objectForKey:@"CFBundleShortVersionString"], [info objectForKey:@"CFBundleVersion"]];
     self.versionLabel.text = versionString;
     
     [self updateCacheSize];
@@ -108,6 +108,10 @@
                 });
             }];
         } else if (indexPath.row == 1) {
+            NSString *appID = @"1039622797";
+            NSString *url = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", appID];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
+        } else if (indexPath.row == 2) {
             NSString *path = [[NSBundle mainBundle] pathForResource:@"Pods-fansky-acknowledgements" ofType:@"plist"];
             VTAcknowledgementsViewController *acknowledgementViewController = [[VTAcknowledgementsViewController alloc] initWithAcknowledgementsPlistPath:path];
             acknowledgementViewController.title = @"致谢";

@@ -17,10 +17,11 @@
 #import "SAMessageViewController.h"
 #import "SAConversation+CoreDataProperties.h"
 #import "SAMessage+CoreDataProperties.h"
+#import "SAUserViewController.h"
 #import "UIColor+Utils.h"
 #import "LGRefreshView.h"
 
-@interface SAConversationViewController () <LGRefreshViewDelegate>
+@interface SAConversationViewController () <LGRefreshViewDelegate, SAConversationCellDelegate>
 
 @property (strong, nonatomic) LGRefreshView *refreshView;
 
@@ -109,7 +110,18 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
     if ([segue.destinationViewController isKindOfClass:[SAMessageViewController class]]) {
         SAMessageViewController *messageViewController = (SAMessageViewController *)segue.destinationViewController;
         messageViewController.userID = self.selectedUserID;
+    } else if ([segue.destinationViewController isKindOfClass:[SAUserViewController class]]) {
+        SAUserViewController *userViewController = (SAUserViewController *)segue.destinationViewController;
+        userViewController.userID = self.selectedUserID;
     }
+}
+
+#pragma mark - SAConversationCellDelegate
+
+- (void)conversationCell:(SAConversationCell *)conversationCell avatarImageViewTouchUp:(id)sender
+{
+    self.selectedUserID = conversationCell.otherUser.userID;
+    [self performSegueWithIdentifier:@"ConversationToUserSegue" sender:nil];
 }
 
 #pragma mark - LGRefreshViewDelegate
@@ -130,6 +142,7 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
     static NSString *const cellName = @"SAConversationCell";
     SAConversation *conversation = [self.conversationList objectAtIndex:indexPath.row];
     SAConversationCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
+    cell.delegate = self;
     [cell configWithMessage:conversation];
     return cell;
 }

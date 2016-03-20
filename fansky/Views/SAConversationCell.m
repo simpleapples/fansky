@@ -20,7 +20,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *userIDLabel;
 
 @property (strong, nonatomic) SAConversation *conversation;
-@property (strong, nonatomic) SAUser *otherUser;
 
 @end
 
@@ -57,6 +56,15 @@
 - (void)loadImage
 {
     [self.avatarImageView sd_setImageWithURL:[NSURL URLWithString:self.otherUser.profileImageURL] placeholderImage:[UIImage imageNamed:@"BackgroundAvatar"] options:SDWebImageRefreshCached];
+}
+
+#pragma mark - EventHandler
+
+- (IBAction)avatarImageTouchUp:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(conversationCell:avatarImageViewTouchUp:)]) {
+        [self.delegate conversationCell:self avatarImageViewTouchUp:sender];
+    }
 }
 
 @end

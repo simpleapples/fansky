@@ -26,6 +26,7 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="909-Vp-DJG">
                                             <rect key="frame" x="16" y="15" width="40" height="40"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <gestureRecognizers/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="EXg-hs-SFn"/>
                                                 <constraint firstAttribute="width" constant="40" id="R1D-Rb-5ib"/>
@@ -52,11 +53,21 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hfr-6J-YSb">
+                                            <rect key="frame" x="16" y="15" width="40" height="40"/>
+                                            <connections>
+                                                <action selector="avatarImageTouchUp:" destination="URt-GF-gHq" eventType="touchUpInside" id="sSR-4h-rVB"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="Hfr-6J-YSb" firstAttribute="trailing" secondItem="909-Vp-DJG" secondAttribute="trailing" id="KUm-ox-NWL"/>
+                                        <constraint firstItem="Hfr-6J-YSb" firstAttribute="top" secondItem="909-Vp-DJG" secondAttribute="top" id="PoJ-LU-Sxq"/>
                                         <constraint firstItem="909-Vp-DJG" firstAttribute="top" secondItem="DPX-LP-ZFo" secondAttribute="top" constant="10" id="Uqh-Im-GTV"/>
                                         <constraint firstItem="OJg-1m-piO" firstAttribute="top" secondItem="909-Vp-DJG" secondAttribute="top" id="WY5-Jg-HcX"/>
+                                        <constraint firstItem="Hfr-6J-YSb" firstAttribute="bottom" secondItem="909-Vp-DJG" secondAttribute="bottom" id="gxz-7R-Egu"/>
                                         <constraint firstItem="909-Vp-DJG" firstAttribute="leading" secondItem="DPX-LP-ZFo" secondAttribute="leading" constant="16" id="kgb-ol-iOG"/>
+                                        <constraint firstItem="Hfr-6J-YSb" firstAttribute="leading" secondItem="909-Vp-DJG" secondAttribute="leading" id="oLu-X7-Y6I"/>
                                         <constraint firstItem="909-Vp-DJG" firstAttribute="centerY" secondItem="DPX-LP-ZFo" secondAttribute="centerY" id="oMe-05-Vn2"/>
                                         <constraint firstItem="OJg-1m-piO" firstAttribute="leading" secondItem="909-Vp-DJG" secondAttribute="trailing" constant="10" id="oyb-wv-73R"/>
                                         <constraint firstItem="9Es-aE-qbz" firstAttribute="bottom" secondItem="909-Vp-DJG" secondAttribute="bottom" id="pSv-XL-3Mt"/>
@@ -86,6 +97,7 @@
                     <tabBarItem key="tabBarItem" tag="3" title="私信" image="IconMail" id="zGf-9s-EI7"/>
                     <connections>
                         <segue destination="Ufd-9g-YvT" kind="show" identifier="ConversationToMessageSegue" id="B4N-io-jVq"/>
+                        <segue destination="Q5T-Lf-5df" kind="show" identifier="ConversationToUserSegue" id="ivR-m5-hzL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qDi-1M-hh9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1008,10 +1020,10 @@
         <image name="IconStop" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qBy-9g-ujA"/>
-        <segue reference="Q2K-Ka-9h2"/>
-        <segue reference="H7G-PZ-sGt"/>
+        <segue reference="Btz-3b-6W7"/>
         <segue reference="Ciz-wU-ArU"/>
+        <segue reference="qBy-9g-ujA"/>
+        <segue reference="ivR-m5-hzL"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>
