@@ -628,10 +628,21 @@
             <objects>
                 <tabBarController storyboardIdentifier="SATabBarViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bcT-Eb-ogE" customClass="SATabBarViewController" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="时间线" id="KGp-NT-lvm">
-                        <barButtonItem key="leftBarButtonItem" image="IconAccount" id="rTU-y5-VGN">
-                            <connections>
-                                <action selector="accountButtonTouchUp:" destination="bcT-Eb-ogE" id="0ev-pw-003"/>
-                            </connections>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="hQZ-IT-uo3">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9Es-kx-T4h">
+                                <rect key="frame" x="20" y="9" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="BackgroundAccount"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="accountButtonTouchUp:" destination="bcT-Eb-ogE" eventType="touchUpInside" id="b7b-6K-uJt"/>
+                                </connections>
+                            </button>
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem image="IconCompose" id="tlu-3n-EV2">
@@ -660,6 +671,7 @@
                         </userDefinedRuntimeAttributes>
                     </tabBar>
                     <connections>
+                        <outlet property="accountButton" destination="9Es-kx-T4h" id="JSX-XP-pkS"/>
                         <outlet property="delegate" destination="OKk-EU-NVX" id="2hF-8C-KUC"/>
                         <segue destination="ieL-P1-XG7" kind="relationship" relationship="viewControllers" id="3TY-n2-7zE"/>
                         <segue destination="PDW-gp-csN" kind="relationship" relationship="viewControllers" id="pXo-Ej-HRv"/>
@@ -978,8 +990,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BackgroundAccount" width="25" height="25"/>
         <image name="BackgroundGrayLine" width="3" height="3"/>
-        <image name="IconAccount" width="25" height="25"/>
         <image name="IconBackColor" width="25" height="25"/>
         <image name="IconBell" width="25" height="25"/>
         <image name="IconCamera" width="25" height="25"/>
@@ -997,9 +1009,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="qBy-9g-ujA"/>
+        <segue reference="Q2K-Ka-9h2"/>
+        <segue reference="H7G-PZ-sGt"/>
         <segue reference="Ciz-wU-ArU"/>
-        <segue reference="uHq-Bf-vPn"/>
-        <segue reference="Btz-3b-6W7"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>

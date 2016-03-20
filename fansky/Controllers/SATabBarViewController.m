@@ -9,8 +9,13 @@
 #import "SATabBarViewController.h"
 #import "SAUserListViewController.h"
 #import "SANotificationManager.h"
+#import "SADataManager+User.h"
+#import "SAUser+CoreDataProperties.h"
+#import <SDWebImage/SDWebImageManager.h>
 
 @interface SATabBarViewController ()
+
+@property (weak, nonatomic) IBOutlet UIButton *accountButton;
 
 @end
 
@@ -23,6 +28,20 @@
     [[SANotificationManager sharedManager] addObserver:self forKeyPath:@"timeLineCount" options:(NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew) context:nil];
     [[SANotificationManager sharedManager] addObserver:self forKeyPath:@"mentionCount" options:(NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew) context:nil];
     [[SANotificationManager sharedManager] addObserver:self forKeyPath:@"messageCount" options:(NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew) context:nil];
+    
+    [self updateInterface];
+}
+
+- (void)updateInterface
+{
+    SAUser *currentUser = [SADataManager sharedManager].currentUser;
+    if (currentUser && currentUser.profileImageURL.length) {
+        NSURL *imageURL = [NSURL URLWithString:currentUser.profileImageURL];
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        [manager downloadImageWithURL:imageURL options:SDWebImageRefreshCached progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+            [self.accountButton setImage:image forState:UIControlStateNormal];
+        }];
+    }
 }
 
 - (void)dealloc
