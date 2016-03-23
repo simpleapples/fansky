@@ -10,11 +10,12 @@
 
 @class SAMessage;
 @class SAUser;
+@class RLMResults;
 
 @interface SADataManager (Message)
 
-- (void)insertMessageWithObjects:(id)objects;
+- (void)insertOrUpdateMessageWithObjects:(id)objects;
 - (SAMessage *)insertOrUpdateMessageWithObject:(id)object localUser:(SAUser *)localUser;
-- (NSArray *)currentMessageWithUserID:(NSString *)userID localUserID:(NSString *)localUserID limit:(NSUInteger)limit;
+- (RLMResults *)currentMessagesWithUserID:(NSString *)userID localUserID:(NSString *)localUserID;
 
 @end

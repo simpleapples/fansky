@@ -2,23 +2,22 @@
 //  SAConversation.h
 //  fansky
 //
-//  Created by Zzy on 10/7/15.
-//  Copyright © 2015 Zzy. All rights reserved.
+//  Created by Zzy on 16/3/21.
+//  Copyright © 2016年 Zzy. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+#import <Realm/Realm.h>
 
-@class SAMessage, SAUser;
+@class SAUser;
+@class SAMessage;
 
-NS_ASSUME_NONNULL_BEGIN
+@interface SAConversation : RLMObject
 
-@interface SAConversation : NSManagedObject
+@property NSString *otherUserID;
+@property int messageCount;
+@property BOOL isNew;
 
-// Insert code here to declare functionality of your managed object subclass
+@property SAMessage *message;
+@property SAUser *localUser;
 
 @end
-
-NS_ASSUME_NONNULL_END
-
-#import "SAConversation+CoreDataProperties.h"

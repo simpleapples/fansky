@@ -7,8 +7,8 @@
 //
 
 #import "SAMessageCell.h"
-#import "SAMessage+CoreDataProperties.h"
-#import "SAUser+CoreDataProperties.h"
+#import "SAMessage.h"
+#import "SAUser.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SAMessageCell ()

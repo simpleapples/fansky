@@ -2,23 +2,23 @@
 //  SAMessage.h
 //  fansky
 //
-//  Created by Zzy on 10/7/15.
-//  Copyright © 2015 Zzy. All rights reserved.
+//  Created by Zzy on 16/3/21.
+//  Copyright © 2016年 Zzy. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+#import <Realm/Realm.h>
 
-@class SAConversation, SAUser;
+@class SAUser;
+@class SAConversation;
 
-NS_ASSUME_NONNULL_BEGIN
+@interface SAMessage : RLMObject
 
-@interface SAMessage : NSManagedObject
+@property NSString *messageID;
+@property NSString *text;
+@property NSDate *createdAt;
 
-// Insert code here to declare functionality of your managed object subclass
+@property SAUser *sender;
+@property SAUser *recipient;
+@property SAUser *localUser;
 
 @end
-
-NS_ASSUME_NONNULL_END
-
-#import "SAMessage+CoreDataProperties.h"

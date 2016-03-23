@@ -8,7 +8,7 @@
 
 #import "SAAPIService.h"
 #import "SAConstants.h"
-#import "SAUser+CoreDataProperties.h"
+#import "SAUser.h"
 #import "SADataManager+User.h"
 #import <TDOAuth/TDOAuth.h>
 

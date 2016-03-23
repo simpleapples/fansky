@@ -8,9 +8,9 @@
 
 #import "SAConversationCell.h"
 #import "SADataManager+User.h"
-#import "SAUser+CoreDataProperties.h"
-#import "SAConversation+CoreDataProperties.h"
-#import "SAMessage+CoreDataProperties.h"
+#import "SAUser.h"
+#import "SAConversation.h"
+#import "SAMessage.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SAConversationCell ()
@@ -37,7 +37,7 @@
 - (void)configWithMessage:(SAConversation *)conversation
 {
     self.conversation = conversation;
-    if ([self.conversation.otherUserID isEqualToString:self.conversation.message.senderID]) {
+    if ([self.conversation.otherUserID isEqualToString:self.conversation.message.sender.userID]) {
         self.otherUser = self.conversation.message.sender;
     } else {
         self.otherUser = self.conversation.message.recipient;

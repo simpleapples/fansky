@@ -8,11 +8,11 @@
 
 #import "SAMentionListViewController.h"
 #import "SADataManager+User.h"
-#import "SAUser+CoreDataProperties.h"
+#import "SAUser.h"
 #import "SAStatusViewController.h"
 #import "SADataManager+Status.h"
 #import "SAMessageDisplayUtils.h"
-#import "SAStatus+CoreDataProperties.h"
+#import "SAStatus.h"
 #import "SAAPIService.h"
 #import "SAUserViewController.h"
 #import "SATimeLineCell.h"
@@ -31,12 +31,9 @@ static NSUInteger TIME_LINE_COUNT = 40;
 - (void)getLocalData
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
-    [[SADataManager sharedManager] currentMentionTimeLineWithUserID:currentUser.userID offset:0 limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
-        [self.timeLineList removeAllObjects];
-        [self.timeLineList addObjectsFromArray:result];
-        [self.tableView reloadData];
-        [self refreshData];
-    }];
+    self.timeLineList = [[SADataManager sharedManager] currentTimeLineWithUserID:currentUser.userID type:SAStatusTypeMentionStatus];
+    [self.tableView reloadData];
+    [self refreshData];
 }
 
 - (void)updateDataWithRefresh:(BOOL)refresh
@@ -50,22 +47,16 @@ static NSUInteger TIME_LINE_COUNT = 40;
     NSString *userID = [SADataManager sharedManager].currentUser.userID;
     void (^success)(id data) = ^(id data) {
         [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:data type:SAStatusTypeMentionStatus];
+        if (self.timeLineList.count) {
+            SAStatus *lastStatus = [self.timeLineList lastObject];
+            self.maxID = lastStatus.statusID;
+        }
+        [self.tableView reloadData];
+        [self.refreshView endRefreshing];
         NSUInteger offset = self.timeLineList.count;
         if (refresh) {
             offset = 0;
         }
-        [[SADataManager sharedManager] currentMentionTimeLineWithUserID:userID offset:offset limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
-            if (refresh) {
-                [self.timeLineList removeAllObjects];
-            }
-            [self.timeLineList addObjectsFromArray:result];
-            if (self.timeLineList.count) {
-                SAStatus *lastStatus = [self.timeLineList lastObject];
-                self.maxID = lastStatus.statusID;
-            }
-            [self.tableView reloadData];
-            [self.refreshView endRefreshing];
-        }];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];

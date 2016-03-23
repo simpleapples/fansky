@@ -7,7 +7,7 @@
 //
 
 #import "SAPhotoTimeLineCell.h"
-#import "SAStatus+CoreDataProperties.h"
+#import "SAStatus.h"
 #import "SAPhoto.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 

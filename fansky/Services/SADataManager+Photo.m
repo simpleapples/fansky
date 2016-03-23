@@ -11,40 +11,23 @@
 
 @implementation SADataManager (Photo)
 
-static NSString *const ENTITY_NAME = @"SAPhoto";
-
-- (SAPhoto *)insertPhotoWithObject:(id)object
+- (SAPhoto *)insertOrUpdatePhotoWithObject:(id)object
 {
     NSString *imageURL = [object objectForKey:@"imageurl"];
     NSString *largeURL = [object objectForKey:@"largeurl"];
     NSString *thumbURL = [object objectForKey:@"thumburl"];
     NSString *photoURL = [object objectForKey:@"url"];
         
-    __block SAPhoto *resultPhoto;
-    [self.managedObjectContext performBlockAndWait:^{
-        SAPhoto *photo = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
-        photo.imageURL = imageURL;
-        photo.largeURL = largeURL;
-        photo.thumbURL = thumbURL;
-        photo.photoURL = photoURL;
-        resultPhoto = photo;
-    }];
-    return resultPhoto;
-}
-
-- (SAPhoto *)photoWithObject:(id)object
-{
-    NSString *imageURL = [object objectForKey:@"imageurl"];
-    NSString *largeURL = [object objectForKey:@"largeurl"];
-    NSString *thumbURL = [object objectForKey:@"thumburl"];
-    NSString *photoURL = [object objectForKey:@"url"];
-    
-    SAPhoto *photo = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
+    SAPhoto *photo = [[SAPhoto alloc] init];
     photo.imageURL = imageURL;
     photo.largeURL = largeURL;
     photo.thumbURL = thumbURL;
     photo.photoURL = photoURL;
-    return photo;
+    
+    [self.defaultRealm beginWriteTransaction];
+    SAPhoto *resultPhoto = [SAPhoto createOrUpdateInRealm:self.defaultRealm withValue:photo];
+    [self.defaultRealm commitWriteTransaction];
+    return resultPhoto;
 }
 
 @end

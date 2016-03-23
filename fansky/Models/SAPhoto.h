@@ -2,23 +2,17 @@
 //  SAPhoto.h
 //  fansky
 //
-//  Created by Zzy on 10/7/15.
-//  Copyright © 2015 Zzy. All rights reserved.
+//  Created by Zzy on 16/3/21.
+//  Copyright © 2016年 Zzy. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+#import <Realm/Realm.h>
 
-@class SAStatus;
+@interface SAPhoto : RLMObject
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface SAPhoto : NSManagedObject
-
-// Insert code here to declare functionality of your managed object subclass
+@property NSString *imageURL;
+@property NSString *thumbURL;
+@property NSString *largeURL;
+@property NSString *photoURL;
 
 @end
-
-NS_ASSUME_NONNULL_END
-
-#import "SAPhoto+CoreDataProperties.h"

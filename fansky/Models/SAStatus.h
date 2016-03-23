@@ -2,34 +2,37 @@
 //  SAStatus.h
 //  fansky
 //
-//  Created by Zzy on 10/7/15.
-//  Copyright © 2015 Zzy. All rights reserved.
+//  Created by Zzy on 16/3/21.
+//  Copyright © 2016年 Zzy. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+#import "SAUser.h"
+#import <Realm/Realm.h>
 
-typedef NS_OPTIONS(NSUInteger, SAStatusTypes)
+typedef NS_ENUM(NSUInteger, SAStatusTypes)
 {
-    SAStatusTypeTimeLine = 1 << 0,
-    
-    SAStatusTypeUserStatus = 1 << 1,
-    
-    SAStatusTypeMentionStatus = 1 << 2,
-    
-    SAStatusTypeFavoriteStatus = 1 << 3
+    SAStatusTypeTimeLine = 1,
+    SAStatusTypeUserStatus = 2,
+    SAStatusTypeMentionStatus = 3,
+    SAStatusTypeFavoriteStatus = 4
 };
 
-@class SAPhoto, SAUser;
+RLM_ARRAY_TYPE(NSNumber)
 
-NS_ASSUME_NONNULL_BEGIN
+@class SAPhoto;
 
-@interface SAStatus : NSManagedObject
+@interface SAStatus : RLMObject
 
-// Insert code here to declare functionality of your managed object subclass
+@property NSString *statusID;
+@property NSString *text;
+@property NSString *source;
+@property NSString *repostStatusID;
+@property NSDate *createdAt;
+@property NSString *types;
+@property BOOL isFavorited;
+
+@property SAUser *user;
+@property SAPhoto *photo;
+@property RLMArray<SAUser *><SAUser> *localUsers;
 
 @end
-
-NS_ASSUME_NONNULL_END
-
-#import "SAStatus+CoreDataProperties.h"

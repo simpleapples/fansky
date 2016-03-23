@@ -10,7 +10,7 @@
 #import "SAUserListViewController.h"
 #import "SANotificationManager.h"
 #import "SADataManager+User.h"
-#import "SAUser+CoreDataProperties.h"
+#import "SAUser.h"
 #import <SDWebImage/SDWebImageManager.h>
 
 @interface SATabBarViewController ()

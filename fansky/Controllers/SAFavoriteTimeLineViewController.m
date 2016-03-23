@@ -13,8 +13,8 @@
 #import "SAStatusViewController.h"
 #import "SAUserViewController.h"
 #import "SATimeLineCell.h"
-#import "SAStatus+CoreDataProperties.h"
-#import "SAUser+CoreDataProperties.h"
+#import "SAStatus.h"
+#import "SAUser.h"
 
 @interface SAFavoriteTimeLineViewController ()
 
@@ -24,7 +24,6 @@
 
 @implementation SAFavoriteTimeLineViewController
 
-static NSString *const ENTITY_NAME = @"SAStatus";
 static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
 
 - (void)getLocalData
@@ -40,17 +39,8 @@ static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
         self.page = 1;
     }
     void (^success)(id data) = ^(id data) {
-        NSArray *originalList = (NSArray *)data;
-        __block NSMutableArray *tempTimeLineList = [[NSMutableArray alloc] init];
-        [originalList enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            SAStatus *status = [[SADataManager sharedManager] statusWithObject:obj localUsers:nil type:SAStatusTypeFavoriteStatus];
-            [tempTimeLineList addObject:status];
-        }];
-        if (self.page > 1) {
-            [self.timeLineList addObjectsFromArray:tempTimeLineList];
-        } else {
-            self.timeLineList = tempTimeLineList;
-        }
+        NSArray *dataList = (NSArray *)data;
+        [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:dataList type:SAStatusTypeFavoriteStatus];
         [self.tableView reloadData];
         [SAMessageDisplayUtils dismiss];
         [self.refreshView endRefreshing];

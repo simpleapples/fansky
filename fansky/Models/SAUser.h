@@ -2,23 +2,29 @@
 //  SAUser.h
 //  fansky
 //
-//  Created by Zzy on 10/7/15.
-//  Copyright © 2015 Zzy. All rights reserved.
+//  Created by Zzy on 16/3/21.
+//  Copyright © 2016年 Zzy. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+#import <Realm/Realm.h>
 
-@class SAConversation, SAMessage, SAStatus;
+@interface SAUser : RLMObject
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface SAUser : NSManagedObject
-
-// Insert code here to declare functionality of your managed object subclass
+@property NSString *userID;
+@property NSString *token;
+@property NSString *tokenSecret;
+@property NSString *name;
+@property NSString *profileImageURL;
+@property NSString *location;
+@property NSString *desc;
+@property BOOL isLocal;
+@property BOOL isProtected;
+@property BOOL isFollowing;
+@property BOOL isActive;
+@property int statusCount;
+@property int friendsCount;
+@property int followersCount;
 
 @end
 
-NS_ASSUME_NONNULL_END
-
-#import "SAUser+CoreDataProperties.h"
+RLM_ARRAY_TYPE(SAUser)

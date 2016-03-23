@@ -9,14 +9,14 @@
 #import "SAConversationViewController.h"
 #import "SAMessageDisplayUtils.h"
 #import "SADataManager+User.h"
-#import "SAUser+CoreDataProperties.h"
+#import "SAUser.h"
 #import "SAAPIService.h"
 #import "SADataManager+Conversation.h"
 #import "SAConversationCell.h"
-#import "SAUser+CoreDataProperties.h"
+#import "SAUser.h"
 #import "SAMessageViewController.h"
-#import "SAConversation+CoreDataProperties.h"
-#import "SAMessage+CoreDataProperties.h"
+#import "SAConversation.h"
+#import "SAMessage.h"
 #import "SAUserViewController.h"
 #import "UIColor+Utils.h"
 #import "LGRefreshView.h"
@@ -61,7 +61,7 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
 - (void)getLocalData
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
-    self.conversationList = [[SADataManager sharedManager] currentConversationListWithUserID:currentUser.userID limit:CONVERSATION_LIST_COUNT];
+    self.conversationList = [[SADataManager sharedManager] currentConversationListWithUserID:currentUser.userID];
     [self.tableView reloadData];
 }
 
@@ -79,9 +79,9 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
         }
     }
     [[SAAPIService sharedSingleton] conversationListWithCount:CONVERSATION_LIST_COUNT success:^(id data) {
-        [[SADataManager sharedManager] insertConversationWithObjects:data];
+        [[SADataManager sharedManager] insertOrUpdateConversationWithObjects:data];
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
-        self.conversationList = [[SADataManager sharedManager] currentConversationListWithUserID:currentUser.userID limit:CONVERSATION_LIST_COUNT];
+        self.conversationList = [[SADataManager sharedManager] currentConversationListWithUserID:currentUser.userID];
         [self.tableView reloadData];
         [self.refreshView endRefreshing];
     } failure:^(NSString *error) {
@@ -151,7 +151,7 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
 {
     SAConversation *conversation = [self.conversationList objectAtIndex:indexPath.row];
     NSString *otherUserID;
-    if ([conversation.otherUserID isEqualToString:conversation.message.senderID]) {
+    if ([conversation.otherUserID isEqualToString:conversation.message.sender.userID]) {
         otherUserID = conversation.message.sender.userID;
     } else {
         otherUserID = conversation.message.recipient.userID;

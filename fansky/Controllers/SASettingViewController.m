@@ -10,7 +10,7 @@
 #import "SAUserViewController.h"
 #import "SAFriendListViewController.h"
 #import "SADataManager+User.h"
-#import "SAUser+CoreDataProperties.h"
+#import "SAUser.h"
 #import "SANotificationManager.h"
 #import <LTHPasscodeViewController/LTHPasscodeViewController.h>
 #import <VTAcknowledgementsViewController/VTAcknowledgementsViewController.h>

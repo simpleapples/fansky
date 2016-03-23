@@ -8,82 +8,46 @@
 
 #import "SADataManager+Conversation.h"
 #import "SADataManager+User.h"
-#import "SAUser+CoreDataProperties.h"
+#import "SAUser.h"
 #import "SADataManager+Message.h"
-#import "SAConversation+CoreDataProperties.h"
+#import "SAConversation.h"
 
 @implementation SADataManager (Conversation)
 
-static NSString *const ENTITY_NAME = @"SAConversation";
-
-- (void)insertConversationWithObjects:(id)objects
+- (void)insertOrUpdateConversationWithObjects:(id)objects
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     [objects enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
-        [self insertConversationWithObject:object localUser:currentUser];
+        [self insertOrUpdateConversationWithObject:object localUser:currentUser];
     }];
 }
 
-- (SAConversation *)insertConversationWithObject:(id)object localUser:(SAUser *)localUser
+- (SAConversation *)insertOrUpdateConversationWithObject:(id)object localUser:(SAUser *)localUser
 {
     NSString *otherUserID = [object objectForKey:@"otherid"];
-    NSNumber *count = [object objectForKey:@"msg_num"];
-    NSNumber *newConversation = [object objectForKey:@"new_conv"];
+    NSNumber *messageCount = [object objectForKey:@"msg_num"];
+    NSNumber *isNew = [object objectForKey:@"new_conv"];
     
     SAMessage *message = [[SADataManager sharedManager] insertOrUpdateMessageWithObject:[object objectForKey:@"dm"] localUser:localUser];
     
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-    fetchRequest.fetchLimit = 1;
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"otherUserID = %@", otherUserID];
+    SAConversation *conversation = [[SAConversation alloc] init];
+    conversation.otherUserID = otherUserID;
+    conversation.messageCount = messageCount.intValue;
+    conversation.isNew = isNew.boolValue;
+    conversation.message = message;
+    conversation.localUser = localUser;
     
-    __block NSError *error;
-    __block SAConversation *resultConversation;
-    [self.managedObjectContext performBlockAndWait:^{
-        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (!error && fetchResult && fetchResult.count) {
-            SAConversation *existConversation = [fetchResult firstObject];
-            existConversation.otherUserID = otherUserID;
-            existConversation.count = count;
-            existConversation.newConversation = newConversation;
-            existConversation.message = message;
-            existConversation.localUser = localUser;
-            resultConversation = existConversation;
-        } else {
-            [self.managedObjectContext performBlockAndWait:^{
-                SAConversation *conversation = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
-                conversation.otherUserID = otherUserID;
-                conversation.count = count;
-                conversation.newConversation = newConversation;
-                conversation.message = message;
-                conversation.localUser = localUser;
-                resultConversation = conversation;
-            }];
-        }
-    }];
+    [self.defaultRealm beginWriteTransaction];
+    SAConversation *resultConversation = [SAConversation createOrUpdateInRealm:self.defaultRealm withValue:conversation];
+    [self.defaultRealm commitWriteTransaction];
     return resultConversation;
 }
 
-- (NSArray *)currentConversationListWithUserID:(NSString *)userID limit:(NSUInteger)limit
+- (RLMResults *)currentConversationListWithUserID:(NSString *)userID
 {
-    NSSortDescriptor *otherUserIDSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"otherUserID" ascending:NO];
-    NSArray *sortArray = [[NSArray alloc] initWithObjects: otherUserIDSortDescriptor, nil];
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@", userID];
-    fetchRequest.sortDescriptors = sortArray;
-    fetchRequest.returnsObjectsAsFaults = NO;
-    fetchRequest.fetchBatchSize = 6;
-    fetchRequest.fetchLimit = limit;
-    
-    __block NSError *error;
-    __block NSArray *resultArray = [[NSArray alloc] init];
-    [self.managedObjectContext performBlockAndWait:^{
-        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (!error && fetchResult && fetchResult.count) {
-            resultArray = fetchResult;
-        }
-    }];
-    return resultArray;
+    RLMResults *results = [SAConversation objectsInRealm:self.defaultRealm where:@"localUser.userID = %@", userID];
+    results = [results sortedResultsUsingProperty:@"otherUserID" ascending:NO];
+    return results;
 }
 
 @end

@@ -10,11 +10,12 @@
 
 @class SAUser;
 @class SAConversation;
+@class RLMResults;
 
 @interface SADataManager (Conversation)
 
-- (void)insertConversationWithObjects:(id)objects;
-- (SAConversation *)insertConversationWithObject:(id)object localUser:(SAUser *)localUser;
-- (NSArray *)currentConversationListWithUserID:(NSString *)userID limit:(NSUInteger)limit;
+- (void)insertOrUpdateConversationWithObjects:(id)objects;
+- (SAConversation *)insertOrUpdateConversationWithObject:(id)object localUser:(SAUser *)localUser;
+- (RLMResults *)currentConversationListWithUserID:(NSString *)userID;
 
 @end

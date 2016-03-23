@@ -8,12 +8,12 @@
 
 #import "SAMessageViewController.h"
 #import "SADataManager+User.h"
-#import "SAUser+CoreDataProperties.h"
+#import "SAUser.h"
 #import "SADataManager+Message.h"
-#import "SAMessage+CoreDataProperties.h"
+#import "SAMessage.h"
 #import "SAAPIService.h"
 #import "SAMessageDisplayUtils.h"
-#import "SAMessage+CoreDataProperties.h"
+#import "SAMessage.h"
 #import "UIColor+Utils.h"
 #import "NSDate+Utils.h"
 #import <JSQMessagesViewController/JSQMessage.h>
@@ -22,9 +22,9 @@
 #import <JSQMessagesViewController/JSQSystemSoundPlayer+JSQMessages.h>
 #import <JSQSystemSoundPlayer/JSQSystemSoundPlayer.h>
 
-@interface SAMessageViewController () <JSQMessagesCollectionViewDataSource, JSQMessagesCollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate>
+@interface SAMessageViewController () <JSQMessagesCollectionViewDataSource, JSQMessagesCollectionViewDelegateFlowLayout>
 
-@property (strong, nonatomic) NSArray *messageList;
+@property (strong, nonatomic) RLMResults *messageList;
 @property (copy, nonatomic) NSString *maxID;
 @property (strong, nonatomic) SAUser *currentUser;
 @property (strong, nonatomic) SAUser *user;
@@ -75,7 +75,7 @@ static NSUInteger MESSAGE_LIST_COUNT = 40;
 
 - (void)getLocalData
 {
-    self.messageList = [[SADataManager sharedManager] currentMessageWithUserID:self.userID localUserID:self.currentUser.userID limit:MESSAGE_LIST_COUNT];
+    self.messageList = [[SADataManager sharedManager] currentMessagesWithUserID:self.userID localUserID:self.currentUser.userID];
     [self.collectionView reloadData];
 }
 
@@ -91,8 +91,8 @@ static NSUInteger MESSAGE_LIST_COUNT = 40;
         maxID = self.maxID;
     }
     [[SAAPIService sharedSingleton] conversationWithUserID:self.userID sinceID:nil maxID:maxID count:MESSAGE_LIST_COUNT success:^(id data) {
-        [[SADataManager sharedManager] insertMessageWithObjects:data];
-        self.messageList = [[SADataManager sharedManager] currentMessageWithUserID:self.userID localUserID:self.currentUser.userID limit:MESSAGE_LIST_COUNT];
+        [[SADataManager sharedManager] insertOrUpdateMessageWithObjects:data];
+        self.messageList = [[SADataManager sharedManager] currentMessagesWithUserID:self.userID localUserID:self.currentUser.userID];
         [self.collectionView reloadData];
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];

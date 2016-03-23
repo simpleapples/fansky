@@ -7,202 +7,90 @@
 //
 
 #import "SADataManager+User.h"
-#import "SAUser+CoreDataProperties.h"
+#import "SAUser.h"
 
 @implementation SADataManager (User)
 
-static NSString *const ENTITY_NAME = @"SAUser";
-
 - (SAUser *)currentUser
 {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-    fetchRequest.fetchLimit = 1;
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"active = %@", @(YES)];
-    
-    __block NSError *error;
-    __block SAUser *resultUser;
-    [self.managedObjectContext performBlockAndWait:^{
-        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (!error && fetchResult && fetchResult.count) {
-            SAUser *existUser = [fetchResult firstObject];
-            resultUser = existUser;
-        }
-    }];
-    return resultUser;
+    RLMResults<SAUser *> *activeUsers = [SAUser objectsInRealm:self.defaultRealm where:@"isActive == %@", @(YES)];
+    return [activeUsers firstObject];
 }
 
 - (SAUser *)insertOrUpdateUserWithObject:(id)userObject local:(BOOL)local active:(BOOL)active token:(NSString *)token secret:(NSString *)secret
-{
-    NSString *userID = [userObject objectForKey:@"id"];
-    NSString *name = [userObject objectForKey:@"name"];
-    NSString *location = [userObject objectForKey:@"location"];
-    NSNumber *protected = [userObject objectForKey:@"protected"];
-    NSString *profileImageURL = [userObject objectForKey:@"profile_image_url_large"];
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-    fetchRequest.fetchLimit = 1;
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"userID = %@", userID];
-    
-    __block NSError *error;
-    __block SAUser *resultUser;
-    [self.managedObjectContext performBlockAndWait:^{
-        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (!error && fetchResult && fetchResult.count) {
-            SAUser *existUser = [fetchResult firstObject];
-            existUser.userID = userID;
-            existUser.name = name;
-            existUser.location = location;
-            existUser.profileImageURL = profileImageURL;
-            existUser.protected = protected;
-            if (local) {
-                existUser.local = @(local);
-                existUser.active = @(active);
-                existUser.token = token;
-                existUser.tokenSecret = secret;
-            }
-            resultUser = existUser;
-        } else {
-            [self.managedObjectContext performBlockAndWait:^{
-                SAUser *user = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
-                user.userID = userID;
-                user.name = name;
-                user.location = location;
-                user.profileImageURL = profileImageURL;
-                user.protected = protected;
-                if (local) {
-                    user.local = @(local);
-                    user.active = @(active);
-                    user.token = token;
-                    user.tokenSecret = secret;
-                }
-                resultUser = user;
-            }];
-        }
-    }];
-    return resultUser;
-}
-
-- (SAUser *)insertOrUpdateUserWithExtendObject:(id)userObject
 {
     NSString *userID = (NSString *)[userObject objectForKey:@"id"];
     NSString *name = (NSString *)[userObject objectForKey:@"name"];
     NSString *location = (NSString *)[userObject objectForKey:@"location"];
     NSString *desc = (NSString *)[userObject objectForKey:@"description"];
     NSString *profileImageURL = (NSString *)[userObject objectForKey:@"profile_image_url_large"];
-    NSNumber *following = [userObject objectForKey:@"following"];
+    NSNumber *isFollowing = [userObject objectForKey:@"following"];
     NSNumber *friendsCount = [userObject objectForKey:@"friends_count"];
     NSNumber *followersCount = [userObject objectForKey:@"followers_count"];
     NSNumber *statusCount = [userObject objectForKey:@"statuses_count"];
-    NSNumber *protected = [userObject objectForKey:@"protected"];
-
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-    fetchRequest.fetchLimit = 1;
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"userID = %@", userID];
+    NSNumber *isProtected = [userObject objectForKey:@"protected"];
     
-    __block NSError *error;
-    __block SAUser *resultUser;
-    [self.managedObjectContext performBlockAndWait:^{
-        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (!error && fetchResult && fetchResult.count) {
-            SAUser *existUser = [fetchResult firstObject];
-            existUser.name = name;
-            existUser.location = location;
-            existUser.desc = desc;
-            existUser.profileImageURL = profileImageURL;
-            existUser.following = following;
-            existUser.friendsCount = friendsCount;
-            existUser.followersCount = followersCount;
-            existUser.statusCount = statusCount;
-            existUser.protected = protected;
-            resultUser = existUser;
-        } else {
-            [self.managedObjectContext performBlockAndWait:^{
-                SAUser *user = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
-                user.userID = userID;
-                user.name = name;
-                user.location = location;
-                user.desc = desc;
-                user.profileImageURL = profileImageURL;
-                user.following = following;
-                user.friendsCount = friendsCount;
-                user.followersCount = followersCount;
-                user.statusCount = statusCount;
-                user.protected = protected;
-                resultUser = user;
-            }];
-        }
-    }];
-    return resultUser;
+    SAUser *user = [SAUser objectInRealm:self.defaultRealm forPrimaryKey:userID];
+    [self.defaultRealm beginWriteTransaction];
+    if (!user) {
+        user = [[SAUser alloc] init];
+        user.userID = userID;
+        user = [SAUser createInRealm:self.defaultRealm withValue:user];
+    }
+    user.name = name;
+    user.location = location;
+    user.desc = desc;
+    user.profileImageURL = profileImageURL;
+    user.friendsCount = [friendsCount intValue];
+    user.followersCount = [followersCount intValue];
+    user.statusCount = [statusCount intValue];
+    user.isFollowing = [isFollowing boolValue];
+    user.isProtected = [isProtected boolValue];
+    if (local) {
+        user.isLocal = local;
+        user.isActive = active;
+        user.token = token;
+        user.tokenSecret = secret;
+    }
+    [self.defaultRealm commitWriteTransaction];
+    
+    return [SAUser objectInRealm:self.defaultRealm forPrimaryKey:userID];
 }
 
 - (SAUser *)userWithID:(NSString *)userID
 {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-    fetchRequest.fetchLimit = 1;
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"userID = %@", userID];
-    
-    __block NSError *error;
-    __block SAUser *resultUser;
-    [self.managedObjectContext performBlockAndWait:^{
-        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (!error && fetchResult && fetchResult.count) {
-            SAUser *existUser = [fetchResult firstObject];
-            resultUser = existUser;
-        }
-    }];
-    return resultUser;
+    SAUser *user = [SAUser objectInRealm:self.defaultRealm forPrimaryKey:userID];
+    return user;
 }
 
-- (SAUser *)userWithObject:(id)object
+- (RLMResults *)localUsers
 {
-    NSString *userID = (NSString *)[object objectForKey:@"id"];
-    NSString *name = (NSString *)[object objectForKey:@"name"];
-    NSString *location = (NSString *)[object objectForKey:@"location"];
-    NSString *profileImageURL = (NSString *)[object objectForKey:@"profile_image_url_large"];
-    NSNumber *following = [object objectForKey:@"following"];
-    NSNumber *friendsCount = [object objectForKey:@"friends_count"];
-    NSNumber *followersCount = [object objectForKey:@"followers_count"];
-    NSNumber *statusCount = [object objectForKey:@"statuses_count"];
-    NSNumber *protected = [object objectForKey:@"protected"];
-    
-    SAUser *user = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
-    user.userID = userID;
-    user.name = name;
-    user.location = location;
-    user.profileImageURL = profileImageURL;
-    user.following = following;
-    user.friendsCount = friendsCount;
-    user.followersCount = followersCount;
-    user.statusCount = statusCount;
-    user.protected = protected;
-    return user;
+    RLMResults *results = [SAUser objectsInRealm:self.defaultRealm where:@"isLocal = %@", @(YES)];
+    results = [results sortedResultsUsingProperty:@"name" ascending:NO];
+    return results;
 }
 
 - (void)setCurrentUserWithUserID:(NSString *)userID
 {
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"local = %@", @(YES)];
-    
-    __block NSError *error;
-    [self.managedObjectContext performBlockAndWait:^{
-        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (!error && fetchResult && fetchResult.count) {
-            [fetchResult enumerateObjectsUsingBlock:^(SAUser *user, NSUInteger idx, BOOL *stop) {
-                if (user.userID == userID) {
-                    user.active = @(YES);
-                } else {
-                    user.active = @(NO);
-                }
-            }];
+    RLMResults<SAUser *> *users = [SAUser allObjectsInRealm:self.defaultRealm];
+    [self.defaultRealm beginWriteTransaction];
+    for (SAUser *user in users) {
+        if ([user.userID isEqualToString:userID]) {
+            user.isActive = YES;
+        } else {
+            user.isActive = NO;
         }
-    }];
+    }
+    [self.defaultRealm commitWriteTransaction];
 }
 
 - (void)deleteUserWithUserID:(NSString *)userID
 {
-    SAUser *user = [self userWithID:userID];
-    user.local = @(NO);
-    user.active = @(NO);
+    SAUser *user = [SAUser objectInRealm:self.defaultRealm forPrimaryKey:userID];
+    [self.defaultRealm beginWriteTransaction];
+    user.isLocal = NO;
+    user.isActive = NO;
+    [self.defaultRealm commitWriteTransaction];
 }
 
 @end

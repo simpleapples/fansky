@@ -10,8 +10,8 @@
 #import "SAAPIService.h"
 #import "SADataManager+Status.h"
 #import "SADataManager+User.h"
-#import "SAUser+CoreDataProperties.h"
-#import "SAStatus+CoreDataProperties.h"
+#import "SAUser.h"
+#import "SAStatus.h"
 
 @interface SANotificationManager ()
 
@@ -62,17 +62,16 @@ static NSUInteger FETCH_TIME_INTERVAL = 30;
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     if (currentUser) {
-        [[SADataManager sharedManager] currentTimeLineWithUserID:currentUser.userID type:SAStatusTypeTimeLine offset:0 limit:1 completeHandler:^(NSArray *result) {
-            if (result.count) {
-                SAStatus *currentStatus = [result firstObject];
-                [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:currentStatus.statusID maxID:nil count:60 success:^(id data) {
-                    NSArray *newTimeLine = (NSArray *)data;
-                    if (newTimeLine.count) {
-                        self.timeLineCount = newTimeLine.count;
-                    }
-                } failure:nil];
-            }
-        }];
+        RLMResults *results = [[SADataManager sharedManager] currentTimeLineWithUserID:currentUser.userID type:SAStatusTypeTimeLine];
+        if (results.count) {
+            SAStatus *currentStatus = [results firstObject];
+            [[SAAPIService sharedSingleton] timeLineWithUserID:currentUser.userID sinceID:currentStatus.statusID maxID:nil count:60 success:^(id data) {
+                NSArray *newTimeLine = (NSArray *)data;
+                if (newTimeLine.count) {
+                    self.timeLineCount = newTimeLine.count;
+                }
+            } failure:nil];
+        }
         
         [[SAAPIService sharedSingleton] accountNotificationWithSuccess:^(id data) {
             NSNumber *mentionCountValue = (NSNumber *)[data objectForKey:@"mentions"];

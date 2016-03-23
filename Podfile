@@ -15,6 +15,7 @@ pod 'LTHPasscodeViewController'
 pod 'LGRefreshView'
 pod 'Fabric'
 pod 'Crashlytics'
+pod 'Realm'
 
 end
 

@@ -2,20 +2,18 @@
 //  SADataManager.h
 //  fansky
 //
-//  Created by Zzy on 9/10/15.
-//  Copyright (c) 2015 Zzy. All rights reserved.
+//  Created by Zzy on 16/3/21.
+//  Copyright © 2016年 Zzy. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+
+@class RLMRealm;
 
 @interface SADataManager : NSObject
 
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic, readonly) RLMRealm *defaultRealm;
 
 + (SADataManager *)sharedManager;
-
-- (NSUInteger)sizeOfAllPersistentStore;
-- (void)saveContext;
 
 @end

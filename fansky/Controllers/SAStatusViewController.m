@@ -8,8 +8,8 @@
 
 #import "SAStatusViewController.h"
 #import "SADataManager+Status.h"
-#import "SAStatus+CoreDataProperties.h"
-#import "SAUser+CoreDataProperties.h"
+#import "SAStatus.h"
+#import "SAUser.h"
 #import "SAPhoto.h"
 #import "SAUserViewController.h"
 #import "SADataManager+User.h"
@@ -61,7 +61,7 @@
 
 - (void)updateStarButton
 {
-    if ([self.status.favorited isEqualToNumber:@(YES)]) {
+    if (self.status.isFavorited) {
         self.starButton.selected = YES;
     } else {
         self.starButton.selected = NO;
@@ -251,9 +251,9 @@
 - (IBAction)starButtonTouchUp:(id)sender
 {
     [SAMessageDisplayUtils showProgressWithMessage:@"请稍后"];
-    if ([self.status.favorited isEqualToNumber:@(YES)]) {
+    if (self.status.isFavorited) {
         [[SAAPIService sharedSingleton] deleteFavoriteStatusWithID:self.statusID success:^(id data) {
-            self.status.favorited = @(NO);
+            self.status.isFavorited = NO;
             [SAMessageDisplayUtils showInfoWithMessage:@"取消收藏成功"];
             [self updateStarButton];
         } failure:^(NSString *error) {
@@ -261,7 +261,7 @@
         }];
     } else {
         [[SAAPIService sharedSingleton] createFavoriteStatusWithID:self.statusID success:^(id data) {
-            self.status.favorited = @(YES);
+            self.status.isFavorited = YES;
             [SAMessageDisplayUtils showInfoWithMessage:@"收藏成功"];
             [self updateStarButton];
         } failure:^(NSString *error) {

@@ -7,9 +7,9 @@
 //
 
 #import "SAPhotoPreviewViewController.h"
-#import "SAStatus+CoreDataProperties.h"
-#import "SAUser+CoreDataProperties.h"
-#import "SAPhoto+CoreDataProperties.h"
+#import "SAStatus.h"
+#import "SAUser.h"
+#import "SAPhoto.h"
 #import "SADataManager+Status.h"
 #import "SAMessageDisplayUtils.h"
 #import "NSDate+Utils.h"

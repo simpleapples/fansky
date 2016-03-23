@@ -7,7 +7,7 @@
 //
 
 #import "SAUserInfoViewController.h"
-#import "SAUser+CoreDataProperties.h"
+#import "SAUser.h"
 #import "SADataManager+User.h"
 
 @interface SAUserInfoViewController ()

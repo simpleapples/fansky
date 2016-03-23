@@ -33,23 +33,9 @@
     [self showPasscodeViewController];
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    [[SADataManager sharedManager] saveContext];
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-}
-
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [[SANotificationManager sharedManager] startFetchNotificationCount];
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    [[SADataManager sharedManager] saveContext];
 }
 
 - (void)initPasscodeViewController

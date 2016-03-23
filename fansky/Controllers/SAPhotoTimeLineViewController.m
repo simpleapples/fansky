@@ -9,11 +9,11 @@
 #import "SAPhotoTimeLineViewController.h"
 #import "SADataManager+Status.h"
 #import "SAPhotoTimeLineCell.h"
-#import "SAStatus+CoreDataProperties.h"
+#import "SAStatus.h"
 #import "SAAPIService.h"
 #import "SAPhoto.h"
 #import "SADataManager+User.h"
-#import "SAUser+CoreDataProperties.h"
+#import "SAUser.h"
 #import "SAMessageDisplayUtils.h"
 #import "NSString+Utils.h"
 #import <MWPhotoBrowser/MWPhotoBrowser.h>
@@ -22,7 +22,7 @@
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 
-@property (strong, nonatomic) NSMutableArray *photoTimeLineList;
+@property (strong, nonatomic) RLMResults *photoTimeLineList;
 @property (copy, nonatomic) NSString *maxID;
 
 @end
@@ -72,14 +72,9 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
 
 - (void)getLocalData
 {
-    [[SADataManager sharedManager] currentPhotoTimeLineWithUserID:self.userID limit:PHOTO_TIME_LINE_COUNT completeHandler:^(NSArray *result) {
-        [self.photoTimeLineList removeAllObjects];
-        [self.photoTimeLineList addObjectsFromArray:result];
-        [self.collectionView reloadData];
-        
-        [self refreshData];
-    }];
-    
+    self.photoTimeLineList = [[SADataManager sharedManager] currentPhotoTimeLineWithUserID:self.userID];
+    [self.collectionView reloadData];
+    [self refreshData];
 }
 
 - (void)refreshData
@@ -97,25 +92,13 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
     }
     void (^success)(id data) = ^(id data) {
         [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:data type:SAStatusTypeUserStatus];
-        NSUInteger limit = PHOTO_TIME_LINE_COUNT;
-        if (!refresh) {
-            limit = self.photoTimeLineList.count + PHOTO_TIME_LINE_COUNT;
+        [self.collectionView reloadData];
+        [SAMessageDisplayUtils dismiss];
+        [self.refreshControl endRefreshing];
+        // 解决刷新后不回弹问题
+        if (refresh) {
+            self.collectionView.contentOffset = CGPointMake(0, -244);
         }
-        [[SADataManager sharedManager] currentPhotoTimeLineWithUserID:self.userID limit:limit completeHandler:^(NSArray *result) {
-            [self.photoTimeLineList removeAllObjects];
-            [self.photoTimeLineList addObjectsFromArray:result];
-            if (self.photoTimeLineList.count) {
-                SAStatus *lastStatus = [self.photoTimeLineList lastObject];
-                self.maxID = lastStatus.statusID;
-            }
-            [self.collectionView reloadData];
-            [SAMessageDisplayUtils dismiss];
-            [self.refreshControl endRefreshing];
-            // 解决刷新后不回弹问题
-            if (refresh) {
-                self.collectionView.contentOffset = CGPointMake(0, -244);
-            }
-        }];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
         [SAMessageDisplayUtils showInfoWithMessage:error];
@@ -127,14 +110,6 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
         [SAMessageDisplayUtils showProgressWithMessage:@"正在刷新"];
     }
     [[SAAPIService sharedSingleton] userPhotoTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:PHOTO_TIME_LINE_COUNT success:success failure:failure];
-}
-
-- (NSMutableArray *)photoTimeLineList
-{
-    if (!_photoTimeLineList) {
-        _photoTimeLineList = [[NSMutableArray alloc] init];
-    }
-    return _photoTimeLineList;
 }
 
 #pragma mark - UICollectionViewDataSource

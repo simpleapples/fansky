@@ -7,7 +7,7 @@
 //
 
 #import "SAUserHeaderView.h"
-#import "SAUser+CoreDataProperties.h"
+#import "SAUser.h"
 #import "SADataManager+User.h"
 #import "SAAPIService.h"
 #import "SAMessageDisplayUtils.h"
@@ -56,7 +56,7 @@
         [self updateInterface];
     }
     [[SAAPIService sharedSingleton] userWithID:userID success:^(id data) {
-        self.user = [[SADataManager sharedManager] insertOrUpdateUserWithExtendObject:data];
+        self.user = [[SADataManager sharedManager] insertOrUpdateUserWithObject:data local:NO active:NO token:nil secret:nil];
         [self updateInterface];
     } failure:nil];
 }
@@ -77,17 +77,17 @@
     NSDictionary *boldDictionay = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:14], NSForegroundColorAttributeName: [UIColor darkGrayColor]};
     NSDictionary *normalDictionay = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue-Light" size:12], NSForegroundColorAttributeName: [UIColor lightGrayColor]};
     
-    NSString *friendsCountString = [NSString stringWithFormat:@"%@", self.user.friendsCount];
+    NSString *friendsCountString = [NSString stringWithFormat:@"%d", self.user.friendsCount];
     NSMutableAttributedString *friendsString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@关注", friendsCountString] attributes:boldDictionay];
     [friendsString setAttributes:normalDictionay range:NSMakeRange(friendsCountString.length, 2)];
     [self.friendsCountButton setAttributedTitle:friendsString forState:UIControlStateNormal];
     
-    NSString *followersCountString = [NSString stringWithFormat:@"%@", self.user.followersCount];
+    NSString *followersCountString = [NSString stringWithFormat:@"%d", self.user.followersCount];
     NSMutableAttributedString *followersString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@关注者", followersCountString] attributes:boldDictionay];
     [followersString setAttributes:normalDictionay range:NSMakeRange(followersCountString.length, 3)];
     [self.followersCountButton setAttributedTitle:followersString forState:UIControlStateNormal];
     
-    NSString *statusCountString = [NSString stringWithFormat:@"%@", self.user.statusCount];
+    NSString *statusCountString = [NSString stringWithFormat:@"%d", self.user.statusCount];
     NSMutableAttributedString *statusString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@消息", statusCountString] attributes:boldDictionay];
     [statusString setAttributes:normalDictionay range:NSMakeRange(statusCountString.length, 2)];
     self.statusCountLabel.attributedText = statusString;
@@ -100,12 +100,12 @@
         self.followButton.hidden = NO;
         self.settingButton.hidden = YES;
     }
-    if ([self.user.protected isEqualToNumber:@(YES)]) {
+    if (self.user.isProtected) {
         self.lockImageView.hidden = NO;
     } else {
         self.lockImageView.hidden = YES;
     }
-    if ([self.user.following isEqualToNumber:@(NO)]) {
+    if (self.user.isFollowing) {
         self.followButton.titleLabel.text = @"+关注";
         [self.followButton setTitle:@"+关注" forState:UIControlStateNormal];
     } else {
@@ -118,10 +118,10 @@
 
 - (IBAction)followButtonTouchUp:(id)sender
 {
-    if ([self.user.following isEqualToNumber:@(NO)]) {
+    if (!self.user.isFollowing) {
         [[SAAPIService sharedSingleton] followUserWithID:self.user.userID success:^(id data) {
             [SAMessageDisplayUtils showSuccessWithMessage:@"关注成功"];
-            self.user.following = @(YES);
+            self.user.isFollowing = YES;
             [self updateInterface];
         } failure:^(NSString *error) {
             [SAMessageDisplayUtils showInfoWithMessage:error];
@@ -129,7 +129,7 @@
     } else {
         [[SAAPIService sharedSingleton] unfollowUserWithID:self.user.userID success:^(id data) {
             [SAMessageDisplayUtils showSuccessWithMessage:@"取消关注成功"];
-            self.user.following = @(NO);
+            self.user.isFollowing = NO;
             [self updateInterface];
         } failure:^(NSString *error) {
             [SAMessageDisplayUtils showErrorWithMessage:error];

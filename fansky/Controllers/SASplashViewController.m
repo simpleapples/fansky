@@ -8,7 +8,7 @@
 
 #import "SASplashViewController.h"
 #import "SAConstants.h"
-#import "SAUser+CoreDataProperties.h"
+#import "SAUser.h"
 #import "SADataManager+User.h"
 
 @interface SASplashViewController ()

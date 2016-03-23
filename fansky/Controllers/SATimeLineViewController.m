@@ -8,8 +8,8 @@
 
 #import "SATimeLineViewController.h"
 #import "SADataManager+User.h"
-#import "SAUser+CoreDataProperties.h"
-#import "SAStatus+CoreDataProperties.h"
+#import "SAUser.h"
+#import "SAStatus.h"
 #import "SAPhoto.h"
 #import "SAAPIService.h"
 #import "SADataManager+Status.h"
@@ -33,7 +33,6 @@
 
 @implementation SATimeLineViewController
 
-static NSString *const ENTITY_NAME = @"SAStatus";
 static NSUInteger TIME_LINE_COUNT = 40;
 static NSString *const cellName = @"SATimeLineCell";
 
@@ -68,12 +67,9 @@ static NSString *const cellName = @"SATimeLineCell";
         userID = currentUser.userID;
         type = SAStatusTypeTimeLine;
     }
-    [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type offset:0 limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
-        [self.timeLineList removeAllObjects];
-        [self.timeLineList addObjectsFromArray:result];
-        [self.tableView reloadData];
-        [self refreshData];
-    }];
+    self.timeLineList = [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type];
+    [self.tableView reloadData];
+    [self refreshData];
 }
 
 - (void)refreshData
@@ -98,23 +94,12 @@ static NSString *const cellName = @"SATimeLineCell";
     }
     void (^success)(id data) = ^(id data) {
         [[SADataManager sharedManager] insertOrUpdateStatusWithObjects:data type:type];
-        NSUInteger offset = self.timeLineList.count;
-        if (refresh) {
-            offset = 0;
+        if (self.timeLineList.count) {
+            SAStatus *lastStatus = [self.timeLineList lastObject];
+            self.maxID = lastStatus.statusID;
         }
-        [[SADataManager sharedManager] currentTimeLineWithUserID:userID type:type offset:offset limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
-            if (refresh) {
-                [self.timeLineList removeAllObjects];
-            }
-            [self.timeLineList addObjectsFromArray:result];
-            if (self.timeLineList.count) {
-                SAStatus *lastStatus = [self.timeLineList lastObject];
-                self.maxID = lastStatus.statusID;
-            }
-            [self.tableView reloadData];
-            [SAMessageDisplayUtils dismiss];
-            [self.refreshView endRefreshing];
-        }];
+        [self.tableView reloadData];
+        [self.refreshView endRefreshing];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
         if (type == SAStatusTypeTimeLine) {
@@ -196,14 +181,6 @@ static NSString *const cellName = @"SATimeLineCell";
     JTSImageViewController *imageViewer = [[JTSImageViewController alloc] initWithImageInfo:imageInfo mode:JTSImageViewControllerMode_Image backgroundStyle:(JTSImageViewControllerBackgroundOption_Scaled | JTSImageViewControllerBackgroundOption_Blurred)];
     imageViewer.interactionsDelegate = self;
     [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
-}
-
-- (NSMutableArray *)timeLineList
-{
-    if (!_timeLineList) {
-        _timeLineList = [[NSMutableArray alloc] init];
-    }
-    return _timeLineList;
 }
 
 #pragma mark - UIViewControllerPreviewingDelegate
