@@ -16,19 +16,19 @@
 
 static NSString *const ENTITY_NAME = @"SAConversation";
 
-- (void)insertConversationWithObjects:(id)objects
+- (void)insertOrUpdateConversationsWithObjects:(id)objects
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     [objects enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
-        [self insertConversationWithObject:object localUser:currentUser];
+        [self insertOrUpdateConversationWithObject:object localUser:currentUser];
     }];
 }
 
-- (SAConversation *)insertConversationWithObject:(id)object localUser:(SAUser *)localUser
+- (SAConversation *)insertOrUpdateConversationWithObject:(id)object localUser:(SAUser *)localUser
 {
     NSString *otherUserID = [object objectForKey:@"otherid"];
     NSNumber *count = [object objectForKey:@"msg_num"];
-    NSNumber *newConversation = [object objectForKey:@"new_conv"];
+    NSNumber *isNew = [object objectForKey:@"new_conv"];
     
     SAMessage *message = [[SADataManager sharedManager] insertOrUpdateMessageWithObject:[object objectForKey:@"dm"] localUser:localUser];
     
@@ -44,7 +44,7 @@ static NSString *const ENTITY_NAME = @"SAConversation";
             SAConversation *existConversation = [fetchResult firstObject];
             existConversation.otherUserID = otherUserID;
             existConversation.count = count;
-            existConversation.newConversation = newConversation;
+            existConversation.isNew = isNew;
             existConversation.message = message;
             existConversation.localUser = localUser;
             resultConversation = existConversation;
@@ -53,7 +53,7 @@ static NSString *const ENTITY_NAME = @"SAConversation";
                 SAConversation *conversation = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
                 conversation.otherUserID = otherUserID;
                 conversation.count = count;
-                conversation.newConversation = newConversation;
+                conversation.isNew = isNew;
                 conversation.message = message;
                 conversation.localUser = localUser;
                 resultConversation = conversation;

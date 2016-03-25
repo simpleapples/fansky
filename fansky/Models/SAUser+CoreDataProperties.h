@@ -2,8 +2,8 @@
 //  SAUser+CoreDataProperties.h
 //  fansky
 //
-//  Created by Zzy on 10/24/15.
-//  Copyright © 2015 Zzy. All rights reserved.
+//  Created by Zzy on 16/3/25.
+//  Copyright © 2016年 Zzy. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
@@ -15,20 +15,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SAUser (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSNumber *active;
+@property (nullable, nonatomic, retain) NSString *desc;
 @property (nullable, nonatomic, retain) NSNumber *followersCount;
-@property (nullable, nonatomic, retain) NSNumber *following;
 @property (nullable, nonatomic, retain) NSNumber *friendsCount;
-@property (nullable, nonatomic, retain) NSNumber *local;
+@property (nullable, nonatomic, retain) NSNumber *isActive;
+@property (nullable, nonatomic, retain) NSNumber *isFollowing;
+@property (nullable, nonatomic, retain) NSNumber *isLocal;
+@property (nullable, nonatomic, retain) NSNumber *isProtected;
 @property (nullable, nonatomic, retain) NSString *location;
 @property (nullable, nonatomic, retain) NSString *name;
 @property (nullable, nonatomic, retain) NSString *profileImageURL;
-@property (nullable, nonatomic, retain) NSNumber *protected;
 @property (nullable, nonatomic, retain) NSNumber *statusCount;
 @property (nullable, nonatomic, retain) NSString *token;
 @property (nullable, nonatomic, retain) NSString *tokenSecret;
 @property (nullable, nonatomic, retain) NSString *userID;
-@property (nullable, nonatomic, retain) NSString *desc;
 @property (nullable, nonatomic, retain) NSSet<SAConversation *> *mineConversations;
 @property (nullable, nonatomic, retain) NSSet<SAMessage *> *mineMessages;
 @property (nullable, nonatomic, retain) NSSet<SAStatus *> *mineStatuses;

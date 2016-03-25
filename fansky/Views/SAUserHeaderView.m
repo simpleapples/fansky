@@ -100,12 +100,12 @@
         self.followButton.hidden = NO;
         self.settingButton.hidden = YES;
     }
-    if ([self.user.protected isEqualToNumber:@(YES)]) {
+    if ([self.user.isProtected isEqualToNumber:@(YES)]) {
         self.lockImageView.hidden = NO;
     } else {
         self.lockImageView.hidden = YES;
     }
-    if ([self.user.following isEqualToNumber:@(NO)]) {
+    if ([self.user.isFollowing isEqualToNumber:@(NO)]) {
         self.followButton.titleLabel.text = @"+关注";
         [self.followButton setTitle:@"+关注" forState:UIControlStateNormal];
     } else {
@@ -118,10 +118,10 @@
 
 - (IBAction)followButtonTouchUp:(id)sender
 {
-    if ([self.user.following isEqualToNumber:@(NO)]) {
+    if ([self.user.isFollowing isEqualToNumber:@(NO)]) {
         [[SAAPIService sharedSingleton] followUserWithID:self.user.userID success:^(id data) {
             [SAMessageDisplayUtils showSuccessWithMessage:@"关注成功"];
-            self.user.following = @(YES);
+            self.user.isFollowing = @(YES);
             [self updateInterface];
         } failure:^(NSString *error) {
             [SAMessageDisplayUtils showInfoWithMessage:error];
@@ -129,7 +129,7 @@
     } else {
         [[SAAPIService sharedSingleton] unfollowUserWithID:self.user.userID success:^(id data) {
             [SAMessageDisplayUtils showSuccessWithMessage:@"取消关注成功"];
-            self.user.following = @(NO);
+            self.user.isFollowing = @(NO);
             [self updateInterface];
         } failure:^(NSString *error) {
             [SAMessageDisplayUtils showErrorWithMessage:error];

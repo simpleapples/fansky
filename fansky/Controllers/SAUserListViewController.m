@@ -10,6 +10,7 @@
 #import "SADataManager+User.h"
 #import "SAUserCell.h"
 #import "SAUser+CoreDataProperties.h"
+#import "SAAPIService.h"
 
 @interface SAUserListViewController () <NSFetchedResultsControllerDelegate>
 
@@ -64,7 +65,7 @@ static NSString *const ENTITY_NAME = @"SAUser";
         NSArray *sortArray = [[NSArray alloc] initWithObjects: userNameSortDescriptor, nil];
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"local = %@", @(YES)];
+        fetchRequest.predicate = [NSPredicate predicateWithFormat:@"isLocal = %@", @(YES)];
         fetchRequest.sortDescriptors = sortArray;
         fetchRequest.returnsObjectsAsFaults = NO;
         fetchRequest.fetchBatchSize = 6;
@@ -114,6 +115,7 @@ static NSString *const ENTITY_NAME = @"SAUser";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SAUser *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [[SAAPIService sharedSingleton] stopAllTasks];
     [[SADataManager sharedManager] setCurrentUserWithUserID:user.userID];
 }
 

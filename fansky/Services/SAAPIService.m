@@ -348,6 +348,15 @@
     }] resume];
 }
 
+- (void)stopAllTasks
+{
+    [self.URLSession getAllTasksWithCompletionHandler:^(NSArray<__kindof NSURLSessionTask *> * _Nonnull tasks) {
+        for (NSURLSessionTask *task in tasks) {
+            [task cancel];
+        }
+    }];
+}
+
 #pragma mark - PhotoUpload
 
 - (NSData *)createBodyWithBoundary:(NSString *)boundary

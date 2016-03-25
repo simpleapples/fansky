@@ -91,7 +91,7 @@ static NSUInteger MESSAGE_LIST_COUNT = 40;
         maxID = self.maxID;
     }
     [[SAAPIService sharedSingleton] conversationWithUserID:self.userID sinceID:nil maxID:maxID count:MESSAGE_LIST_COUNT success:^(id data) {
-        [[SADataManager sharedManager] insertMessageWithObjects:data];
+        [[SADataManager sharedManager] insertOrUpdateMessagesWithObjects:data];
         self.messageList = [[SADataManager sharedManager] currentMessageWithUserID:self.userID localUserID:self.currentUser.userID limit:MESSAGE_LIST_COUNT];
         [self.collectionView reloadData];
     } failure:^(NSString *error) {

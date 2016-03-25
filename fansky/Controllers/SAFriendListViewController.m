@@ -15,7 +15,7 @@
 
 @interface SAFriendListViewController () <UIActionSheetDelegate>
 
-@property (strong, nonatomic) NSMutableArray *friendList;
+@property (strong, nonatomic) NSArray *friendList;
 @property (nonatomic) NSUInteger page;
 @property (copy, nonatomic) NSString *selectedUserID;
 @property (nonatomic, getter = isCellRegistered) BOOL cellRegistered;
@@ -89,9 +89,10 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
             [tempFriendList addObject:friend];
         }];
         if (self.page <= 1) {
-            [self.friendList removeAllObjects];
+            self.friendList = tempFriendList;
+        } else {
+            self.friendList = [self.friendList arrayByAddingObjectsFromArray:tempFriendList];
         }
-        [self.friendList addObjectsFromArray:tempFriendList];
         [self.tableView reloadData];
         [self.refreshControl endRefreshing];
         [SAMessageDisplayUtils dismiss];
@@ -118,10 +119,10 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
     }
 }
 
-- (NSMutableArray *)friendList
+- (NSArray *)friendList
 {
     if (!_friendList) {
-        _friendList = [[NSMutableArray alloc] init];
+        _friendList = [[NSArray alloc] init];
     }
     return _friendList;
 }

@@ -32,8 +32,7 @@ static NSUInteger TIME_LINE_COUNT = 40;
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     [[SADataManager sharedManager] currentMentionTimeLineWithUserID:currentUser.userID offset:0 limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
-        [self.timeLineList removeAllObjects];
-        [self.timeLineList addObjectsFromArray:result];
+        self.timeLineList = result;
         [self.tableView reloadData];
         [self refreshData];
     }];
@@ -56,9 +55,10 @@ static NSUInteger TIME_LINE_COUNT = 40;
         }
         [[SADataManager sharedManager] currentMentionTimeLineWithUserID:userID offset:offset limit:TIME_LINE_COUNT completeHandler:^(NSArray *result) {
             if (refresh) {
-                [self.timeLineList removeAllObjects];
+                self.timeLineList = result;
+            } else {
+                self.timeLineList = [self.timeLineList arrayByAddingObjectsFromArray:result];
             }
-            [self.timeLineList addObjectsFromArray:result];
             if (self.timeLineList.count) {
                 SAStatus *lastStatus = [self.timeLineList lastObject];
                 self.maxID = lastStatus.statusID;

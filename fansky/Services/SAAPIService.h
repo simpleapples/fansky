@@ -70,4 +70,8 @@
 
 - (void)searchPublicTimeLineWithKeyword:(NSString *)keyword sinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
 
+#pragma mark - Base
+
+- (void)stopAllTasks;
+
 @end

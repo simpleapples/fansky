@@ -143,6 +143,7 @@
 		5A86A68A1BBBFD3B00C562E2 /* SANotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SANotificationManager.h; sourceTree = "<group>"; };
 		5A86A68B1BBBFD3B00C562E2 /* SANotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SANotificationManager.m; sourceTree = "<group>"; };
 		5A86C0CB1C2ECEB0008BB3FD /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/SAOthers.storyboard"; sourceTree = "<group>"; };
+		5A924F381CA4E82700548ADC /* fansky 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "fansky 5.xcdatamodel"; sourceTree = "<group>"; };
 		5A93F01D1BC24AA000C44023 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/SAMain.storyboard"; sourceTree = "<group>"; };
 		5A93F01E1BC24AA000C44023 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.xib"; sourceTree = "<group>"; };
 		5A95558B1BD36D1200326E94 /* SAFavoriteTimeLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFavoriteTimeLineViewController.h; sourceTree = "<group>"; };
@@ -963,12 +964,13 @@
 		5AD70EF41B316A79009C5B84 /* fansky.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				5A924F381CA4E82700548ADC /* fansky 5.xcdatamodel */,
 				5A5694EA1BDB55F400A883A9 /* fansky 4.xcdatamodel */,
 				5A95558E1BD384B400326E94 /* fansky 3.xcdatamodel */,
 				5A849E8E1BC3E62D000FDCB9 /* fansky 2.xcdatamodel */,
 				5AD70EF51B316A79009C5B84 /* fansky.xcdatamodel */,
 			);
-			currentVersion = 5A5694EA1BDB55F400A883A9 /* fansky 4.xcdatamodel */;
+			currentVersion = 5A924F381CA4E82700548ADC /* fansky 5.xcdatamodel */;
 			path = fansky.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

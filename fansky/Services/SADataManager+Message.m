@@ -15,7 +15,7 @@
 
 static NSString *const ENTITY_NAME = @"SAMessage";
 
-- (void)insertMessageWithObjects:(id)objects
+- (void)insertOrUpdateMessagesWithObjects:(id)objects
 {
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     
@@ -70,8 +70,6 @@ static NSString *const ENTITY_NAME = @"SAMessage";
 {
     NSString *messageID = [object objectForKey:@"id"];
     NSString *text = [object objectForKey:@"text"];
-    NSString *senderID = [object objectForKey:@"sender_id"];
-    NSString *recipientID = [object objectForKey:@"recipient_id"];
     NSString *createdAtString = [object objectForKey:@"created_at"];
     NSDate *createdAt = [createdAtString dateWithDefaultFormat];
     
@@ -88,8 +86,6 @@ static NSString *const ENTITY_NAME = @"SAMessage";
         message.messageID = messageID;
         message.text = text;
         message.createdAt = createdAt;
-        message.senderID = senderID;
-        message.recipientID = recipientID;
         message.sender = sender;
         message.recipient = recipient;
         message.localUser = localUser;

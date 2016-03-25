@@ -22,7 +22,7 @@
 
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 
-@property (strong, nonatomic) NSMutableArray *photoTimeLineList;
+@property (strong, nonatomic) NSArray *photoTimeLineList;
 @property (copy, nonatomic) NSString *maxID;
 
 @end
@@ -73,10 +73,8 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
 - (void)getLocalData
 {
     [[SADataManager sharedManager] currentPhotoTimeLineWithUserID:self.userID limit:PHOTO_TIME_LINE_COUNT completeHandler:^(NSArray *result) {
-        [self.photoTimeLineList removeAllObjects];
-        [self.photoTimeLineList addObjectsFromArray:result];
+        self.photoTimeLineList = result;
         [self.collectionView reloadData];
-        
         [self refreshData];
     }];
     
@@ -102,8 +100,7 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
             limit = self.photoTimeLineList.count + PHOTO_TIME_LINE_COUNT;
         }
         [[SADataManager sharedManager] currentPhotoTimeLineWithUserID:self.userID limit:limit completeHandler:^(NSArray *result) {
-            [self.photoTimeLineList removeAllObjects];
-            [self.photoTimeLineList addObjectsFromArray:result];
+            self.photoTimeLineList = result;
             if (self.photoTimeLineList.count) {
                 SAStatus *lastStatus = [self.photoTimeLineList lastObject];
                 self.maxID = lastStatus.statusID;
@@ -129,10 +126,10 @@ static NSUInteger PHOTO_TIME_LINE_COUNT = 40;
     [[SAAPIService sharedSingleton] userPhotoTimeLineWithUserID:self.userID sinceID:nil maxID:maxID count:PHOTO_TIME_LINE_COUNT success:success failure:failure];
 }
 
-- (NSMutableArray *)photoTimeLineList
+- (NSArray *)photoTimeLineList
 {
     if (!_photoTimeLineList) {
-        _photoTimeLineList = [[NSMutableArray alloc] init];
+        _photoTimeLineList = [[NSArray alloc] init];
     }
     return _photoTimeLineList;
 }

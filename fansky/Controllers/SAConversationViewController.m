@@ -79,7 +79,7 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
         }
     }
     [[SAAPIService sharedSingleton] conversationListWithCount:CONVERSATION_LIST_COUNT success:^(id data) {
-        [[SADataManager sharedManager] insertConversationWithObjects:data];
+        [[SADataManager sharedManager] insertOrUpdateConversationsWithObjects:data];
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
         self.conversationList = [[SADataManager sharedManager] currentConversationListWithUserID:currentUser.userID limit:CONVERSATION_LIST_COUNT];
         [self.tableView reloadData];
@@ -151,7 +151,7 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
 {
     SAConversation *conversation = [self.conversationList objectAtIndex:indexPath.row];
     NSString *otherUserID;
-    if ([conversation.otherUserID isEqualToString:conversation.message.senderID]) {
+    if ([conversation.otherUserID isEqualToString:conversation.message.sender.userID]) {
         otherUserID = conversation.message.sender.userID;
     } else {
         otherUserID = conversation.message.recipient.userID;

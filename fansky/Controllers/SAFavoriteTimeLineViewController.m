@@ -47,9 +47,9 @@ static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
             [tempTimeLineList addObject:status];
         }];
         if (self.page > 1) {
-            [self.timeLineList addObjectsFromArray:tempTimeLineList];
+            self.timeLineList = [self.timeLineList arrayByAddingObjectsFromArray:tempTimeLineList];
         } else {
-            self.timeLineList = tempTimeLineList;
+            self.timeLineList = [[NSArray alloc] initWithArray:tempTimeLineList];
         }
         [self.tableView reloadData];
         [SAMessageDisplayUtils dismiss];

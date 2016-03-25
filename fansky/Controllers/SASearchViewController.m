@@ -31,7 +31,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-@property (strong, nonatomic) NSMutableArray *timeLineList;
+@property (strong, nonatomic) NSArray *timeLineList;
 @property (copy, nonatomic) NSString *maxID;
 @property (copy, nonatomic) NSString *keyword;
 @property (copy, nonatomic) NSString *selectedStatusID;
@@ -93,9 +93,10 @@ static NSString *const cellName = @"SATimeLineCell";
             [tempTimeLineList addObject:status];
         }];
         if (refresh) {
-            [self.timeLineList removeAllObjects];
+            self.timeLineList = tempTimeLineList;
+        } else {
+            self.timeLineList = [self.timeLineList arrayByAddingObjectsFromArray:tempTimeLineList];
         }
-        [self.timeLineList addObjectsFromArray:tempTimeLineList];
         if (self.timeLineList.count) {
             SAStatus *lastStatus = [self.timeLineList lastObject];
             self.maxID = lastStatus.statusID;
@@ -167,10 +168,10 @@ static NSString *const cellName = @"SATimeLineCell";
     }
 }
 
-- (NSMutableArray *)timeLineList
+- (NSArray *)timeLineList
 {
     if (!_timeLineList) {
-        _timeLineList = [[NSMutableArray alloc] init];
+        _timeLineList = [[NSArray alloc] init];
     }
     return _timeLineList;
 }
