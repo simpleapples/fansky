@@ -33,57 +33,6 @@ static NSString *const ENTITY_NAME = @"SAUser";
 
 - (SAUser *)insertOrUpdateUserWithObject:(id)userObject local:(BOOL)local active:(BOOL)active token:(NSString *)token secret:(NSString *)secret
 {
-    NSString *userID = [userObject objectForKey:@"id"];
-    NSString *name = [userObject objectForKey:@"name"];
-    NSString *location = [userObject objectForKey:@"location"];
-    NSNumber *isProtected = [userObject objectForKey:@"protected"];
-    NSString *profileImageURL = [userObject objectForKey:@"profile_image_url_large"];
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-    fetchRequest.fetchLimit = 1;
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"userID = %@", userID];
-    
-    __block NSError *error;
-    __block SAUser *resultUser;
-    [self.managedObjectContext performBlockAndWait:^{
-        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        if (!error && fetchResult && fetchResult.count) {
-            SAUser *existUser = [fetchResult firstObject];
-            existUser.userID = userID;
-            existUser.name = name;
-            existUser.location = location;
-            existUser.profileImageURL = profileImageURL;
-            existUser.isProtected = isProtected;
-            if (local) {
-                existUser.isLocal = @(local);
-                existUser.isActive = @(active);
-                existUser.token = token;
-                existUser.tokenSecret = secret;
-            }
-            resultUser = existUser;
-        } else {
-            [self.managedObjectContext performBlockAndWait:^{
-                SAUser *user = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
-                user.userID = userID;
-                user.name = name;
-                user.location = location;
-                user.profileImageURL = profileImageURL;
-                user.isProtected = isProtected;
-                if (local) {
-                    user.isLocal = @(local);
-                    user.isActive = @(active);
-                    user.token = token;
-                    user.tokenSecret = secret;
-                }
-                resultUser = user;
-            }];
-        }
-    }];
-    return resultUser;
-}
-
-- (SAUser *)insertOrUpdateUserWithExtendObject:(id)userObject
-{
     NSString *userID = (NSString *)[userObject objectForKey:@"id"];
     NSString *name = (NSString *)[userObject objectForKey:@"name"];
     NSString *location = (NSString *)[userObject objectForKey:@"location"];
@@ -114,6 +63,12 @@ static NSString *const ENTITY_NAME = @"SAUser";
             existUser.followersCount = followersCount;
             existUser.statusCount = statusCount;
             existUser.isProtected = isProtected;
+            if (local) {
+                existUser.isLocal = @(local);
+                existUser.isActive = @(active);
+                existUser.token = token;
+                existUser.tokenSecret = secret;
+            }
             resultUser = existUser;
         } else {
             [self.managedObjectContext performBlockAndWait:^{
@@ -128,6 +83,12 @@ static NSString *const ENTITY_NAME = @"SAUser";
                 user.followersCount = followersCount;
                 user.statusCount = statusCount;
                 user.isProtected = isProtected;
+                if (local) {
+                    user.isLocal = @(local);
+                    user.isActive = @(active);
+                    user.token = token;
+                    user.tokenSecret = secret;
+                }
                 resultUser = user;
             }];
         }

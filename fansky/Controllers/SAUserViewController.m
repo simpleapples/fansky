@@ -50,7 +50,7 @@
         }
     } else {
         [[SAAPIService sharedSingleton] userWithID:self.userID success:^(id data) {
-            SAUser *user = [[SADataManager sharedManager] insertOrUpdateUserWithExtendObject:data];
+            SAUser *user = [[SADataManager sharedManager] insertOrUpdateUserWithObject:data local:NO active:NO token:nil secret:nil];
             self.title = user.name;
             self.userID = user.userID;
             [self updateInterface];

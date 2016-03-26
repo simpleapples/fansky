@@ -70,6 +70,8 @@ static NSString *const ENTITY_NAME = @"SAMessage";
 {
     NSString *messageID = [object objectForKey:@"id"];
     NSString *text = [object objectForKey:@"text"];
+    NSString *senderID = [object objectForKey:@"sender_id"];
+    NSString *recipientID = [object objectForKey:@"recipient_id"];
     NSString *createdAtString = [object objectForKey:@"created_at"];
     NSDate *createdAt = [createdAtString dateWithDefaultFormat];
     
@@ -85,6 +87,8 @@ static NSString *const ENTITY_NAME = @"SAMessage";
         SAMessage *message = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
         message.messageID = messageID;
         message.text = text;
+        message.senderID = senderID;
+        message.recipientID = recipientID;
         message.createdAt = createdAt;
         message.sender = sender;
         message.recipient = recipient;

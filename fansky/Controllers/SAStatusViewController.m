@@ -33,7 +33,7 @@
 @property (weak, nonatomic) IBOutlet DTAttributedLabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *iconGIFImageView;
-@property (weak, nonatomic) IBOutlet UIButton *starButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *starButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelTopToLabelMarginConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelTopToImageViewMarginConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentLabelHeightConstraint;
@@ -62,9 +62,9 @@
 - (void)updateStarButton
 {
     if ([self.status.isFavorited isEqualToNumber:@(YES)]) {
-        self.starButton.selected = YES;
+        [self.starButton setImage:[UIImage imageNamed:@"IconStarSelected"]];
     } else {
-        self.starButton.selected = NO;
+        [self.starButton setImage:[UIImage imageNamed:@"IconStar"]];
     }
 }
 
@@ -135,10 +135,10 @@
         UINavigationController *navigationController = segue.destinationViewController;
         if ([[navigationController.viewControllers firstObject] isKindOfClass:[SAComposeViewController class]]) {
             SAComposeViewController *composeViewController = (SAComposeViewController *)[navigationController.viewControllers firstObject];
-            UIButton *button = (UIButton *)sender;
-            if (button.tag == 1) {
+            UIBarButtonItem *barButton = (UIBarButtonItem *)sender;
+            if (barButton.tag == 1) {
                 composeViewController.replyToStatusID = self.status.statusID;
-            } else if (button.tag == 2) {
+            } else if (barButton.tag == 2) {
                 composeViewController.repostStatusID = self.status.statusID;
             }
         }

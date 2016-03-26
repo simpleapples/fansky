@@ -36,7 +36,13 @@
     paragraphStyle.lineHeightMultiple = 1.4;
     NSDictionary *attributes = @{NSParagraphStyleAttributeName: paragraphStyle};
     
-    self.infoLabel.attributedText = [[NSAttributedString alloc] initWithString:self.user.desc attributes:attributes];
+    NSString *locationString = @"";
+    if (self.user.location.length) {
+        locationString = [NSString stringWithFormat:@"所在地：%@\n", self.user.location];
+    }
+    NSString *infoString = [NSString stringWithFormat:@"%@自述：%@", locationString, self.user.desc];
+    
+    self.infoLabel.attributedText = [[NSAttributedString alloc] initWithString:infoString attributes:attributes];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle

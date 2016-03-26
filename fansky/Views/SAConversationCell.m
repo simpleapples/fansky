@@ -37,7 +37,7 @@
 - (void)configWithMessage:(SAConversation *)conversation
 {
     self.conversation = conversation;
-    if ([self.conversation.otherUserID isEqualToString:self.conversation.message.sender.userID]) {
+    if ([self.conversation.otherUserID isEqualToString:self.conversation.message.senderID]) {
         self.otherUser = self.conversation.message.sender;
     } else {
         self.otherUser = self.conversation.message.recipient;

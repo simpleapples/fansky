@@ -151,7 +151,7 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
 {
     SAConversation *conversation = [self.conversationList objectAtIndex:indexPath.row];
     NSString *otherUserID;
-    if ([conversation.otherUserID isEqualToString:conversation.message.sender.userID]) {
+    if ([conversation.otherUserID isEqualToString:conversation.message.senderID]) {
         otherUserID = conversation.message.sender.userID;
     } else {
         otherUserID = conversation.message.recipient.userID;

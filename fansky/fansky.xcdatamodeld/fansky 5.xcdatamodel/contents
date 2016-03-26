@@ -10,6 +10,8 @@
     <entity name="SAMessage" representedClassName="SAMessage" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="messageID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recipientID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="senderID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="conversation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAConversation" inverseName="message" inverseEntity="SAConversation" syncable="YES"/>
         <relationship name="localUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAUser" inverseName="mineMessages" inverseEntity="SAUser" syncable="YES"/>
@@ -59,7 +61,7 @@
     </entity>
     <elements>
         <element name="SAConversation" positionX="-45" positionY="99" width="128" height="120"/>
-        <element name="SAMessage" positionX="-45" positionY="90" width="128" height="150"/>
+        <element name="SAMessage" positionX="-45" positionY="90" width="128" height="180"/>
         <element name="SAPhoto" positionX="-36" positionY="81" width="128" height="120"/>
         <element name="SAStatus" positionX="-63" positionY="45" width="128" height="195"/>
         <element name="SAUser" positionX="-63" positionY="-18" width="128" height="345"/>

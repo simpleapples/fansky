@@ -56,7 +56,7 @@
         [self updateInterface];
     }
     [[SAAPIService sharedSingleton] userWithID:userID success:^(id data) {
-        self.user = [[SADataManager sharedManager] insertOrUpdateUserWithExtendObject:data];
+        self.user = [[SADataManager sharedManager] insertOrUpdateUserWithObject:data local:NO active:NO token:nil secret:nil];
         [self updateInterface];
     } failure:nil];
 }

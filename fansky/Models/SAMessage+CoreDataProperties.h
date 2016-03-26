@@ -2,7 +2,7 @@
 //  SAMessage+CoreDataProperties.h
 //  fansky
 //
-//  Created by Zzy on 16/3/25.
+//  Created by Zzy on 16/3/26.
 //  Copyright © 2016年 Zzy. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSDate *createdAt;
 @property (nullable, nonatomic, retain) NSString *messageID;
 @property (nullable, nonatomic, retain) NSString *text;
+@property (nullable, nonatomic, retain) NSString *senderID;
+@property (nullable, nonatomic, retain) NSString *recipientID;
 @property (nullable, nonatomic, retain) SAConversation *conversation;
 @property (nullable, nonatomic, retain) SAUser *localUser;
 @property (nullable, nonatomic, retain) SAUser *recipient;
