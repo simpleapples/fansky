@@ -126,7 +126,8 @@ static NSString *const ENTITY_NAME = @"SAUser";
     NSNumber *statusCount = [object objectForKey:@"statuses_count"];
     NSNumber *isProtected = [object objectForKey:@"protected"];
     
-    SAUser *user = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
+    SAUser *user = [[SAUser alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:nil];
     user.userID = userID;
     user.name = name;
     user.location = location;

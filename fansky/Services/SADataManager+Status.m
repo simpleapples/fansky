@@ -167,7 +167,8 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     SAPhoto *photo = [[SADataManager sharedManager] photoWithObject:[object objectForKey:@"photo"]];
     SAUser *user = [[SADataManager sharedManager] userWithObject:[object objectForKey:@"user"]];
     
-    SAStatus *status = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
+    SAStatus *status = [[SAStatus alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:nil];
     status.statusID = statusID;
     status.source = source;
     status.text = text;

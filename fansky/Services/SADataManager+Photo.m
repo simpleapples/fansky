@@ -49,7 +49,8 @@ static NSString *const ENTITY_NAME = @"SAPhoto";
     NSString *thumbURL = [object objectForKey:@"thumburl"];
     NSString *photoURL = [object objectForKey:@"url"];
     
-    SAPhoto *photo = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
+    SAPhoto *photo = [[SAPhoto alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:nil];
     photo.imageURL = imageURL;
     photo.largeURL = largeURL;
     photo.thumbURL = thumbURL;
