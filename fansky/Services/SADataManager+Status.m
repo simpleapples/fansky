@@ -192,7 +192,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     NSString *repostStatusID = [object objectForKey:@"repost_status_id"];
     NSDate *createdAt = [createdAtString dateWithDefaultFormat];
     
-    SAPhoto *photo = [[SADataManager sharedManager] insertOrUpdatePhotoWithObject:[object objectForKey:@"photo"]];
+    SAPhoto *photo = [[SADataManager sharedManager] insertOrUpdatePhotoWithObject:[object objectForKey:@"photo"] statusID:statusID];
     SAUser *user = [[SADataManager sharedManager] insertOrUpdateUserWithObject:[object objectForKey:@"user"] local:NO active:NO token:nil secret:nil];
     
     __block SAStatus *resultStatus;

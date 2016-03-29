@@ -12,7 +12,7 @@
 
 @interface SADataManager (Photo)
 
-- (SAPhoto *)insertOrUpdatePhotoWithObject:(id)object;
+- (SAPhoto *)insertOrUpdatePhotoWithObject:(id)object statusID:(NSString *)statusID;
 - (SAPhoto *)photoWithObject:(id)object;
 
 @end

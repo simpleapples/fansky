@@ -22,6 +22,7 @@
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="largeURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="photoURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="statusID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thumbURL" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="status" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SAStatus" inverseName="photo" inverseEntity="SAStatus" syncable="YES"/>
     </entity>
@@ -62,7 +63,7 @@
     <elements>
         <element name="SAConversation" positionX="-45" positionY="99" width="128" height="120"/>
         <element name="SAMessage" positionX="-45" positionY="90" width="128" height="180"/>
-        <element name="SAPhoto" positionX="-36" positionY="81" width="128" height="120"/>
+        <element name="SAPhoto" positionX="-36" positionY="81" width="128" height="135"/>
         <element name="SAStatus" positionX="-63" positionY="45" width="128" height="195"/>
         <element name="SAUser" positionX="-63" positionY="-18" width="128" height="345"/>
     </elements>
