@@ -113,7 +113,9 @@ static NSString *const cellName = @"SATimeLineCell";
             }
             [self.tableView reloadData];
             [SAMessageDisplayUtils dismiss];
-            [self.refreshView endRefreshing];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.refreshView endRefreshing];
+            });
         }];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
@@ -122,12 +124,17 @@ static NSString *const cellName = @"SATimeLineCell";
         } else {
             [SAMessageDisplayUtils showInfoWithMessage:error];
         }
-        [self.refreshView endRefreshing];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.refreshView endRefreshing];
+        });
+        
     };
     
     if (type == SAStatusTypeTimeLine) {
         if (refresh) {
-            [self.refreshView triggerAnimated:YES];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.refreshView triggerAnimated:YES];
+            });
         }
         [[SAAPIService sharedSingleton] timeLineWithUserID:userID sinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
     } else {

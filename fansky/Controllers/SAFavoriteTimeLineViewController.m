@@ -53,11 +53,15 @@ static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
         }
         [self.tableView reloadData];
         [SAMessageDisplayUtils dismiss];
-        [self.refreshView endRefreshing];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.refreshView endRefreshing];
+        });
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
         [SAMessageDisplayUtils showInfoWithMessage:error];
-        [self.refreshView endRefreshing];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.refreshView endRefreshing];
+        });
     };
     
     if (refresh) {

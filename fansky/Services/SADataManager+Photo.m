@@ -13,7 +13,7 @@
 
 static NSString *const ENTITY_NAME = @"SAPhoto";
 
-- (SAPhoto *)insertOrUpdatePhotoWithObject:(id)object
+- (SAPhoto *)insertOrUpdatePhotoWithObject:(id)object statusID:(NSString *)statusID
 {
     NSString *imageURL = [object objectForKey:@"imageurl"];
     NSString *largeURL = [object objectForKey:@"largeurl"];
@@ -22,7 +22,7 @@ static NSString *const ENTITY_NAME = @"SAPhoto";
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
     fetchRequest.fetchLimit = 1;
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"photoURL = %@", photoURL];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"statusID = %@", statusID];
     
     __block NSError *error;
     __block SAPhoto *resultPhoto;
@@ -32,6 +32,7 @@ static NSString *const ENTITY_NAME = @"SAPhoto";
             resultPhoto = [fetchResult firstObject];
         } else {
             SAPhoto *photo = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
+            photo.statusID = statusID;
             photo.imageURL = imageURL;
             photo.largeURL = largeURL;
             photo.thumbURL = thumbURL;

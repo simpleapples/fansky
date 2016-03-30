@@ -64,16 +64,22 @@ static NSUInteger TIME_LINE_COUNT = 40;
                 self.maxID = lastStatus.statusID;
             }
             [self.tableView reloadData];
-            [self.refreshView endRefreshing];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.refreshView endRefreshing];
+            });
         }];
     };
     void (^failure)(NSString *error) = ^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
-        [self.refreshView endRefreshing];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.refreshView endRefreshing];
+        });
     };
 
     if (refresh) {
-        [self.refreshView triggerAnimated:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.refreshView triggerAnimated:YES];
+        });
     }
     [[SAAPIService sharedSingleton] mentionStatusWithSinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
 }
