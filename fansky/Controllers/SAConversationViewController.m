@@ -73,7 +73,9 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
 - (void)updateDataWithRefresh:(BOOL)refresh
 {
     if (refresh) {
-        [self.refreshView triggerAnimated:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.refreshView triggerAnimated:YES];
+        });
         if (self.conversationList.count) {
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         }
@@ -83,10 +85,14 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
         SAUser *currentUser = [SADataManager sharedManager].currentUser;
         self.conversationList = [[SADataManager sharedManager] currentConversationListWithUserID:currentUser.userID limit:CONVERSATION_LIST_COUNT];
         [self.tableView reloadData];
-        [self.refreshView endRefreshing];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.refreshView endRefreshing];
+        });
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
-        [self.refreshView endRefreshing];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.refreshView endRefreshing];
+        });
     }];
 }
 
