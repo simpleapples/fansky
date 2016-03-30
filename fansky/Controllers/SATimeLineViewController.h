@@ -10,13 +10,15 @@
 #import <ARSegmentPager/ARSegmentControllerDelegate.h>
 #import "LGRefreshView.h"
 
+@class SAStatus;
+
 @interface SATimeLineViewController : UITableViewController <ARSegmentControllerDelegate>
 
 @property (strong, nonatomic) LGRefreshView *refreshView;
 
 @property (strong, nonatomic) NSArray *timeLineList;
 @property (copy, nonatomic) NSString *userID;
-@property (copy, nonatomic) NSString *selectedStatusID;
+@property (strong, nonatomic) SAStatus *selectedStatus;
 @property (copy, nonatomic) NSString *selectedUserID;
 
 - (void)refreshData;

@@ -90,7 +90,7 @@ static NSUInteger FAVORITE_TIME_LINE_COUNT = 40;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
-    self.selectedStatusID = status.statusID;
+    self.selectedStatus = status;
     [self performSegueWithIdentifier:@"FavoriteTimeLineToStatusSegue" sender:nil];
 }
 

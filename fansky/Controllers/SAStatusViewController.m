@@ -37,7 +37,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelTopToLabelMarginConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelTopToImageViewMarginConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentLabelHeightConstraint;
-@property (strong, nonatomic) SAStatus *status;
 @property (copy, nonatomic) NSString *selectedUserID;
 
 @end
@@ -47,8 +46,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.status = [[SADataManager sharedManager] statusWithID:self.statusID];
     
     [self updateInterface];
 }
@@ -252,7 +249,7 @@
 {
     [SAMessageDisplayUtils showProgressWithMessage:@"请稍后"];
     if ([self.status.isFavorited isEqualToNumber:@(YES)]) {
-        [[SAAPIService sharedSingleton] deleteFavoriteStatusWithID:self.statusID success:^(id data) {
+        [[SAAPIService sharedSingleton] deleteFavoriteStatusWithID:self.status.statusID success:^(id data) {
             self.status.isFavorited = @(NO);
             [SAMessageDisplayUtils showInfoWithMessage:@"取消收藏成功"];
             [self updateStarButton];
@@ -260,7 +257,7 @@
             [SAMessageDisplayUtils showErrorWithMessage:error];
         }];
     } else {
-        [[SAAPIService sharedSingleton] createFavoriteStatusWithID:self.statusID success:^(id data) {
+        [[SAAPIService sharedSingleton] createFavoriteStatusWithID:self.status.statusID success:^(id data) {
             self.status.isFavorited = @(YES);
             [SAMessageDisplayUtils showInfoWithMessage:@"收藏成功"];
             [self updateStarButton];
@@ -289,8 +286,8 @@
         [SAMessageDisplayUtils showSuccessWithMessage:@"已举报"];
     }];
     UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"删除消息" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        [[SAAPIService sharedSingleton] deleteStatusWithID:self.statusID success:^(id data) {
-            [[SADataManager sharedManager] deleteStatusWithID:self.statusID];
+        [[SAAPIService sharedSingleton] deleteStatusWithID:self.status.statusID success:^(id data) {
+            [[SADataManager sharedManager] deleteStatusWithID:self.status.statusID];
             [SAMessageDisplayUtils showSuccessWithMessage:@"删除成功"];
             [self.navigationController popViewControllerAnimated:YES];
         } failure:^(NSString *error) {

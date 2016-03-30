@@ -162,7 +162,7 @@ static NSString *const cellName = @"SATimeLineCell";
 {
     if ([segue.destinationViewController isKindOfClass:[SAStatusViewController class]]) {
         SAStatusViewController *statusViewController = (SAStatusViewController *)segue.destinationViewController;
-        statusViewController.statusID = self.selectedStatusID;
+        statusViewController.status = self.selectedStatus;
     } else if ([segue.destinationViewController isKindOfClass:[SAUserViewController class]]) {
         SAUserViewController *userViewController = (SAUserViewController *)segue.destinationViewController;
         userViewController.userID = self.selectedUserID;
@@ -340,7 +340,7 @@ static NSString *const cellName = @"SATimeLineCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
-    self.selectedStatusID = status.statusID;
+    self.selectedStatus = status;
     [self performSegueWithIdentifier:@"TimeLineToStatusSegue" sender:nil];
 }
 

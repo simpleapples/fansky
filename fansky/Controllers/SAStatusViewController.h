@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class SAStatus;
+
 @interface SAStatusViewController : UIViewController
 
-@property (copy, nonatomic) NSString *statusID;
+@property (strong, nonatomic) SAStatus *status;
 
 @end
