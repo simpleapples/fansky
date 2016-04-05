@@ -22,8 +22,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
 
-@property (strong, nonatomic) SAStatus *status;
-
 @end
 
 @implementation SAPhotoPreviewViewController
@@ -31,8 +29,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    self.status = [[SADataManager sharedManager] statusWithID:self.statusID];
     
     [self updateInterface];
 }

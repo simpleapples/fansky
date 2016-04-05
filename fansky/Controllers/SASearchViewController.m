@@ -192,7 +192,7 @@ static NSString *const cellName = @"SATimeLineCell";
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SAOthers" bundle:[NSBundle mainBundle]];
         SAPhotoPreviewViewController *photoPreviewViewController = [storyboard instantiateViewControllerWithIdentifier:@"SAPhotoPreviewViewController"];
-        photoPreviewViewController.statusID = timeLineCell.status.statusID;
+        photoPreviewViewController.status = timeLineCell.status;
         return photoPreviewViewController;
     }
     return nil;
@@ -201,7 +201,7 @@ static NSString *const cellName = @"SATimeLineCell";
 - (void)previewingContext:(id<UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit
 {
     SAPhotoPreviewViewController *photoPreviewViewController = (SAPhotoPreviewViewController *)viewControllerToCommit;
-    SAStatus *status = [[SADataManager sharedManager] statusWithID:photoPreviewViewController.statusID];
+    SAStatus *status = [[SADataManager sharedManager] statusWithID:photoPreviewViewController.status.statusID];
     [self showPhotoFromSourceCell:nil photo:status.photo];
 }
 

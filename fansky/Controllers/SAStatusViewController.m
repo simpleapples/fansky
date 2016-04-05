@@ -187,7 +187,7 @@
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SAOthers" bundle:[NSBundle mainBundle]];
         SAPhotoPreviewViewController *photoPreviewViewController = [storyboard instantiateViewControllerWithIdentifier:@"SAPhotoPreviewViewController"];
-        photoPreviewViewController.statusID = self.status.statusID;
+        photoPreviewViewController.status = self.status;
         return photoPreviewViewController;
     }
     return nil;
