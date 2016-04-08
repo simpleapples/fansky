@@ -2,7 +2,7 @@
 //  SAStatus+CoreDataProperties.h
 //  fansky
 //
-//  Created by Zzy on 16/3/25.
+//  Created by Zzy on 16/4/8.
 //  Copyright © 2016年 Zzy. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *statusID;
 @property (nullable, nonatomic, retain) NSString *text;
 @property (nullable, nonatomic, retain) NSNumber *type;
+@property (nullable, nonatomic, retain) NSString *replyStatusID;
 @property (nullable, nonatomic, retain) NSSet<SAUser *> *localUsers;
 @property (nullable, nonatomic, retain) SAPhoto *photo;
 @property (nullable, nonatomic, retain) SAUser *user;

@@ -58,6 +58,8 @@
 
 - (void)deleteFavoriteStatusWithID:(NSString *)statusID success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
 
+- (void)showStatusWithID:(NSString *)statusID success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
+
 #pragma mark - Message
 
 - (void)conversationListWithCount:(NSInteger)count success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;

@@ -274,6 +274,11 @@
     [self requestAPIWithPath:SA_API_FAVORITE_STATUS_DELETE_PATH method:@"POST" parametersDictionary:@{@"id": statusID, @"mode": @"lite", @"format": @"html"} success:success failure:failure];
 }
 
+- (void)showStatusWithID:(NSString *)statusID success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    [self requestAPIWithPath:SA_API_STATUS_SHOW_PATH method:@"GET" parametersDictionary:@{@"id": statusID, @"mode": @"lite", @"format": @"html"} success:success failure:failure];
+}
+
 #pragma mark - Message
 
 - (void)conversationListWithCount:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *))failure

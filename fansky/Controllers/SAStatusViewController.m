@@ -34,10 +34,13 @@
 @property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *iconGIFImageView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *starButton;
+@property (weak, nonatomic) IBOutlet UIButton *originalStatusButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelTopToLabelMarginConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelTopToImageViewMarginConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentLabelHeightConstraint;
+
 @property (copy, nonatomic) NSString *selectedUserID;
+@property (strong, nonatomic) SAStatus *replyStatus;
 
 @end
 
@@ -48,6 +51,17 @@
     [super viewDidLoad];
     
     [self updateInterface];
+    
+    if (self.status.replyStatusID.length) {
+        [[SAAPIService sharedSingleton] showStatusWithID:self.status.replyStatusID success:^(id data) {
+            self.replyStatus = [[SADataManager sharedManager] statusWithObject:data localUsers:nil type:SAStatusTypeUserStatus];
+            if (self.replyStatus.statusID.length) {
+                NSString *buttonTitle = [NSString stringWithFormat:@"回复给 %@", self.replyStatus.user.name];
+                [self.originalStatusButton setTitle:buttonTitle forState:UIControlStateNormal];
+                self.originalStatusButton.hidden = NO;
+            }
+        } failure:nil];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -314,6 +328,14 @@
     } else if ([URL.scheme isEqualToString:@"http"] || [URL.scheme isEqualToString:@"https"]) {
         [[UIApplication sharedApplication] openURL:URL];
     }
+}
+
+- (IBAction)originalStatusButtonTouchUp:(id)sender
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SAMain" bundle:[NSBundle mainBundle]];
+    SAStatusViewController *statusViewController = [storyboard instantiateViewControllerWithIdentifier:@"SAStatusViewController"];
+    statusViewController.status = self.replyStatus;
+    [self.navigationController showViewController:statusViewController sender:sender];
 }
 
 @end

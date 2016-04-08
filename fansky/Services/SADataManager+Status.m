@@ -161,6 +161,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     NSString *text = [object objectForKey:@"text"];
     NSNumber *isFavorited = [object objectForKey:@"favorited"];
     NSString *repostStatusID = [object objectForKey:@"repost_status_id"];
+    NSString *replyStatusID = [object objectForKey:@"in_reply_to_status_id"];
     NSString *createdAtString = [object objectForKey:@"created_at"];
     NSDate *createdAt = [createdAtString dateWithDefaultFormat];
     
@@ -177,6 +178,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     status.user = user;
     status.localUsers = localUsers;
     status.repostStatusID = repostStatusID;
+    status.replyStatusID = replyStatusID;
     status.createdAt = createdAt;
     status.type = @(type);
     return status;
@@ -190,6 +192,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     NSNumber *isFavorited = [object objectForKey:@"favorited"];
     NSString *createdAtString = [object objectForKey:@"created_at"];
     NSString *repostStatusID = [object objectForKey:@"repost_status_id"];
+    NSString *replyStatusID = [object objectForKey:@"in_reply_to_status_id"];
     NSDate *createdAt = [createdAtString dateWithDefaultFormat];
     
     SAPhoto *photo = [[SADataManager sharedManager] insertOrUpdatePhotoWithObject:[object objectForKey:@"photo"] statusID:statusID];
@@ -205,6 +208,7 @@ static NSString *const ENTITY_NAME = @"SAStatus";
         status.photo = photo;
         status.user = user;
         status.repostStatusID = repostStatusID;
+        status.replyStatusID = replyStatusID;
         status.createdAt = createdAt;
         if (![status.localUsers containsObject:localUser]) {
             [status addLocalUsersObject:localUser];
