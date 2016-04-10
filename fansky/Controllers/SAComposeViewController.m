@@ -18,7 +18,7 @@
 #import "UIImage+Utils.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface SAComposeViewController () <UITextViewDelegate>
+@interface SAComposeViewController () <UITextViewDelegate, UIImagePickerControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;

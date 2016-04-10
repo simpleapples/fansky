@@ -20,6 +20,10 @@
 
 - (void)accountNotificationWithSuccess:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
 
+- (void)updateProfileWithImage:(NSData *)image success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
+
+- (void)updateProfileWithLocation:(NSString *)location desc:(NSString *)desc success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;
+
 #pragma mark - User
 
 - (void)userWithID:(NSString *)userID success:(void(^)(id data))success failure:(void(^)(NSString *error))failure;

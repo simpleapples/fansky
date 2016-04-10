@@ -140,4 +140,9 @@
     [self performSegueWithIdentifier:@"UserToUserInfoSegue" sender:nil];
 }
 
+- (void)userHeaderView:(SAUserHeaderView *)userHeaderView modifyInfoButtonTouchUp:(id)sender
+{
+    [self performSegueWithIdentifier:@"UserToModifyInfoSegue" sender:nil];
+}
+
 @end

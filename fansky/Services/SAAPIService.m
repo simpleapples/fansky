@@ -15,6 +15,7 @@
 @interface SAAPIService ()
 
 @property (strong, nonatomic) NSURLSession *URLSession;
+@property (strong, nonatomic) NSURLSession *uploadURLSession;
 
 @end
 
@@ -37,9 +38,14 @@
     self = [super init];
     if (self) {
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        configuration.timeoutIntervalForRequest = 10;
-        configuration.timeoutIntervalForResource = 10;
+        configuration.timeoutIntervalForRequest = 20;
+        configuration.timeoutIntervalForResource = 20;
         self.URLSession = [NSURLSession sessionWithConfiguration:configuration];
+        
+        NSURLSessionConfiguration *uploadConfiguration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        configuration.timeoutIntervalForRequest = 60;
+        configuration.timeoutIntervalForResource = 30;
+        self.uploadURLSession = [NSURLSession sessionWithConfiguration:uploadConfiguration];
     }
     return self;
 }
@@ -110,6 +116,22 @@
 - (void)accountNotificationWithSuccess:(void (^)(id))success failure:(void (^)(NSString *))failure
 {
     [self requestAPIWithPath:SA_API_ACCOUNT_NOTIFICATION_PATH method:@"GET" parametersDictionary:nil success:success failure:failure];
+}
+
+- (void)updateProfileWithImage:(NSData *)image success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    [self requestAPIWithPath:SA_API_UPDATE_PROFILE_IMAGE_PATH method:@"POST" parametersDictionary:@{@"mode": @"lite", @"format": @"html"} image:image success:success failure:failure];
+}
+
+- (void)updateProfileWithLocation:(NSString *)location desc:(NSString *)desc success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    if (!location) {
+        location = @" ";
+    }
+    if (!desc) {
+        desc = @" ";
+    }
+    [self requestAPIWithPath:SA_API_UPDATE_PROFILE_PATH method:@"POST" parametersDictionary:@{@"location": location, @"description": desc, @"mode": @"lite", @"format": @"html"} success:success failure:failure];
 }
 
 #pragma mark - User
@@ -191,40 +213,7 @@
         [mutableDictionary setObject:repostStatusID forKey:@"repost_status_id"];
     }
     if (image) {
-        NSString *boundary = [self generateBoundaryString];
-        NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
-        
-        NSMutableDictionary *authParametersDictionary = [mutableDictionary mutableCopy];
-        [authParametersDictionary setObject:@"photo" forKey:@"photo"];
-        
-        NSData *httpBody = [self createBodyWithBoundary:boundary parameters:mutableDictionary data:image];
-        SAUser *currentUser = [SADataManager sharedManager].currentUser;
-        NSMutableURLRequest *mutableURLRequest = [[TDOAuth URLRequestForPath:SA_API_UPDATE_PHOTO_STATUS_PATH parameters:nil host:SA_API_HOST consumerKey:SA_API_COMSUMER_KEY consumerSecret:SA_API_COMSUMER_SECRET accessToken:currentUser.token tokenSecret:currentUser.tokenSecret scheme:@"http" requestMethod:@"POST" dataEncoding:TDOAuthContentTypeUrlEncodedForm headerValues:nil signatureMethod:TDOAuthSignatureMethodHmacSha1] mutableCopy];
-        [mutableURLRequest setValue:contentType forHTTPHeaderField: @"Content-Type"];
-        [mutableURLRequest setHTTPBody:httpBody];
-        
-        [[self.URLSession dataTaskWithRequest:mutableURLRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-            if (!error) {
-                id responseJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
-                NSString *error = nil;
-                if ([responseJSON respondsToSelector:@selector(objectForKey:)]) {
-                    error = [responseJSON objectForKey:@"error"];
-                }
-                if (responseJSON && !error && success) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        success(responseJSON);
-                    });
-                } else if (failure) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        failure(error);
-                    });
-                }
-            } else if (failure) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    failure(@"网络故障");
-                });
-            }
-        }] resume];
+        [self requestAPIWithPath:SA_API_UPDATE_PHOTO_STATUS_PATH method:@"POST" parametersDictionary:mutableDictionary image:image success:success failure:failure];
     } else {
         [self requestAPIWithPath:SA_API_UPDATE_STATUS_PATH method:@"POST" parametersDictionary:mutableDictionary success:success failure:failure];
     }
@@ -322,6 +311,41 @@
 }
 
 #pragma mark - Base
+
+- (void)requestAPIWithPath:(NSString *)path method:(NSString *)method parametersDictionary:(NSDictionary *)parametersDictionary image:(NSData *)image success:(void(^)(id responseObject))success failure:(void(^)(NSString *error))failure
+{
+    NSString *boundary = [self generateBoundaryString];
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
+    
+    NSData *httpBody = [self createBodyWithBoundary:boundary parameters:parametersDictionary data:image];
+    SAUser *currentUser = [SADataManager sharedManager].currentUser;
+    NSMutableURLRequest *mutableURLRequest = [[TDOAuth URLRequestForPath:path parameters:nil host:SA_API_HOST consumerKey:SA_API_COMSUMER_KEY consumerSecret:SA_API_COMSUMER_SECRET accessToken:currentUser.token tokenSecret:currentUser.tokenSecret scheme:@"http" requestMethod:method dataEncoding:TDOAuthContentTypeUrlEncodedForm headerValues:nil signatureMethod:TDOAuthSignatureMethodHmacSha1] mutableCopy];
+    [mutableURLRequest setValue:contentType forHTTPHeaderField: @"Content-Type"];
+    [mutableURLRequest setHTTPBody:httpBody];
+    
+    [[self.uploadURLSession dataTaskWithRequest:mutableURLRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (!error) {
+            id responseJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
+            NSString *error = nil;
+            if ([responseJSON respondsToSelector:@selector(objectForKey:)]) {
+                error = [responseJSON objectForKey:@"error"];
+            }
+            if (responseJSON && !error && success) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    success(responseJSON);
+                });
+            } else if (failure) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    failure(error);
+                });
+            }
+        } else if (failure) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                failure(@"网络故障");
+            });
+        }
+    }] resume];
+}
 
 - (void)requestAPIWithPath:(NSString *)path method:(NSString *)method parametersDictionary:(NSDictionary *)parametersDictionary success:(void(^)(id responseObject))success failure:(void(^)(NSString *error))failure
 {

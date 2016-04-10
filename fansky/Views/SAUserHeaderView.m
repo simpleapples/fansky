@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UILabel *statusCountLabel;
 @property (weak, nonatomic) IBOutlet UIButton *settingButton;
+@property (weak, nonatomic) IBOutlet UIButton *modifyInfoButton;
 @property (weak, nonatomic) IBOutlet UIImageView *lockImageView;
 @property (weak, nonatomic) IBOutlet UIButton *userInfoButton;
 
@@ -37,6 +38,7 @@
 - (void)awakeFromNib
 {
     self.followButton.layer.borderColor = [UIColor fanskyBlue].CGColor;
+    self.modifyInfoButton.layer.borderColor = [UIColor fanskyBlue].CGColor;
 }
 
 - (void)configWithUserID:(NSString *)userID
@@ -71,6 +73,7 @@
         self.userInfoButton.hidden = YES;
     }
     [self.followButton.layer setRasterizationScale:[UIScreen mainScreen].scale];
+    [self.modifyInfoButton.layer setRasterizationScale:[UIScreen mainScreen].scale];
     self.nameLabel.text = self.user.name;
     self.userIDLabel.text = [NSString stringWithFormat:@"@%@", self.user.userID];
 
@@ -96,9 +99,11 @@
     if (self.isMineInfo) {
         self.followButton.hidden = YES;
         self.settingButton.hidden = NO;
+        self.modifyInfoButton.hidden = NO;
     } else {
         self.followButton.hidden = NO;
         self.settingButton.hidden = YES;
+        self.modifyInfoButton.hidden = YES;
     }
     if ([self.user.isProtected isEqualToNumber:@(YES)]) {
         self.lockImageView.hidden = NO;
@@ -137,10 +142,6 @@
     }
 }
 
-- (IBAction)modifyInfoButtonTouchUp:(id)sender
-{
-}
-
 - (IBAction)settingButtonTouchUp:(id)sender
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(userHeaderView:settingButtonTouchUp:)]) {
@@ -166,6 +167,13 @@
 {
     if (self.delegate && [self.delegate respondsToSelector:@selector(userHeaderView:userInfoButtonTouchUp:)]) {
         [self.delegate userHeaderView:self userInfoButtonTouchUp:sender];
+    }
+}
+
+- (IBAction)modifyInfoButtonTouchUp:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(userHeaderView:modifyInfoButtonTouchUp:)]) {
+        [self.delegate userHeaderView:self modifyInfoButtonTouchUp:sender];
     }
 }
 

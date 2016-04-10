@@ -16,6 +16,7 @@
 - (void)userHeaderView:(SAUserHeaderView *)userHeaderView friendsCountButtonTouchUp:(id)sender;
 - (void)userHeaderView:(SAUserHeaderView *)userHeaderView followersCountButtonTouchUp:(id)sender;
 - (void)userHeaderView:(SAUserHeaderView *)userHeaderView userInfoButtonTouchUp:(id)sender;
+- (void)userHeaderView:(SAUserHeaderView *)userHeaderView modifyInfoButtonTouchUp:(id)sender;
 
 @end
 
