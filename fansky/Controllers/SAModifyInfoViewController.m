@@ -118,6 +118,7 @@
         self.user.location = [data objectForKey:@"location"];
         [self updateUserInfo];
         [SAMessageDisplayUtils showSuccessWithMessage:@"修改成功"];
+        [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
     }];

@@ -120,7 +120,7 @@
 
 - (void)updateProfileWithImage:(NSData *)image success:(void (^)(id))success failure:(void (^)(NSString *))failure
 {
-    [self requestAPIWithPath:SA_API_UPDATE_PROFILE_IMAGE_PATH method:@"POST" parametersDictionary:@{@"mode": @"lite", @"format": @"html"} image:image success:success failure:failure];
+    [self requestAPIWithPath:SA_API_UPDATE_PROFILE_IMAGE_PATH method:@"POST" parametersDictionary:@{@"mode": @"lite", @"format": @"html"} image:image fileName:@"image" success:success failure:failure];
 }
 
 - (void)updateProfileWithLocation:(NSString *)location desc:(NSString *)desc success:(void (^)(id))success failure:(void (^)(NSString *))failure
@@ -213,7 +213,7 @@
         [mutableDictionary setObject:repostStatusID forKey:@"repost_status_id"];
     }
     if (image) {
-        [self requestAPIWithPath:SA_API_UPDATE_PHOTO_STATUS_PATH method:@"POST" parametersDictionary:mutableDictionary image:image success:success failure:failure];
+        [self requestAPIWithPath:SA_API_UPDATE_PHOTO_STATUS_PATH method:@"POST" parametersDictionary:mutableDictionary image:image fileName:@"photo" success:success failure:failure];
     } else {
         [self requestAPIWithPath:SA_API_UPDATE_STATUS_PATH method:@"POST" parametersDictionary:mutableDictionary success:success failure:failure];
     }
@@ -312,12 +312,12 @@
 
 #pragma mark - Base
 
-- (void)requestAPIWithPath:(NSString *)path method:(NSString *)method parametersDictionary:(NSDictionary *)parametersDictionary image:(NSData *)image success:(void(^)(id responseObject))success failure:(void(^)(NSString *error))failure
+- (void)requestAPIWithPath:(NSString *)path method:(NSString *)method parametersDictionary:(NSDictionary *)parametersDictionary image:(NSData *)image fileName:(NSString *)fileName success:(void(^)(id responseObject))success failure:(void(^)(NSString *error))failure
 {
     NSString *boundary = [self generateBoundaryString];
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
     
-    NSData *httpBody = [self createBodyWithBoundary:boundary parameters:parametersDictionary data:image];
+    NSData *httpBody = [self createBodyWithBoundary:boundary parameters:parametersDictionary data:image fileName:fileName];
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     NSMutableURLRequest *mutableURLRequest = [[TDOAuth URLRequestForPath:path parameters:nil host:SA_API_HOST consumerKey:SA_API_COMSUMER_KEY consumerSecret:SA_API_COMSUMER_SECRET accessToken:currentUser.token tokenSecret:currentUser.tokenSecret scheme:@"http" requestMethod:method dataEncoding:TDOAuthContentTypeUrlEncodedForm headerValues:nil signatureMethod:TDOAuthSignatureMethodHmacSha1] mutableCopy];
     [mutableURLRequest setValue:contentType forHTTPHeaderField: @"Content-Type"];
@@ -388,9 +388,7 @@
 
 #pragma mark - PhotoUpload
 
-- (NSData *)createBodyWithBoundary:(NSString *)boundary
-                        parameters:(NSDictionary *)parameters
-                             data:(NSData *)data
+- (NSData *)createBodyWithBoundary:(NSString *)boundary parameters:(NSDictionary *)parameters data:(NSData *)data fileName:(NSString *)fileName
 {
     NSMutableData *httpBody = [NSMutableData data];
     
@@ -401,7 +399,7 @@
     }];
     
     [httpBody appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [httpBody appendData:[@"Content-Disposition: form-data; name=\"photo\"; filename=\"photo\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"photo\"\r\n", fileName] dataUsingEncoding:NSUTF8StringEncoding]];
     [httpBody appendData:[[NSString stringWithFormat:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [httpBody appendData:data];
     [httpBody appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
