@@ -11,6 +11,7 @@
 #import "SANotificationManager.h"
 #import "SADataManager+User.h"
 #import "SAUser+CoreDataProperties.h"
+#import "SASearchViewController.h"
 #import <SDWebImage/SDWebImageManager.h>
 
 @interface SATabBarViewController ()
@@ -41,6 +42,14 @@
         [manager downloadImageWithURL:imageURL options:SDWebImageRefreshCached progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
             [self.accountButton setImage:image forState:UIControlStateNormal];
         }];
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.destinationViewController isKindOfClass:[SASearchViewController class]]) {
+        SASearchViewController *searchViewController = (SASearchViewController *)segue.destinationViewController;
+        searchViewController.type = SASearchViewControllerTypeTrend;
     }
 }
 

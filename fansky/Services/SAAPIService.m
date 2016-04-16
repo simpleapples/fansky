@@ -310,6 +310,13 @@
     [self requestAPIWithPath:SA_API_SEARCH_PUBLIC_TIMELINE_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
 }
 
+#pragma mark - Trend
+
+- (void)trendsWithSuccess:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    [self requestAPIWithPath:SA_API_TRENDS_LIST_PATH method:@"GET" parametersDictionary:nil success:success failure:failure];
+}
+
 #pragma mark - Base
 
 - (void)requestAPIWithPath:(NSString *)path method:(NSString *)method parametersDictionary:(NSDictionary *)parametersDictionary image:(NSData *)image fileName:(NSString *)fileName success:(void(^)(id responseObject))success failure:(void(^)(NSString *error))failure

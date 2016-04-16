@@ -20,6 +20,8 @@
 #import "SAComposeViewController.h"
 #import "SACacheManager.h"
 #import "SAPhotoPreviewViewController.h"
+#import "SATrend.h"
+#import "SATrendCell.h"
 #import "UIColor+Utils.h"
 #import <DTCoreText/DTCoreText.h>
 #import <JTSImageViewController/JTSImageViewController.h>
@@ -31,9 +33,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-@property (strong, nonatomic) NSArray *timeLineList;
+@property (strong, nonatomic) NSArray *resultList;
 @property (copy, nonatomic) NSString *maxID;
-@property (copy, nonatomic) NSString *keyword;
 @property (strong, nonatomic) SAStatus *selectedStatus;
 @property (copy, nonatomic) NSString *selectedUserID;
 
@@ -42,7 +43,8 @@
 @implementation SASearchViewController
 
 static NSUInteger TIME_LINE_COUNT = 40;
-static NSString *const cellName = @"SATimeLineCell";
+static NSString *const trendCellName = @"SATrendCell";
+static NSString *const timeLineCellName = @"SATimeLineCell";
 
 - (void)viewDidLoad
 {
@@ -50,7 +52,26 @@ static NSString *const cellName = @"SATimeLineCell";
     
     [self updateInterface];
     
-    [self.searchTextField becomeFirstResponder];
+    if (self.type == SASearchViewControllerTypeTrend) {
+        [self.searchTextField becomeFirstResponder];
+        [[SAAPIService sharedSingleton] trendsWithSuccess:^(id data) {
+            NSMutableArray *tempTrendsList = [[NSMutableArray alloc] init];
+            NSArray *trends = [data objectForKey:@"trends"];
+            [trends enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                SATrend *trend = [[SATrend alloc] initWithObject:obj];
+                [tempTrendsList addObject:trend];
+            }];
+            self.resultList = tempTrendsList;
+            [self.tableView reloadData];
+        } failure:nil];
+    } else if (self.type == SASearchViewControllerTypeSearch) {
+        if (self.keyword) {
+            self.searchTextField.text = self.keyword;
+            [self refreshSearchResult];
+        } else {
+            [self.searchTextField becomeFirstResponder];
+        }
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -71,17 +92,17 @@ static NSString *const cellName = @"SATimeLineCell";
     [SAMessageDisplayUtils dismiss];
 }
 
-- (void)refreshData
+- (void)refreshSearchResult
 {
-    [self updateDataWithRefresh:YES];
+    [self updateSearchResultWithRefresh:YES];
 }
 
-- (void)updateDataWithRefresh:(BOOL)refresh
+- (void)updateSearchResultWithRefresh:(BOOL)refresh
 {
     NSString *maxID;
     if (!refresh) {
         maxID = self.maxID;
-    } else if (self.timeLineList.count) {
+    } else if (self.resultList.count) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
     }
     void (^success)(id data) = ^(id data) {
@@ -92,12 +113,12 @@ static NSString *const cellName = @"SATimeLineCell";
             [tempTimeLineList addObject:status];
         }];
         if (refresh) {
-            self.timeLineList = tempTimeLineList;
+            self.resultList = tempTimeLineList;
         } else {
-            self.timeLineList = [self.timeLineList arrayByAddingObjectsFromArray:tempTimeLineList];
+            self.resultList = [self.resultList arrayByAddingObjectsFromArray:tempTimeLineList];
         }
-        if (self.timeLineList.count) {
-            SAStatus *lastStatus = [self.timeLineList lastObject];
+        if (self.resultList.count) {
+            SAStatus *lastStatus = [self.resultList lastObject];
             self.maxID = lastStatus.statusID;
         }
         [self.tableView reloadData];
@@ -114,7 +135,11 @@ static NSString *const cellName = @"SATimeLineCell";
 
 - (void)updateInterface
 {
-    [self.tableView registerNib:[UINib nibWithNibName:cellName bundle:nil] forCellReuseIdentifier:cellName];
+    if (self.type == SASearchViewControllerTypeTrend) {
+        [self.tableView registerNib:[UINib nibWithNibName:trendCellName bundle:nil] forCellReuseIdentifier:trendCellName];
+    } else {
+        [self.tableView registerNib:[UINib nibWithNibName:timeLineCellName bundle:nil] forCellReuseIdentifier:timeLineCellName];
+    }
     self.tableView.tableFooterView = [UIView new];
     
     if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
@@ -167,12 +192,12 @@ static NSString *const cellName = @"SATimeLineCell";
     }
 }
 
-- (NSArray *)timeLineList
+- (NSArray *)resultList
 {
-    if (!_timeLineList) {
-        _timeLineList = [[NSArray alloc] init];
+    if (!_resultList) {
+        _resultList = [[NSArray alloc] init];
     }
-    return _timeLineList;
+    return _resultList;
 }
 
 #pragma mark - UIViewControllerPreviewingDelegate
@@ -225,7 +250,7 @@ static NSString *const cellName = @"SATimeLineCell";
     if (textField.text.length) {
         self.keyword = textField.text;
         [self.view endEditing:YES];
-        [self refreshData];
+        [self refreshSearchResult];
         return YES;
     }
     [SAMessageDisplayUtils showInfoWithMessage:@"请输入要搜索的内容"];
@@ -267,57 +292,78 @@ static NSString *const cellName = @"SATimeLineCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.timeLineList.count;
+    return self.resultList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
-    
-    NSNumber *cachedHeight = [[SACacheManager sharedManager] cachedItemForKey:status.statusID];
-    if (cachedHeight) {
-        return cachedHeight.floatValue;
+    if (self.type == SASearchViewControllerTypeSearch) {
+        SAStatus *status = [self.resultList objectAtIndex:indexPath.row];
+        
+        NSNumber *cachedHeight = [[SACacheManager sharedManager] cachedItemForKey:status.statusID];
+        if (cachedHeight) {
+            return cachedHeight.floatValue;
+        }
+        
+        UIColor *linkColor = [UIColor fanskyBlue];
+        
+        NSDictionary *optionDictionary = @{DTDefaultFontName: @"HelveticaNeue-Light",
+                                           DTDefaultFontSize: @(16),
+                                           DTDefaultLinkColor: linkColor,
+                                           DTDefaultLinkHighlightColor: linkColor,
+                                           DTDefaultLinkDecoration: @(NO),
+                                           DTDefaultLineHeightMultiplier: @(1.5)};
+        NSAttributedString* attributedString = [[NSAttributedString alloc] initWithHTMLData:[status.text dataUsingEncoding:NSUnicodeStringEncoding] options:optionDictionary documentAttributes:nil];
+        
+        DTCoreTextLayouter *layouter = [[DTCoreTextLayouter alloc] initWithAttributedString:attributedString];
+        
+        CGFloat width = self.tableView.frame.size.width - 86;
+        CGRect maxRect = CGRectMake(0, 0, width, CGFLOAT_HEIGHT_UNKNOWN);
+        NSRange entireString = NSMakeRange(0, attributedString.length);
+        DTCoreTextLayoutFrame *layoutFrame = [layouter layoutFrameWithRect:maxRect range:entireString];
+        CGFloat offset = 62;
+        if (status.photo.imageURL) {
+            offset = width / 2 + 16 + 10 + 46;
+        }
+        CGFloat height = layoutFrame.frame.size.height + offset;
+        [[SACacheManager sharedManager] cacheItem:@(height) forKey:status.statusID];
+        return height;
+    } else if (self.type == SASearchViewControllerTypeTrend) {
+        return 50;
     }
-    
-    UIColor *linkColor = [UIColor fanskyBlue];
-    
-    NSDictionary *optionDictionary = @{DTDefaultFontName: @"HelveticaNeue-Light",
-                                       DTDefaultFontSize: @(16),
-                                       DTDefaultLinkColor: linkColor,
-                                       DTDefaultLinkHighlightColor: linkColor,
-                                       DTDefaultLinkDecoration: @(NO),
-                                       DTDefaultLineHeightMultiplier: @(1.5)};
-    NSAttributedString* attributedString = [[NSAttributedString alloc] initWithHTMLData:[status.text dataUsingEncoding:NSUnicodeStringEncoding] options:optionDictionary documentAttributes:nil];
-    
-    DTCoreTextLayouter *layouter = [[DTCoreTextLayouter alloc] initWithAttributedString:attributedString];
-    
-    CGFloat width = self.tableView.frame.size.width - 86;
-    CGRect maxRect = CGRectMake(0, 0, width, CGFLOAT_HEIGHT_UNKNOWN);
-    NSRange entireString = NSMakeRange(0, attributedString.length);
-    DTCoreTextLayoutFrame *layoutFrame = [layouter layoutFrameWithRect:maxRect range:entireString];
-    CGFloat offset = 62;
-    if (status.photo.imageURL) {
-        offset = width / 2 + 16 + 10 + 46;
-    }
-    CGFloat height = layoutFrame.frame.size.height + offset;
-    [[SACacheManager sharedManager] cacheItem:@(height) forKey:status.statusID];
-    return height;
+    return 44;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
-    SATimeLineCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
-    [cell configWithStatus:status];
-    cell.delegate = self;
-    return cell;
+    if (self.type == SASearchViewControllerTypeTrend) {
+        SATrend *trend = [self.resultList objectAtIndex:indexPath.row];
+        SATrendCell *trendCell = [self.tableView dequeueReusableCellWithIdentifier:trendCellName forIndexPath:indexPath];
+        [trendCell configWithTrend:trend];
+        return trendCell;
+    } else if (self.type == SASearchViewControllerTypeSearch) {
+        SAStatus *status = [self.resultList objectAtIndex:indexPath.row];
+        SATimeLineCell *statusCell = [tableView dequeueReusableCellWithIdentifier:timeLineCellName forIndexPath:indexPath];
+        [statusCell configWithStatus:status];
+        statusCell.delegate = self;
+        return statusCell;
+    }
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
-    self.selectedStatus = status;
-    [self performSegueWithIdentifier:@"SearchToStatusSegue" sender:nil];
+    if (self.type == SASearchViewControllerTypeTrend) {
+        SATrend *trend = [self.resultList objectAtIndex:indexPath.row];
+        SASearchViewController *searchViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASearchViewController"];
+        searchViewController.type = SASearchViewControllerTypeSearch;
+        searchViewController.keyword = trend.query;
+        [self.navigationController showViewController:searchViewController sender:nil];
+    } else if (self.type == SASearchViewControllerTypeSearch) {
+        SAStatus *status = [self.resultList objectAtIndex:indexPath.row];
+        self.selectedStatus = status;
+        [self performSegueWithIdentifier:@"SearchToStatusSegue" sender:nil];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -335,28 +381,33 @@ static NSString *const cellName = @"SATimeLineCell";
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
-    UITableViewRowAction *repostAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"转发" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        SAComposeViewController *composeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
-        composeViewController.repostStatusID = status.statusID;
-        [self presentViewController:composeViewController animated:YES completion:nil];
-    }];
-    repostAction.backgroundColor = [UIColor fanskyBlue];
-    UITableViewRowAction *replyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"回复" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
-        SAComposeViewController *composeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
-        composeViewController.replyToStatusID = status.statusID;
-        [self presentViewController:composeViewController animated:YES completion:nil];
-    }];
-    replyAction.backgroundColor = [UIColor lightGrayColor];
-    return @[repostAction, replyAction];
+    if (self.type == SASearchViewControllerTypeSearch) {
+        SAStatus *status = [self.resultList objectAtIndex:indexPath.row];
+        UITableViewRowAction *repostAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"转发" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+            SAComposeViewController *composeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
+            composeViewController.repostStatusID = status.statusID;
+            [self presentViewController:composeViewController animated:YES completion:nil];
+        }];
+        repostAction.backgroundColor = [UIColor fanskyBlue];
+        UITableViewRowAction *replyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"回复" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+            SAComposeViewController *composeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
+            composeViewController.replyToStatusID = status.statusID;
+            [self presentViewController:composeViewController animated:YES completion:nil];
+        }];
+        replyAction.backgroundColor = [UIColor lightGrayColor];
+        return @[repostAction, replyAction];
+    }
+    return nil;
 }
 
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if (fabs(scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y) < scrollView.contentSize.height * 0.3) {
-        [self updateDataWithRefresh:NO];
+    if (self.type == SASearchViewControllerTypeSearch) {
+        if (fabs(scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y) < scrollView.contentSize.height * 0.3) {
+            [self updateSearchResultWithRefresh:NO];
+        }
     }
 }
 

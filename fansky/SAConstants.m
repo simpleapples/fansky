@@ -56,3 +56,5 @@ NSString *const SA_API_CONVERSATION_PATH = @"/direct_messages/conversation.json"
 NSString *const SA_API_SEND_NEW_MESSAGE_PATH = @"/direct_messages/new.json";
 
 NSString *const SA_API_SEARCH_PUBLIC_TIMELINE_PATH = @"/search/public_timeline.json";
+
+NSString *const SA_API_TRENDS_LIST_PATH = @"/trends/list.json";

@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, SASearchViewControllerType)
+{
+    SASearchViewControllerTypeTrend = 1,
+    SASearchViewControllerTypeSearch = 2
+};
+
 @interface SASearchViewController : UIViewController
+
+@property (nonatomic) SASearchViewControllerType type;
+@property (copy, nonatomic) NSString *keyword;
 
 @end

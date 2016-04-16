@@ -39,6 +39,9 @@
 		5A9AD6B01BAA6CD50058916A /* SAMessageDisplayUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */; };
 		5AAB875C1BDA4B19003C9A51 /* SAUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB875B1BDA4B19003C9A51 /* SAUserInfoViewController.m */; };
 		5AAC809C1BE65BBD0083C7E5 /* UIColor+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAC809B1BE65BBD0083C7E5 /* UIColor+Utils.m */; };
+		5AB325621CC229DE0009C26D /* SATrend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB325611CC229DE0009C26D /* SATrend.m */; };
+		5AB3256C1CC22EEF0009C26D /* SATrendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB3256A1CC22EEF0009C26D /* SATrendCell.m */; };
+		5AB3256D1CC22EEF0009C26D /* SATrendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5AB3256B1CC22EEF0009C26D /* SATrendCell.xib */; };
 		5AB785F31BE6769D0034046B /* UIImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB785F21BE6769D0034046B /* UIImage+Utils.m */; };
 		5AD70EF01B316A79009C5B84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EEF1B316A79009C5B84 /* main.m */; };
 		5AD70EF31B316A79009C5B84 /* SAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EF21B316A79009C5B84 /* SAAppDelegate.m */; };
@@ -159,6 +162,11 @@
 		5AAB875B1BDA4B19003C9A51 /* SAUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUserInfoViewController.m; sourceTree = "<group>"; };
 		5AAC809A1BE65BBD0083C7E5 /* UIColor+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Utils.h"; sourceTree = "<group>"; };
 		5AAC809B1BE65BBD0083C7E5 /* UIColor+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Utils.m"; sourceTree = "<group>"; };
+		5AB325601CC229DE0009C26D /* SATrend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SATrend.h; sourceTree = "<group>"; };
+		5AB325611CC229DE0009C26D /* SATrend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SATrend.m; sourceTree = "<group>"; };
+		5AB325691CC22EEF0009C26D /* SATrendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SATrendCell.h; sourceTree = "<group>"; };
+		5AB3256A1CC22EEF0009C26D /* SATrendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SATrendCell.m; sourceTree = "<group>"; };
+		5AB3256B1CC22EEF0009C26D /* SATrendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SATrendCell.xib; sourceTree = "<group>"; };
 		5AB785F11BE6769D0034046B /* UIImage+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Utils.h"; sourceTree = "<group>"; };
 		5AB785F21BE6769D0034046B /* UIImage+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Utils.m"; sourceTree = "<group>"; };
 		5AD70EEA1B316A79009C5B84 /* fansky.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fansky.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -265,6 +273,9 @@
 				5AE98AC51BAEE90800B7F105 /* SAConversationCell.m */,
 				5A5C21291BB52BA400C1277F /* SAFriendCell.h */,
 				5A5C212A1BB52BA400C1277F /* SAFriendCell.m */,
+				5AB325691CC22EEF0009C26D /* SATrendCell.h */,
+				5AB3256A1CC22EEF0009C26D /* SATrendCell.m */,
+				5AB3256B1CC22EEF0009C26D /* SATrendCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -294,6 +305,8 @@
 				5A0F7B061BC4E50500926FD4 /* SAMessage.m */,
 				5AFF6FE01BC42BF400769995 /* SAFriend.h */,
 				5AFF6FE11BC42BF400769995 /* SAFriend.m */,
+				5AB325601CC229DE0009C26D /* SATrend.h */,
+				5AB325611CC229DE0009C26D /* SATrend.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -577,6 +590,7 @@
 				5AD70EFC1B316A79009C5B84 /* SAMain.storyboard in Resources */,
 				5A86C0CA1C2ECEB0008BB3FD /* SAOthers.storyboard in Resources */,
 				5AD70F011B316A79009C5B84 /* LaunchScreen.xib in Resources */,
+				5AB3256D1CC22EEF0009C26D /* SATrendCell.xib in Resources */,
 				5AD70EFE1B316A79009C5B84 /* Images.xcassets in Resources */,
 				5A159D9B1BDDD5D0007DFE6A /* SAMine.storyboard in Resources */,
 				5A849E921BC3EC20000FDCB9 /* Pods-fansky-acknowledgements.plist in Resources */,
@@ -696,6 +710,7 @@
 				5AED4B6E1BA8429300EDBF47 /* SAUserViewController.m in Sources */,
 				5A0F7B0E1BC4E50500926FD4 /* SAConversation.m in Sources */,
 				5A0F7B0D1BC4E50500926FD4 /* SAConversation+CoreDataProperties.m in Sources */,
+				5AB325621CC229DE0009C26D /* SATrend.m in Sources */,
 				5A2365C41B39723900E1E73C /* SAAPIService.m in Sources */,
 				5A5C21281BB51B1100C1277F /* SAFriendListViewController.m in Sources */,
 				5AED4B361BA6E52B00EDBF47 /* SATabBarViewController.m in Sources */,
@@ -715,6 +730,7 @@
 				5AD70EF61B316A79009C5B84 /* fansky.xcdatamodeld in Sources */,
 				5A5C212B1BB52BA400C1277F /* SAFriendCell.m in Sources */,
 				5A86A4741BFB693300229B26 /* SAFileUtils.m in Sources */,
+				5AB3256C1CC22EEF0009C26D /* SATrendCell.m in Sources */,
 				5AE98AAB1BAECDAA00B7F105 /* SADataManager+Message.m in Sources */,
 				5AFF6FE21BC42BF400769995 /* SAFriend.m in Sources */,
 			);
