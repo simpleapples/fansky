@@ -41,7 +41,6 @@
 
 @implementation SASearchViewController
 
-static NSString *const ENTITY_NAME = @"SAStatus";
 static NSUInteger TIME_LINE_COUNT = 40;
 static NSString *const cellName = @"SATimeLineCell";
 
