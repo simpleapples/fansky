@@ -30,6 +30,7 @@
 @property (strong, nonatomic) SAUser *user;
 @property (strong, nonatomic) JSQMessagesBubbleImage *outgoingBubbleImageData;
 @property (strong, nonatomic) JSQMessagesBubbleImage *incomingBubbleImageData;
+@property (strong, nonatomic) NSTimer *refreshTimer;
 
 @end
 
@@ -55,8 +56,18 @@ static NSUInteger MESSAGE_LIST_COUNT = 40;
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
     self.collectionView.collectionViewLayout.springinessEnabled = YES;
+    if (!self.refreshTimer.isValid) {
+        [[NSRunLoop currentRunLoop] addTimer:self.refreshTimer forMode:NSRunLoopCommonModes];
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    if (self.refreshTimer.isValid) {
+        [self.refreshTimer invalidate];
+    }
 }
 
 - (void)updateInterface
@@ -97,6 +108,14 @@ static NSUInteger MESSAGE_LIST_COUNT = 40;
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
     }];
+}
+
+- (NSTimer *)refreshTimer
+{
+    if (!_refreshTimer) {
+        _refreshTimer = [NSTimer timerWithTimeInterval:20 target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
+    }
+    return _refreshTimer;
 }
 
 #pragma mark - 

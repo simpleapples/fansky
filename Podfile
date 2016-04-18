@@ -15,6 +15,8 @@ pod 'LTHPasscodeViewController'
 pod 'LGRefreshView'
 pod 'Fabric'
 pod 'Crashlytics'
+pod 'STPopup'
+pod 'FBMemoryProfiler'
 
 end
 
