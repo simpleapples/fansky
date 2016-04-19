@@ -57,7 +57,8 @@ static NSUInteger MESSAGE_LIST_COUNT = 40;
 {
     [super viewDidAppear:animated];
     self.collectionView.collectionViewLayout.springinessEnabled = YES;
-    if (!self.refreshTimer.isValid) {
+    if (!self.refreshTimer) {
+        self.refreshTimer = [NSTimer timerWithTimeInterval:20 target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:self.refreshTimer forMode:NSRunLoopCommonModes];
     }
 }
@@ -67,6 +68,7 @@ static NSUInteger MESSAGE_LIST_COUNT = 40;
     [super viewDidDisappear:animated];
     if (self.refreshTimer.isValid) {
         [self.refreshTimer invalidate];
+        self.refreshTimer = nil;
     }
 }
 
@@ -108,14 +110,6 @@ static NSUInteger MESSAGE_LIST_COUNT = 40;
     } failure:^(NSString *error) {
         [SAMessageDisplayUtils showErrorWithMessage:error];
     }];
-}
-
-- (NSTimer *)refreshTimer
-{
-    if (!_refreshTimer) {
-        _refreshTimer = [NSTimer timerWithTimeInterval:20 target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
-    }
-    return _refreshTimer;
 }
 
 #pragma mark - 

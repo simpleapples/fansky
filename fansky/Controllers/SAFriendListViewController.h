@@ -7,16 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <STPopup/UIViewController+STPopup.h>
 
 typedef NS_ENUM(NSUInteger, SAFriendListType)
 {
     SAFriendListTypeFollow,
     SAFriendListTypeFriend,
+    SAFriendListTypeFriendPopup,
     SAFriendListTypeRequest
 };
 
+@class SAFriendListViewController;
+
+@protocol SAFriendListViewControllerDelegate <NSObject>
+
+- (void)friendListViewController:(SAFriendListViewController *)friendListViewController friendIDSelected:(NSString *)friendID;
+
+@end
+
 @interface SAFriendListViewController : UITableViewController
 
+@property (weak, nonatomic) id<SAFriendListViewControllerDelegate> delegate;
 @property (copy, nonatomic) NSString *userID;
 @property (assign, nonatomic) SAFriendListType type;
 

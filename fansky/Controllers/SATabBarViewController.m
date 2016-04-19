@@ -12,6 +12,7 @@
 #import "SADataManager+User.h"
 #import "SAUser+CoreDataProperties.h"
 #import "SASearchViewController.h"
+#import "SAConversationViewController.h"
 #import <SDWebImage/SDWebImageManager.h>
 
 @interface SATabBarViewController ()
@@ -123,6 +124,16 @@
         self.navigationController.viewControllers = viewControllers;
     }
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)composeButtonTouchUp:(id)sender
+{
+    if ([self.selectedViewController isKindOfClass:[SAConversationViewController class]]) {
+        SAConversationViewController *conversationViewController = (SAConversationViewController *)self.selectedViewController;
+        [conversationViewController showFriendPopup];
+    } else {
+        [self performSegueWithIdentifier:@"TabBarToComposeNavigationSegue" sender:sender];
+    }
 }
 
 @end

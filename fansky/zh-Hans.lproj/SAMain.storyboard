@@ -672,7 +672,7 @@
                         <rightBarButtonItems>
                             <barButtonItem image="IconCompose" id="tlu-3n-EV2">
                                 <connections>
-                                    <segue destination="oxA-mI-Ol2" kind="presentation" id="H7G-PZ-sGt"/>
+                                    <action selector="composeButtonTouchUp:" destination="bcT-Eb-ogE" id="ycy-1Y-68u"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="IconSearch" id="QN8-7v-8mi">
@@ -703,6 +703,7 @@
                         <segue destination="DHD-J2-3SL" kind="relationship" relationship="viewControllers" id="eWC-d6-eqi"/>
                         <segue destination="Q5T-Lf-5df" kind="show" identifier="TimeLineToUserSegue" id="Q2K-Ka-9h2"/>
                         <segue destination="Q5T-Lf-5df" kind="relationship" relationship="viewControllers" id="O39-fj-akt"/>
+                        <segue destination="oxA-mI-Ol2" kind="presentation" identifier="TabBarToComposeNavigationSegue" id="gfZ-wO-GQL"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tQ7-Lk-vfz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1034,9 +1035,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="qBy-9g-ujA"/>
-        <segue reference="JUY-4f-01A"/>
+        <segue reference="gfZ-wO-GQL"/>
         <segue reference="Ciz-wU-ArU"/>
-        <segue reference="Btz-3b-6W7"/>
+        <segue reference="ivR-m5-hzL"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>

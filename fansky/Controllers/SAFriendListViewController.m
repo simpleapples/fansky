@@ -58,6 +58,10 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
         self.title = @"关注者";
     } else if (self.type == SAFriendListTypeFriend) {
         self.title = @"关注";
+    } else if (self.type == SAFriendListTypeFriendPopup) {
+        self.title = @"选择好友";
+        self.contentSizeInPopup = CGSizeMake(300, 400);
+        self.landscapeContentSizeInPopup = CGSizeMake(400, 200);
     } else if (self.type == SAFriendListTypeRequest) {
         self.title = @"关注请求";
     }
@@ -104,7 +108,7 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
 
     if (self.type == SAFriendListTypeFollow) {
         [[SAAPIService sharedSingleton] userFollowersWithUserID:self.userID count:FRIEND_LIST_COUNT page:self.page success:success failure:failure];
-    } else if (self.type == SAFriendListTypeFriend) {
+    } else if (self.type == SAFriendListTypeFriend || self.type == SAFriendListTypeFriendPopup) {
         [[SAAPIService sharedSingleton] userFriendsWithUserID:self.userID count:FRIEND_LIST_COUNT page:self.page success:success failure:failure];
     } else if (self.type == SAFriendListTypeRequest) {
         [[SAAPIService sharedSingleton] userFriendshipRequestWithCount:FRIEND_LIST_COUNT page:self.page success:success failure:failure];
@@ -148,6 +152,9 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
             case SAFriendListTypeFriend:
                 cellType = SAFriendCellTypeFriend;
                 break;
+            case SAFriendListTypeFriendPopup:
+                cellType = SAFriendCellTypeFriendPopup;
+                break;
             case SAFriendListTypeRequest:
                 cellType = SAFriendCellTypeRequest;
                 break;
@@ -161,9 +168,9 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
 {
     SAFriend *friend = [self.friendList objectAtIndex:indexPath.row];
     self.selectedUserID = friend.friendID;
-    if (self.type != SAFriendListTypeRequest) {
+    if (self.type == SAFriendListTypeFriend || self.type == SAFriendListTypeFollow) {
         [self performSegueWithIdentifier:@"FriendListToUserSegue" sender:nil];
-    } else {
+    } else if (self.type == SAFriendListTypeRequest) {
         UIActionSheet *actionSheet;
         if ([friend.following isEqualToNumber:@(YES)]) {
             actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"忽略请求" otherButtonTitles:@"接受请求", nil];
@@ -173,6 +180,11 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
             actionSheet.tag = 2;
         }
         [actionSheet showInView:self.view];
+    } else if (self.type == SAFriendListTypeFriendPopup) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(friendListViewController:friendIDSelected:)]) {
+            SAFriend *friend = [self.friendList objectAtIndex:indexPath.row];
+            [self.delegate friendListViewController:self friendIDSelected:friend.friendID];
+        }
     }
 }
 

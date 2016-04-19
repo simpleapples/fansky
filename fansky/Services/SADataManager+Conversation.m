@@ -63,6 +63,39 @@ static NSString *const ENTITY_NAME = @"SAConversation";
     return resultConversation;
 }
 
+- (SAConversation *)insertNewConversationWithOtherUserID:(NSString *)otherUserID localUser:(SAUser *)localUser;
+{
+    __block SAConversation *resultConversation;
+    [self.managedObjectContext performBlockAndWait:^{
+        SAConversation *conversation = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
+        conversation.otherUserID = otherUserID;
+        conversation.count = @(0);
+        conversation.isNew = @(YES);
+        conversation.message = nil;
+        conversation.localUser = localUser;
+        resultConversation = conversation;
+    }];
+    return resultConversation;
+}
+
+- (SAConversation *)conversationWithOtherUserID:(NSString *)otherUserID localUser:(SAUser *)localUser
+{
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
+    fetchRequest.fetchLimit = 1;
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"otherUserID = %@", otherUserID];
+    
+    __block NSError *error;
+    __block SAConversation *resultConversation;
+    [self.managedObjectContext performBlockAndWait:^{
+        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (!error && fetchResult && fetchResult.count) {
+            SAConversation *existConversation = [fetchResult firstObject];
+            resultConversation = existConversation;
+        }
+    }];
+    return resultConversation;
+}
+
 - (NSArray *)currentConversationListWithUserID:(NSString *)userID limit:(NSUInteger)limit
 {
     NSSortDescriptor *otherUserIDSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"otherUserID" ascending:NO];

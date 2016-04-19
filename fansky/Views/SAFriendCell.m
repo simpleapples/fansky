@@ -53,7 +53,7 @@
     [self.followButton.layer setRasterizationScale:[UIScreen mainScreen].scale];
     self.nameLabel.text = self.friend.name;
     self.friendIDLabel.text = [NSString stringWithFormat:@"@%@", self.friend.friendID];
-    if (self.type != SAFriendCellTypeRequest) {
+    if (self.type != SAFriendCellTypeRequest && self.type != SAFriendCellTypeFriendPopup) {
         self.followButton.hidden = NO;
         if ([self.friend.following isEqualToNumber:@(YES)]) {
             self.followButton.titleLabel.text = @"取消关注";

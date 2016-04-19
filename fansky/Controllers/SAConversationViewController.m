@@ -18,15 +18,18 @@
 #import "SAConversation+CoreDataProperties.h"
 #import "SAMessage+CoreDataProperties.h"
 #import "SAUserViewController.h"
+#import "SAFriendListViewController.h"
 #import "UIColor+Utils.h"
 #import "LGRefreshView.h"
+#import <STPopup/STPopup.h>
 
-@interface SAConversationViewController () <LGRefreshViewDelegate, SAConversationCellDelegate>
+@interface SAConversationViewController () <LGRefreshViewDelegate, SAConversationCellDelegate, SAFriendListViewControllerDelegate>
 
 @property (strong, nonatomic) LGRefreshView *refreshView;
 
 @property (strong, nonatomic) NSArray *conversationList;
 @property (copy, nonatomic) NSString *selectedUserID;
+@property (strong, nonatomic) STPopupController *popupViewController;
 
 @end
 
@@ -106,6 +109,18 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
     self.tableView.rowHeight = 70;
 }
 
+- (void)showFriendPopup
+{
+    SAUser *currentUser = [SADataManager sharedManager].currentUser;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SAMine" bundle:[NSBundle mainBundle]];
+    SAFriendListViewController *friendListViewController = (SAFriendListViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SAFriendListViewController"];
+    friendListViewController.delegate = self;
+    friendListViewController.userID = currentUser.userID;
+    friendListViewController.type = SAFriendListTypeFriendPopup;
+    self.popupViewController = [[STPopupController alloc] initWithRootViewController:friendListViewController];
+    [self.popupViewController presentInViewController:self];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -120,6 +135,26 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
         SAUserViewController *userViewController = (SAUserViewController *)segue.destinationViewController;
         userViewController.userID = self.selectedUserID;
     }
+}
+
+#pragma mark - SAFriendListViewControllerDelegate
+
+- (void)friendListViewController:(SAFriendListViewController *)friendListViewController friendIDSelected:(NSString *)friendID
+{
+    [self.popupViewController dismiss];
+//    SAUser *currentUser = [SADataManager sharedManager].currentUser;
+//    if (![[SADataManager sharedManager] conversationWithOtherUserID:friendID localUser:currentUser]) {
+//        [[SADataManager sharedManager] insertNewConversationWithOtherUserID:friendID localUser:currentUser];
+//    }
+    self.selectedUserID = friendID;
+    [SAMessageDisplayUtils showProgressWithMessage:@"载入中"];
+    [[SAAPIService sharedSingleton] userWithID:friendID success:^(id data) {
+        [[SADataManager sharedManager] insertOrUpdateUserWithObject:data local:NO active:NO token:nil secret:nil];
+        [SAMessageDisplayUtils dismiss];
+        [self performSegueWithIdentifier:@"ConversationToMessageSegue" sender:nil];
+    } failure:^(NSString *error) {
+        [SAMessageDisplayUtils dismiss];
+    }];
 }
 
 #pragma mark - SAConversationCellDelegate

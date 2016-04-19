@@ -12,6 +12,7 @@ typedef NS_ENUM(NSUInteger, SAFriendCellType)
 {
     SAFriendCellTypeFollow,
     SAFriendCellTypeFriend,
+    SAFriendCellTypeFriendPopup,
     SAFriendCellTypeRequest
 };
 

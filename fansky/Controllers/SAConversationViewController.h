@@ -10,6 +10,7 @@
 
 @interface SAConversationViewController : UITableViewController
 
+- (void)showFriendPopup;
 - (void)refreshData;
 
 @end
