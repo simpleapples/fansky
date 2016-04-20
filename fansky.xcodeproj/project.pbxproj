@@ -77,7 +77,7 @@
 		5AF5B1D01BA1816600C7A18A /* SADataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1CF1BA1816600C7A18A /* SADataManager.m */; };
 		5AF5B1D31BA181CD00C7A18A /* SADataManager+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1D21BA181CD00C7A18A /* SADataManager+User.m */; };
 		5AFF6FE21BC42BF400769995 /* SAFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFF6FE11BC42BF400769995 /* SAFriend.m */; };
-		A5780EF56B5B4E2B090419E4 /* Pods_fansky.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E43255F77409845B17D05D0 /* Pods_fansky.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A5780EF56B5B4E2B090419E4 /* Pods_fansky.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E43255F77409845B17D05D0 /* Pods_fansky.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */

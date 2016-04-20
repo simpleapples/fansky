@@ -13,6 +13,13 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 #import <LTHPasscodeViewController/LTHPasscodeViewController.h>
+#import <FBMemoryProfiler/FBMemoryProfiler.h>
+
+@interface SAAppDelegate ()
+
+@property (strong, nonatomic) FBMemoryProfiler *memoryProfiler;
+
+@end
 
 @implementation SAAppDelegate
 
@@ -23,6 +30,9 @@
     [self updateAppearance];
     [self initPasscodeViewController];
     [self showPasscodeViewController];
+    
+    self.memoryProfiler = [[FBMemoryProfiler alloc] initWithPlugins:nil retainCycleDetectorConfiguration:nil];
+    [self.memoryProfiler enable];
     
     return YES;
 }
