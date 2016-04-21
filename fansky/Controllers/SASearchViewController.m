@@ -250,7 +250,14 @@ static NSString *const timeLineCellName = @"SATimeLineCell";
     if (textField.text.length) {
         self.keyword = textField.text;
         [self.view endEditing:YES];
-        [self refreshSearchResult];
+        if (self.type == SASearchViewControllerTypeTrend) {
+            SASearchViewController *searchViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASearchViewController"];
+            searchViewController.type = SASearchViewControllerTypeSearch;
+            searchViewController.keyword = self.keyword;
+            [self.navigationController showViewController:searchViewController sender:nil];
+        } else {
+            [self refreshSearchResult];
+        }
         return YES;
     }
     [SAMessageDisplayUtils showInfoWithMessage:@"请输入要搜索的内容"];
