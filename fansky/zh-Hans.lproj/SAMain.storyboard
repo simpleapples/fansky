@@ -39,14 +39,14 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJg-1m-piO">
-                                            <rect key="frame" x="66" y="15" width="431" height="19"/>
+                                            <rect key="frame" x="66" y="15" width="441" height="19"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Es-aE-qbz">
-                                            <rect key="frame" x="66" y="38" width="431" height="17"/>
+                                            <rect key="frame" x="66" y="38" width="441" height="17"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -59,7 +59,7 @@
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="现在" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6c-Dy-y52">
-                                            <rect key="frame" x="497" y="15" width="60" height="40"/>
+                                            <rect key="frame" x="507" y="15" width="60" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="60" id="64T-Wk-FEW"/>
                                             </constraints>
@@ -78,7 +78,7 @@
                                         <constraint firstItem="Hfr-6J-YSb" firstAttribute="bottom" secondItem="909-Vp-DJG" secondAttribute="bottom" id="gxz-7R-Egu"/>
                                         <constraint firstItem="h6c-Dy-y52" firstAttribute="leading" secondItem="OJg-1m-piO" secondAttribute="trailing" id="kI2-zi-aNS"/>
                                         <constraint firstItem="909-Vp-DJG" firstAttribute="leading" secondItem="DPX-LP-ZFo" secondAttribute="leading" constant="16" id="kgb-ol-iOG"/>
-                                        <constraint firstAttribute="trailing" secondItem="h6c-Dy-y52" secondAttribute="trailing" constant="10" id="mWg-zJ-XDx"/>
+                                        <constraint firstAttribute="trailing" secondItem="h6c-Dy-y52" secondAttribute="trailing" id="mWg-zJ-XDx"/>
                                         <constraint firstItem="Hfr-6J-YSb" firstAttribute="leading" secondItem="909-Vp-DJG" secondAttribute="leading" id="oLu-X7-Y6I"/>
                                         <constraint firstItem="909-Vp-DJG" firstAttribute="centerY" secondItem="DPX-LP-ZFo" secondAttribute="centerY" id="oMe-05-Vn2"/>
                                         <constraint firstItem="OJg-1m-piO" firstAttribute="leading" secondItem="909-Vp-DJG" secondAttribute="trailing" constant="10" id="oyb-wv-73R"/>
