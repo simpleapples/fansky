@@ -56,19 +56,23 @@
 - (void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler
 {
     if ([shortcutItem.type isEqualToString:@"com.zangzhiya.fansky.compose"]) {
-        [self showComposeViewControllerFromApplication:application];
+        [self showViewControllerFromApplication:application type:@"COMPOSE"];
+    } else if ([shortcutItem.type isEqualToString:@"com.zangzhiya.fansky.search"]) {
+        [self showViewControllerFromApplication:application type:@"SEARCH"];
     }
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
 {
     if ([url.absoluteString isEqualToString:@"fansky://compose"]) {
-        [self showComposeViewControllerFromApplication:app];
+        [self showViewControllerFromApplication:app type:@"COMPOSE"];
+    } else if ([url.absoluteString isEqualToString:@"fansky://search"]) {
+        [self showViewControllerFromApplication:app type:@"SEARCH"];
     }
     return YES;
 }
 
-- (void)showComposeViewControllerFromApplication:(UIApplication *)app
+- (void)showViewControllerFromApplication:(UIApplication *)app type:(NSString *)type
 {
     if (![SADataManager sharedManager].currentUser) {
         return;
@@ -76,8 +80,13 @@
     UIViewController *rootViewController = app.keyWindow.rootViewController;
     if ([rootViewController isMemberOfClass:[UINavigationController class]]) {
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"SAMain" bundle:[NSBundle mainBundle]];
-        UIViewController *composeViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
-        [rootViewController presentViewController:composeViewController animated:YES completion:nil];
+        if ([type isEqualToString:@"COMPOSE"]) {
+            UIViewController *composeViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
+            [rootViewController presentViewController:composeViewController animated:YES completion:nil];
+        } else if ([type isEqualToString:@"SEARCH"]) {
+            UIViewController *searchViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SASearchViewController"];
+            [rootViewController showViewController:searchViewController sender:nil];
+        }
     }
 }
 
