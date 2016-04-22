@@ -9,6 +9,7 @@
 #import "SAAppDelegate.h"
 #import "SADataManager.h"
 #import "SANotificationManager.h"
+#import "SADataManager+User.h"
 #import "UIColor+Utils.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -69,6 +70,9 @@
 
 - (void)showComposeViewControllerFromApplication:(UIApplication *)app
 {
+    if (![SADataManager sharedManager].currentUser) {
+        return;
+    }
     UIViewController *rootViewController = app.keyWindow.rootViewController;
     if ([rootViewController isMemberOfClass:[UINavigationController class]]) {
         UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"SAMain" bundle:[NSBundle mainBundle]];
