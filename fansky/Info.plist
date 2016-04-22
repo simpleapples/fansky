@@ -60,19 +60,19 @@
 	<array>
 		<dict>
 			<key>UIApplicationShortcutItemIconType</key>
-			<string>UIApplicationShortcutIconTypeCompose</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>发饭</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>com.zangzhiya.fansky.compose</string>
-		</dict>
-		<dict>
-			<key>UIApplicationShortcutItemIconType</key>
 			<string>UIApplicationShortcutIconTypeSearch</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>搜索</string>
 			<key>UIApplicationShortcutItemType</key>
 			<string>com.zangzhiya.fansky.search</string>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeCompose</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>发饭</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>com.zangzhiya.fansky.compose</string>
 		</dict>
 	</array>
 	<key>UILaunchStoryboardName</key>
