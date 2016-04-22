@@ -39,14 +39,14 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OJg-1m-piO">
-                                            <rect key="frame" x="66" y="15" width="491" height="19"/>
+                                            <rect key="frame" x="66" y="15" width="431" height="19"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Es-aE-qbz">
-                                            <rect key="frame" x="66" y="38" width="491" height="17"/>
+                                            <rect key="frame" x="66" y="38" width="431" height="17"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -58,25 +58,41 @@
                                                 <action selector="avatarImageTouchUp:" destination="URt-GF-gHq" eventType="touchUpInside" id="sSR-4h-rVB"/>
                                             </connections>
                                         </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="现在" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6c-Dy-y52">
+                                            <rect key="frame" x="497" y="15" width="60" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="60" id="64T-Wk-FEW"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="h6c-Dy-y52" firstAttribute="bottom" secondItem="9Es-aE-qbz" secondAttribute="bottom" id="6Ar-lD-CET"/>
                                         <constraint firstItem="Hfr-6J-YSb" firstAttribute="trailing" secondItem="909-Vp-DJG" secondAttribute="trailing" id="KUm-ox-NWL"/>
                                         <constraint firstItem="Hfr-6J-YSb" firstAttribute="top" secondItem="909-Vp-DJG" secondAttribute="top" id="PoJ-LU-Sxq"/>
+                                        <constraint firstItem="h6c-Dy-y52" firstAttribute="top" secondItem="OJg-1m-piO" secondAttribute="top" id="Sal-U6-T1f"/>
                                         <constraint firstItem="909-Vp-DJG" firstAttribute="top" secondItem="DPX-LP-ZFo" secondAttribute="top" constant="10" id="Uqh-Im-GTV"/>
                                         <constraint firstItem="OJg-1m-piO" firstAttribute="top" secondItem="909-Vp-DJG" secondAttribute="top" id="WY5-Jg-HcX"/>
                                         <constraint firstItem="Hfr-6J-YSb" firstAttribute="bottom" secondItem="909-Vp-DJG" secondAttribute="bottom" id="gxz-7R-Egu"/>
+                                        <constraint firstItem="h6c-Dy-y52" firstAttribute="leading" secondItem="OJg-1m-piO" secondAttribute="trailing" id="kI2-zi-aNS"/>
                                         <constraint firstItem="909-Vp-DJG" firstAttribute="leading" secondItem="DPX-LP-ZFo" secondAttribute="leading" constant="16" id="kgb-ol-iOG"/>
+                                        <constraint firstAttribute="trailing" secondItem="h6c-Dy-y52" secondAttribute="trailing" constant="10" id="mWg-zJ-XDx"/>
                                         <constraint firstItem="Hfr-6J-YSb" firstAttribute="leading" secondItem="909-Vp-DJG" secondAttribute="leading" id="oLu-X7-Y6I"/>
                                         <constraint firstItem="909-Vp-DJG" firstAttribute="centerY" secondItem="DPX-LP-ZFo" secondAttribute="centerY" id="oMe-05-Vn2"/>
                                         <constraint firstItem="OJg-1m-piO" firstAttribute="leading" secondItem="909-Vp-DJG" secondAttribute="trailing" constant="10" id="oyb-wv-73R"/>
                                         <constraint firstItem="9Es-aE-qbz" firstAttribute="bottom" secondItem="909-Vp-DJG" secondAttribute="bottom" id="pSv-XL-3Mt"/>
                                         <constraint firstItem="9Es-aE-qbz" firstAttribute="trailing" secondItem="OJg-1m-piO" secondAttribute="trailing" id="q8T-zx-hnP"/>
                                         <constraint firstItem="9Es-aE-qbz" firstAttribute="leading" secondItem="OJg-1m-piO" secondAttribute="leading" id="zcd-Eb-yIz"/>
+                                        <constraint firstItem="h6c-Dy-y52" firstAttribute="bottom" secondItem="OJg-1m-piO" secondAttribute="bottom" id="zkm-RY-uVd"/>
                                         <constraint firstAttribute="trailing" secondItem="OJg-1m-piO" secondAttribute="trailing" constant="10" id="zmM-tN-xL7"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
                                             <exclude reference="Uqh-Im-GTV"/>
+                                            <exclude reference="zmM-tN-xL7"/>
+                                            <exclude reference="zkm-RY-uVd"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -84,6 +100,7 @@
                                 <connections>
                                     <outlet property="avatarImageView" destination="909-Vp-DJG" id="STn-bw-2x9"/>
                                     <outlet property="nameLabel" destination="OJg-1m-piO" id="5Kw-lg-8e2"/>
+                                    <outlet property="timeLabel" destination="h6c-Dy-y52" id="i0q-lk-qSw"/>
                                     <outlet property="userIDLabel" destination="9Es-aE-qbz" id="zkM-Zh-tl0"/>
                                 </connections>
                             </tableViewCell>
@@ -1036,8 +1053,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="qBy-9g-ujA"/>
         <segue reference="Ciz-wU-ArU"/>
-        <segue reference="uHq-Bf-vPn"/>
         <segue reference="Btz-3b-6W7"/>
+        <segue reference="ivR-m5-hzL"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>

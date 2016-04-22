@@ -98,7 +98,7 @@ static NSString *const ENTITY_NAME = @"SAConversation";
 
 - (NSArray *)currentConversationListWithUserID:(NSString *)userID limit:(NSUInteger)limit
 {
-    NSSortDescriptor *otherUserIDSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"otherUserID" ascending:NO];
+    NSSortDescriptor *otherUserIDSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"message.createdAt" ascending:NO];
     NSArray *sortArray = [[NSArray alloc] initWithObjects: otherUserIDSortDescriptor, nil];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];

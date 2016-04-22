@@ -11,6 +11,7 @@
 #import "SAUser+CoreDataProperties.h"
 #import "SAConversation+CoreDataProperties.h"
 #import "SAMessage+CoreDataProperties.h"
+#import "NSDate+Utils.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface SAConversationCell ()
@@ -18,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userIDLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
 @property (strong, nonatomic) SAConversation *conversation;
 
@@ -51,6 +53,7 @@
     
     self.nameLabel.text = self.otherUser.name;
     self.userIDLabel.text = [NSString stringWithFormat:@"@%@", self.otherUser.userID];
+    self.timeLabel.text = [self.conversation.message.createdAt friendlyDateString];
 }
 
 - (void)loadImage
