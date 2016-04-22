@@ -174,6 +174,41 @@
     [imageViewer showFromViewController:self transition:JTSImageViewControllerTransition_FromOriginalPosition];
 }
 
+- (UIImage *)shareImage
+{
+    
+    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat height = self.usernameLabel.frame.size.height + self.contentLabel.frame.size.height + 16 + 10 + 16 + 20 + 20;
+    
+    CGFloat imageHeight = 0;
+    if (self.contentImageView.image) {
+        imageHeight = self.contentImageView.image.size.height / self.contentImageView.image.size.width * self.contentImageView.frame.size.width;
+        height += (imageHeight + 10);
+    }
+    CGSize imageSize = CGSizeMake(width, height);
+    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0.0);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextSetCharacterSpacing(ctx, 10);
+    CGContextSetTextDrawingMode(ctx, kCGTextFillStroke);
+    CGContextSetRGBFillColor(ctx, 0, 0, 0, 1);
+    
+    [self.avatarImageView drawViewHierarchyInRect:self.avatarImageView.frame afterScreenUpdates:YES];
+    [self.usernameLabel drawViewHierarchyInRect:self.usernameLabel.frame afterScreenUpdates:YES];
+    [self.contentLabel drawViewHierarchyInRect:self.contentLabel.frame afterScreenUpdates:YES];
+    
+    if (self.contentImageView.image) {
+        [self.contentImageView.image drawInRect:CGRectMake(self.contentImageView.frame.origin.x, self.contentImageView.frame.origin.y, self.contentImageView.frame.size.width, imageHeight)];
+    }
+    
+    UIImage *shareContentImage = [UIImage imageNamed:@"IconShareContent"];
+    [shareContentImage drawInRect:CGRectMake(self.contentLabel.frame.origin.x, height - 20 - 20, shareContentImage.size.width, shareContentImage.size.height)];
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error) {
@@ -286,12 +321,10 @@
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    UIAlertAction *copyAction = [UIAlertAction actionWithTitle:@"复制消息" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *copyAction = [UIAlertAction actionWithTitle:@"分享为图片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (self.status.text.length) {
-            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-            NSString *pasteString = [self.status.text flattenHTML];
-            pasteboard.string = pasteString;
-            [SAMessageDisplayUtils showInfoWithMessage:@"已复制"];
+            UIImage *image = [self shareImage];
+            UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
         } else {
             [SAMessageDisplayUtils showInfoWithMessage:@"没有消息内容可以复制"];
         }
