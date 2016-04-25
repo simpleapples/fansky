@@ -142,10 +142,6 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
 - (void)friendListViewController:(SAFriendListViewController *)friendListViewController friendIDSelected:(NSString *)friendID
 {
     [self.popupViewController dismiss];
-//    SAUser *currentUser = [SADataManager sharedManager].currentUser;
-//    if (![[SADataManager sharedManager] conversationWithOtherUserID:friendID localUser:currentUser]) {
-//        [[SADataManager sharedManager] insertNewConversationWithOtherUserID:friendID localUser:currentUser];
-//    }
     self.selectedUserID = friendID;
     [SAMessageDisplayUtils showProgressWithMessage:@"载入中"];
     [[SAAPIService sharedSingleton] userWithID:friendID success:^(id data) {

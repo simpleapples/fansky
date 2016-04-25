@@ -10,6 +10,7 @@
 #import "SADataManager.h"
 #import "SANotificationManager.h"
 #import "SADataManager+User.h"
+#import "SASearchViewController.h"
 #import "UIColor+Utils.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
@@ -84,7 +85,8 @@
             UIViewController *composeViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
             [rootViewController presentViewController:composeViewController animated:YES completion:nil];
         } else if ([type isEqualToString:@"SEARCH"]) {
-            UIViewController *searchViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SASearchViewController"];
+            SASearchViewController *searchViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SASearchViewController"];
+            searchViewController.type = SASearchViewControllerTypeSearch;
             [rootViewController showViewController:searchViewController sender:nil];
         }
     }

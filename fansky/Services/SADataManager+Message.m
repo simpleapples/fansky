@@ -51,13 +51,16 @@ static NSString *const ENTITY_NAME = @"SAMessage";
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
     fetchRequest.fetchLimit = 1;
     fetchRequest.predicate = [NSPredicate predicateWithFormat:@"messageID = %@", messageID];
-    
+        
     __block NSError *error;
     __block SAMessage *resultMessage;
     [self.managedObjectContext performBlockAndWait:^{
         NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
         if (!error && fetchResult && fetchResult.count) {
             SAMessage *existMessage = [fetchResult firstObject];
+            if (![existMessage.localUsers containsObject:localUser]) {
+                [existMessage addLocalUsersObject:localUser];
+            }
             resultMessage = existMessage;
         } else {
             resultMessage = [self insertMessageWithObject:object localUser:localUser];
@@ -92,7 +95,9 @@ static NSString *const ENTITY_NAME = @"SAMessage";
         message.createdAt = createdAt;
         message.sender = sender;
         message.recipient = recipient;
-        message.localUser = localUser;
+        if (![message.localUsers containsObject:localUser]) {
+            [message addLocalUsersObject:localUser];
+        }
         resultMessage = message;
     }];
     return resultMessage;
@@ -104,7 +109,7 @@ static NSString *const ENTITY_NAME = @"SAMessage";
     NSArray *sortArray = [[NSArray alloc] initWithObjects: createdAtSortDescriptor, nil];
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUser.userID = %@ AND (sender.userID = %@ OR recipient.userID = %@)", localUserID, userID, userID];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"localUsers.userID CONTAINS %@ AND (sender.userID = %@ OR recipient.userID = %@)", localUserID, userID, userID];
     fetchRequest.sortDescriptors = sortArray;
     fetchRequest.returnsObjectsAsFaults = NO;
     fetchRequest.fetchBatchSize = 6;

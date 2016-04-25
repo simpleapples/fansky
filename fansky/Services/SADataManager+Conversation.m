@@ -12,6 +12,8 @@
 #import "SADataManager+Message.h"
 #import "SAConversation+CoreDataProperties.h"
 
+#import "SAMessage+CoreDataProperties.h"
+
 @implementation SADataManager (Conversation)
 
 static NSString *const ENTITY_NAME = @"SAConversation";
@@ -59,21 +61,6 @@ static NSString *const ENTITY_NAME = @"SAConversation";
                 resultConversation = conversation;
             }];
         }
-    }];
-    return resultConversation;
-}
-
-- (SAConversation *)insertNewConversationWithOtherUserID:(NSString *)otherUserID localUser:(SAUser *)localUser;
-{
-    __block SAConversation *resultConversation;
-    [self.managedObjectContext performBlockAndWait:^{
-        SAConversation *conversation = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_NAME inManagedObjectContext:self.managedObjectContext];
-        conversation.otherUserID = otherUserID;
-        conversation.count = @(0);
-        conversation.isNew = @(YES);
-        conversation.message = nil;
-        conversation.localUser = localUser;
-        resultConversation = conversation;
     }];
     return resultConversation;
 }

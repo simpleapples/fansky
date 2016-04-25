@@ -158,6 +158,7 @@
 		5A95558E1BD384B400326E94 /* fansky 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "fansky 3.xcdatamodel"; sourceTree = "<group>"; };
 		5A9AD6AE1BAA6CD50058916A /* SAMessageDisplayUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessageDisplayUtils.h; sourceTree = "<group>"; };
 		5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageDisplayUtils.m; sourceTree = "<group>"; };
+		5A9F3F531CCB29BE00F7E9AF /* fansky 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "fansky 7.xcdatamodel"; sourceTree = "<group>"; };
 		5AAB875A1BDA4B19003C9A51 /* SAUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAUserInfoViewController.h; sourceTree = "<group>"; };
 		5AAB875B1BDA4B19003C9A51 /* SAUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUserInfoViewController.m; sourceTree = "<group>"; };
 		5AAC809A1BE65BBD0083C7E5 /* UIColor+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Utils.h"; sourceTree = "<group>"; };
@@ -987,6 +988,7 @@
 		5AD70EF41B316A79009C5B84 /* fansky.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				5A9F3F531CCB29BE00F7E9AF /* fansky 7.xcdatamodel */,
 				5A5E79BB1CB796960050FE55 /* fansky 6.xcdatamodel */,
 				5A924F381CA4E82700548ADC /* fansky 5.xcdatamodel */,
 				5A5694EA1BDB55F400A883A9 /* fansky 4.xcdatamodel */,
@@ -994,7 +996,7 @@
 				5A849E8E1BC3E62D000FDCB9 /* fansky 2.xcdatamodel */,
 				5AD70EF51B316A79009C5B84 /* fansky.xcdatamodel */,
 			);
-			currentVersion = 5A5E79BB1CB796960050FE55 /* fansky 6.xcdatamodel */;
+			currentVersion = 5A9F3F531CCB29BE00F7E9AF /* fansky 7.xcdatamodel */;
 			path = fansky.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

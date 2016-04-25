@@ -15,7 +15,6 @@
 
 - (void)insertOrUpdateConversationsWithObjects:(id)objects;
 - (SAConversation *)insertOrUpdateConversationWithObject:(id)object localUser:(SAUser *)localUser;
-- (SAConversation *)insertNewConversationWithOtherUserID:(NSString *)otherUserID localUser:(SAUser *)localUser;
 - (SAConversation *)conversationWithOtherUserID:(NSString *)otherUserID localUser:(SAUser *)localUser;
 - (NSArray *)currentConversationListWithUserID:(NSString *)userID limit:(NSUInteger)limit;
 

@@ -2,7 +2,7 @@
 //  SAPhoto+CoreDataProperties.m
 //  fansky
 //
-//  Created by Zzy on 16/3/29.
+//  Created by Zzy on 16/4/23.
 //  Copyright © 2016年 Zzy. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -16,8 +16,8 @@
 @dynamic imageURL;
 @dynamic largeURL;
 @dynamic photoURL;
-@dynamic thumbURL;
 @dynamic statusID;
+@dynamic thumbURL;
 @dynamic status;
 
 @end
