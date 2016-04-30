@@ -168,11 +168,6 @@
     UIImage *tempImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     self.uploadImage = [tempImage fixOrientation];
     [self.cameraButton setImage:[UIImage imageNamed:@"IconCameraCheck"] forState:UIControlStateNormal];
-    if (!self.contentTextView.text.length) {
-        self.contentTextView.text = @"我上传了一张照片";
-        [self updateTextView:self.contentTextView];
-        [self updateRemainLabel];
-    }
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

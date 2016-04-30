@@ -321,12 +321,13 @@
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    UIAlertAction *copyAction = [UIAlertAction actionWithTitle:@"分享为图片" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *copyAction = [UIAlertAction actionWithTitle:@"分享" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (self.status.text.length) {
             UIImage *image = [self shareImage];
-            UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+            UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[image] applicationActivities:nil];
+            [self presentViewController:activityViewController animated:YES completion:nil];
         } else {
-            [SAMessageDisplayUtils showInfoWithMessage:@"没有消息内容可以复制"];
+            [SAMessageDisplayUtils showInfoWithMessage:@"没有消息内容可以分享"];
         }
     }];
     UIAlertAction *reportAction = [UIAlertAction actionWithTitle:@"举报" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

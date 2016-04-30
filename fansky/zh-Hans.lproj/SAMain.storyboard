@@ -440,7 +440,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="状态" id="HMl-h7-ulL">
-                        <barButtonItem key="rightBarButtonItem" image="IconMore" id="jzm-KW-lgA">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="jzm-KW-lgA">
                             <connections>
                                 <action selector="moreButtonTouchUp:" destination="sUO-Mb-465" id="4Dd-dU-eHY"/>
                             </connections>
@@ -1042,7 +1042,6 @@
         <image name="IconGIF" width="40" height="20"/>
         <image name="IconHome" width="25" height="25"/>
         <image name="IconMail" width="25" height="25"/>
-        <image name="IconMore" width="25" height="25"/>
         <image name="IconReply" width="25" height="25"/>
         <image name="IconReplySmall" width="21" height="21"/>
         <image name="IconRepost" width="25" height="25"/>
@@ -1054,7 +1053,7 @@
         <segue reference="qBy-9g-ujA"/>
         <segue reference="Ciz-wU-ArU"/>
         <segue reference="Btz-3b-6W7"/>
-        <segue reference="ivR-m5-hzL"/>
+        <segue reference="uHq-Bf-vPn"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>
