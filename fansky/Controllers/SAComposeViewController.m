@@ -87,7 +87,7 @@
         self.cameraButton.hidden = YES;
         self.placeholderLabel.hidden = YES;
         SAStatus *status = [[SADataManager sharedManager] statusWithID:self.repostStatusID];
-        self.contentTextView.text = [NSString stringWithFormat:@"「@%@ %@」", status.user.name, [status.text flattenHTML]];
+        self.contentTextView.text = [NSString stringWithFormat:@"转@%@ %@」", status.user.name, [status.text flattenHTML]];
         self.contentTextView.selectedRange = NSMakeRange(0, 0);
     }
 }

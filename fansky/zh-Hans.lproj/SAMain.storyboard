@@ -1051,9 +1051,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="qBy-9g-ujA"/>
+        <segue reference="JUY-4f-01A"/>
         <segue reference="Ciz-wU-ArU"/>
         <segue reference="Btz-3b-6W7"/>
-        <segue reference="uHq-Bf-vPn"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.33333333329999998" green="0.67450980390000004" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>
