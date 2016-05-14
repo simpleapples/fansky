@@ -867,14 +867,19 @@
                                     <action selector="closeButtonTouchUp:" destination="AEP-as-v9Y" eventType="touchUpInside" id="508-63-Jnh"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IwN-Bh-hWg">
-                                <rect key="frame" x="10" y="70" width="580" height="180"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IwN-Bh-hWg">
+                                <rect key="frame" x="10" y="70" width="580" height="476"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="180" id="7gc-Yx-qTJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="7gc-Yx-qTJ"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <outlet property="delegate" destination="AEP-as-v9Y" id="jYC-F7-naE"/>
                                 </connections>
@@ -990,6 +995,7 @@
                             <constraint firstItem="IwN-Bh-hWg" firstAttribute="top" secondItem="Aqh-tS-ahx" secondAttribute="top" constant="-8" id="b24-Qf-c3H"/>
                             <constraint firstItem="IwN-Bh-hWg" firstAttribute="top" secondItem="qET-TX-KAn" secondAttribute="bottom" constant="10" id="eDA-nO-nSL"/>
                             <constraint firstItem="IwN-Bh-hWg" firstAttribute="leading" secondItem="Aqh-tS-ahx" secondAttribute="leading" constant="-5" id="hMP-Pe-5YA"/>
+                            <constraint firstItem="1lN-xs-yox" firstAttribute="top" secondItem="IwN-Bh-hWg" secondAttribute="bottom" constant="10" id="njy-Ge-a9X"/>
                             <constraint firstItem="s6A-92-pJ7" firstAttribute="top" secondItem="XvL-i2-Ebq" secondAttribute="bottom" id="pG0-p9-IM4"/>
                         </constraints>
                     </view>
