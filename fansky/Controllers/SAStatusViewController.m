@@ -321,7 +321,17 @@
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
-    UIAlertAction *copyAction = [UIAlertAction actionWithTitle:@"分享" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *copyAction = [UIAlertAction actionWithTitle:@"复制消息" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if (self.status.text.length) {
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            NSString *pasteString = [self.status.text flattenHTML];
+            pasteboard.string = pasteString;
+            [SAMessageDisplayUtils showInfoWithMessage:@"已复制"];
+        } else {
+            [SAMessageDisplayUtils showInfoWithMessage:@"没有消息内容可以复制"];
+        }
+    }];
+    UIAlertAction *shareAction = [UIAlertAction actionWithTitle:@"分享" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         if (self.status.text.length) {
             UIImage *image = [self shareImage];
             UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[image] applicationActivities:nil];
@@ -348,6 +358,7 @@
         [alertController addAction:deleteAction];
     }
     [alertController addAction:copyAction];
+    [alertController addAction:shareAction];
     [alertController addAction:reportAction];
     [alertController addAction:cancelAction];
     [self presentViewController:alertController animated:YES completion:nil];
