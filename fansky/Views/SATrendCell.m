@@ -12,6 +12,7 @@
 @interface SATrendCell ()
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 
 @end
 
@@ -30,6 +31,7 @@
 - (void)configWithTrend:(SATrend *)trend
 {
     self.titleLabel.text = trend.name;
+    self.detailLabel.text = trend.query;
 }
 
 @end

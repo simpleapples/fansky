@@ -13,11 +13,14 @@
 #import "SAUser+CoreDataProperties.h"
 #import "SASearchViewController.h"
 #import "SAConversationViewController.h"
+#import "UIColor+Utils.h"
 #import <SDWebImage/SDWebImageManager.h>
 
 @interface SATabBarViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *accountButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *searchButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *composeButton;
 
 @end
 
@@ -109,6 +112,27 @@
 {
     self.navigationItem.title = item.title;
     item.badgeValue = nil;
+    if (item.tag == 1) {
+        self.searchButton.enabled = YES;
+        self.searchButton.tintColor = [UIColor fanskyBlue];
+        self.composeButton.enabled = YES;
+        self.composeButton.tintColor = [UIColor fanskyBlue];
+    } else if (item.tag == 2) {
+        self.searchButton.enabled = NO;
+        self.searchButton.tintColor = [UIColor clearColor];
+        self.composeButton.enabled = NO;
+        self.composeButton.tintColor = [UIColor clearColor];
+    } else if (item.tag == 3) {
+        self.searchButton.enabled = NO;
+        self.searchButton.tintColor = [UIColor clearColor];
+        self.composeButton.enabled = YES;
+        self.composeButton.tintColor = [UIColor fanskyBlue];
+    } else if (item.tag == 4) {
+        self.searchButton.enabled = NO;
+        self.searchButton.tintColor = [UIColor clearColor];
+        self.composeButton.enabled = NO;
+        self.composeButton.tintColor = [UIColor clearColor];
+    }
 }
 
 #pragma mark - EventHandler

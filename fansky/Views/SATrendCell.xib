@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -13,8 +13,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Khv-mG-c1f">
-                        <rect key="frame" x="16" y="7" width="42" height="30"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Khv-mG-c1f">
+                        <rect key="frame" x="16" y="7" width="40" height="30"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="sJK-7G-x1A"/>
                         </constraints>
@@ -22,13 +22,23 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MwK-zb-LWm">
+                        <rect key="frame" x="271" y="7" width="33" height="30"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="MwK-zb-LWm" firstAttribute="top" secondItem="Khv-mG-c1f" secondAttribute="top" id="C17-bL-EoU"/>
                     <constraint firstItem="Khv-mG-c1f" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="VtF-QF-WQi"/>
+                    <constraint firstItem="MwK-zb-LWm" firstAttribute="bottom" secondItem="Khv-mG-c1f" secondAttribute="bottom" id="Wyl-0t-7yD"/>
+                    <constraint firstAttribute="trailing" secondItem="MwK-zb-LWm" secondAttribute="trailing" constant="16" id="mhM-va-75P"/>
                     <constraint firstItem="Khv-mG-c1f" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="ryS-ye-oxA"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="detailLabel" destination="MwK-zb-LWm" id="cv2-dC-bsw"/>
                 <outlet property="titleLabel" destination="Khv-mG-c1f" id="Cv8-f9-jHQ"/>
             </connections>
         </tableViewCell>
