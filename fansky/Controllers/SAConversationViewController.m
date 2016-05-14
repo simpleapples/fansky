@@ -19,6 +19,7 @@
 #import "SAMessage+CoreDataProperties.h"
 #import "SAUserViewController.h"
 #import "SAFriendListViewController.h"
+#import "SAFriend.h"
 #import "UIColor+Utils.h"
 #import "LGRefreshView.h"
 #import <STPopup/STPopup.h>
@@ -139,12 +140,12 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
 
 #pragma mark - SAFriendListViewControllerDelegate
 
-- (void)friendListViewController:(SAFriendListViewController *)friendListViewController friendIDSelected:(NSString *)friendID
+- (void)friendListViewController:(SAFriendListViewController *)friendListViewController selectedfriend:(SAFriend *)selectedFriend
 {
     [self.popupViewController dismiss];
-    self.selectedUserID = friendID;
+    self.selectedUserID = selectedFriend.friendID;
     [SAMessageDisplayUtils showProgressWithMessage:@"载入中"];
-    [[SAAPIService sharedSingleton] userWithID:friendID success:^(id data) {
+    [[SAAPIService sharedSingleton] userWithID:self.selectedUserID success:^(id data) {
         [[SADataManager sharedManager] insertOrUpdateUserWithObject:data local:NO active:NO token:nil secret:nil];
         [SAMessageDisplayUtils dismiss];
         [self performSegueWithIdentifier:@"ConversationToMessageSegue" sender:nil];

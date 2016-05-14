@@ -181,9 +181,9 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
         }
         [actionSheet showInView:self.view];
     } else if (self.type == SAFriendListTypeFriendPopup) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(friendListViewController:friendIDSelected:)]) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(friendListViewController:selectedfriend:)]) {
             SAFriend *friend = [self.friendList objectAtIndex:indexPath.row];
-            [self.delegate friendListViewController:self friendIDSelected:friend.friendID];
+            [self.delegate friendListViewController:self selectedfriend:friend];
         }
     }
 }

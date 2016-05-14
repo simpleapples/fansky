@@ -18,10 +18,11 @@ typedef NS_ENUM(NSUInteger, SAFriendListType)
 };
 
 @class SAFriendListViewController;
+@class SAFriend;
 
 @protocol SAFriendListViewControllerDelegate <NSObject>
 
-- (void)friendListViewController:(SAFriendListViewController *)friendListViewController friendIDSelected:(NSString *)friendID;
+- (void)friendListViewController:(SAFriendListViewController *)friendListViewController selectedfriend:(SAFriend *)selectedFriend;
 
 @end
 

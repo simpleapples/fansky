@@ -947,17 +947,34 @@
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36m-s6-Vs6">
+                                        <rect key="frame" x="54" y="0.0" width="44" height="44"/>
+                                        <state key="normal" image="IconAt"/>
+                                        <connections>
+                                            <action selector="atButtonTouchUp:" destination="AEP-as-v9Y" eventType="touchUpInside" id="Vuu-Er-UEa"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="36m-s6-Vs6" firstAttribute="top" secondItem="JAC-Fo-Ulm" secondAttribute="top" id="5ih-9M-oax"/>
                                     <constraint firstAttribute="centerY" secondItem="xUo-RQ-PFq" secondAttribute="centerY" id="7jd-Cm-Jhb"/>
+                                    <constraint firstItem="36m-s6-Vs6" firstAttribute="bottom" secondItem="JAC-Fo-Ulm" secondAttribute="bottom" id="Cpd-RA-V1p"/>
                                     <constraint firstItem="N8A-ds-hsO" firstAttribute="centerY" secondItem="1lN-xs-yox" secondAttribute="centerY" id="Q9o-rt-Idq"/>
                                     <constraint firstItem="xUo-RQ-PFq" firstAttribute="leading" secondItem="N8A-ds-hsO" secondAttribute="trailing" constant="20" id="T16-Zx-VhW"/>
                                     <constraint firstAttribute="height" constant="44" id="bOL-SY-udC"/>
+                                    <constraint firstItem="36m-s6-Vs6" firstAttribute="width" secondItem="JAC-Fo-Ulm" secondAttribute="width" id="kxx-z5-bLO"/>
                                     <constraint firstItem="JAC-Fo-Ulm" firstAttribute="centerY" secondItem="1lN-xs-yox" secondAttribute="centerY" id="oLI-04-Mkp"/>
+                                    <constraint firstItem="36m-s6-Vs6" firstAttribute="leading" secondItem="1lN-xs-yox" secondAttribute="leading" constant="54" id="pLx-Gg-rUb"/>
                                     <constraint firstAttribute="trailing" secondItem="xUo-RQ-PFq" secondAttribute="trailing" constant="10" id="tbB-he-y0j"/>
+                                    <constraint firstItem="36m-s6-Vs6" firstAttribute="leading" secondItem="JAC-Fo-Ulm" secondAttribute="trailing" id="vTs-pr-miV"/>
                                     <constraint firstItem="JAC-Fo-Ulm" firstAttribute="leading" secondItem="1lN-xs-yox" secondAttribute="leading" constant="10" id="xm4-X0-nK9"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="vTs-pr-miV"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -978,6 +995,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="m0Y-BV-VDI"/>
                     <connections>
+                        <outlet property="atButtonLeftConstraint" destination="pLx-Gg-rUb" id="Dub-dZ-x2R"/>
                         <outlet property="avatarImageView" destination="qET-TX-KAn" id="0ag-ZD-Y4g"/>
                         <outlet property="cameraButton" destination="JAC-Fo-Ulm" id="9oF-kk-LDx"/>
                         <outlet property="contentTextView" destination="IwN-Bh-hWg" id="J7o-0V-SFB"/>
@@ -1037,6 +1055,7 @@
     <resources>
         <image name="BackgroundAccount" width="25" height="25"/>
         <image name="BackgroundGrayLine" width="3" height="3"/>
+        <image name="IconAt" width="25" height="25"/>
         <image name="IconBackColor" width="25" height="25"/>
         <image name="IconBell" width="25" height="25"/>
         <image name="IconCamera" width="25" height="25"/>

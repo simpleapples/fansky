@@ -12,13 +12,16 @@
 #import "SAUser+CoreDataProperties.h"
 #import "SAStatus+CoreDataProperties.h"
 #import "SAAPIService.h"
+#import "SAFriendListViewController.h"
 #import "SAMessageDisplayUtils.h"
+#import "SAFriend.h"
 #import "NSString+Utils.h"
 #import "UIColor+Utils.h"
 #import "UIImage+Utils.h"
+#import <STPopup/STPopup.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface SAComposeViewController () <UITextViewDelegate, UIImagePickerControllerDelegate>
+@interface SAComposeViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, SAFriendListViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
@@ -27,8 +30,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *remainLabel;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *functionViewBottomConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *atButtonLeftConstraint;
 
 @property (strong, nonatomic) UIImage *uploadImage;
+@property (strong, nonatomic) STPopupController *popupViewController;
 
 @end
 
@@ -75,16 +80,19 @@
     
     if (self.userID) {
         self.cameraButton.hidden = NO;
+        self.atButtonLeftConstraint.constant = 54;
         self.placeholderLabel.hidden = YES;
         SAUser *user = [[SADataManager sharedManager] userWithID:self.userID];
         self.contentTextView.text = [NSString stringWithFormat:@"@%@ ", user.name];
     } else if (self.replyToStatusID) {
         self.cameraButton.hidden = YES;
+        self.atButtonLeftConstraint.constant = 10;
         self.placeholderLabel.hidden = YES;
         SAStatus *status = [[SADataManager sharedManager] statusWithID:self.replyToStatusID];
         self.contentTextView.text = [NSString stringWithFormat:@"@%@ ", status.user.name];
     } else if (self.repostStatusID) {
         self.cameraButton.hidden = YES;
+        self.atButtonLeftConstraint.constant = 10;
         self.placeholderLabel.hidden = YES;
         SAStatus *status = [[SADataManager sharedManager] statusWithID:self.repostStatusID];
         self.contentTextView.text = [NSString stringWithFormat:@"转@%@ %@", status.user.name, [status.text flattenHTML]];
@@ -126,9 +134,30 @@
     [self presentViewController:imagePickerController animated:YES completion:nil];
 }
 
+- (void)showFriendPopup
+{
+    SAUser *currentUser = [SADataManager sharedManager].currentUser;
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SAMine" bundle:[NSBundle mainBundle]];
+    SAFriendListViewController *friendListViewController = (SAFriendListViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SAFriendListViewController"];
+    friendListViewController.delegate = self;
+    friendListViewController.userID = currentUser.userID;
+    friendListViewController.type = SAFriendListTypeFriendPopup;
+    self.popupViewController = [[STPopupController alloc] initWithRootViewController:friendListViewController];
+    [self.popupViewController presentInViewController:self];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - SAFriendListViewControllerDelegate
+
+- (void)friendListViewController:(SAFriendListViewController *)friendListViewController selectedfriend:(SAFriend *)selectedFriend
+{
+    [self.popupViewController dismiss];
+    self.contentTextView.text = [NSString stringWithFormat:@"%@ @%@", self.contentTextView.text, selectedFriend.name];
+    [self updateTextView:self.contentTextView];
 }
 
 #pragma mark - KeyboardNotification
@@ -255,6 +284,11 @@
     } else {
         [self dismissViewControllerAnimated:YES completion:nil];
     }
+}
+
+- (IBAction)atButtonTouchUp:(id)sender
+{
+    [self showFriendPopup];
 }
 
 @end
