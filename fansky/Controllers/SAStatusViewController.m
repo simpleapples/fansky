@@ -40,7 +40,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentLabelHeightConstraint;
 
 @property (copy, nonatomic) NSString *selectedUserID;
-@property (strong, nonatomic) SAStatus *replyStatus;
+@property (strong, nonatomic) SAStatus *originalStatus;
 
 @end
 
@@ -54,10 +54,22 @@
     
     if (self.status.replyStatusID.length) {
         [[SAAPIService sharedSingleton] showStatusWithID:self.status.replyStatusID success:^(id data) {
-            self.replyStatus = [[SADataManager sharedManager] statusWithObject:data localUsers:nil type:SAStatusTypeUserStatus];
-            if (self.replyStatus.statusID.length) {
-                NSString *buttonTitle = [NSString stringWithFormat:@"回复给 %@", self.replyStatus.user.name];
+            self.originalStatus = [[SADataManager sharedManager] statusWithObject:data localUsers:nil type:SAStatusTypeUserStatus];
+            if (self.originalStatus.statusID.length) {
+                NSString *buttonTitle = [NSString stringWithFormat:@"回复给 %@", self.originalStatus.user.name];
                 [self.originalStatusButton setTitle:buttonTitle forState:UIControlStateNormal];
+                [self.originalStatusButton setImage:[UIImage imageNamed:@"IconReplySmall"] forState:UIControlStateNormal];
+                self.originalStatusButton.hidden = NO;
+            }
+        } failure:nil];
+    }
+    if (self.status.repostStatusID.length) {
+        [[SAAPIService sharedSingleton] showStatusWithID:self.status.repostStatusID success:^(id data) {
+            self.originalStatus = [[SADataManager sharedManager] statusWithObject:data localUsers:nil type:SAStatusTypeUserStatus];
+            if (self.originalStatus.statusID.length) {
+                NSString *buttonTitle = [NSString stringWithFormat:@"转自 %@", self.originalStatus.user.name];
+                [self.originalStatusButton setTitle:buttonTitle forState:UIControlStateNormal];
+                [self.originalStatusButton setImage:[UIImage imageNamed:@"IconRepostSmall"] forState:UIControlStateNormal];
                 self.originalStatusButton.hidden = NO;
             }
         } failure:nil];
@@ -379,7 +391,7 @@
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SAMain" bundle:[NSBundle mainBundle]];
     SAStatusViewController *statusViewController = [storyboard instantiateViewControllerWithIdentifier:@"SAStatusViewController"];
-    statusViewController.status = self.replyStatus;
+    statusViewController.status = self.originalStatus;
     [self.navigationController showViewController:statusViewController sender:sender];
 }
 
