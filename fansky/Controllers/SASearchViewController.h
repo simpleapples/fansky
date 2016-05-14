@@ -11,7 +11,8 @@
 typedef NS_ENUM(NSInteger, SASearchViewControllerType)
 {
     SASearchViewControllerTypeTrend = 1,
-    SASearchViewControllerTypeSearch = 2
+    SASearchViewControllerTypeSearch = 2,
+    SASearchViewControllerTypeRandom = 3
 };
 
 @interface SASearchViewController : UIViewController

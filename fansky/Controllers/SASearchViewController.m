@@ -53,6 +53,7 @@ static NSString *const timeLineCellName = @"SATimeLineCell";
     [self updateInterface];
     
     if (self.type == SASearchViewControllerTypeTrend) {
+        self.searchTextField.enabled = YES;
         [self.searchTextField becomeFirstResponder];
         [[SAAPIService sharedSingleton] trendsWithSuccess:^(id data) {
             NSMutableArray *tempTrendsList = [[NSMutableArray alloc] init];
@@ -65,12 +66,17 @@ static NSString *const timeLineCellName = @"SATimeLineCell";
             [self.tableView reloadData];
         } failure:nil];
     } else if (self.type == SASearchViewControllerTypeSearch) {
+        self.searchTextField.enabled = YES;
         if (self.keyword) {
             self.searchTextField.text = self.keyword;
             [self refreshSearchResult];
         } else {
             [self.searchTextField becomeFirstResponder];
         }
+    } else if (self.type == SASearchViewControllerTypeRandom) {
+        self.searchTextField.enabled = NO;
+        self.searchTextField.text = @"随便看看";
+        [self refreshSearchResult];
     }
 }
 
@@ -130,7 +136,11 @@ static NSString *const timeLineCellName = @"SATimeLineCell";
     };
     
     self.activityIndicator.hidden = NO;
-    [[SAAPIService sharedSingleton] searchPublicTimeLineWithKeyword:self.keyword sinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
+    if (self.type == SASearchViewControllerTypeSearch) {
+        [[SAAPIService sharedSingleton] searchPublicTimeLineWithKeyword:self.keyword sinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
+    } else if (self.type == SASearchViewControllerTypeRandom) {
+        [[SAAPIService sharedSingleton] publicTimeLineWithSinceID:nil maxID:maxID count:TIME_LINE_COUNT success:success failure:failure];
+    }
 }
 
 - (void)updateInterface
@@ -299,12 +309,15 @@ static NSString *const timeLineCellName = @"SATimeLineCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (self.type == SASearchViewControllerTypeTrend) {
+        return self.resultList.count + 1;
+    }
     return self.resultList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.type == SASearchViewControllerTypeSearch) {
+    if (self.type == SASearchViewControllerTypeSearch || self.type == SASearchViewControllerTypeRandom) {
         SAStatus *status = [self.resultList objectAtIndex:indexPath.row];
         
         NSNumber *cachedHeight = [[SACacheManager sharedManager] cachedItemForKey:status.statusID];
@@ -344,11 +357,15 @@ static NSString *const timeLineCellName = @"SATimeLineCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.type == SASearchViewControllerTypeTrend) {
-        SATrend *trend = [self.resultList objectAtIndex:indexPath.row];
         SATrendCell *trendCell = [self.tableView dequeueReusableCellWithIdentifier:trendCellName forIndexPath:indexPath];
-        [trendCell configWithTrend:trend];
+        if (indexPath.row == 0) {
+            [trendCell configWithTrend:nil type:SATrendCellTypeRandom];
+        } else {
+            SATrend *trend = [self.resultList objectAtIndex:indexPath.row - 1];
+            [trendCell configWithTrend:trend type:SATrendCellTypeHot];
+        }
         return trendCell;
-    } else if (self.type == SASearchViewControllerTypeSearch) {
+    } else if (self.type == SASearchViewControllerTypeSearch || self.type == SASearchViewControllerTypeRandom) {
         SAStatus *status = [self.resultList objectAtIndex:indexPath.row];
         SATimeLineCell *statusCell = [tableView dequeueReusableCellWithIdentifier:timeLineCellName forIndexPath:indexPath];
         [statusCell configWithStatus:status];
@@ -361,12 +378,16 @@ static NSString *const timeLineCellName = @"SATimeLineCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.type == SASearchViewControllerTypeTrend) {
-        SATrend *trend = [self.resultList objectAtIndex:indexPath.row];
         SASearchViewController *searchViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SASearchViewController"];
-        searchViewController.type = SASearchViewControllerTypeSearch;
-        searchViewController.keyword = trend.query;
+        if (indexPath.row == 0) {
+            searchViewController.type = SASearchViewControllerTypeRandom;
+        } else {
+            SATrend *trend = [self.resultList objectAtIndex:indexPath.row - 1];
+            searchViewController.type = SASearchViewControllerTypeSearch;
+            searchViewController.keyword = trend.query;
+        }
         [self.navigationController showViewController:searchViewController sender:nil];
-    } else if (self.type == SASearchViewControllerTypeSearch) {
+    } else if (self.type == SASearchViewControllerTypeSearch || self.type == SASearchViewControllerTypeRandom) {
         SAStatus *status = [self.resultList objectAtIndex:indexPath.row];
         self.selectedStatus = status;
         [self performSegueWithIdentifier:@"SearchToStatusSegue" sender:nil];
@@ -388,7 +409,7 @@ static NSString *const timeLineCellName = @"SATimeLineCell";
 
 - (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.type == SASearchViewControllerTypeSearch) {
+    if (self.type == SASearchViewControllerTypeSearch || self.type == SASearchViewControllerTypeRandom) {
         SAStatus *status = [self.resultList objectAtIndex:indexPath.row];
         UITableViewRowAction *repostAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"转发" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
             SAComposeViewController *composeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
@@ -411,7 +432,7 @@ static NSString *const timeLineCellName = @"SATimeLineCell";
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if (self.type == SASearchViewControllerTypeSearch) {
+    if (self.type == SASearchViewControllerTypeSearch || self.type == SASearchViewControllerTypeRandom) {
         if (fabs(scrollView.contentSize.height - scrollView.frame.size.height - scrollView.contentOffset.y) < scrollView.contentSize.height * 0.3) {
             [self updateSearchResultWithRefresh:NO];
         }

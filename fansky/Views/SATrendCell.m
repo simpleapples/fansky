@@ -28,10 +28,15 @@
     [super setSelected:selected animated:animated];
 }
 
-- (void)configWithTrend:(SATrend *)trend
+- (void)configWithTrend:(SATrend *)trend type:(SATrendCellType)type
 {
-    self.titleLabel.text = trend.name;
-    self.detailLabel.text = trend.query;
+    if (type == SATrendCellTypeHot && trend) {
+        self.titleLabel.text = trend.name;
+        self.detailLabel.text = trend.query;
+    } else if (type == SATrendCellTypeRandom) {
+        self.titleLabel.text = @"随便看看";
+        self.detailLabel.text = @"";
+    }
 }
 
 @end

@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, SATrendCellType) {
+    SATrendCellTypeHot = 1,
+    SATrendCellTypeRandom = 2
+};
+
 @class SATrend;
 
 @interface SATrendCell : UITableViewCell
 
-- (void)configWithTrend:(SATrend *)trend;
+- (void)configWithTrend:(SATrend *)trend type:(SATrendCellType)type;
 
 @end

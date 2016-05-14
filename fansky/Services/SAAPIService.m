@@ -203,6 +203,18 @@
     [self requestAPIWithPath:SA_API_USER_TIMELINE_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
 }
 
+- (void)publicTimeLineWithSinceID:(NSString *)sinceID maxID:(NSString *)maxID count:(NSInteger)count success:(void (^)(id))success failure:(void (^)(NSString *))failure
+{
+    NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@(count), @"count", @"html", @"format", nil];
+    if (sinceID) {
+        [mutableDictionary setObject:sinceID forKey:@"since_id"];
+    }
+    if (maxID) {
+        [mutableDictionary setObject:maxID forKey:@"max_id"];
+    }
+    [self requestAPIWithPath:SA_API_PUBLIC_TIMELINE_PATH method:@"GET" parametersDictionary:mutableDictionary success:success failure:failure];
+}
+
 - (void)sendStatus:(NSString *)status replyToStatusID:(NSString *)replyToStatusID repostStatusID:(NSString *)repostStatusID image:(NSData *)image success:(void (^)(id))success failure:(void (^)(NSString *error))failure
 {
     NSMutableDictionary *mutableDictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:status, @"status", @"lite", @"mode", @"html", @"format", nil];
