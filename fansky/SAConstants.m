@@ -17,8 +17,8 @@ BOOL SA_DEBUG = NO;
 NSString *const SA_APP_DOMAIN = @"com.zangzhiya.fansky";
 
 NSString *const SA_API_BASE_HOST = @"fanfou.com";
-NSString *const SA_API_COMSUMER_KEY = @"f1a7f5a8dc2faa0342bb8121de2f9b07";
-NSString *const SA_API_COMSUMER_SECRET = @"6763155636ac7029f91cc7691d0e7939";
+NSString *const SA_API_COMSUMER_KEY = @"";
+NSString *const SA_API_COMSUMER_SECRET = @"";
 NSString *const SA_API_ACCESS_TOKEN_PATH = @"/oauth/access_token";
 NSString *const SA_API_REQUEST_TOKEN_PATH = @"/oauth/request_token";
 NSString *const SA_API_AUTHORIZE_PATH = @"/oauth/authorize";
