@@ -13,14 +13,12 @@
 #import "SAUser+CoreDataProperties.h"
 #import "SANotificationManager.h"
 #import <LTHPasscodeViewController/LTHPasscodeViewController.h>
-#import <VTAcknowledgementsViewController/VTAcknowledgementsViewController.h>
 #import <SDWebImage/SDImageCache.h>
 
 @interface SASettingViewController () <LTHPasscodeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *friendRequestCountLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *passcodeSwitch;
-@property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *cacheSizeLabel;
 
 @end
@@ -57,10 +55,6 @@
     self.friendRequestCountLabel.text = [NSString stringWithFormat:@"%ld", [SANotificationManager sharedManager].friendRequestCount];
     
     [self updatePasscodeSwitch];
-
-    NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
-    NSString *versionString = [NSString stringWithFormat:@"你正在使用饭斯基 %@ (%@)", [info objectForKey:@"CFBundleShortVersionString"], [info objectForKey:@"CFBundleVersion"]];
-    self.versionLabel.text = versionString;
     
     [self updateCacheSize];
 }
@@ -111,13 +105,6 @@
             NSString *appID = @"1039622797";
             NSString *url = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", appID];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
-        } else if (indexPath.row == 2) {
-            NSString *path = [[NSBundle mainBundle] pathForResource:@"Pods-fansky-acknowledgements" ofType:@"plist"];
-            VTAcknowledgementsViewController *acknowledgementViewController = [[VTAcknowledgementsViewController alloc] initWithAcknowledgementsPlistPath:path];
-            acknowledgementViewController.title = @"致谢";
-            acknowledgementViewController.headerText = @"饭斯基使用了如下开源组件";
-            acknowledgementViewController.footerText = @"使用 CocoaPods 生成";
-            [self.navigationController showViewController:acknowledgementViewController sender:nil];
         }
     }
 }

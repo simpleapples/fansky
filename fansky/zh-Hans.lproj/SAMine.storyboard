@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--我-->
@@ -356,27 +357,6 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="iVd-B4-2Zs">
-                            <rect key="frame" x="0.0" y="389" width="600" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="饭斯基 1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RwL-yb-HU3">
-                                    <rect key="frame" x="16" y="5" width="568" height="20"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="20" id="clv-31-nYX"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
-                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstItem="RwL-yb-HU3" firstAttribute="leading" secondItem="iVd-B4-2Zs" secondAttribute="leading" constant="16" id="Od8-SV-kwd"/>
-                                <constraint firstAttribute="trailing" secondItem="RwL-yb-HU3" secondAttribute="trailing" constant="16" id="QiE-gh-snb"/>
-                                <constraint firstItem="RwL-yb-HU3" firstAttribute="centerY" secondItem="iVd-B4-2Zs" secondAttribute="centerY" id="cqB-fd-T4Z"/>
-                            </constraints>
-                        </view>
                         <sections>
                             <tableViewSection id="UYV-6M-s0S">
                                 <cells>
@@ -512,7 +492,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="致谢" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KML-4d-By0">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="关于 饭斯基" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KML-4d-By0">
                                                     <rect key="frame" x="15" y="0.0" width="550" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
@@ -521,6 +501,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="4G6-e8-XXV" kind="show" id="9tp-3s-vIS"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -546,13 +529,144 @@
                         <outlet property="cacheSizeLabel" destination="oZA-S7-f4p" id="i6z-k9-Fet"/>
                         <outlet property="friendRequestCountLabel" destination="3Z6-HF-ySw" id="Ig0-7K-Zrr"/>
                         <outlet property="passcodeSwitch" destination="wqa-n3-vry" id="RQE-MR-RTS"/>
-                        <outlet property="versionLabel" destination="RwL-yb-HU3" id="w4P-Cz-0gp"/>
                         <segue destination="AX1-RB-XMm" kind="show" identifier="SettingToFriendListSegue" id="8Zu-Ra-w2O"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tMW-A0-7mT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2732" y="9"/>
+        </scene>
+        <!--关于-->
+        <scene sceneID="jku-Oe-Bgd">
+            <objects>
+                <viewController storyboardIdentifier="SAAboutViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4G6-e8-XXV" customClass="SAAboutViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7Vz-3y-gs6"/>
+                        <viewControllerLayoutGuide type="bottom" id="jQF-kJ-Nhe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mwf-Yl-Wbm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vvC-YB-nrz">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iRN-jd-bkF">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconFansky" translatesAutoresizingMaskIntoConstraints="NO" id="T4m-Rv-vKp">
+                                                <rect key="frame" x="240" y="30" width="120" height="120"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="120" id="vig-6b-yf2"/>
+                                                    <constraint firstAttribute="width" constant="120" id="yIr-tC-hDq"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="20"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                                        <integer key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.shouldRasterize" value="YES"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </imageView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bMa-KM-QR0">
+                                                <rect key="frame" x="30" y="231" width="540" height="275"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="饭斯基是一款简洁的第三方饭否客户端 仅支持核心的饭否功能 追求简洁、高效的刷饭体验 由饭否用户@simpleapples开发  饭斯基使用了来自开源社区的组件 并且饭斯基本身也是开源的  致谢 ">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <font key="NSFont" size="14" name="PingFangSC-Light"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content=" ">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.33333333333333331" green="0.67450980392156867" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <font key="NSFont" size="14" name="PingFangSC-Light"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                    <fragment content="开源 ">
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <font key="NSFont" size="14" name="PingFangSC-Light"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="4G6-e8-XXV" id="1e4-Ki-GDa"/>
+                                                </connections>
+                                            </textView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="饭斯基" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AJl-vd-JMs">
+                                                <rect key="frame" x="30" y="180" width="540" height="21"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="AJl-vd-JMs" firstAttribute="leading" secondItem="iRN-jd-bkF" secondAttribute="leading" constant="30" id="C2L-kx-cSx"/>
+                                            <constraint firstAttribute="trailing" secondItem="AJl-vd-JMs" secondAttribute="trailing" constant="30" id="DY1-lT-fyT"/>
+                                            <constraint firstItem="bMa-KM-QR0" firstAttribute="top" secondItem="AJl-vd-JMs" secondAttribute="bottom" constant="30" id="LNl-E4-HNg"/>
+                                            <constraint firstItem="bMa-KM-QR0" firstAttribute="top" secondItem="T4m-Rv-vKp" secondAttribute="bottom" constant="30" id="NsH-IQ-VqN"/>
+                                            <constraint firstItem="AJl-vd-JMs" firstAttribute="top" secondItem="T4m-Rv-vKp" secondAttribute="bottom" constant="30" id="R41-NI-v1E"/>
+                                            <constraint firstAttribute="trailing" secondItem="bMa-KM-QR0" secondAttribute="trailing" constant="30" id="X9R-bD-hzH"/>
+                                            <constraint firstAttribute="bottom" secondItem="bMa-KM-QR0" secondAttribute="bottom" constant="30" id="XKb-cd-6OC"/>
+                                            <constraint firstItem="T4m-Rv-vKp" firstAttribute="top" secondItem="iRN-jd-bkF" secondAttribute="top" constant="30" id="YBB-V0-qae"/>
+                                            <constraint firstItem="bMa-KM-QR0" firstAttribute="centerX" secondItem="iRN-jd-bkF" secondAttribute="centerX" id="eQD-SH-bqC"/>
+                                            <constraint firstAttribute="bottom" secondItem="bMa-KM-QR0" secondAttribute="bottom" constant="30" id="j3g-le-vdt"/>
+                                            <constraint firstItem="bMa-KM-QR0" firstAttribute="leading" secondItem="iRN-jd-bkF" secondAttribute="leading" constant="30" id="l4t-KY-hdY"/>
+                                            <constraint firstItem="T4m-Rv-vKp" firstAttribute="centerX" secondItem="iRN-jd-bkF" secondAttribute="centerX" id="tQa-HX-PbE"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="NsH-IQ-VqN"/>
+                                                <exclude reference="XKb-cd-6OC"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="iRN-jd-bkF" secondAttribute="trailing" id="1iH-GQ-mIn"/>
+                                    <constraint firstItem="iRN-jd-bkF" firstAttribute="top" secondItem="vvC-YB-nrz" secondAttribute="top" id="7hO-BM-6Os"/>
+                                    <constraint firstItem="iRN-jd-bkF" firstAttribute="leading" secondItem="vvC-YB-nrz" secondAttribute="leading" id="BYp-LX-dbE"/>
+                                    <constraint firstAttribute="bottom" secondItem="iRN-jd-bkF" secondAttribute="bottom" id="eGI-wB-CBx"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="vvC-YB-nrz" secondAttribute="trailing" id="2cm-pw-t8y"/>
+                            <constraint firstItem="iRN-jd-bkF" firstAttribute="height" secondItem="mwf-Yl-Wbm" secondAttribute="height" constant="-64" id="SCz-Jm-GTN"/>
+                            <constraint firstItem="iRN-jd-bkF" firstAttribute="leading" secondItem="mwf-Yl-Wbm" secondAttribute="leadingMargin" constant="-20" id="SyB-vz-n49"/>
+                            <constraint firstItem="vvC-YB-nrz" firstAttribute="leading" secondItem="mwf-Yl-Wbm" secondAttribute="leading" id="TgX-e7-1GE"/>
+                            <constraint firstItem="vvC-YB-nrz" firstAttribute="top" secondItem="7Vz-3y-gs6" secondAttribute="bottom" id="a2e-NF-x9e"/>
+                            <constraint firstItem="jQF-kJ-Nhe" firstAttribute="top" secondItem="vvC-YB-nrz" secondAttribute="bottom" id="yFA-wp-3kg"/>
+                            <constraint firstItem="iRN-jd-bkF" firstAttribute="width" secondItem="mwf-Yl-Wbm" secondAttribute="width" id="zIr-5D-vrr"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="SyB-vz-n49"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="关于" id="RMs-pa-IcC"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="introTextView" destination="bMa-KM-QR0" id="oX1-xJ-1Yt"/>
+                        <outlet property="logoImageView" destination="T4m-Rv-vKp" id="l14-2x-TbR"/>
+                        <outlet property="versionLabel" destination="AJl-vd-JMs" id="2uj-OU-W1e"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XbD-kl-PiZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3463" y="9"/>
         </scene>
         <!--修改个人信息-->
         <scene sceneID="tfX-V3-alk">
@@ -791,6 +905,7 @@
     <resources>
         <image name="IconClose" width="44" height="44"/>
         <image name="IconCompose" width="25" height="25"/>
+        <image name="IconFansky" width="120" height="120"/>
         <image name="IconGIF" width="40" height="20"/>
         <image name="IconPerson" width="25" height="25"/>
     </resources>

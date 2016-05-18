@@ -37,6 +37,7 @@
 		5A86C0CA1C2ECEB0008BB3FD /* SAOthers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A86C0CC1C2ECEB0008BB3FD /* SAOthers.storyboard */; };
 		5A95558D1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A95558C1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m */; };
 		5A9AD6B01BAA6CD50058916A /* SAMessageDisplayUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */; };
+		5AA8784D1CEC433F0093C89B /* SAAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AA8784C1CEC433F0093C89B /* SAAboutViewController.m */; };
 		5AAB875C1BDA4B19003C9A51 /* SAUserInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAB875B1BDA4B19003C9A51 /* SAUserInfoViewController.m */; };
 		5AAC809C1BE65BBD0083C7E5 /* UIColor+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AAC809B1BE65BBD0083C7E5 /* UIColor+Utils.m */; };
 		5AB325621CC229DE0009C26D /* SATrend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AB325611CC229DE0009C26D /* SATrend.m */; };
@@ -159,6 +160,8 @@
 		5A9AD6AE1BAA6CD50058916A /* SAMessageDisplayUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessageDisplayUtils.h; sourceTree = "<group>"; };
 		5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessageDisplayUtils.m; sourceTree = "<group>"; };
 		5A9F3F531CCB29BE00F7E9AF /* fansky 7.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "fansky 7.xcdatamodel"; sourceTree = "<group>"; };
+		5AA8784B1CEC433F0093C89B /* SAAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAAboutViewController.h; sourceTree = "<group>"; };
+		5AA8784C1CEC433F0093C89B /* SAAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAAboutViewController.m; sourceTree = "<group>"; };
 		5AAB875A1BDA4B19003C9A51 /* SAUserInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAUserInfoViewController.h; sourceTree = "<group>"; };
 		5AAB875B1BDA4B19003C9A51 /* SAUserInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAUserInfoViewController.m; sourceTree = "<group>"; };
 		5AAC809A1BE65BBD0083C7E5 /* UIColor+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Utils.h"; sourceTree = "<group>"; };
@@ -426,6 +429,8 @@
 				5A0B50591C2FC9DB00FE4C73 /* SAPhotoPreviewViewController.m */,
 				5A5E79BC1CBA62640050FE55 /* SAModifyInfoViewController.h */,
 				5A5E79BD1CBA62640050FE55 /* SAModifyInfoViewController.m */,
+				5AA8784B1CEC433F0093C89B /* SAAboutViewController.h */,
+				5AA8784C1CEC433F0093C89B /* SAAboutViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -550,6 +555,7 @@
 		5AD70EE21B316A79009C5B84 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Zzy;
 				TargetAttributes = {
@@ -692,6 +698,7 @@
 				5A1811CB1BAC1C40004B6C54 /* SATimeLineCell.m in Sources */,
 				5AB785F31BE6769D0034046B /* UIImage+Utils.m in Sources */,
 				5A0F7B081BC4E50500926FD4 /* SAPhoto.m in Sources */,
+				5AA8784D1CEC433F0093C89B /* SAAboutViewController.m in Sources */,
 				5A0B505A1C2FC9DB00FE4C73 /* SAPhotoPreviewViewController.m in Sources */,
 				5AF5B1CA1BA17F7B00C7A18A /* SALoginViewController.m in Sources */,
 				5AED4B331BA6E48B00EDBF47 /* SAComposeViewController.m in Sources */,
@@ -878,6 +885,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -890,6 +898,7 @@
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zangzhiya.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -900,6 +909,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
