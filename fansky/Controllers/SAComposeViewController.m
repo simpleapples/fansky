@@ -84,18 +84,16 @@
         self.placeholderLabel.hidden = YES;
         SAUser *user = [[SADataManager sharedManager] userWithID:self.userID];
         self.contentTextView.text = [NSString stringWithFormat:@"@%@ ", user.name];
-    } else if (self.replyToStatusID) {
+    } else if (self.replyToStatus) {
         self.cameraButton.hidden = YES;
         self.atButtonLeftConstraint.constant = 10;
         self.placeholderLabel.hidden = YES;
-        SAStatus *status = [[SADataManager sharedManager] statusWithID:self.replyToStatusID];
-        self.contentTextView.text = [NSString stringWithFormat:@"@%@ ", status.user.name];
-    } else if (self.repostStatusID) {
+        self.contentTextView.text = [NSString stringWithFormat:@"@%@ ", self.replyToStatus.user.name];
+    } else if (self.repostStatus.statusID) {
         self.cameraButton.hidden = YES;
         self.atButtonLeftConstraint.constant = 10;
         self.placeholderLabel.hidden = YES;
-        SAStatus *status = [[SADataManager sharedManager] statusWithID:self.repostStatusID];
-        self.contentTextView.text = [NSString stringWithFormat:@"转@%@ %@", status.user.name, [status.text flattenHTML]];
+        self.contentTextView.text = [NSString stringWithFormat:@"转@%@ %@", self.repostStatus.user.name, [self.repostStatus.text flattenHTML]];
         self.contentTextView.selectedRange = NSMakeRange(0, 0);
     }
 }
@@ -107,7 +105,7 @@
         imageData = UIImageJPEGRepresentation(self.uploadImage, 0.5);
     }
     [SAMessageDisplayUtils showProgressWithMessage:@"正在发送"];
-    [[SAAPIService sharedSingleton] sendStatus:self.contentTextView.text replyToStatusID:self.replyToStatusID repostStatusID:self.repostStatusID image:imageData success:^(id data) {
+    [[SAAPIService sharedSingleton] sendStatus:self.contentTextView.text replyToStatusID:self.replyToStatus.statusID repostStatusID:self.repostStatus.statusID image:imageData success:^(id data) {
         [SAMessageDisplayUtils showSuccessWithMessage:@"发送完成"];
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(NSString *error) {

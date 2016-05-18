@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@class SAStatus;
+
 @interface SAComposeViewController : UIViewController
 
 @property (copy, nonatomic) NSString *userID;
-@property (copy, nonatomic) NSString *replyToStatusID;
-@property (copy, nonatomic) NSString *repostStatusID;
+@property (strong, nonatomic) SAStatus *replyToStatus;
+@property (strong, nonatomic) SAStatus *repostStatus;
 
 @end

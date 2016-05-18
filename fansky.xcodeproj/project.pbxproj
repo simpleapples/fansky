@@ -631,18 +631,18 @@
 		};
 		5A49067D1C81B22A00DF3A07 /* Fabric Script */ = {
 			isa = PBXShellScriptBuildPhase;
- 			buildActionMask = 2147483647;
- 			files = (
- 			);
- 			inputPaths = (
- 			);
- 			name = "Fabric Script";
- 			outputPaths = (
- 			);
- 			runOnlyForDeploymentPostprocessing = 0;
- 			shellPath = /bin/sh;
- 			shellScript = "\"${PODS_ROOT}/Fabric/run\" bf1bdc051ce5990b8445d157bdf2ab47e59adfb2 7fbdfbfff7688dc6abf8cf81b4fa28baec856a4706bb1ad9d53cb780c1678dff";
- 		};
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Fabric Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" bf1bdc051ce5990b8445d157bdf2ab47e59adfb2 7fbdfbfff7688dc6abf8cf81b4fa28baec856a4706bb1ad9d53cb780c1678dff";
+		};
 		A8D80BEA510F48F57A33657B /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

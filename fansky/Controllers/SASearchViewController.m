@@ -413,13 +413,13 @@ static NSString *const timeLineCellName = @"SATimeLineCell";
         SAStatus *status = [self.resultList objectAtIndex:indexPath.row];
         UITableViewRowAction *repostAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"转发" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
             SAComposeViewController *composeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
-            composeViewController.repostStatusID = status.statusID;
+            composeViewController.repostStatus = status;
             [self presentViewController:composeViewController animated:YES completion:nil];
         }];
         repostAction.backgroundColor = [UIColor fanskyBlue];
         UITableViewRowAction *replyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"回复" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
             SAComposeViewController *composeViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SAComposeViewController"];
-            composeViewController.replyToStatusID = status.statusID;
+            composeViewController.replyToStatus = status;
             [self presentViewController:composeViewController animated:YES completion:nil];
         }];
         replyAction.backgroundColor = [UIColor lightGrayColor];

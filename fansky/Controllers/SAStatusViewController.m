@@ -160,9 +160,9 @@
             SAComposeViewController *composeViewController = (SAComposeViewController *)[navigationController.viewControllers firstObject];
             UIBarButtonItem *barButton = (UIBarButtonItem *)sender;
             if (barButton.tag == 1) {
-                composeViewController.replyToStatusID = self.status.statusID;
+                composeViewController.replyToStatus = self.status;
             } else if (barButton.tag == 2) {
-                composeViewController.repostStatusID = self.status.statusID;
+                composeViewController.repostStatus = self.status;
             }
         }
     }
