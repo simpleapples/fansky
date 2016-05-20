@@ -102,6 +102,7 @@
                 });
             }];
         } else if (indexPath.row == 1) {
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
             NSString *appID = @"1039622797";
             NSString *url = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", appID];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:url]];
