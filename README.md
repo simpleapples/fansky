@@ -1,5 +1,5 @@
 #饭斯基
-饭斯基是一款简洁的第三方饭否客户端
+一款简洁的第三方饭否客户端
 
 [<img src="https://cloud.githubusercontent.com/assets/219689/5575342/963e0ee8-9013-11e4-8091-7ece67d64729.png" width="135" height="40" alt="AppStore"/>](https://itunes.apple.com/app/fan-si-ji/id1039622797)
 
