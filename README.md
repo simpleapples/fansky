@@ -1,7 +1,7 @@
 #饭斯基
 饭斯基是一款简洁的第三方饭否客户端
 
-[<img src="https://cloud.githubusercontent.com/assets/219689/5575342/963e0ee8-9013-11e4-8091-7ece67d64729.png" width="135" height="40" alt="AppStore"/>](https://itunes.apple.com/app/vpn-on/id1039622797)
+[<img src="https://cloud.githubusercontent.com/assets/219689/5575342/963e0ee8-9013-11e4-8091-7ece67d64729.png" width="135" height="40" alt="AppStore"/>](https://itunes.apple.com/app/fan-si-ji/id1039622797)
 
 ## 截屏
 <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple69/v4/5e/41/82/5e41829a-e759-bfed-3ee0-406ce052a22a/pr_source.png/500x500bb.jpg" width="281" height="500" alt="时间线"/>
