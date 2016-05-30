@@ -19,6 +19,12 @@ pod 'STPopup'
 
 end
 
+target 'ShareExtension' do
+
+pod 'TDOAuth'
+
+end
+
 target 'fanskyTests' do
 
 end
