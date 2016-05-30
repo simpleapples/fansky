@@ -7,12 +7,7 @@
 //
 
 #import "ShareViewController.h"
-#import "SAMessageDisplayUtils.h"
 #import "SAAPIService.h"
-
-#import "SADataManager.h"
-#import "SADataManager+User.h"
-#import "SAUser+CoreDataProperties.h"
 
 @interface ShareViewController ()
 
@@ -57,11 +52,7 @@
         if (extraString) {
             status = [NSString stringWithFormat:@"%@ %@", self.contentText, extraString];
         }
-        [[SAAPIService sharedSingleton] sendStatus:status replyToStatusID:nil repostStatusID:nil image:imageData success:^(id data) {
-            
-        } failure:^(NSString *error) {
-            NSLog(@"---%@", error);
-        }];
+        [[SAAPIService sharedSingleton] sendStatus:status replyToStatusID:nil repostStatusID:nil image:imageData success:nil failure:nil];
     });
     
     [self.extensionContext completeRequestReturningItems:@[] completionHandler:nil];
