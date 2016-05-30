@@ -1,5 +1,4 @@
 target 'fansky' do
-use_frameworks!
 
 pod 'TDOAuth'
 pod 'SDWebImage', '~>3.7'
