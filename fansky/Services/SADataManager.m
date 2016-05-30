@@ -48,7 +48,7 @@
 
 - (NSURL *)applicationDocumentsDirectory
 {
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    return [[NSFileManager defaultManager] containerURLForSecurityApplicationGroupIdentifier:@"group.fansky"];
 }
 
 - (NSManagedObjectModel *)managedObjectModel

@@ -19,6 +19,9 @@
 		5A0F7B0E1BC4E50500926FD4 /* SAConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B021BC4E50500926FD4 /* SAConversation.m */; };
 		5A0F7B0F1BC4E50500926FD4 /* SAMessage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B041BC4E50500926FD4 /* SAMessage+CoreDataProperties.m */; };
 		5A0F7B101BC4E50500926FD4 /* SAMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B061BC4E50500926FD4 /* SAMessage.m */; };
+		5A14BA121CFC1D47002B783D /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A14BA111CFC1D47002B783D /* ShareViewController.m */; };
+		5A14BA151CFC1D47002B783D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A14BA131CFC1D47002B783D /* MainInterface.storyboard */; };
+		5A14BA191CFC1D47002B783D /* ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5A14BA0E1CFC1D46002B783D /* ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5A159D9B1BDDD5D0007DFE6A /* SAMine.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A159D991BDDD5D0007DFE6A /* SAMine.storyboard */; };
 		5A1811AD1BABED3D004B6C54 /* SAMentionListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811AC1BABED3D004B6C54 /* SAMentionListViewController.m */; };
 		5A1811CB1BAC1C40004B6C54 /* SATimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A1811C91BAC1C40004B6C54 /* SATimeLineCell.m */; };
@@ -35,6 +38,27 @@
 		5A86A4741BFB693300229B26 /* SAFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A86A4731BFB693300229B26 /* SAFileUtils.m */; };
 		5A86A68C1BBBFD3B00C562E2 /* SANotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A86A68B1BBBFD3B00C562E2 /* SANotificationManager.m */; };
 		5A86C0CA1C2ECEB0008BB3FD /* SAOthers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A86C0CC1C2ECEB0008BB3FD /* SAOthers.storyboard */; };
+		5A9546D21CFC2AA4007F5E35 /* SAMessageDisplayUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */; };
+		5A9546D31CFC2AE9007F5E35 /* SAConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70F1F1B31716A009C5B84 /* SAConstants.m */; };
+		5A9546D71CFC2B21007F5E35 /* SAPhoto+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF41BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m */; };
+		5A9546D81CFC2B21007F5E35 /* SAPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF61BC4E50500926FD4 /* SAPhoto.m */; };
+		5A9546D91CFC2B21007F5E35 /* SAUser+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF81BC4E50500926FD4 /* SAUser+CoreDataProperties.m */; };
+		5A9546DA1CFC2B21007F5E35 /* SAUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AFA1BC4E50500926FD4 /* SAUser.m */; };
+		5A9546DB1CFC2B21007F5E35 /* SAStatus+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AFC1BC4E50500926FD4 /* SAStatus+CoreDataProperties.m */; };
+		5A9546DC1CFC2B21007F5E35 /* SAStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AFE1BC4E50500926FD4 /* SAStatus.m */; };
+		5A9546DD1CFC2B21007F5E35 /* SAConversation+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B001BC4E50500926FD4 /* SAConversation+CoreDataProperties.m */; };
+		5A9546DE1CFC2B21007F5E35 /* SAConversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B021BC4E50500926FD4 /* SAConversation.m */; };
+		5A9546DF1CFC2B21007F5E35 /* SAMessage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B041BC4E50500926FD4 /* SAMessage+CoreDataProperties.m */; };
+		5A9546E01CFC2B2F007F5E35 /* SAMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7B061BC4E50500926FD4 /* SAMessage.m */; };
+		5A9546E11CFC2F44007F5E35 /* fansky.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5AD70EF41B316A79009C5B84 /* fansky.xcdatamodeld */; };
+		5A9546E51CFC362B007F5E35 /* SAAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2365C31B39723900E1E73C /* SAAPIService.m */; };
+		5A9546E61CFC362B007F5E35 /* SADataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1CF1BA1816600C7A18A /* SADataManager.m */; };
+		5A9546E71CFC362B007F5E35 /* SADataManager+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1D21BA181CD00C7A18A /* SADataManager+User.m */; };
+		5A9546E81CFC362B007F5E35 /* SADataManager+Status.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3E6C571BA441D100C589BE /* SADataManager+Status.m */; };
+		5A9546E91CFC362B007F5E35 /* SADataManager+Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AED4B281BA672D100EDBF47 /* SADataManager+Photo.m */; };
+		5A9546EA1CFC362B007F5E35 /* SADataManager+Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AAA1BAECDAA00B7F105 /* SADataManager+Message.m */; };
+		5A9546EB1CFC362B007F5E35 /* SADataManager+Conversation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AE98AC21BAEE43300B7F105 /* SADataManager+Conversation.m */; };
+		5A9546EE1CFC3E99007F5E35 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AD70EFD1B316A79009C5B84 /* Images.xcassets */; };
 		5A95558D1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A95558C1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m */; };
 		5A9AD6B01BAA6CD50058916A /* SAMessageDisplayUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A9AD6AF1BAA6CD50058916A /* SAMessageDisplayUtils.m */; };
 		5AA8784D1CEC433F0093C89B /* SAAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AA8784C1CEC433F0093C89B /* SAAboutViewController.m */; };
@@ -82,6 +106,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5A14BA171CFC1D47002B783D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5AD70EE21B316A79009C5B84 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5A14BA0D1CFC1D46002B783D;
+			remoteInfo = ShareExtension;
+		};
 		5AD70F071B316A79009C5B84 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5AD70EE21B316A79009C5B84 /* Project object */;
@@ -90,6 +121,20 @@
 			remoteInfo = fansky;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5A14BA1D1CFC1D47002B783D /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				5A14BA191CFC1D47002B783D /* ShareExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		3E43255F77409845B17D05D0 /* Pods_fansky.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fansky.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +165,11 @@
 		5A0F7B051BC4E50500926FD4 /* SAMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMessage.h; sourceTree = "<group>"; };
 		5A0F7B061BC4E50500926FD4 /* SAMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMessage.m; sourceTree = "<group>"; };
 		5A113F051BDBAB800065E18D /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		5A14BA0E1CFC1D46002B783D /* ShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A14BA101CFC1D47002B783D /* ShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
+		5A14BA111CFC1D47002B783D /* ShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
+		5A14BA141CFC1D47002B783D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		5A14BA161CFC1D47002B783D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A159D9A1BDDD5D0007DFE6A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/SAMine.storyboard"; sourceTree = "<group>"; };
 		5A1811AB1BABED3D004B6C54 /* SAMentionListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAMentionListViewController.h; sourceTree = "<group>"; };
 		5A1811AC1BABED3D004B6C54 /* SAMentionListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAMentionListViewController.m; sourceTree = "<group>"; };
@@ -154,6 +204,8 @@
 		5A924F381CA4E82700548ADC /* fansky 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "fansky 5.xcdatamodel"; sourceTree = "<group>"; };
 		5A93F01D1BC24AA000C44023 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "zh-Hans"; path = "zh-Hans.lproj/SAMain.storyboard"; sourceTree = "<group>"; };
 		5A93F01E1BC24AA000C44023 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.xib"; sourceTree = "<group>"; };
+		5A9546EC1CFC3975007F5E35 /* ShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ShareExtension.entitlements; sourceTree = "<group>"; };
+		5A9546ED1CFC3B5F007F5E35 /* fansky.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = fansky.entitlements; sourceTree = "<group>"; };
 		5A95558B1BD36D1200326E94 /* SAFavoriteTimeLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFavoriteTimeLineViewController.h; sourceTree = "<group>"; };
 		5A95558C1BD36D1200326E94 /* SAFavoriteTimeLineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFavoriteTimeLineViewController.m; sourceTree = "<group>"; };
 		5A95558E1BD384B400326E94 /* fansky 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "fansky 3.xcdatamodel"; sourceTree = "<group>"; };
@@ -240,6 +292,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5A14BA0B1CFC1D46002B783D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5AD70EE71B316A79009C5B84 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -258,6 +317,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A14BA0F1CFC1D47002B783D /* ShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				5A9546EC1CFC3975007F5E35 /* ShareExtension.entitlements */,
+				5A14BA101CFC1D47002B783D /* ShareViewController.h */,
+				5A14BA111CFC1D47002B783D /* ShareViewController.m */,
+				5A14BA131CFC1D47002B783D /* MainInterface.storyboard */,
+				5A14BA161CFC1D47002B783D /* Info.plist */,
+			);
+			path = ShareExtension;
+			sourceTree = "<group>";
+		};
 		5A2365BA1B395FC100E1E73C /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +391,7 @@
 			children = (
 				5AD70EEC1B316A79009C5B84 /* fansky */,
 				5AD70F091B316A79009C5B84 /* fanskyTests */,
+				5A14BA0F1CFC1D47002B783D /* ShareExtension */,
 				5AD70EEB1B316A79009C5B84 /* Products */,
 				9A74077015D9A0E057728EA2 /* Pods */,
 				7A012AD8EBD5286DCA3A07D7 /* Frameworks */,
@@ -331,6 +403,7 @@
 			children = (
 				5AD70EEA1B316A79009C5B84 /* fansky.app */,
 				5AD70F061B316A79009C5B84 /* fanskyTests.xctest */,
+				5A14BA0E1CFC1D46002B783D /* ShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -338,6 +411,7 @@
 		5AD70EEC1B316A79009C5B84 /* fansky */ = {
 			isa = PBXGroup;
 			children = (
+				5A9546ED1CFC3B5F007F5E35 /* fansky.entitlements */,
 				5ADA99DD1BB267550068C0FF /* Segues */,
 				5AED4B2A1BA6C16300EDBF47 /* Utils */,
 				5A2365BE1B39619100E1E73C /* Models */,
@@ -510,6 +584,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		5A14BA0D1CFC1D46002B783D /* ShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A14BA1C1CFC1D47002B783D /* Build configuration list for PBXNativeTarget "ShareExtension" */;
+			buildPhases = (
+				5A14BA0A1CFC1D46002B783D /* Sources */,
+				5A14BA0B1CFC1D46002B783D /* Frameworks */,
+				5A14BA0C1CFC1D46002B783D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShareExtension;
+			productName = ShareExtension;
+			productReference = 5A14BA0E1CFC1D46002B783D /* ShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		5AD70EE91B316A79009C5B84 /* fansky */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5AD70F101B316A79009C5B84 /* Build configuration list for PBXNativeTarget "fansky" */;
@@ -521,10 +612,12 @@
 				E3A3D1275D399D3442815DA5 /* Copy Pods Resources */,
 				A8D80BEA510F48F57A33657B /* Embed Pods Frameworks */,
 				5A49067D1C81B22A00DF3A07 /* Fabric Script */,
+				5A14BA1D1CFC1D47002B783D /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				5A14BA181CFC1D47002B783D /* PBXTargetDependency */,
 			);
 			name = fansky;
 			productName = fansky;
@@ -559,9 +652,23 @@
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Zzy;
 				TargetAttributes = {
+					5A14BA0D1CFC1D46002B783D = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = LMJACF6T63;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					5AD70EE91B316A79009C5B84 = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = LMJACF6T63;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					5AD70F051B316A79009C5B84 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -575,6 +682,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				"zh-Hans",
+				Base,
 			);
 			mainGroup = 5AD70EE11B316A79009C5B84;
 			productRefGroup = 5AD70EEB1B316A79009C5B84 /* Products */;
@@ -583,11 +691,21 @@
 			targets = (
 				5AD70EE91B316A79009C5B84 /* fansky */,
 				5AD70F051B316A79009C5B84 /* fanskyTests */,
+				5A14BA0D1CFC1D46002B783D /* ShareExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5A14BA0C1CFC1D46002B783D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A14BA151CFC1D47002B783D /* MainInterface.storyboard in Resources */,
+				5A9546EE1CFC3E99007F5E35 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5AD70EE81B316A79009C5B84 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -676,6 +794,34 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5A14BA0A1CFC1D46002B783D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A9546D71CFC2B21007F5E35 /* SAPhoto+CoreDataProperties.m in Sources */,
+				5A9546E01CFC2B2F007F5E35 /* SAMessage.m in Sources */,
+				5A9546D31CFC2AE9007F5E35 /* SAConstants.m in Sources */,
+				5A9546EA1CFC362B007F5E35 /* SADataManager+Message.m in Sources */,
+				5A9546E91CFC362B007F5E35 /* SADataManager+Photo.m in Sources */,
+				5A9546E61CFC362B007F5E35 /* SADataManager.m in Sources */,
+				5A9546E11CFC2F44007F5E35 /* fansky.xcdatamodeld in Sources */,
+				5A9546D81CFC2B21007F5E35 /* SAPhoto.m in Sources */,
+				5A9546D21CFC2AA4007F5E35 /* SAMessageDisplayUtils.m in Sources */,
+				5A9546DA1CFC2B21007F5E35 /* SAUser.m in Sources */,
+				5A9546DB1CFC2B21007F5E35 /* SAStatus+CoreDataProperties.m in Sources */,
+				5A9546DC1CFC2B21007F5E35 /* SAStatus.m in Sources */,
+				5A9546DD1CFC2B21007F5E35 /* SAConversation+CoreDataProperties.m in Sources */,
+				5A9546E71CFC362B007F5E35 /* SADataManager+User.m in Sources */,
+				5A9546E51CFC362B007F5E35 /* SAAPIService.m in Sources */,
+				5A9546DE1CFC2B21007F5E35 /* SAConversation.m in Sources */,
+				5A9546EB1CFC362B007F5E35 /* SADataManager+Conversation.m in Sources */,
+				5A14BA121CFC1D47002B783D /* ShareViewController.m in Sources */,
+				5A9546E81CFC362B007F5E35 /* SADataManager+Status.m in Sources */,
+				5A9546DF1CFC2B21007F5E35 /* SAMessage+CoreDataProperties.m in Sources */,
+				5A9546D91CFC2B21007F5E35 /* SAUser+CoreDataProperties.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5AD70EE61B316A79009C5B84 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -755,6 +901,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5A14BA181CFC1D47002B783D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5A14BA0D1CFC1D46002B783D /* ShareExtension */;
+			targetProxy = 5A14BA171CFC1D47002B783D /* PBXContainerItemProxy */;
+		};
 		5AD70F081B316A79009C5B84 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5AD70EE91B316A79009C5B84 /* fansky */;
@@ -763,6 +914,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		5A14BA131CFC1D47002B783D /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5A14BA141CFC1D47002B783D /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		5A159D991BDDD5D0007DFE6A /* SAMine.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -798,6 +957,41 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5A14BA1A1CFC1D47002B783D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = ShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zangzhiya.fansky.shareextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		5A14BA1B1CFC1D47002B783D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ANALYZER_NONNULL = YES;
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/ShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = ShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.zangzhiya.fansky.shareextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		5AD70F0E1B316A79009C5B84 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -886,6 +1080,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = fansky/fansky.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -910,6 +1105,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = fansky/fansky.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -965,6 +1161,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5A14BA1C1CFC1D47002B783D /* Build configuration list for PBXNativeTarget "ShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A14BA1A1CFC1D47002B783D /* Debug */,
+				5A14BA1B1CFC1D47002B783D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5AD70EE51B316A79009C5B84 /* Build configuration list for PBXProject "fansky" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
