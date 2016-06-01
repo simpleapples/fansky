@@ -29,7 +29,7 @@
     SAUser *currentUser = [SADataManager sharedManager].currentUser;
     if (!currentUser) {
         UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请在先在饭斯基App中登录一个饭否账号" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请在饭斯基App中登录一个饭否账号" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:okAction];
         [self presentViewController:alertController animated:YES completion:nil];
         return;
