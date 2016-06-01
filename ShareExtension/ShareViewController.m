@@ -8,6 +8,7 @@
 
 #import "ShareViewController.h"
 #import "SAAPIService.h"
+#import "SADataManager+User.h"
 
 @interface ShareViewController ()
 
@@ -25,6 +26,14 @@
 
 - (void)didSelectPost
 {
+    SAUser *currentUser = [SADataManager sharedManager].currentUser;
+    if (!currentUser) {
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:nil];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"请在先在饭斯基App中登录一个饭否账号" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         __block NSData *imageData;
         __block NSString *extraString;
