@@ -32,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>116</string>
+	<string>117</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -56,6 +56,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>饭斯基想使用您的摄像头</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>饭斯基想读取您的相册</string>
 	<key>UIApplicationShortcutItems</key>
 	<array>
 		<dict>
@@ -91,10 +95,6 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>饭斯基想读取您的相册</string>
-	<key>NSCameraUsageDescription</key>
-	<string>饭斯基想使用您的摄像头</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 </dict>
