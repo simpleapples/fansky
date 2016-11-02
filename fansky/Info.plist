@@ -91,6 +91,10 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>饭斯基想读取您的相册</string>
+	<key>NSCameraUsageDescription</key>
+	<string>饭斯基想使用您的摄像头</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 </dict>
