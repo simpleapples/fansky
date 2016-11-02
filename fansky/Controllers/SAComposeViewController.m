@@ -21,7 +21,7 @@
 #import <STPopup/STPopup.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@interface SAComposeViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, SAFriendListViewControllerDelegate>
+@interface SAComposeViewController () <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SAFriendListViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImageView;
 @property (weak, nonatomic) IBOutlet UILabel *placeholderLabel;
@@ -93,7 +93,7 @@
         self.cameraButton.hidden = YES;
         self.atButtonLeftConstraint.constant = 10;
         self.placeholderLabel.hidden = YES;
-        self.contentTextView.text = [NSString stringWithFormat:@"转@%@ %@", self.repostStatus.user.name, [self.repostStatus.text flattenHTML]];
+        self.contentTextView.text = [NSString stringWithFormat:@" 转@%@ %@", self.repostStatus.user.name, [self.repostStatus.text flattenHTML]];
         self.contentTextView.selectedRange = NSMakeRange(0, 0);
     }
 }

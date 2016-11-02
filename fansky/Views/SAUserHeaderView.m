@@ -37,6 +37,7 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     self.followButton.layer.borderColor = [UIColor fanskyBlue].CGColor;
     self.modifyInfoButton.layer.borderColor = [UIColor fanskyBlue].CGColor;
 }
