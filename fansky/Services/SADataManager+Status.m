@@ -187,6 +187,10 @@ static NSString *const ENTITY_NAME = @"SAStatus";
 - (SAStatus *)insertStatusWithObject:(id)object localUser:(SAUser *)localUser type:(SAStatusTypes)type
 {
     NSString *statusID = [object objectForKey:@"id"];
+    // 饭否API有可能返回statusID = 0的记录
+    if ([statusID isEqual:@(0)]) {
+        return nil;
+    }
     NSString *source = [object objectForKey:@"source"];
     NSString *text = [object objectForKey:@"text"];
     NSNumber *isFavorited = [object objectForKey:@"favorited"];
@@ -195,7 +199,10 @@ static NSString *const ENTITY_NAME = @"SAStatus";
     NSString *replyStatusID = [object objectForKey:@"in_reply_to_status_id"];
     NSDate *createdAt = [createdAtString dateWithDefaultFormat];
     
-    SAPhoto *photo = [[SADataManager sharedManager] insertOrUpdatePhotoWithObject:[object objectForKey:@"photo"] statusID:statusID];
+    SAPhoto *photo = nil;
+    if ([object objectForKey:@"photo"]) {
+        photo = [[SADataManager sharedManager] insertOrUpdatePhotoWithObject:[object objectForKey:@"photo"] statusID:statusID];
+    }
     SAUser *user = [[SADataManager sharedManager] insertOrUpdateUserWithObject:[object objectForKey:@"user"] local:NO active:NO token:nil secret:nil];
     
     __block SAStatus *resultStatus;
