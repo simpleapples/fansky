@@ -140,6 +140,26 @@ static NSString *const ENTITY_NAME = @"SAUser";
     return user;
 }
 
+- (BOOL)isLocalUserExist
+{
+    NSSortDescriptor *userNameSortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:NO];
+    NSArray *sortArray = [[NSArray alloc] initWithObjects: userNameSortDescriptor, nil];
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"isLocal = %@", @(YES)];
+    fetchRequest.sortDescriptors = sortArray;
+    
+    __block NSError *error;
+    __block BOOL isExist = NO;
+    [self.managedObjectContext performBlockAndWait:^{
+        NSArray *fetchResult = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        if (!error && fetchResult && fetchResult.count) {
+            isExist = YES;
+        }
+    }];
+    return isExist;
+}
+
 - (void)setCurrentUserWithUserID:(NSString *)userID
 {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:ENTITY_NAME];

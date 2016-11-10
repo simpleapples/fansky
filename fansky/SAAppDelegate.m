@@ -94,7 +94,9 @@
 
 - (void)initPasscodeViewController
 {
-    [LTHPasscodeViewController useKeychain:NO];
+    if (![[SADataManager sharedManager] isLocalUserExist]) {
+        [LTHPasscodeViewController deletePasscodeAndClose];
+    }
     [LTHPasscodeViewController sharedUser].allowUnlockWithTouchID = NO;
     [LTHPasscodeViewController sharedUser].hidesCancelButton = NO;
     [LTHPasscodeViewController sharedUser].turnOffPasscodeString = @"关闭密码";

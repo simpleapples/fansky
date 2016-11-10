@@ -17,6 +17,7 @@
 - (SAUser *)userWithID:(NSString *)userID;
 - (SAUser *)userWithObject:(id)object;
 
+- (BOOL)isLocalUserExist;
 - (void)setCurrentUserWithUserID:(NSString *)userID;
 - (void)deleteUserWithUserID:(NSString *)userID;
 
