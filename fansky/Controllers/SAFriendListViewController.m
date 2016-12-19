@@ -24,6 +24,7 @@
 
 @implementation SAFriendListViewController
 
+static NSString *const CELL_NAME = @"SAFriendCell";
 static NSUInteger FRIEND_LIST_COUNT = 30;
 
 - (void)viewDidLoad
@@ -140,9 +141,8 @@ static NSUInteger FRIEND_LIST_COUNT = 30;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *const cellName = @"SAFriendCell";
     SAFriend *friend = [self.friendList objectAtIndex:indexPath.row];
-    SAFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
+    SAFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_NAME forIndexPath:indexPath];
     if (cell) {
         SAFriendCellType cellType;
         switch (self.type) {

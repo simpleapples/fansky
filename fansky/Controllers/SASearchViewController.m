@@ -43,8 +43,8 @@
 @implementation SASearchViewController
 
 static NSUInteger TIME_LINE_COUNT = 40;
-static NSString *const trendCellName = @"SATrendCell";
-static NSString *const timeLineCellName = @"SATimeLineCell";
+static NSString *const TREND_CELL_NAME = @"SATrendCell";
+static NSString *const TIME_LINE_CELL_NAME = @"SATimeLineCell";
 
 - (void)viewDidLoad
 {
@@ -146,9 +146,9 @@ static NSString *const timeLineCellName = @"SATimeLineCell";
 - (void)updateInterface
 {
     if (self.type == SASearchViewControllerTypeTrend) {
-        [self.tableView registerNib:[UINib nibWithNibName:trendCellName bundle:nil] forCellReuseIdentifier:trendCellName];
+        [self.tableView registerNib:[UINib nibWithNibName:TREND_CELL_NAME bundle:nil] forCellReuseIdentifier:TREND_CELL_NAME];
     } else {
-        [self.tableView registerNib:[UINib nibWithNibName:timeLineCellName bundle:nil] forCellReuseIdentifier:timeLineCellName];
+        [self.tableView registerNib:[UINib nibWithNibName:TIME_LINE_CELL_NAME bundle:nil] forCellReuseIdentifier:TIME_LINE_CELL_NAME];
     }
     self.tableView.tableFooterView = [UIView new];
     
@@ -357,7 +357,7 @@ static NSString *const timeLineCellName = @"SATimeLineCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.type == SASearchViewControllerTypeTrend) {
-        SATrendCell *trendCell = [self.tableView dequeueReusableCellWithIdentifier:trendCellName forIndexPath:indexPath];
+        SATrendCell *trendCell = [self.tableView dequeueReusableCellWithIdentifier:TREND_CELL_NAME forIndexPath:indexPath];
         if (indexPath.row == 0) {
             [trendCell configWithTrend:nil type:SATrendCellTypeRandom];
         } else {
@@ -367,7 +367,7 @@ static NSString *const timeLineCellName = @"SATimeLineCell";
         return trendCell;
     } else if (self.type == SASearchViewControllerTypeSearch || self.type == SASearchViewControllerTypeRandom) {
         SAStatus *status = [self.resultList objectAtIndex:indexPath.row];
-        SATimeLineCell *statusCell = [tableView dequeueReusableCellWithIdentifier:timeLineCellName forIndexPath:indexPath];
+        SATimeLineCell *statusCell = [tableView dequeueReusableCellWithIdentifier:TIME_LINE_CELL_NAME forIndexPath:indexPath];
         [statusCell configWithStatus:status];
         statusCell.delegate = self;
         return statusCell;

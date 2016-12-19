@@ -37,6 +37,7 @@
 @implementation SAConversationViewController
 
 static NSString *const ENTITY_NAME = @"SAConversation";
+static NSString *const CELL_NAME = @"SAConversationCell";
 static NSUInteger CONVERSATION_LIST_COUNT = 60;
 
 - (void)viewDidLoad
@@ -177,9 +178,8 @@ static NSUInteger CONVERSATION_LIST_COUNT = 60;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *const cellName = @"SAConversationCell";
     SAConversation *conversation = [self.conversationList objectAtIndex:indexPath.row];
-    SAConversationCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
+    SAConversationCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_NAME forIndexPath:indexPath];
     cell.delegate = self;
     [cell configWithMessage:conversation];
     return cell;

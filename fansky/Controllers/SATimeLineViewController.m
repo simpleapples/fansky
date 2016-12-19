@@ -35,7 +35,7 @@
 
 static NSString *const ENTITY_NAME = @"SAStatus";
 static NSUInteger TIME_LINE_COUNT = 40;
-static NSString *const cellName = @"SATimeLineCell";
+static NSString *const CELL_NAME = @"SATimeLineCell";
 
 - (void)viewDidLoad
 {
@@ -151,7 +151,7 @@ static NSString *const cellName = @"SATimeLineCell";
         self.refreshView = [[LGRefreshView alloc] initWithScrollView:self.tableView delegate:self];
         self.refreshView.tintColor = [UIColor fanskyBlue];
     }
-    [self.tableView registerNib:[UINib nibWithNibName:cellName bundle:nil] forCellReuseIdentifier:cellName];
+    [self.tableView registerNib:[UINib nibWithNibName:CELL_NAME bundle:nil] forCellReuseIdentifier:CELL_NAME];
     self.clearsSelectionOnViewWillAppear = YES;
     self.tableView.tableFooterView = [UIView new];
     
@@ -338,7 +338,7 @@ static NSString *const cellName = @"SATimeLineCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     SAStatus *status = [self.timeLineList objectAtIndex:indexPath.row];
-    SATimeLineCell *cell = [tableView dequeueReusableCellWithIdentifier:cellName forIndexPath:indexPath];
+    SATimeLineCell *cell = [tableView dequeueReusableCellWithIdentifier:CELL_NAME forIndexPath:indexPath];
     [cell configWithStatus:status];
     cell.delegate = self;
     return cell;
