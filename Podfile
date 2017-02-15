@@ -1,3 +1,6 @@
+platform :ios, '10.0'
+use_frameworks!
+
 target 'fansky' do
 
 pod 'TDOAuth'
@@ -9,7 +12,7 @@ pod 'WSProgressHUD'
 pod 'MWPhotoBrowser'
 pod 'VTAcknowledgementsViewController'
 pod 'DTCoreText'
-pod 'VVBlurPresentation'
+pod 'MIBlurPopup'
 pod 'LTHPasscodeViewController'
 pod 'LGRefreshView'
 pod 'Fabric'
