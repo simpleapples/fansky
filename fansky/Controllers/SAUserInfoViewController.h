@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <VVBlurPresentation/VVBlurViewController.h>
 
-@interface SAUserInfoViewController : VVBlurViewController
+@interface SAUserInfoViewController : UIViewController
 
 @property (copy, nonatomic) NSString *userID;
 
