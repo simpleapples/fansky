@@ -12,8 +12,6 @@
 
 @interface SAUserInfoViewController ()
 
-@property (weak, nonatomic) IBOutlet UILabel *infoLabel;
-
 @property (strong, nonatomic) SAUser *user;
 
 @end

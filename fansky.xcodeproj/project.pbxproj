@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2FB33E2547000959B7487532 /* Pods_fanskyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2942B3EA28EAD603362B85 /* Pods_fanskyTests.framework */; };
+		4B230D8C79E2D692804DD47B /* Pods_ShareExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF65DF737A3F6CE213D9E6A /* Pods_ShareExtension.framework */; };
 		5A0B505A1C2FC9DB00FE4C73 /* SAPhotoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B50591C2FC9DB00FE4C73 /* SAPhotoPreviewViewController.m */; };
 		5A0C753A1BF44D3A005D9AA2 /* SACacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0C75391BF44D3A005D9AA2 /* SACacheManager.m */; };
 		5A0F7B071BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0F7AF41BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m */; };
@@ -31,6 +33,8 @@
 		5A5C21281BB51B1100C1277F /* SAFriendListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5C21271BB51B1100C1277F /* SAFriendListViewController.m */; };
 		5A5C212B1BB52BA400C1277F /* SAFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5C212A1BB52BA400C1277F /* SAFriendCell.m */; };
 		5A5E79BE1CBA62640050FE55 /* SAModifyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A5E79BD1CBA62640050FE55 /* SAModifyInfoViewController.m */; };
+		5A6F74A11E55721200180736 /* SADismissAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F749E1E55721200180736 /* SADismissAnimator.m */; };
+		5A6F74A21E55721200180736 /* SAPresentationAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6F74A01E55721200180736 /* SAPresentationAnimator.m */; };
 		5A7848B81BDF802400E027C1 /* SASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7848B71BDF802400E027C1 /* SASearchViewController.m */; };
 		5A7E1F201BA9CD67000E7E62 /* SAPhotoTimeLineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7E1F1F1BA9CD67000E7E62 /* SAPhotoTimeLineViewController.m */; };
 		5A7E1F231BA9CDA4000E7E62 /* SAPhotoTimeLineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A7E1F221BA9CDA4000E7E62 /* SAPhotoTimeLineCell.m */; };
@@ -101,9 +105,7 @@
 		5AF5B1D01BA1816600C7A18A /* SADataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1CF1BA1816600C7A18A /* SADataManager.m */; };
 		5AF5B1D31BA181CD00C7A18A /* SADataManager+User.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF5B1D21BA181CD00C7A18A /* SADataManager+User.m */; };
 		5AFF6FE21BC42BF400769995 /* SAFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AFF6FE11BC42BF400769995 /* SAFriend.m */; };
-		6BEA4476DB3523E6B932ED5A /* libPods-ShareExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4942CBC5A9652A42625B9F60 /* libPods-ShareExtension.a */; };
-		8482B2F57DC743806B996311 /* libPods-fansky.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2E9D96C971CDF6DDB3A8947 /* libPods-fansky.a */; };
-		B76F4DDA1965368AE553F16E /* libPods-fanskyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BCB17A366B3C5F532BBB37B /* libPods-fanskyTests.a */; };
+		A7FA16D4B5BA7306330055B2 /* Pods_fansky.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60F0DFB0C983234FF7221578 /* Pods_fansky.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -138,9 +140,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1BCB17A366B3C5F532BBB37B /* libPods-fanskyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fanskyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		370B8A5DA63556674AA42676 /* Pods-ShareExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShareExtension/Pods-ShareExtension.debug.xcconfig"; sourceTree = "<group>"; };
-		4942CBC5A9652A42625B9F60 /* libPods-ShareExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ShareExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA0B1D52B50FFEAB4E792B5 /* Pods-fansky.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fansky.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fansky/Pods-fansky.debug.xcconfig"; sourceTree = "<group>"; };
 		5A01639A1BA96A470065F1F1 /* TTTAttributedLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TTTAttributedLabel.framework; path = "Pods/../build/Debug-iphoneos/TTTAttributedLabel.framework"; sourceTree = "<group>"; };
 		5A0B50581C2FC9DB00FE4C73 /* SAPhotoPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPhotoPreviewViewController.h; sourceTree = "<group>"; };
@@ -191,6 +191,10 @@
 		5A5E79BB1CB796960050FE55 /* fansky 6.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "fansky 6.xcdatamodel"; sourceTree = "<group>"; };
 		5A5E79BC1CBA62640050FE55 /* SAModifyInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAModifyInfoViewController.h; sourceTree = "<group>"; };
 		5A5E79BD1CBA62640050FE55 /* SAModifyInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAModifyInfoViewController.m; sourceTree = "<group>"; };
+		5A6F749D1E55721200180736 /* SADismissAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SADismissAnimator.h; sourceTree = "<group>"; };
+		5A6F749E1E55721200180736 /* SADismissAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SADismissAnimator.m; sourceTree = "<group>"; };
+		5A6F749F1E55721200180736 /* SAPresentationAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPresentationAnimator.h; sourceTree = "<group>"; };
+		5A6F74A01E55721200180736 /* SAPresentationAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAPresentationAnimator.m; sourceTree = "<group>"; };
 		5A7848B61BDF802400E027C1 /* SASearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SASearchViewController.h; sourceTree = "<group>"; };
 		5A7848B71BDF802400E027C1 /* SASearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SASearchViewController.m; sourceTree = "<group>"; };
 		5A7E1F1E1BA9CD67000E7E62 /* SAPhotoTimeLineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAPhotoTimeLineViewController.h; sourceTree = "<group>"; };
@@ -291,11 +295,13 @@
 		5AF5B1D21BA181CD00C7A18A /* SADataManager+User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SADataManager+User.m"; sourceTree = "<group>"; };
 		5AFF6FE01BC42BF400769995 /* SAFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SAFriend.h; sourceTree = "<group>"; };
 		5AFF6FE11BC42BF400769995 /* SAFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SAFriend.m; sourceTree = "<group>"; };
+		5C2942B3EA28EAD603362B85 /* Pods_fanskyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fanskyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		60F0DFB0C983234FF7221578 /* Pods_fansky.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_fansky.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DF65DF737A3F6CE213D9E6A /* Pods_ShareExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShareExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		83D23C6BE1DB4FCAB91A2205 /* Pods-fanskyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fanskyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fanskyTests/Pods-fanskyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		83D2C9A6231322EF3E1553D2 /* Pods-fanskyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fanskyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-fanskyTests/Pods-fanskyTests.release.xcconfig"; sourceTree = "<group>"; };
 		A5901B3345C1524FB14FFFE6 /* Pods-ShareExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShareExtension/Pods-ShareExtension.release.xcconfig"; sourceTree = "<group>"; };
 		BD18F73F4E7C0D5101B87468 /* Pods-fansky.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fansky.release.xcconfig"; path = "Pods/Target Support Files/Pods-fansky/Pods-fansky.release.xcconfig"; sourceTree = "<group>"; };
-		C2E9D96C971CDF6DDB3A8947 /* libPods-fansky.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-fansky.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -303,7 +309,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6BEA4476DB3523E6B932ED5A /* libPods-ShareExtension.a in Frameworks */,
+				4B230D8C79E2D692804DD47B /* Pods_ShareExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,7 +317,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8482B2F57DC743806B996311 /* libPods-fansky.a in Frameworks */,
+				A7FA16D4B5BA7306330055B2 /* Pods_fansky.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,7 +325,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B76F4DDA1965368AE553F16E /* libPods-fanskyTests.a in Frameworks */,
+				2FB33E2547000959B7487532 /* Pods_fanskyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,6 +552,10 @@
 		5ADA99DD1BB267550068C0FF /* Segues */ = {
 			isa = PBXGroup;
 			children = (
+				5A6F749D1E55721200180736 /* SADismissAnimator.h */,
+				5A6F749E1E55721200180736 /* SADismissAnimator.m */,
+				5A6F749F1E55721200180736 /* SAPresentationAnimator.h */,
+				5A6F74A01E55721200180736 /* SAPresentationAnimator.m */,
 				5ADA99DE1BB2676B0068C0FF /* SAPushWithoutAnimation.h */,
 				5ADA99DF1BB2676B0068C0FF /* SAPushWithoutAnimation.m */,
 			);
@@ -576,9 +586,9 @@
 			children = (
 				5A113F051BDBAB800065E18D /* LocalAuthentication.framework */,
 				5A01639A1BA96A470065F1F1 /* TTTAttributedLabel.framework */,
-				4942CBC5A9652A42625B9F60 /* libPods-ShareExtension.a */,
-				C2E9D96C971CDF6DDB3A8947 /* libPods-fansky.a */,
-				1BCB17A366B3C5F532BBB37B /* libPods-fanskyTests.a */,
+				7DF65DF737A3F6CE213D9E6A /* Pods_ShareExtension.framework */,
+				60F0DFB0C983234FF7221578 /* Pods_fansky.framework */,
+				5C2942B3EA28EAD603362B85 /* Pods_fanskyTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -969,6 +979,7 @@
 				5AAB875C1BDA4B19003C9A51 /* SAUserInfoViewController.m in Sources */,
 				5AE98AB41BAED16300B7F105 /* SAConversationViewController.m in Sources */,
 				5AD70F201B31716A009C5B84 /* SAConstants.m in Sources */,
+				5A6F74A11E55721200180736 /* SADismissAnimator.m in Sources */,
 				5AF5B1D31BA181CD00C7A18A /* SADataManager+User.m in Sources */,
 				5AE98ABA1BAEDF0000B7F105 /* SAMessageViewController.m in Sources */,
 				5AED4B6E1BA8429300EDBF47 /* SAUserViewController.m in Sources */,
@@ -994,6 +1005,7 @@
 				5AD70EF61B316A79009C5B84 /* fansky.xcdatamodeld in Sources */,
 				5A5C212B1BB52BA400C1277F /* SAFriendCell.m in Sources */,
 				5A86A4741BFB693300229B26 /* SAFileUtils.m in Sources */,
+				5A6F74A21E55721200180736 /* SAPresentationAnimator.m in Sources */,
 				5AB3256C1CC22EEF0009C26D /* SATrendCell.m in Sources */,
 				5AE98AAB1BAECDAA00B7F105 /* SADataManager+Message.m in Sources */,
 				5AFF6FE21BC42BF400769995 /* SAFriend.m in Sources */,

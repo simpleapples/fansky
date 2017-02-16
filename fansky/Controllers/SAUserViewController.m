@@ -17,10 +17,12 @@
 #import "SAFavoriteTimeLineViewController.h"
 #import "SAComposeViewController.h"
 #import "SAUserInfoViewController.h"
+#import "SAPresentationAnimator.h"
+#import "SADismissAnimator.h"
 #import "UIColor+Utils.h"
 #import <ARSegmentPager/ARSegmentView.h>
 
-@interface SAUserViewController () <SAUserHeaderViewDelegate>
+@interface SAUserViewController () <SAUserHeaderViewDelegate, UIViewControllerTransitioningDelegate>
 
 @end
 
@@ -109,6 +111,10 @@
     } else if ([segue.destinationViewController isKindOfClass:[SAUserInfoViewController class]]) {
         SAUserInfoViewController *userInfoViewController = (SAUserInfoViewController *)segue.destinationViewController;
         userInfoViewController.userID = userID;
+        userInfoViewController.providesPresentationContextTransitionStyle = YES;
+        userInfoViewController.definesPresentationContext = YES;
+        userInfoViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        userInfoViewController.transitioningDelegate = self;
     } else if ([segue.destinationViewController isMemberOfClass:[UINavigationController class]]) {
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         if ([navigationController.viewControllers.firstObject isKindOfClass:[SAComposeViewController class]]) {
@@ -143,6 +149,22 @@
 - (void)userHeaderView:(SAUserHeaderView *)userHeaderView modifyInfoButtonTouchUp:(id)sender
 {
     [self performSegueWithIdentifier:@"UserToModifyInfoSegue" sender:nil];
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
+
+#pragma mark - Transition
+
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    
+    return [SAPresentationAnimator new];
+}
+
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    return [SADismissAnimator new];
 }
 
 @end

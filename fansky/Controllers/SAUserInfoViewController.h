@@ -11,5 +11,8 @@
 @interface SAUserInfoViewController : UIViewController
 
 @property (copy, nonatomic) NSString *userID;
+@property (weak, nonatomic) IBOutlet UIVisualEffectView *blurView;
+@property (weak, nonatomic) IBOutlet UILabel *infoLabel;
+@property (weak, nonatomic) IBOutlet UIButton *closeButton;
 
 @end
