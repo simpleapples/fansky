@@ -73,4 +73,39 @@
     return newImage;
 }
 
++ (UIImage *)cropSquareImage:(UIImage *)image {
+    
+    CGImageRef sourceImageRef = [image CGImage];//将UIImage转换成CGImageRef
+    
+    CGFloat _imageWidth = image.size.width * image.scale;
+    CGFloat _imageHeight = image.size.height * image.scale;
+    CGFloat _width = _imageWidth > _imageHeight ? _imageHeight : _imageWidth;
+    CGFloat _offsetX = (_imageWidth - _width) / 2;
+    CGFloat _offsetY = (_imageHeight - _width) / 2;
+    
+    CGRect rect = CGRectMake(_offsetX, _offsetY, _width, _width);
+    CGImageRef newImageRef = CGImageCreateWithImageInRect(sourceImageRef, rect);//按照给定的矩形区域进行剪裁
+    UIImage *newImage = [UIImage imageWithCGImage:newImageRef];
+    
+    return newImage;
+}
+
+- (UIImage *)circleImage:(CGFloat)width {
+    UIImage * squareImage= [UIImage cropSquareImage:self];
+    UIGraphicsBeginImageContext(squareImage.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(context, 2);
+    CGContextSetStrokeColorWithColor(context, [UIColor whiteColor].CGColor);
+    CGRect rect = CGRectMake(0, 0, width, width);
+    CGContextAddEllipseInRect(context, rect);
+    CGContextClip(context);
+    
+    [squareImage drawInRect:rect];
+    CGContextAddEllipseInRect(context, rect);
+    CGContextStrokePath(context);
+    UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newimg;
+}
+
 @end

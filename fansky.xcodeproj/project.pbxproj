@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2915885E21CBEBF9006D53DA /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 2915885321CBEBF9006D53DA /* LICENSE */; };
+		2915885F21CBEBF9006D53DA /* ARSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2915885621CBEBF9006D53DA /* ARSegmentView.m */; };
+		2915886021CBEBF9006D53DA /* ARSegmentPageHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 2915885821CBEBF9006D53DA /* ARSegmentPageHeader.m */; };
+		2915886121CBEBF9006D53DA /* ARSegmentPageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2915885A21CBEBF9006D53DA /* ARSegmentPageController.m */; };
+		2915886221CBEBF9006D53DA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2915885D21CBEBF9006D53DA /* README.md */; };
 		2FB33E2547000959B7487532 /* Pods_fanskyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C2942B3EA28EAD603362B85 /* Pods_fanskyTests.framework */; };
 		4B230D8C79E2D692804DD47B /* Pods_ShareExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DF65DF737A3F6CE213D9E6A /* Pods_ShareExtension.framework */; };
 		5A0B505A1C2FC9DB00FE4C73 /* SAPhotoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0B50591C2FC9DB00FE4C73 /* SAPhotoPreviewViewController.m */; };
@@ -140,6 +145,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2915885321CBEBF9006D53DA /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		2915885521CBEBF9006D53DA /* ARSegmentPageControllerHeaderProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSegmentPageControllerHeaderProtocol.h; sourceTree = "<group>"; };
+		2915885621CBEBF9006D53DA /* ARSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARSegmentView.m; sourceTree = "<group>"; };
+		2915885721CBEBF9006D53DA /* ARSegmentPageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSegmentPageController.h; sourceTree = "<group>"; };
+		2915885821CBEBF9006D53DA /* ARSegmentPageHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARSegmentPageHeader.m; sourceTree = "<group>"; };
+		2915885921CBEBF9006D53DA /* ARSegmentControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSegmentControllerDelegate.h; sourceTree = "<group>"; };
+		2915885A21CBEBF9006D53DA /* ARSegmentPageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARSegmentPageController.m; sourceTree = "<group>"; };
+		2915885B21CBEBF9006D53DA /* ARSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSegmentView.h; sourceTree = "<group>"; };
+		2915885C21CBEBF9006D53DA /* ARSegmentPageHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSegmentPageHeader.h; sourceTree = "<group>"; };
+		2915885D21CBEBF9006D53DA /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		370B8A5DA63556674AA42676 /* Pods-ShareExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShareExtension/Pods-ShareExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		4CA0B1D52B50FFEAB4E792B5 /* Pods-fansky.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-fansky.debug.xcconfig"; path = "Pods/Target Support Files/Pods-fansky/Pods-fansky.debug.xcconfig"; sourceTree = "<group>"; };
 		5A01639A1BA96A470065F1F1 /* TTTAttributedLabel.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TTTAttributedLabel.framework; path = "Pods/../build/Debug-iphoneos/TTTAttributedLabel.framework"; sourceTree = "<group>"; };
@@ -332,6 +347,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2915885221CBEBF9006D53DA /* ARSegmentPager */ = {
+			isa = PBXGroup;
+			children = (
+				2915885321CBEBF9006D53DA /* LICENSE */,
+				2915885421CBEBF9006D53DA /* ARSegmentPageController */,
+				2915885D21CBEBF9006D53DA /* README.md */,
+			);
+			path = ARSegmentPager;
+			sourceTree = "<group>";
+		};
+		2915885421CBEBF9006D53DA /* ARSegmentPageController */ = {
+			isa = PBXGroup;
+			children = (
+				2915885921CBEBF9006D53DA /* ARSegmentControllerDelegate.h */,
+				2915885521CBEBF9006D53DA /* ARSegmentPageControllerHeaderProtocol.h */,
+				2915885B21CBEBF9006D53DA /* ARSegmentView.h */,
+				2915885621CBEBF9006D53DA /* ARSegmentView.m */,
+				2915885721CBEBF9006D53DA /* ARSegmentPageController.h */,
+				2915885A21CBEBF9006D53DA /* ARSegmentPageController.m */,
+				2915885C21CBEBF9006D53DA /* ARSegmentPageHeader.h */,
+				2915885821CBEBF9006D53DA /* ARSegmentPageHeader.m */,
+			);
+			path = ARSegmentPageController;
+			sourceTree = "<group>";
+		};
 		5A14BA0F1CFC1D47002B783D /* ShareExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -433,6 +473,7 @@
 				5A2365BA1B395FC100E1E73C /* Views */,
 				5AD70F1A1B316F4D009C5B84 /* Services */,
 				5AD70F161B316AFD009C5B84 /* Controllers */,
+				2915885221CBEBF9006D53DA /* ARSegmentPager */,
 				5AD70EF11B316A79009C5B84 /* SAAppDelegate.h */,
 				5AD70EF21B316A79009C5B84 /* SAAppDelegate.m */,
 				5AD70EFA1B316A79009C5B84 /* SAMain.storyboard */,
@@ -617,7 +658,6 @@
 				5A14BA0A1CFC1D46002B783D /* Sources */,
 				5A14BA0B1CFC1D46002B783D /* Frameworks */,
 				5A14BA0C1CFC1D46002B783D /* Resources */,
-				DA399C0BB9CAADB9A09882F0 /* [CP] Copy Pods Resources */,
 				5A9546F01CFC6AF3007F5E35 /* ShellScript */,
 			);
 			buildRules = (
@@ -637,7 +677,6 @@
 				5AD70EE61B316A79009C5B84 /* Sources */,
 				5AD70EE71B316A79009C5B84 /* Frameworks */,
 				5AD70EE81B316A79009C5B84 /* Resources */,
-				E3A3D1275D399D3442815DA5 /* [CP] Copy Pods Resources */,
 				A8D80BEA510F48F57A33657B /* [CP] Embed Pods Frameworks */,
 				5A49067D1C81B22A00DF3A07 /* Fabric Script */,
 				5A14BA1D1CFC1D47002B783D /* Embed App Extensions */,
@@ -660,8 +699,6 @@
 				5AD70F021B316A79009C5B84 /* Sources */,
 				5AD70F031B316A79009C5B84 /* Frameworks */,
 				5AD70F041B316A79009C5B84 /* Resources */,
-				85BE0230CE08340135329410 /* [CP] Embed Pods Frameworks */,
-				6FB45839CC91C9EE88B37569 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -680,7 +717,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = Zzy;
 				TargetAttributes = {
 					5A14BA0D1CFC1D46002B783D = {
@@ -747,10 +784,12 @@
 				5A1811CC1BAC1C40004B6C54 /* SATimeLineCell.xib in Resources */,
 				5AD70EFC1B316A79009C5B84 /* SAMain.storyboard in Resources */,
 				5A86C0CA1C2ECEB0008BB3FD /* SAOthers.storyboard in Resources */,
+				2915885E21CBEBF9006D53DA /* LICENSE in Resources */,
 				5AD70F011B316A79009C5B84 /* LaunchScreen.xib in Resources */,
 				5AB3256D1CC22EEF0009C26D /* SATrendCell.xib in Resources */,
 				5AD70EFE1B316A79009C5B84 /* Images.xcassets in Resources */,
 				5A159D9B1BDDD5D0007DFE6A /* SAMine.storyboard in Resources */,
+				2915886221CBEBF9006D53DA /* README.md in Resources */,
 				5A849E921BC3EC20000FDCB9 /* Pods-fansky-acknowledgements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -771,13 +810,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-fansky-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5A49067D1C81B22A00DF3A07 /* Fabric Script */ = {
@@ -813,43 +855,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ShareExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		6FB45839CC91C9EE88B37569 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fanskyTests/Pods-fanskyTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		85BE0230CE08340135329410 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fanskyTests/Pods-fanskyTests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		96F324F2EBDF3AF188711FF4 /* [CP] Check Pods Manifest.lock */ = {
@@ -858,13 +873,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-fanskyTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A8D80BEA510F48F57A33657B /* [CP] Embed Pods Frameworks */ = {
@@ -873,43 +891,48 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-fansky/Pods-fansky-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DACircularProgress/DACircularProgress.framework",
+				"${BUILT_PRODUCTS_DIR}/DTCoreText/DTCoreText.framework",
+				"${BUILT_PRODUCTS_DIR}/DTFoundation/DTFoundation.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/JTSImageViewController/JTSImageViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/LGRefreshView/LGRefreshView.framework",
+				"${BUILT_PRODUCTS_DIR}/LTHPasscodeViewController/LTHPasscodeViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MWPhotoBrowser/MWPhotoBrowser.framework",
+				"${BUILT_PRODUCTS_DIR}/OMGHTTPURLRQ/OMGHTTPURLRQ.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/STPopup/STPopup.framework",
+				"${BUILT_PRODUCTS_DIR}/Shimmer/Shimmer.framework",
+				"${BUILT_PRODUCTS_DIR}/TDOAuth/TDOAuth.framework",
+				"${BUILT_PRODUCTS_DIR}/VTAcknowledgementsViewController/VTAcknowledgementsViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/WSProgressHUD/WSProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DACircularProgress.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTCoreText.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DTFoundation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTSImageViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LGRefreshView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTHPasscodeViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MWPhotoBrowser.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OMGHTTPURLRQ.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/STPopup.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Shimmer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TDOAuth.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/VTAcknowledgementsViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WSProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fansky/Pods-fansky-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DA399C0BB9CAADB9A09882F0 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ShareExtension/Pods-ShareExtension-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E3A3D1275D399D3442815DA5 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-fansky/Pods-fansky-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -963,6 +986,7 @@
 				5AF5B1CD1BA1813A00C7A18A /* SASplashViewController.m in Sources */,
 				5A1811CB1BAC1C40004B6C54 /* SATimeLineCell.m in Sources */,
 				5AB785F31BE6769D0034046B /* UIImage+Utils.m in Sources */,
+				2915886121CBEBF9006D53DA /* ARSegmentPageController.m in Sources */,
 				5A0F7B081BC4E50500926FD4 /* SAPhoto.m in Sources */,
 				5AA8784D1CEC433F0093C89B /* SAAboutViewController.m in Sources */,
 				5A0B505A1C2FC9DB00FE4C73 /* SAPhotoPreviewViewController.m in Sources */,
@@ -989,6 +1013,8 @@
 				5A2365C41B39723900E1E73C /* SAAPIService.m in Sources */,
 				5A5C21281BB51B1100C1277F /* SAFriendListViewController.m in Sources */,
 				5AED4B361BA6E52B00EDBF47 /* SATabBarViewController.m in Sources */,
+				2915885F21CBEBF9006D53DA /* ARSegmentView.m in Sources */,
+				2915886021CBEBF9006D53DA /* ARSegmentPageHeader.m in Sources */,
 				5A0F7B091BC4E50500926FD4 /* SAUser+CoreDataProperties.m in Sources */,
 				5AE98AB71BAED1B400B7F105 /* SAMessageCell.m in Sources */,
 				5A0F7B071BC4E50500926FD4 /* SAPhoto+CoreDataProperties.m in Sources */,
@@ -1134,14 +1160,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1180,14 +1214,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;

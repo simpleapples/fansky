@@ -97,7 +97,7 @@
     if (![[SADataManager sharedManager] isLocalUserExist]) {
         [LTHPasscodeViewController deletePasscodeAndClose];
     }
-    [LTHPasscodeViewController sharedUser].allowUnlockWithTouchID = NO;
+    [LTHPasscodeViewController sharedUser].allowUnlockWithBiometrics = NO;
     [LTHPasscodeViewController sharedUser].hidesCancelButton = NO;
     [LTHPasscodeViewController sharedUser].turnOffPasscodeString = @"关闭密码";
     [LTHPasscodeViewController sharedUser].enablePasscodeString = @"设置密码";
