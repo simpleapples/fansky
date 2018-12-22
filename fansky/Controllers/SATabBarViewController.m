@@ -45,16 +45,9 @@
         NSURL *imageURL = [NSURL URLWithString:currentUser.profileImageURL];
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
         [manager downloadImageWithURL:imageURL options:SDWebImageRefreshCached progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-            self.accountButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
-            [self.accountButton setImage: [image circleImage:75] forState:UIControlStateNormal]; // TODO -bugfix
+            [self.accountButton setImage: [image circleImage:32] forState:UIControlStateNormal];
         }];
     }
-}
-
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-     // TODO -bugfix
-    [self.accountButton setFrame:CGRectMake(16, 9.5, 50, 50)];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

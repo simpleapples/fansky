@@ -123,9 +123,13 @@
     [UINavigationBar appearance].backIndicatorTransitionMaskImage = backButtonImage;
     NSDictionary *textAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:17]};
     [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
-    
     [[UIBarButtonItem appearance] setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+    if(@available(iOS 11, *)) {
+        [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor clearColor]} forState:UIControlStateNormal];
+        [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor clearColor]} forState:UIControlStateHighlighted];
+    } else {
+        [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+    }
     
     [UIActivityIndicatorView appearance].color = [UIColor fanskyBlue];
     [UIRefreshControl appearance].tintColor = [UIColor fanskyBlue];

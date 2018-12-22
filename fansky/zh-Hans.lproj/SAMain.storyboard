@@ -663,7 +663,7 @@
                     <navigationItem key="navigationItem" title="时间线" id="KGp-NT-lvm">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="hQZ-IT-uo3">
                             <button key="customView" opaque="NO" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9Es-kx-T4h">
-                                <rect key="frame" x="16" y="9.5" width="25" height="25"/>
+                                <rect key="frame" x="16" y="9.5" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="BackgroundAccount"/>
                                 <userDefinedRuntimeAttributes>
