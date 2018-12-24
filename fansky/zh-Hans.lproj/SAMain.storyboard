@@ -308,7 +308,11 @@
                                                 </connections>
                                             </imageView>
                                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconGIF" translatesAutoresizingMaskIntoConstraints="NO" id="aUB-Nd-XMZ">
-                                                <rect key="frame" x="279" y="182.5" width="80" height="40"/>
+                                                <rect key="frame" x="319" y="202.5" width="40" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="5RS-kc-Kl1"/>
+                                                    <constraint firstAttribute="height" constant="20" id="MAA-w8-Fmf"/>
+                                                </constraints>
                                             </imageView>
                                             <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DAe-Np-dLq">
                                                 <rect key="frame" x="70" y="16" width="289" height="20"/>
@@ -663,7 +667,7 @@
                     <navigationItem key="navigationItem" title="时间线" id="KGp-NT-lvm">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="hQZ-IT-uo3">
                             <button key="customView" opaque="NO" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9Es-kx-T4h">
-                                <rect key="frame" x="16" y="9.5" width="32" height="32"/>
+                                <rect key="frame" x="16" y="6" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="BackgroundAccount"/>
                                 <userDefinedRuntimeAttributes>
@@ -885,11 +889,12 @@
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <subviews>
                                     <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xUo-RQ-PFq">
-                                        <rect key="frame" x="335" y="7" width="30" height="30"/>
+                                        <rect key="frame" x="305" y="7" width="60" height="30"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="8mS-94-l4s"/>
                                             <constraint firstAttribute="height" constant="30" id="8yF-Pf-pbQ"/>
+                                            <constraint firstAttribute="width" constant="60" id="q2P-HQ-PXr"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                         <state key="normal" title="发饭">
@@ -928,7 +933,7 @@
                                         </connections>
                                     </button>
                                     <label userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="剩余140字" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8A-ds-hsO">
-                                        <rect key="frame" x="249" y="13.5" width="66" height="17"/>
+                                        <rect key="frame" x="219" y="13.5" width="66" height="17"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                         <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1062,8 +1067,8 @@
         <image name="IconStop" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Q2K-Ka-9h2"/>
-        <segue reference="gfZ-wO-GQL"/>
+        <segue reference="uHq-Bf-vPn"/>
+        <segue reference="Btz-3b-6W7"/>
         <segue reference="qBy-9g-ujA"/>
         <segue reference="cOW-5L-KIN"/>
     </inferredMetricsTieBreakers>
