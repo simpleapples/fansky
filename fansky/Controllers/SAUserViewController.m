@@ -20,7 +20,7 @@
 #import "SAPresentationAnimator.h"
 #import "SADismissAnimator.h"
 #import "UIColor+Utils.h"
-#import <ARSegmentPager/ARSegmentView.h>
+#import "ARSegmentView.h"
 
 @interface SAUserViewController () <SAUserHeaderViewDelegate, UIViewControllerTransitioningDelegate>
 

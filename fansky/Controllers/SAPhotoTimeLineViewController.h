@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ARSegmentPager/ARSegmentControllerDelegate.h>
+#import "ARSegmentPageController.h"
 
 @interface SAPhotoTimeLineViewController : UICollectionViewController <ARSegmentControllerDelegate>
 

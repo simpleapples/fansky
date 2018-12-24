@@ -11,5 +11,6 @@
 @interface UIImage (Utils)
 
 - (UIImage *)fixOrientation;
+- (UIImage *)circleImage:(CGFloat)width;
 
 @end

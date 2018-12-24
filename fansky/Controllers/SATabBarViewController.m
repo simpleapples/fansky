@@ -15,6 +15,7 @@
 #import "SAConversationViewController.h"
 #import "UIColor+Utils.h"
 #import <SDWebImage/SDWebImageManager.h>
+#import "UIImage+Utils.h"
 
 @interface SATabBarViewController ()
 
@@ -44,7 +45,7 @@
         NSURL *imageURL = [NSURL URLWithString:currentUser.profileImageURL];
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
         [manager downloadImageWithURL:imageURL options:SDWebImageRefreshCached progress:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-            [self.accountButton setImage:image forState:UIControlStateNormal];
+            [self.accountButton setImage: [image circleImage:32] forState:UIControlStateNormal];
         }];
     }
 }

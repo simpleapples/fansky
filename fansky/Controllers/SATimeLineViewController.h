@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ARSegmentPager/ARSegmentControllerDelegate.h>
+#import "ARSegmentPageHeader.h"
 #import "LGRefreshView.h"
 
 @class SAStatus;
 
-@interface SATimeLineViewController : UITableViewController <ARSegmentControllerDelegate>
+@interface SATimeLineViewController : UITableViewController <ARSegmentPageControllerHeaderProtocol>
 
 @property (strong, nonatomic) LGRefreshView *refreshView;
 

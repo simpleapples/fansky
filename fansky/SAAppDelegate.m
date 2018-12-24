@@ -97,7 +97,7 @@
     if (![[SADataManager sharedManager] isLocalUserExist]) {
         [LTHPasscodeViewController deletePasscodeAndClose];
     }
-    [LTHPasscodeViewController sharedUser].allowUnlockWithTouchID = NO;
+    [LTHPasscodeViewController sharedUser].allowUnlockWithBiometrics = NO;
     [LTHPasscodeViewController sharedUser].hidesCancelButton = NO;
     [LTHPasscodeViewController sharedUser].turnOffPasscodeString = @"关闭密码";
     [LTHPasscodeViewController sharedUser].enablePasscodeString = @"设置密码";
@@ -123,9 +123,13 @@
     [UINavigationBar appearance].backIndicatorTransitionMaskImage = backButtonImage;
     NSDictionary *textAttributes = @{NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:17]};
     [[UINavigationBar appearance] setTitleTextAttributes:textAttributes];
-    
     [[UIBarButtonItem appearance] setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
-    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+    if(@available(iOS 11, *)) {
+        [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor clearColor]} forState:UIControlStateNormal];
+        [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor clearColor]} forState:UIControlStateHighlighted];
+    } else {
+        [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
+    }
     
     [UIActivityIndicatorView appearance].color = [UIColor fanskyBlue];
     [UIRefreshControl appearance].tintColor = [UIColor fanskyBlue];

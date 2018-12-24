@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <ARSegmentPager/ARSegmentPageController.h>
+#import "ARSegmentPageController.h"
 
 @interface SAUserViewController : ARSegmentPageController
 
