@@ -1,4 +1,4 @@
-#饭斯基
+# 饭斯基
 一款简洁的第三方饭否客户端
 
 <a href="https://itunes.apple.com/cn/app/%E9%A5%AD%E6%96%AF%E5%9F%BA/id1039622797?mt=8" target="_blank"><img src="https://linkmaker.itunes.apple.com/assets/shared/badges/zh-cht/appstore-lrg.svg" /></a>
